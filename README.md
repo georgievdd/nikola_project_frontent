@@ -1,3 +1,3 @@
 ## Quick start (dev)
-- npm i
-- npm run start
+- npm/yarn i
+- npm/yarn run start

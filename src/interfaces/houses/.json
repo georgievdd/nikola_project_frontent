@@ -1,0 +1,18 @@
+{
+  "id": 1,
+  "name": "Домик 1",
+  "description": "Домик 1",
+  "features": [
+      {
+          "id": 1,
+          "name": "Денис",
+          "icon": "http://127.0.0.1:8002/media/houses_features/icons/%D0%94%D0%B5%D0%BD%D0%B8%D1%81.png"
+      }
+  ],
+  "pictures": [],
+  "base_price": 10000,
+  "total_price": null,
+  "base_persons_amount": 2,
+  "max_persons_amount": 3,
+  "price_per_extra_person": 2000
+}

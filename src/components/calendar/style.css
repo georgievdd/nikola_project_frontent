@@ -55,7 +55,7 @@
 }
 
 .body .col.selected {
-  background: #007bff;
+  background: rgba(0, 162, 255, 0.75);
   color: white;
 }
 

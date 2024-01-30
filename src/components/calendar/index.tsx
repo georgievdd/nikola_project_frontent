@@ -21,7 +21,9 @@ interface CalendarProps {
 const Calendar = ({ initialData } : CalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
-
+  useEffect(() => {
+    console.log(initialData)
+  }, []);
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy";
 

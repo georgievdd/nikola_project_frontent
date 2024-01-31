@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect} from 'react';
 import './style.css';
-import { api } from '../../api';
-import {
-    addDays,
-    endOfMonth,
-    endOfWeek,
-    format,
-    isSameDay,
-    isSameMonth,
-    nextDay,
-    startOfMonth,
-    startOfWeek
-} from "date-fns";
-import { ru } from "date-fns/locale"
+import {addDays, endOfMonth, endOfWeek, format, startOfMonth, startOfWeek} from "date-fns";
+import {ru} from "date-fns/locale"
+import {CalendarController, DAY_STATE, stateStyle} from "./useCalendar";
+import {formatKey} from "../../utils/utils";
 
 let startDate = startOfWeek(new Date(), { weekStartsOn: 1 });
-const Calendar2 = ({initialDayStates}: {initialDayStates?: Record<string, string>}) => {
-    const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
-    const [dayStates, setDayStates] = useState<Record<string, string>>(initialDayStates || {})
-
-    const select = useSelect()
+const CalendarForm = (
+    {controller}: {controller: CalendarController}
+) => {
+    const {
+        select,
+        monthMask,
+        setMonthMask,
+    } = controller
     const renderDays = () => {
         const dateFormat = "iiiiii";
         const days = [];
@@ -53,7 +47,7 @@ const Calendar2 = ({initialDayStates}: {initialDayStates?: Record<string, string
     }
     const renderCells = () => {
         const dateFormat = "d";
-        const monthStart = startOfMonth(currentMonth);
+        const monthStart = startOfMonth(controller.month);
         const monthEnd = endOfMonth(monthStart);
 
         const startDate = startOfWeek(monthStart, {weekStartsOn: 1});
@@ -65,19 +59,19 @@ const Calendar2 = ({initialDayStates}: {initialDayStates?: Record<string, string
 
         while (day <= endDate) {
             for (let i = 0; i < 7; i++) {
-                const dayKey = format(day, 'yyyy-MM-dd');
-                if (day < monthStart || day > monthEnd) {
-                    dayStates[dayKey] = "cell-disabled"
+                const dayKey = formatKey(day);
+                if (controller.isPast(day)) {
+                    monthMask[dayKey] = DAY_STATE.PAST
                 }
-                const dayState = dayStates[dayKey] || '';
-                const dayCopyState = new Date(day) // чтобы js замыкал текущее состояние
+                const dayStyle = stateStyle[monthMask[dayKey]];
+                const dayCopy = new Date(day) // чтобы js замыкал текущее состояние
                 days.push(
                     <div
-                        className={"calendar-cell " + dayState}
+                        className={"calendar-cell " + dayStyle}
                         key={day.toString()}
-                        onMouseDown={(e) => handleMouseDown(e, dayCopyState)}
-                        onMouseUp={e => handleMouseUp(e, dayCopyState)}
-                        onMouseEnter={e => handleMouseEnter(e, dayCopyState)}
+                        onMouseDown={(e) => handleMouseDown(e, dayCopy)}
+                        onMouseUp={e => handleMouseUp(e, dayCopy)}
+                        onMouseEnter={e => handleMouseEnter(e, dayCopy)}
                     >
                         {format(day, dateFormat)}
                     </div>
@@ -95,30 +89,52 @@ const Calendar2 = ({initialDayStates}: {initialDayStates?: Record<string, string
     }
 
     useEffect(() => {
-        if (!select.end || !select.begin) return;
-        const newDayStates: Record<string, string> = {};
-        let begin = new Date(select.begin);
-        let end = new Date(select.end);
+        if (!controller.mayUpdate()) {
+            return
+        }
+        const monthStart = startOfMonth(controller.month);
+        const monthEnd = endOfMonth(monthStart);
+
+        const newDayStates = {...controller.initMonthMask};
+        let begin = new Date(select.begin!);
+        let end = new Date(select.end!);
+
         if (begin > end) {
             const ref = begin
             begin = end
             end = ref
         }
-        const keyBegin = format(begin, 'yyyy-MM-dd')
-        const keyEnd = format(end, 'yyyy-MM-dd')
-        const endCopy = end
+
+        let keyBegin = formatKey(controller.checkBegin(begin))
+        let keyEnd = formatKey(end)
+
+        if (controller.initMonthMask[keyBegin] === DAY_STATE.BOOKED) {
+            controller.select.setIsActive(false)
+            return;
+        }
+
+        console.log(keyBegin, keyEnd)
+
         while (begin <= end) {
-            const dayKey = format(begin, 'yyyy-MM-dd');
-            newDayStates[dayKey] = "cell-selected";
+            const dayKey = formatKey(begin)
+
+            if (monthMask[dayKey] === DAY_STATE.BOOKED) {
+                keyEnd = formatKey(addDays(begin, -1))
+                select.setIsActive(true)
+                console.log(keyEnd)
+                break
+            }
+
+            newDayStates[dayKey] = DAY_STATE.SELECTED;
             begin = addDays(begin, 1);
         }
         if (keyBegin !== keyEnd) {
-            newDayStates[keyBegin] += " cell-selected-left"
-            newDayStates[keyEnd] += " cell-selected-right"
+            newDayStates[keyBegin] = DAY_STATE.LEFT_SELECTED;
+            newDayStates[keyEnd] = DAY_STATE.RIGHT_SELECTED;
         } else {
-            newDayStates[keyBegin] += " cell-selected-point"
+            newDayStates[keyBegin] = DAY_STATE.POINT_SELECTED;
         }
-        setDayStates(newDayStates);
+        setMonthMask(newDayStates);
     }, [select.end, select.begin]);
 
     return (
@@ -129,22 +145,4 @@ const Calendar2 = ({initialDayStates}: {initialDayStates?: Record<string, string
     )
 };
 
-export default Calendar2;
-
-
-const useSelect = () => {
-    const [begin, setBegin] = useState<Date | null>(null)
-    const [end, setEnd] = useState<Date | null>(null)
-    const [isActive, setIsActive] = useState<Boolean>(false)
-    const clear = () => {
-        setBegin(null)
-        setEnd(null)
-        setIsActive(false)
-    }
-    return {
-        begin, setBegin,
-        end, setEnd,
-        clear,
-        isActive, setIsActive
-    }
-}
+export default CalendarForm;

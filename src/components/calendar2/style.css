@@ -19,6 +19,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     cursor: pointer;
+    position: relative;
 }
 
 .border-bottom {
@@ -44,6 +45,10 @@
     background-color: #645d59;
 }
 
+.cell-closed {
+    background-color: rgba(186, 176, 173, 0.8);
+}
+
 .cell-holiday {
     background-color: #e1e1a0;
 }
@@ -56,6 +61,14 @@
     border-radius: 0 10px 10px 0;
 }
 
-.cell-selected-point, .cell-booked, .cell-holiday {
+.cell-selected-point, .cell-booked, .cell-holiday, .cell-closed {
     border-radius: 10px;
+}
+.calendar-cell-cost {
+    position: absolute;
+    font-size: 10px;
+    font-weight: 600;
+    color: #950000;
+    left: 0;
+    right: 0;
 }

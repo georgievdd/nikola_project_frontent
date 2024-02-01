@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import './style.css';
-import {addDays, endOfMonth, endOfWeek, format, startOfMonth, startOfWeek} from "date-fns";
+import {addDays, endOfMonth, endOfWeek, format, isSameDay, startOfMonth, startOfWeek} from "date-fns";
 import {ru} from "date-fns/locale"
 import {CalendarController, DAY_STATE, stateStyle} from "./useCalendar";
-import {formatKey} from "../../utils/utils";
+import {formatKey, showAlert} from "../../utils/utils";
+import calendar from "../calendar";
 
 let startDate = startOfWeek(new Date(), { weekStartsOn: 1 });
 const CalendarForm = (
@@ -36,13 +37,19 @@ const CalendarForm = (
     }
     const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>, day: Date) => {
         e.preventDefault()
+        if (isSameDay(select.begin!, select.end!)) {
+            showAlert("Нельзя Забронировать домик на один день", 'alert-warning')
+        }
         select.setIsActive(true)
     }
     const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>, day: Date) => {
         e.preventDefault()
+
         if (select.isActive || !select.begin) {
             return;
         }
+        // if (badCell(controller.monthMask[formatKey(day)]))
+        //     return
         select.setEnd(day)
     }
     const renderCells = () => {
@@ -74,6 +81,7 @@ const CalendarForm = (
                         onMouseEnter={e => handleMouseEnter(e, dayCopy)}
                     >
                         {format(day, dateFormat)}
+                        {controller.costs[dayKey] && <DayCost cost={controller.costs[dayKey]}/>}
                     </div>
                 );
                 day = addDays(day, 1)
@@ -87,7 +95,9 @@ const CalendarForm = (
         }
         return <div id="calendar-dates">{rows}</div>
     }
-
+    function badCell(dayType: DAY_STATE) {
+        return dayType === DAY_STATE.CLOSED || dayType === DAY_STATE.BOOKED
+    }
     useEffect(() => {
         if (!controller.mayUpdate()) {
             return
@@ -95,7 +105,7 @@ const CalendarForm = (
         const monthStart = startOfMonth(controller.month);
         const monthEnd = endOfMonth(monthStart);
 
-        const newDayStates = {...controller.initMonthMask};
+        const newDayStates = {...controller.rawMask};
         let begin = new Date(select.begin!);
         let end = new Date(select.end!);
 
@@ -108,19 +118,17 @@ const CalendarForm = (
         let keyBegin = formatKey(controller.checkBegin(begin))
         let keyEnd = formatKey(end)
 
-        if (controller.initMonthMask[keyBegin] === DAY_STATE.BOOKED) {
+        if (controller.rawMask[keyBegin] === DAY_STATE.BOOKED) {
             controller.select.setIsActive(false)
             return;
         }
 
-        console.log(keyBegin, keyEnd)
 
         while (begin <= end) {
             const dayKey = formatKey(begin)
 
-            if (monthMask[dayKey] === DAY_STATE.BOOKED) {
+            if (monthMask[dayKey] === DAY_STATE.BOOKED /* || monthMask[dayKey] === DAY_STATE.CLOSED */) {
                 keyEnd = formatKey(addDays(begin, -1))
-                select.setIsActive(true)
                 console.log(keyEnd)
                 break
             }
@@ -146,3 +154,8 @@ const CalendarForm = (
 };
 
 export default CalendarForm;
+
+
+const DayCost = ({cost} : {cost: number}) => {
+    return <div className='calendar-cell-cost'>{cost}</div>
+}

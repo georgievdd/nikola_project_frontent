@@ -138,23 +138,7 @@ export default function HouseModal({
 
     // каждое выделение
     useEffect(() => {
-        if (!controller.calendarController.select.isActive ||
-            controller.calendarController.select.pointSelect()) return
-        if (!modalInput.checkinInput.value) return
-
-        const reservationPriceData: IReservationPriceRequest = {
-            check_in_datetime: `${format(calendarController.select.minDate!, 'dd-MM-yyyy')} ${modalInput.checkinInput.value}`,
-            check_out_datetime: `${format(calendarController.select.maxDate!, 'dd-MM-yyyy')} ${modalInput.checkoutInput.value}`,
-            extra_persons_amount: max_persons_amount,
-        }
-
-        api.house.getReservationPrice(id!, reservationPriceData)
-            .then(res => res.data)
-            .then(data => {
-                console.log(data)
-                priceList.set(data)
-            })
-
+        getPriceList()
     }, [calendarController.select.isActive, max_persons_amount, modalInput.checkinInput.value, modalInput.checkinInput.value])
 
     // только при инициализации
@@ -171,7 +155,28 @@ export default function HouseModal({
                     createTimesList(data.check_out_times),
                 )
             })
+        getPriceList()
     }, [open]);
+
+    function getPriceList() {
+        if (!controller.calendarController.select.isActive ||
+            controller.calendarController.select.pointSelect()) return
+        if (!modalInput.checkinInput.value) return
+
+        const reservationPriceData: IReservationPriceRequest = {
+            check_in_datetime: `${format(calendarController.select.minDate!, 'dd-MM-yyyy')} ${modalInput.checkinInput.value}`,
+            check_out_datetime: `${format(calendarController.select.maxDate!, 'dd-MM-yyyy')} ${modalInput.checkoutInput.value}`,
+            extra_persons_amount: max_persons_amount,
+        }
+
+        api.house.getReservationPrice(id!, reservationPriceData)
+            .then(res => res.data)
+            .then(data => {
+                console.log(data)
+                priceList.set(data)
+            })
+    }
+
     const bookHouse = () => {
         const bookData: INewReservationRequest = {
             check_in_datetime: `${format(controller.calendarController.select.minDate!, 'dd-MM-yyyy')} 16:00`,
@@ -254,19 +259,22 @@ export default function HouseModal({
                                             жителей {reservationOptions.max_persons_amount.value}</p>
                                         <p>стандартное количество
                                             жителей {reservationOptions.base_persons_amount.value}</p>
-                                        <p>цена за каждого компаньона {reservationOptions.price_per_extra_person.value}</p>
+                                        <p>цена за каждого компаньона
+                                            {reservationOptions.price_per_extra_person.value}</p>
                                     </div>
                                 </Grid>
                                 {priceList.data &&
                                     <>
                                         <Grid display='flex' gap={2}>
-                                            <h3>Заезд: {format(new Date(priceList.data.check_in_datetime), 'dd-MM-yyyy')}</h3>
+                                            <h3>Заезд: {format(new Date(priceList.data.check_in_datetime),
+                                                'dd-MM-yyyy')}</h3>
                                             <label>
                                                 <AutocompleteDateInput controller={modalInput.checkinInput}/>
                                             </label>
                                         </Grid>
                                         <Grid display='flex' gap={2}>
-                                            <h3>Выезд: {format(new Date(priceList.data.check_out_datetime), 'dd-MM-yyyy')}</h3>
+                                            <h3>Выезд: {format(new Date(priceList.data.check_out_datetime),
+                                                'dd-MM-yyyy')}</h3>
                                             <label>
                                                 <AutocompleteDateInput controller={modalInput.checkoutInput}/>
                                             </label>

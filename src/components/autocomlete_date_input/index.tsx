@@ -15,7 +15,7 @@ export default function AutocompleteDateInput({controller}: {controller: Autocom
                     return v
                 }}
                 options={controller.options}
-                renderInput={(params) => <TextField {...params} label="час выезда" />}
+                renderInput={(params) => <TextField {...params} />}
             />
         </Stack>
     );

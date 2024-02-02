@@ -1,16 +1,17 @@
 import {format} from "date-fns";
 import {CalendarDayResponse, CalendarDayResponseSelect} from "../interfaces/houses";
 import {DAY_STATE} from "../components/calendar2/useCalendar";
+import {IReservationOptionsTimes} from "../interfaces/houses/reservation";
 
 export function formatKey(date: Date) {
     return format(date, 'yyyy-MM-dd')
 }
 
-function formatFromDDMMYYYY(date: string) {
+export function formatFromDDMMYYYY(date: string) {
     return date.split('-').reverse().join('-')
 }
 
-function formatToDDMMYYYY(date: string) {
+export function formatToDDMMYYYY(date: string) {
     return date.split('-').reverse().join('-')
 }
 
@@ -68,7 +69,7 @@ export function mapFromSelectToCalender(
     return newMask
 }
 
-function isSelectedType(type: DAY_STATE) {
+export function isSelectedType(type: DAY_STATE) {
     return type === DAY_STATE.SELECTED || type === DAY_STATE.LEFT_SELECTED ||type === DAY_STATE.RIGHT_SELECTED ||type === DAY_STATE.POINT_SELECTED
 }
 
@@ -103,3 +104,12 @@ export const showAlert = (message: string, variant?: 'alert-danger' | 'alert-suc
     }, 2000);
 }
 
+const blackList = ["default", "earliest", "latest"]
+export function createTimesList(list: IReservationOptionsTimes): string[] {
+    const result: string[] = [list.default]
+    Object.keys(list).forEach(key => {
+        if (blackList.includes(key) || key === list.default) return
+        result.push(key)
+    })
+    return result
+}

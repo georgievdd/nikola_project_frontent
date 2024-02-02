@@ -1,8 +1,16 @@
 import React from 'react'
 import { IHouse } from '../../interfaces/houses'
-import { Container, Paper, Typography } from '@mui/material'
+import {Button, Container, Paper, Typography} from '@mui/material'
 
-const HouseCard = ({data} : {data: IHouse}) => {
+const HouseCard = ({
+                       data,
+                       onClick
+} : {
+    data: IHouse,
+    onClick: () => void
+}) => {
+
+
   return (
     <Paper sx={{padding: '20px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginBottom: '20px'}}>
       <Typography variant='h6'>"id": {data.id}</Typography>
@@ -15,6 +23,7 @@ const HouseCard = ({data} : {data: IHouse}) => {
       <Typography variant='h6'>"price_per_extra_person": {data.price_per_extra_person}</Typography>
       <Typography variant='h6'>"pictures.length": {data.pictures.length}</Typography>
       <Typography variant='h6'>"features.length": {data.features.length}</Typography>
+        <Button variant='contained' color='success' onClick={onClick}>забронировать</Button>
     </Paper>
   )
 }

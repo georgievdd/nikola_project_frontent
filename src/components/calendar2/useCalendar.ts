@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {addDays, addMonths, format} from "date-fns";
+import {addDays, addMonths, format, isSameDay} from "date-fns";
 import {formatKey} from "../../utils/utils";
 
 export enum DAY_STATE {
@@ -26,8 +26,6 @@ export interface CalendarController {
     checkBegin: (day: Date) => Date,
     rawMask: Record<string, DAY_STATE>,
     setRawMask: any //(param: Record<string, DAY_STATE>) => void,
-    alreadyLoad: Record<string, any>,
-    setAlreadyLoad: any,
     costs: Record<string, number>,
     setCosts: any,
     firstState: Record<string, DAY_STATE>,
@@ -41,7 +39,6 @@ export function useCalendar(
     const [month, setMonth] = useState<Date>(initMonth)
     const [monthMask, setMonthMask] = useState<Record<string, DAY_STATE>>({})
     const [rawMask, setRawMask] = useState<Record<string, DAY_STATE>>({})
-    const [alreadyLoad, setAlreadyLoad] = useState<Record<string, any>>({})
     const select = useSelect()
     const [costs, setCosts] = useState<Record<string, number>>({})
     const [firstState, setFirstState] = useState<Record<string, DAY_STATE>>({})
@@ -76,7 +73,6 @@ export function useCalendar(
         mayUpdate,
         checkBegin,
         rawMask, setRawMask,
-        alreadyLoad, setAlreadyLoad,
         costs,
         setCosts,
         firstState,
@@ -99,12 +95,13 @@ export const stateStyle = {
 
 
 interface SelectController {
-    begin: Date | null, setBegin: (param: Date) => void,
-    end: Date | null, setEnd: (param: Date) => void,
+    begin: Date | null, setBegin: (param: Date | null) => void,
+    end: Date | null, setEnd: (param: Date | null) => void,
     clear: () => void,
     isActive: Boolean, setIsActive: (param: Boolean) => void,
     maxDate: Date | null,
     minDate: Date | null,
+    pointSelect: () => boolean,
 }
 export const useSelect = (): SelectController => {
     const [begin, setBegin] = useState<Date | null>(null)
@@ -116,6 +113,8 @@ export const useSelect = (): SelectController => {
         setIsActive(false)
     }
 
+    const pointSelect = () => !!(begin && end && isSameDay(begin, end))
+
     return {
         begin, setBegin,
         end, setEnd,
@@ -123,5 +122,6 @@ export const useSelect = (): SelectController => {
         isActive, setIsActive,
         maxDate: begin && end && (begin < end ? end : begin),
         minDate: begin && end && (begin > end ? end : begin),
+        pointSelect,
     }
 }

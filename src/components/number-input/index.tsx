@@ -40,10 +40,12 @@ const CompactNumberInput = React.forwardRef(function CompactNumberInput(
 
 export default function NumberInput({
   value,
-  setValue
+  setValue,
+  check = (value: number) => true
 }: {
   value: number,
   setValue: (value: number) => void,
+  check?: (value: number) => boolean,
 }) {
 
   return (
@@ -53,7 +55,9 @@ export default function NumberInput({
         placeholder="Type a number…"
         readOnly
         value={value}
-        onChange={(event, val) => setValue(Math.max(val as number, 0))}
+        onChange={(event, val) => {
+          if (!check(val!)) return;
+          setValue(Math.max(val as number, 0))}}
       />
 
       <Typography>Едет со мной: {value ?? ' '}</Typography>

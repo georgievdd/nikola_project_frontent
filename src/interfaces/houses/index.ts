@@ -51,3 +51,15 @@ export interface CalendarDayResponseSelect {
   price?: number,
   check_out_is_available: false,
 }
+
+
+export interface INewReservationRequest {
+  check_in_datetime: string,
+  check_out_datetime: string,
+  extra_persons_amount: number,
+  email: string,
+  first_name: string,
+  last_name: string,
+  preferred_contact: string
+}
+

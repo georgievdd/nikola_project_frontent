@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Grid, Paper, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { PATH } from '../../consts'
 import { api } from '../../api'
 import NumberInput from '../../components/number-input'
@@ -13,28 +13,19 @@ import {DAY_STATE, useCalendar} from "../../components/calendar2/useCalendar";
 import {addMonths, format, isSameDay} from "date-fns";
 import {ru} from "date-fns/locale";
 import {
-    addCosts,
+    addCosts, isSelectedType,
     mapFromSelectToCalender,
     mapFromUnselectToCalender,
     removedClosedDaysCalendar,
     showAlert
 } from "../../utils/utils";
-
-// const initialDayStates = {
-//   '2024-02-03': DAY_STATE.BOOKED,
-//   '2024-02-14': DAY_STATE.BOOKED,
-//   '2024-02-09': DAY_STATE.BOOKED,
-//   '2024-02-30': DAY_STATE.HOLIDAY,
-//   '2024-02-28': DAY_STATE.HOLIDAY,
-//   '2024-02-20': DAY_STATE.HOLIDAY,
-//   '2024-02-15': DAY_STATE.BOOKED,
-// }
+import HouseModal, {useHouseModal} from "./modal";
 
 const HousePage = () => {
-
     const [data, setData] = useState<IHouse[]>([]);
     const [max_persons_amount, setMPA] = useState<number>(0);
     const calendar = useCalendar(new Date());
+    const modalController = useHouseModal(calendar)
     // домики
     function initHomes(data: IHousesQueryRequest) {
         api.house.getAll(data)
@@ -57,16 +48,14 @@ const HousePage = () => {
     }, [max_persons_amount, calendar.select.isActive]);
 
     // календарь
+     /**
+     * костыль, переделать в зависимости от ожидаемой логики
+     */
     const trigger = useTrigger()
     useEffect(() => {
         if (!calendar.month) return
         [calendar.month, addMonths(calendar.month, 1)]
             .forEach(month => {
-                // const k = format(month, 'MM-yyyy')
-                // if (calendar.alreadyLoad[k]) {
-                //     return
-                // }
-                // calendar.setAlreadyLoad((prev: Record<string, any>) => ({...prev, [k]: true}))
                 api.house.getCalendar({
                     month: month.getMonth() + 1,
                     year: month.getFullYear(),
@@ -118,8 +107,11 @@ const HousePage = () => {
         }
     }, [calendar.select.isActive]);
 
+
+
     return (
         <div style={{marginTop: '100px'}}>
+            <HouseModal controller={modalController} max_persons_amount_init={max_persons_amount}/>
             <Grid container display='flex' spacing={2}>
                 <Grid item xs={5}>
                     <Paper sx={{backgroundColor: 'rgba(0,0,0, 0)', padding: '20px'}}>
@@ -136,7 +128,24 @@ const HousePage = () => {
                 <Grid item xs={7}>
                     {
                         data.map((e, i) => (
-                            <HouseCard key={e.name} data={e}/>
+                            <HouseCard key={e.name} data={e} onClick={() => {
+                                modalController.setOpen(true)
+                                modalController.setState(e)
+                                // modalController.calendarController.setCosts({})
+                                modalController.calendarController.setMonth(calendar.month)
+                                modalController.calendarController.select.setBegin(calendar.select.begin)
+                                modalController.calendarController.select.setEnd(calendar.select.end)
+                                modalController.calendarController.select.setIsActive(calendar.select.isActive)
+                                modalController.calendarController.setMonthMask((prev: any) => {
+                                    const newMask: Record<string, DAY_STATE> = {}
+                                    Object.keys(calendar.monthMask).forEach(key => {
+                                        if (isSelectedType(calendar.monthMask[key])) {
+                                            newMask[key] = calendar.monthMask[key]
+                                        }
+                                    })
+                                    return newMask
+                                })
+                            }}/>
                         ))
                     }
                 </Grid>
@@ -148,7 +157,7 @@ const HousePage = () => {
 export default HousePage
 
 
-const useTrigger = () => {
+export const useTrigger = () => {
     const [val, setVal] = useState(false)
     return {
         call: () => setVal(prev => !prev),

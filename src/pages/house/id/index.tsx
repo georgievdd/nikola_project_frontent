@@ -1,13 +1,26 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
 
 const HouseIdPage = () => {
 
-  const { id } = useParams();
+    const {id} = useParams()
+    const query = new URLSearchParams(useLocation().search)
+    useEffect(() => {
+        console.log(query)
+    }, []);
+    return (
+        <div>Конкретный домик {id}</div>
+    )
+}
+export default HouseIdPage
 
-  return (
-    <div>Конкретный домик {id}</div>
-  )
+
+export interface HouseIdUrlParams {
+    id: string
+    check_in?: string
+    check_out?: string
 }
 
-export default HouseIdPage
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}

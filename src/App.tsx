@@ -3,6 +3,9 @@ import { Router } from "./router";
 import { createTheme } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { ThemeProvider } from "@emotion/react";
+import Calendar3 from "./components/calendar3";
+import useCalendar from "./components/calendar3/useCalendar";
+import {useEffect} from "react";
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
@@ -18,24 +21,9 @@ declare module '@mui/material/styles' {
 }
 
 function App() {
-
-  const theme = createTheme({
-    status: {
-      danger: orange[500],
-    },
-    typography: {
-      fontFamily: [
-        'Roboto',//'Dancing Script',
-        'cursive'
-      ].join(','),
-    },
-  });
-
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={Router} />
-      </ThemeProvider>
+      <RouterProvider router={Router} />
     </div>
   );
 }

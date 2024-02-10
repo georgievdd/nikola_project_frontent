@@ -4,27 +4,18 @@ import { Modal as BaseModal } from '@mui/base/Modal';
 import Fade from '@mui/material/Fade';
 import { Button } from '@mui/base/Button';
 import {useEffect, useState} from "react";
-import {CalendarDayResponse, CalendarDayResponseSelect, IHouse, INewReservationRequest} from "../../interfaces/houses";
+import {IHouse, INewReservationRequest} from "../../interfaces/houses";
 import {Grid, Paper} from "@mui/material";
-import {Block, Label} from "@mui/icons-material";
-import {CalendarController, DAY_STATE, useCalendar} from "../../components/calendar2/useCalendar";
-import Calendar from "../../components/calendar";
-import Calendar2 from "../../components/calendar2";
-import {addMonths, format, isSameDay} from "date-fns";
+import {format} from "date-fns";
 import {api} from "../../api";
-import {
-    addCosts, createTimesList, formatKey, formatToDDMMYYYY,
-    mapFromSelectToCalender,
-    mapFromUnselectToCalender,
-    removedClosedDaysCalendar,
-    showAlert
-} from "../../utils/utils";
-import {useTrigger} from "./index";
-import {FormControl, Input} from "@mui/base";
+import {createTimesList, showAlert} from "../../utils/utils";
+import {Input} from "@mui/base";
 import {Space} from "../../components/space";
 import NumberInput from "../../components/number-input";
 import {IReservationPrice, IReservationPriceRequest} from "../../interfaces/houses/reservation";
 import AutocompleteDateInput, {useAutocompleteDateInputController} from "../../components/autocomlete_date_input";
+import useCalendar, {CalendarController} from "../../components/calendar3/useCalendar";
+import Calendar3 from "../../components/calendar3";
 
 
 export interface HouseModalController {
@@ -40,7 +31,7 @@ export function useHouseModal(mainCalendarController: CalendarController): House
     const [state, setState] = useState<IHouse | null>(null)
     const [begin, setBegin] = useState<Date | null>(null)
     const [end, setEnd] = useState<Date | null>(null)
-    const calendarController = useCalendar(new Date())
+    const calendarController = useCalendar()
     return {
         open, setOpen,
         state, setState,
@@ -53,8 +44,8 @@ export function useHouseModal(mainCalendarController: CalendarController): House
 
 
 export default function HouseModal({
-                                       controller,
-                                       max_persons_amount_init,
+    controller,
+    max_persons_amount_init,
 }: {
     controller: HouseModalController,
     max_persons_amount_init: number
@@ -66,9 +57,6 @@ export default function HouseModal({
         state,
         calendarController,
     } = controller
-    const {
-        month
-    } = calendarController
     const id = state?.id
     const [max_persons_amount, setMPA] = useState<number>(0);
 
@@ -77,69 +65,17 @@ export default function HouseModal({
     const priceList = usePriceList()
 
     /**
-     * календарь
-     */
-    const trigger = useTrigger()
-    useEffect(() => {
-        if (!open) return
-        [month, addMonths(month, 1)]
-            .forEach(month => {
-                api.house.getHouseCalendar(id!, {
-                    month: month.getMonth() + 1,
-                    year: month.getFullYear(),
-                })
-                    .then(res => res.data.calendar)
-                    .then(data => {
-                        const newPage = mapFromUnselectToCalender(data as Record<string, CalendarDayResponse>)
-                        calendarController.setRawMask((prev: Record<string, DAY_STATE>) => ({...newPage, ...prev}))
-                        calendarController.setMonthMask((prev: Record<string, DAY_STATE>) => ({...newPage, ...prev}))
-                        trigger.call()
-                    })
-                    .catch(err => {
-                        showAlert(err?.response?.data?.error, 'alert-warning')
-                    })
-            })
-    }, [controller.calendarController.month]);
-    useEffect(() => {
-        calendarController.setFirstState((prev: any) => calendarController.monthMask)
-    }, [trigger.val]);
-    useEffect(() => {
-        if (!calendarController.select.begin || !calendarController.select.end) return
-        if (isSameDay(calendarController.select.begin, calendarController.select.end)) return
-        api.house.getHouseCalendar(id!, {
-            month: calendarController.month.getMonth() + 1,
-            year: calendarController.month.getFullYear(),
-            chosen_check_in_date: format(calendarController.select.minDate!, 'dd-MM-yyyy')
-        })
-            .then(res => res.data.calendar)
-            .then(data => {
-                const newCosts = addCosts(data as Record<string, CalendarDayResponseSelect>)
-                calendarController.setCosts((prev: Record<string, number>) => newCosts)
-                calendarController.setMonthMask(
-                    (prev: Record<string, DAY_STATE>) =>
-                        mapFromSelectToCalender(prev, data as Record<string, CalendarDayResponseSelect>))
-                calendarController.setRawMask(
-                    (prev: Record<string, DAY_STATE>) =>
-                        mapFromSelectToCalender(prev, data as Record<string, CalendarDayResponseSelect>))
-            })
-
-    }, [calendarController.select.begin, calendarController.select.end]);
-    useEffect(() => {
-        if (calendarController.select.isActive && isSameDay(calendarController.select.begin!, calendarController.select.end!)) {
-            calendarController.setCosts({})
-            calendarController.setMonthMask((prev: Record<string, DAY_STATE>) => removedClosedDaysCalendar(prev, calendarController.firstState))
-            calendarController.setRawMask((prev: Record<string, DAY_STATE>) => removedClosedDaysCalendar(prev, calendarController.firstState))
-        }
-    }, [calendarController.select.isActive]);
-
-    /**
      * для информации о заявке
      */
-
     // каждое выделение
     useEffect(() => {
         getPriceList()
-    }, [calendarController.select.isActive, max_persons_amount, modalInput.checkinInput.value, modalInput.checkinInput.value])
+    }, [
+        calendarController.selectionController.isActive,
+        max_persons_amount,
+        modalInput.checkinInput.value,
+        modalInput.checkinInput.value
+    ])
 
     // только при инициализации
     useEffect(() => {
@@ -159,13 +95,12 @@ export default function HouseModal({
     }, [open]);
 
     function getPriceList() {
-        if (!controller.calendarController.select.isActive ||
-            controller.calendarController.select.pointSelect()) return
+        if (!controller.calendarController.selectionController.isActive) return
         if (!modalInput.checkinInput.value) return
 
         const reservationPriceData: IReservationPriceRequest = {
-            check_in_datetime: `${format(calendarController.select.minDate!, 'dd-MM-yyyy')} ${modalInput.checkinInput.value}`,
-            check_out_datetime: `${format(calendarController.select.maxDate!, 'dd-MM-yyyy')} ${modalInput.checkoutInput.value}`,
+            check_in_datetime: `${calendarController.selectionController.dateBegin!.getKey()} ${modalInput.checkinInput.value}`,
+            check_out_datetime: `${calendarController.selectionController.dateEnd!.getKey()} ${modalInput.checkoutInput.value}`,
             extra_persons_amount: max_persons_amount,
         }
 
@@ -179,8 +114,12 @@ export default function HouseModal({
 
     const bookHouse = () => {
         const bookData: INewReservationRequest = {
-            check_in_datetime: `${format(controller.calendarController.select.minDate!, 'dd-MM-yyyy')} 16:00`,
-            check_out_datetime: `${format(controller.calendarController.select.maxDate!, 'dd-MM-yyyy')} 12:00`,
+            check_in_datetime: `${controller
+                    .calendarController
+                    .selectionController.dateBegin!.getKey()} ${modalInput.checkinInput.value}`,
+            check_out_datetime: `${controller
+                .calendarController
+                .selectionController.dateEnd!.getKey()} ${modalInput.checkoutInput.value}`,
             extra_persons_amount: max_persons_amount,
             ...modalInput.dto,
         }
@@ -225,11 +164,7 @@ export default function HouseModal({
                            <Grid item xs={6}>
                                <NumberInput value={max_persons_amount} setValue={setMPA} check={checkMPA}/>
                                <Space h='20px'/>
-                               <h1>{format(controller.calendarController.month, 'MMMM')}
-                                   {controller.calendarController.month.getFullYear()}</h1>
-                               <button onClick={controller.calendarController.nextMonth}>next</button>
-                               <button onClick={controller.calendarController.prevMonth}>prev</button>
-                               <Calendar2 controller={controller.calendarController}/>
+                               <Calendar3 controller={controller.calendarController} />
                            </Grid>
                        </Grid>
                         <Grid display='flex' justifyContent='center'>

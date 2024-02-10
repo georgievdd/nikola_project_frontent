@@ -113,3 +113,7 @@ export function createTimesList(list: IReservationOptionsTimes): string[] {
     })
     return result
 }
+
+
+
+ export const currentMonthIndex = new Date().getMonth()

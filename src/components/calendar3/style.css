@@ -1,0 +1,148 @@
+.calendar-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(236, 234, 234, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    padding-top: 0;
+
+    font-size: 12px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.calendar-container_disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+    transition: ease-in 0.5s;
+}
+
+.calendar-months {
+    position: relative;
+    width: 15%;
+    overflow-y: hidden;
+}
+
+.month-name {
+    text-align: left !important;
+    position: relative;
+}
+
+.month-name-title {
+    font-weight: bold;
+    text-align: initial;
+    margin-left: 10px;
+}
+
+.month-name::first-letter, .month-name-title::first-letter {
+    text-transform: uppercase;
+}
+
+.month-name-highlighter {
+    position: absolute;
+    top: 0;
+    border-radius: 10px;
+    background-color: rgba(219, 218, 218, 0.76);
+    height: 30px;
+    margin-top: 5px;
+    transition: all 0.25s;
+}
+
+.calendar-days {
+    width: 85%;
+}
+
+.days-header {
+    height: 10%;
+    line-height: 10%;
+}
+
+.calendar-cells {
+    height: 90%;
+    /*scroll-snap-type: y mandatory;*/
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+.calendar-cells::-webkit-scrollbar {
+    display: none;
+}
+
+.calendar__month {
+    width: auto;
+    /*scroll-snap-align: start; !*прилипание при прокрутке*!*/
+}
+
+.calendar__row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.calendar__cell {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+
+.date_holiday,
+.date {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.date_disabled {
+    cursor: not-allowed;
+}
+
+.date__coin {
+    position: absolute;
+    color: red;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.date_disabled {
+    opacity: 0.4;
+}
+
+.date_holiday {
+    background-color: bisque;
+}
+
+.date_select-left,
+.date_select-right,
+.date_select-point,
+.date_select {
+    background-color: rgba(163, 238, 163, 0.8);
+}
+
+.date_select-start {
+    border-radius: 10px;
+    outline: 2px solid rgba(163, 238, 163, 0.8);
+}
+
+.date_holiday,
+.date_select-point {
+    border-radius: 10px;
+}
+
+.date_select-left {
+    border-radius: 10px 0 0 10px;
+}
+
+.date_select-right {
+    border-radius: 0 10px 10px 0;
+}

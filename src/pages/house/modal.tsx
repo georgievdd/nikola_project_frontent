@@ -31,7 +31,7 @@ export function useHouseModal(mainCalendarController: CalendarController): House
     const [state, setState] = useState<IHouse | null>(null)
     const [begin, setBegin] = useState<Date | null>(null)
     const [end, setEnd] = useState<Date | null>(null)
-    const calendarController = useCalendar()
+    const calendarController = useCalendar('modal', open)
     return {
         open, setOpen,
         state, setState,

@@ -12,29 +12,14 @@ export default function Calendar3({controller}: {controller: CalendarController}
         selectionController,
         processDateClick,
         opacity,
+        calendarCellsRef,
+        selectedMonthIndex,
+        handleScroll,
+        calendarRef,
     } = controller
-    const calendarCellsRef = useRef<HTMLDivElement>(null)
     const calendarMonthNameColumnRef = useRef<HTMLDivElement>(null)
-    const [selectedMonthIndex, setSelectedMonthIndex] = useState(0)
-    const handleScroll = debounce(() => {
-        const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title')
-        let visibleBlocks: Element[] = []
-        const containerRect = calendarCellsRef.current!.getBoundingClientRect()
-        visibilityCells.forEach(cell => {
-            const cellRect = cell.getBoundingClientRect()
-            if (
-                cellRect.top >= containerRect.top &&
-                cellRect.bottom <= containerRect.bottom
-            ) {
-                visibleBlocks.push(cell)
-            }
-        })
-        setSelectedMonthIndex(+visibleBlocks[0].id)
-    }, 10)
-
-
     return (
-        <div className={`calendar-container ${controller.onLoad && 'calendar-container_disabled'}`}>
+        <div className={`calendar-container ${controller.onLoad && 'calendar-container_disabled'}`} ref={calendarRef}>
             <div className='calendar-months' ref={calendarMonthNameColumnRef}>
                 {selectedMonthIndex !== undefined && (
                     <CalendarHighlighter
@@ -59,7 +44,10 @@ export default function Calendar3({controller}: {controller: CalendarController}
                         )
                     })}
                 </div>
-                <div className='calendar-cells' ref={calendarCellsRef} onScroll={handleScroll}>
+                <div className='calendar-cells'
+                     ref={calendarCellsRef}
+                     onScroll={handleScroll}
+                >
                     {Array.from({length: opacity}).map((_, i) => {
                         const month = addMonths(new Date(), i)
                         return (
@@ -83,7 +71,7 @@ export default function Calendar3({controller}: {controller: CalendarController}
 
 const CalendarHighlighter = (
     { selectedMonthIndex, calendarMonthNameColumnRef }:
-        { selectedMonthIndex: number, calendarMonthNameColumnRef: RefObject<HTMLDivElement> }
+    { selectedMonthIndex: number, calendarMonthNameColumnRef: RefObject<HTMLDivElement> }
 ) => {
     const calendarHighlighterRef = useRef<HTMLDivElement>(null);
     const [highlighterTop, setHighlighterTop] = useState(0);

@@ -11,9 +11,9 @@ import Calendar3 from "../../components/calendar3";
 import {api} from "../../api";
 
 const HousePage = () => {
-    const [data, setData] = useState<IHouse[]>([]);
-    const [max_persons_amount, setMPA] = useState<number>(0);
-    const calendar = useCalendar();
+    const [data, setData] = useState<IHouse[]>([])
+    const [max_persons_amount, setMPA] = useState<number>(0)
+    const calendar = useCalendar('main')
     const modalController = useHouseModal(calendar)
     // const modalController = useHouseModal(calendar)
     // домики

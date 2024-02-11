@@ -1,9 +1,11 @@
-import {Dispatch, useEffect, useState} from "react";
+import {Dispatch, RefObject, useEffect, useRef, useState} from "react";
 import {deAT} from "date-fns/locale";
 import {format, startOfToday} from "date-fns";
 import {randomUUID} from "node:crypto";
 import {getCheckInCalendar, getCommonCalendar} from "./api";
 import {currentMonthIndex} from "../../utils/utils";
+import debounce from "lodash/debounce";
+import {useOnScreen} from "./utilsComponents";
 
 export type DateOrNull = Date | null
 
@@ -29,15 +31,37 @@ export interface CalendarController {
     setCosts: Dispatch<Record<string, number>>
     opacity: number
     onLoad: boolean
+    selectedMonthIndex: number
+    handleScroll: () => void
+    calendarCellsRef: RefObject<HTMLDivElement>
+    calendarRef: RefObject<HTMLDivElement>
 }
 
-function useCalendar (): CalendarController {
-    const id = Math.random() + ''
+function useCalendar (id: string, firstMoveTrigger?: boolean): CalendarController {
     const opacity = 12 - currentMonthIndex
     const selectionController = useSelection()
     const [mapState, setMapState] = useState<Record<string, DayType>>({})
     const [costs, setCosts] = useState<Record<string, number>>({})
     const [onLoad, setLoad] = useState(true)
+    const [selectedMonthIndex, setSelectedMonthIndex] = useState(0)
+    const calendarCellsRef = useRef<HTMLDivElement>(null)
+    const calendarRef = useRef<HTMLDivElement>(null)
+    const handleScroll = debounce(() => {
+        const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title')
+        let visibleBlocks: Element[] = []
+        const containerRect = calendarCellsRef.current!.getBoundingClientRect()
+        visibilityCells.forEach(cell => {
+            const cellRect = cell.getBoundingClientRect()
+            if (
+                cellRect.top >= containerRect.top &&
+                cellRect.bottom <= containerRect.bottom
+            ) {
+                visibleBlocks.push(cell)
+            }
+        })
+        setSelectedMonthIndex(+visibleBlocks[0].id)
+    }, 10)
+
     function validDate(date: Date): boolean {
         if (!mapState[date.getKey()]) return true
         return mapState[date.getKey()] !== DayType.Disabled
@@ -64,15 +88,18 @@ function useCalendar (): CalendarController {
     }
 
     useEffect(() => {
-
-    }, []);
-
-    useEffect(() => {
+        /**
+         * Инициализация календаря. Запрос нужно кидать только, тогда, когда выполнено trigger условие.
+         * У main - didMount, у modal - open.
+         */
+        if (firstMoveTrigger !== undefined && !firstMoveTrigger) {
+            return
+        }
         setLoad(true)
         getCommonCalendar(opacity)
             .then(result => setMapState(result))
             .finally(() => setLoad(false))
-    }, []);
+    }, [firstMoveTrigger]);
 
     useEffect(() => {
         if (selectionController.isStart) {
@@ -95,6 +122,10 @@ function useCalendar (): CalendarController {
         costs, setCosts,
         opacity,
         onLoad,
+        handleScroll,
+        selectedMonthIndex,
+        calendarCellsRef,
+        calendarRef,
     }
 }
 

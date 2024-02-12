@@ -1,5 +1,5 @@
-import {DayType} from "./useCalendar";
 import {CheckInCalendar, CommonCalendar} from "./dto";
+import {DayType} from "./helpers";
 
 
 /**
@@ -46,3 +46,4 @@ export function mapFromCheckInDateCalendar(checkInDate: Date, data: CheckInCalen
     })
     return [result, costs]
 }
+

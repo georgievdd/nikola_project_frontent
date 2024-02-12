@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom'
 import Navbar from '../components/navbar'
 import { Space } from '../components/space'
 import Footer from '../components/footer'
+import HousePage from "./house";
+import HomePage from "./home";
 
 const PublicWrapper = () => {
   const navbarHeight = '64px';
@@ -12,7 +14,7 @@ const PublicWrapper = () => {
         <Navbar />
         <Space h={navbarHeight} />
         <Box sx={{minHeight: '70vh'}}>
-          <Outlet />
+          <Outlet/>
         </Box>
         <Footer />
       </Container>

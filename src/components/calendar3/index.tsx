@@ -1,10 +1,11 @@
 import React, {RefObject, useEffect, useRef, useState} from 'react';
 import './style.css'
 import {addDays, addMonths, endOfMonth, format, isSameDay, startOfMonth, startOfWeek} from "date-fns";
-import {getMonthName, monday, weekArray} from "./utilsComponents";
+import {dayStyle, DayType, getMonthName, monday, weekArray} from "./helpers";
 import {ru} from "date-fns/locale";
-import {CalendarController, DayType, SelectionController} from "./useCalendar";
-import debounce from 'lodash/debounce'
+import {CalendarController} from "./hooks/useCalendar";
+import {SelectionController} from "./hooks/useSelection";
+
 
 export default function Calendar3({controller}: {controller: CalendarController}) {
     const {
@@ -13,22 +14,22 @@ export default function Calendar3({controller}: {controller: CalendarController}
         processDateClick,
         opacity,
         calendarCellsRef,
-        selectedMonthIndex,
-        handleScroll,
-        calendarRef,
+        scrollController,
+        dataController
     } = controller
     const calendarMonthNameColumnRef = useRef<HTMLDivElement>(null)
+
     return (
-        <div className={`calendar-container ${controller.onLoad && 'calendar-container_disabled'}`} ref={calendarRef}>
+        <div className={`calendar-container ${controller.onLoad && 'calendar-container_disabled'}`}>
             <div className='calendar-months' ref={calendarMonthNameColumnRef}>
-                {selectedMonthIndex !== undefined && (
+                {scrollController.currentMonthIndex !== undefined && (
                     <CalendarHighlighter
-                        selectedMonthIndex={selectedMonthIndex}
+                        selectedMonthIndex={scrollController.currentMonthIndex}
                         calendarMonthNameColumnRef={calendarMonthNameColumnRef}
                     />
                 )}
                 {Array.from({length: opacity}).map((_, i) =>
-                    <div id={`${id}month-name${i}`} className="month-name calendar__cell" key={i}>
+                    <div id={`${id}month-name${i}`} className="month-name calendar__cell" key={id + i}>
                         {getMonthName(addMonths(new Date(), i).getMonth())}
                     </div>
                 )}
@@ -38,7 +39,7 @@ export default function Calendar3({controller}: {controller: CalendarController}
                     {weekArray.map((_, i) => {
                         const text = format(addDays(monday, i), "iiiiii", {locale: ru})
                         return (
-                            <div className="calendar__cell" key={text + id}>
+                            <div className="calendar__cell" key={text + id + i}>
                                 {text}
                             </div>
                         )
@@ -46,7 +47,7 @@ export default function Calendar3({controller}: {controller: CalendarController}
                 </div>
                 <div className='calendar-cells'
                      ref={calendarCellsRef}
-                     onScroll={handleScroll}
+                     onScroll={scrollController.handleScroll}
                 >
                     {Array.from({length: opacity}).map((_, i) => {
                         const month = addMonths(new Date(), i)
@@ -58,8 +59,8 @@ export default function Calendar3({controller}: {controller: CalendarController}
                                 month={month}
                                 selectionController={selectionController}
                                 processDateClick={processDateClick}
-                                mapState={controller.mapState}
-                                costs={controller.costs}
+                                mapState={dataController.mapState}
+                                costs={dataController.costs}
                             />
                         </div>
                     )})}
@@ -113,12 +114,13 @@ const CalendarHighlighter = (
         <div id="calendar-highlighter" className='month-name-highlighter' ref={calendarHighlighterRef} style={{ top: `${highlighterTop}px`, width: `${highlighterWidth}px` }} />
     );
 };
-
-const dayStyle = {
-    [DayType.Disabled]: 'date_disabled',
-    [DayType.Holiday]: 'date_holiday',
+interface MonthProps {
+    month: Date
+    selectionController: SelectionController
+    processDateClick: (day: Date) => void
+    mapState: Record<string, DayType>
+    costs: Record<string, number>
 }
-
 const Month = ({month, processDateClick, mapState, selectionController, costs}: MonthProps) => {
 
     const {
@@ -198,12 +200,4 @@ const Month = ({month, processDateClick, mapState, selectionController, costs}: 
             {renderCells()}
         </div>
     )
-}
-
-interface MonthProps {
-    month: Date
-    selectionController: SelectionController
-    processDateClick: (day: Date) => void
-    mapState: Record<string, DayType>
-    costs: Record<string, number>
 }

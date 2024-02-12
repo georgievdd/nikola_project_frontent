@@ -14,7 +14,7 @@ import {Space} from "../../components/space";
 import NumberInput from "../../components/number-input";
 import {IReservationPrice, IReservationPriceRequest} from "../../interfaces/houses/reservation";
 import AutocompleteDateInput, {useAutocompleteDateInputController} from "../../components/autocomlete_date_input";
-import useCalendar, {CalendarController} from "../../components/calendar3/useCalendar";
+import {CalendarController, useCalendar} from "../../components/calendar3/hooks/useCalendar";
 import Calendar3 from "../../components/calendar3";
 
 

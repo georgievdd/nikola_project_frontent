@@ -4,9 +4,8 @@ import NumberInput from '../../components/number-input'
 import {Space} from '../../components/space'
 import {IHouse} from '../../interfaces/houses'
 import HouseCard from '../../components/house-card'
-import {format} from "date-fns";
 import HouseModal, {useHouseModal} from "./modal";
-import useCalendar from "../../components/calendar3/useCalendar";
+import {useCalendar} from "../../components/calendar3/hooks/useCalendar";
 import Calendar3 from "../../components/calendar3";
 import {api} from "../../api";
 
@@ -15,7 +14,6 @@ const HousePage = () => {
     const [max_persons_amount, setMPA] = useState<number>(0)
     const calendar = useCalendar('main')
     const modalController = useHouseModal(calendar)
-    // const modalController = useHouseModal(calendar)
     // домики
     useEffect(() => {
         if (calendar.selectionController.isActive) {
@@ -50,17 +48,17 @@ const HousePage = () => {
                     {
                         data.map((e, i) => (
                             <HouseCard key={e.name} data={e} onClick={() => {
-
+                                // TODO create Factory Copy Function
                                 modalController.setOpen(true)
                                 modalController.setState(e)
                                 modalController.calendarController.selectionController.setDateBegin(
                                     modalController.mainCalendarController.selectionController.dateBegin)
                                 modalController.calendarController.selectionController.setDateEnd(
                                     modalController.mainCalendarController.selectionController.dateEnd)
-                                modalController.calendarController.setCosts(
-                                    modalController.mainCalendarController.costs)
-                                modalController.calendarController.setMapState(
-                                    modalController.mainCalendarController.mapState)
+                                modalController.calendarController.dataController.setCosts(
+                                    modalController.mainCalendarController.dataController.costs)
+                                modalController.calendarController.dataController.setMapState(
+                                    modalController.mainCalendarController.dataController.mapState)
                             }}/>
                         ))
                     }

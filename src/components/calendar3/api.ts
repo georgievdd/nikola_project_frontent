@@ -3,10 +3,18 @@ import {mapFromCheckInDateCalendar, mapFromCommonCalendar} from "./mapper";
 import {addDays, addMonths, startOfMonth} from "date-fns";
 import {axiosInstance} from "../../api/instance";
 import endpoints from "../../api/endpoints";
+import {CalendarDataController} from "./hooks/useCalendarData";
+import {getMonthFromIndexInCalendar} from "./helpers";
 
-export async function getCommonCalendar(opacity: number) {
-    const begin = startOfMonth(new Date())
-    const response = await Promise.all(Array.from({length: opacity}).map((_, i) => {
+export async function getCommonCalendar(opacity: number, dataController: CalendarDataController, dateIndex: number) {
+    const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
+    const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
+        if (dataController.beenLoaded[dateIndex + i]) {
+            return Promise.resolve({calendar: {}})
+        }
+        const newCashState = dataController.beenLoaded.slice()
+        newCashState[dateIndex + i] = true
+        dataController.setBeenLoaded(newCashState)
         const month = addMonths(begin, i)
         const data = {
             month: month.getMonth() + 1,

@@ -8,6 +8,7 @@ import HouseModal, {useHouseModal} from "./modal";
 import {useCalendar} from "../../components/calendar3/hooks/useCalendar";
 import Calendar3 from "../../components/calendar3";
 import {api} from "../../api";
+import {showAlert} from "../../utils/utils";
 
 const HousePage = () => {
     const [data, setData] = useState<IHouse[]>([])
@@ -22,6 +23,7 @@ const HousePage = () => {
                 check_out_date: calendar.selectionController.dateEnd!.getKey(),
             })
                 .then(res => setData(res.data))
+                .catch(e => showAlert(e.response?.data?.message || 'Ошибка', 'alert-danger'))
         } else {
             api.house.getAll({})
                 .then(res => setData(res.data))

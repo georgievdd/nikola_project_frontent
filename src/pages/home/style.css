@@ -1,0 +1,6 @@
+.content {
+    font-size: 200px;
+    text-transform: uppercase;
+    letter-spacing: 20px;
+    transform: translate(0, 50%) rotate(30deg);
+}

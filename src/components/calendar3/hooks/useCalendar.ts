@@ -1,6 +1,6 @@
 import {Dispatch, RefObject, useEffect, useRef, useState} from "react";
 import {getCheckInCalendar, getCommonCalendar} from "../api";
-import {currentMonthIndex} from "../../../utils/utils";
+import {currentMonthIndex, showAlert} from "../../../utils/utils";
 import {ScrollController, useScroll} from "./useScroll";
 import {SelectionController, useSelection} from "./useSelection";
 import {DayType} from "../helpers";
@@ -63,6 +63,7 @@ export function useCalendar (id: string, initializationParameter?: boolean): Cal
         )
             .then(result => dataController.setMapState(prev =>
                 ({...prev, ...result})))
+            .catch(e => showAlert(e.response?.data?.message, 'alert-danger'))
             .finally(() => setLoad(false))
     }
     function setCheckInCalendar(withClear: boolean = false) {
@@ -84,6 +85,7 @@ export function useCalendar (id: string, initializationParameter?: boolean): Cal
                     dataController.setCosts(prev => ({...costs, ...prev}))
                 }
             })
+            .catch(e => showAlert(e.response?.data?.message, 'alert-danger'))
             .finally(() => setLoad(false))
     }
 
@@ -101,7 +103,8 @@ export function useCalendar (id: string, initializationParameter?: boolean): Cal
      */
     useEffect(() => {
         if (IsNotInitByInitializationParameter()) return
-        if (selectionController.isStart) {
+        // isActive оставить в зависимости от требований
+        if (selectionController.isStart || selectionController.isActive) {
             setCheckInCalendar()
         } else {
             setCommonCalendar()

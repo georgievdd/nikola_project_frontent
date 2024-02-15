@@ -5,29 +5,34 @@ import {axiosInstance} from "../../api/instance";
 import endpoints from "../../api/endpoints";
 import {CalendarDataController} from "./hooks/useCalendarData";
 import {getMonthFromIndexInCalendar} from "./helpers";
+import {showAlert} from "../../utils/utils";
 
 export async function getCommonCalendar(
     opacity: number,
     dataController: CalendarDataController,
     dateIndex: number
 ) {
-    const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
-    const dataCashMask = dataController.beenLoaded.slice()
+    try {
+        const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
+        const dataCashMask = dataController.beenLoaded.slice()
 
-    const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
-        if (dataCashMask[dateIndex + i]) {
-            return Promise.resolve({calendar: {}})
-        }
-        dataCashMask[dateIndex + i] = true
-        const month = addMonths(begin, i)
-        const data = {
-            month: month.getMonth() + 1,
-            year: month.getFullYear()
-        }
-        return axiosInstance.get<CommonCalendar>(endpoints.HOUSE.CALENDAR, {params: data}).then(r => r.data)
-    }))
-    dataController.setBeenLoaded(prev => dataCashMask)
-    return mapFromCommonCalendar(response)
+        const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
+            if (dataCashMask[dateIndex + i]) {
+                return Promise.resolve({calendar: {}})
+            }
+            dataCashMask[dateIndex + i] = true
+            const month = addMonths(begin, i)
+            const data = {
+                month: month.getMonth() + 1,
+                year: month.getFullYear()
+            }
+            return axiosInstance.get<CommonCalendar>(endpoints.HOUSE.CALENDAR, {params: data}).then(r => r.data)
+        }))
+        dataController.setBeenLoaded(prev => dataCashMask)
+        return mapFromCommonCalendar(response)
+    } catch (e) {
+        throw e
+    }
 }
 
 export async function getCheckInCalendar(
@@ -37,24 +42,28 @@ export async function getCheckInCalendar(
     checkInDate: Date,
     withClear: boolean
 ) {
-    const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
-    const dataCashMask = withClear ?
-        dataController.beenLoaded.map(() => false) :
-        dataController.beenLoaded.slice()
+    try {
+        const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
+        const dataCashMask = withClear ?
+            dataController.beenLoaded.map(() => false) :
+            dataController.beenLoaded.slice()
 
-    const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
-        if (dataCashMask[dateIndex + i]) {
-            return Promise.resolve({calendar: {}})
-        }
-        dataCashMask[dateIndex + i] = true
-        const month = addMonths(begin, i)
-        const data = {
-            month: month.getMonth() + 1,
-            year: month.getFullYear(),
-            chosen_check_in_date: checkInDate.getKey(),
-        }
-        return axiosInstance.get<CheckInCalendar>(endpoints.HOUSE.CALENDAR, {params: data}).then(r => r.data)
-    }));
-    dataController.setBeenLoaded(prev => dataCashMask)
-    return mapFromCheckInDateCalendar(checkInDate, response)
+        const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
+            if (dataCashMask[dateIndex + i]) {
+                return Promise.resolve({calendar: {}})
+            }
+            dataCashMask[dateIndex + i] = true
+            const month = addMonths(begin, i)
+            const data = {
+                month: month.getMonth() + 1,
+                year: month.getFullYear(),
+                chosen_check_in_date: checkInDate.getKey(),
+            }
+            return axiosInstance.get<CheckInCalendar>(endpoints.HOUSE.CALENDAR, {params: data}).then(r => r.data)
+        }));
+        dataController.setBeenLoaded(prev => dataCashMask)
+        return mapFromCheckInDateCalendar(checkInDate, response)
+    } catch (e) {
+        throw e
+    }
 }

@@ -20,7 +20,8 @@ export default function Calendar3({controller}: {controller: CalendarController}
     const calendarMonthNameColumnRef = useRef<HTMLDivElement>(null)
 
     return (
-        <div className={`calendar-container ${controller.onLoad && 'calendar-container_disabled'}`}>
+        <div className={`calendar-container`}>
+            {/*className={`calendar-container ${controller.onLoad && 'calendar-container_disabled'}`}>*/}
             <div className='calendar-months' ref={calendarMonthNameColumnRef}>
                 {scrollController.currentMonthIndex !== undefined && (
                     <CalendarHighlighter

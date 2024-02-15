@@ -6,15 +6,19 @@ import endpoints from "../../api/endpoints";
 import {CalendarDataController} from "./hooks/useCalendarData";
 import {getMonthFromIndexInCalendar} from "./helpers";
 
-export async function getCommonCalendar(opacity: number, dataController: CalendarDataController, dateIndex: number) {
+export async function getCommonCalendar(
+    opacity: number,
+    dataController: CalendarDataController,
+    dateIndex: number
+) {
     const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
+    const dataCashMask = dataController.beenLoaded.slice()
+
     const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
-        if (dataController.beenLoaded[dateIndex + i]) {
+        if (dataCashMask[dateIndex + i]) {
             return Promise.resolve({calendar: {}})
         }
-        const newCashState = dataController.beenLoaded.slice()
-        newCashState[dateIndex + i] = true
-        dataController.setBeenLoaded(newCashState)
+        dataCashMask[dateIndex + i] = true
         const month = addMonths(begin, i)
         const data = {
             month: month.getMonth() + 1,
@@ -22,12 +26,27 @@ export async function getCommonCalendar(opacity: number, dataController: Calenda
         }
         return axiosInstance.get<CommonCalendar>(endpoints.HOUSE.CALENDAR, {params: data}).then(r => r.data)
     }))
+    dataController.setBeenLoaded(prev => dataCashMask)
     return mapFromCommonCalendar(response)
 }
 
-export async function getCheckInCalendar(checkInDate: Date, opacity: number) {
-    const begin = startOfMonth(new Date())
-    const response = await Promise.all(Array.from({length: opacity}).map((_, i) => {
+export async function getCheckInCalendar(
+    opacity: number,
+    dataController: CalendarDataController,
+    dateIndex: number,
+    checkInDate: Date,
+    withClear: boolean
+) {
+    const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
+    const dataCashMask = withClear ?
+        dataController.beenLoaded.map(() => false) :
+        dataController.beenLoaded.slice()
+
+    const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
+        if (dataCashMask[dateIndex + i]) {
+            return Promise.resolve({calendar: {}})
+        }
+        dataCashMask[dateIndex + i] = true
         const month = addMonths(begin, i)
         const data = {
             month: month.getMonth() + 1,
@@ -35,7 +54,7 @@ export async function getCheckInCalendar(checkInDate: Date, opacity: number) {
             chosen_check_in_date: checkInDate.getKey(),
         }
         return axiosInstance.get<CheckInCalendar>(endpoints.HOUSE.CALENDAR, {params: data}).then(r => r.data)
-    }))
-    console.log(response)
+    }));
+    dataController.setBeenLoaded(prev => dataCashMask)
     return mapFromCheckInDateCalendar(checkInDate, response)
 }

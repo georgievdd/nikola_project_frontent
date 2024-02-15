@@ -17,7 +17,7 @@ export interface CalendarController {
     calendarCellsRef: RefObject<HTMLDivElement>
 }
 
-export function useCalendar (id: string, firstMoveTrigger?: boolean): CalendarController {
+export function useCalendar (id: string, initializationParameter?: boolean): CalendarController {
     /**
      * Сколько месяцев вперед отображаем
      */
@@ -26,7 +26,7 @@ export function useCalendar (id: string, firstMoveTrigger?: boolean): CalendarCo
     const selectionController = useSelection()
     const scrollController = useScroll(calendarCellsRef)
     const dataController = useCalendarData(opacity)
-    const [onLoad, setLoad] = useState(true)
+    const [onLoad, setLoad] = useState(false)
 
     function validDate(date: Date): boolean {
         if (!dataController.mapState[date.getKey()]) return true
@@ -54,20 +54,7 @@ export function useCalendar (id: string, firstMoveTrigger?: boolean): CalendarCo
     }
 
 
-    /**
-     * По дефолту (у main календаря) тригером является didMount
-     * У модального окна тригер - open=true
-     */
-    function triggerActive() {
-        return firstMoveTrigger !== undefined && !firstMoveTrigger
-    }
-
-    /**
-     * При инициализации scrollController.currentMonthIndex = 0 (сегодняшний месяц)
-     * При прокрутке будем расширять mapState, если в нем еще нет рассматриваемого месяца (+ opacity)
-     */
-    useEffect(() => {
-        if (triggerActive()) return;
+    function setCommonCalendar() {
         setLoad(true)
         getCommonCalendar(
             1, // сколько месяцев вперед смотрим дополнительно
@@ -77,19 +64,53 @@ export function useCalendar (id: string, firstMoveTrigger?: boolean): CalendarCo
             .then(result => dataController.setMapState(prev =>
                 ({...prev, ...result})))
             .finally(() => setLoad(false))
-    }, [firstMoveTrigger, scrollController.currentMonthIndex]);
+    }
+    function setCheckInCalendar(withClear: boolean = false) {
+        setLoad(true)
+        getCheckInCalendar(
+            2,
+            dataController,
+            Math.max(scrollController.currentMonthIndex - 1, 0),
+            selectionController.dateBegin!,
+            withClear,
+        )
+            .then(result => {
+                const [map, costs] = result
+                if (withClear) {
+                    dataController.setMapState(prev => map)
+                    dataController.setCosts(prev => costs)
+                } else {
+                    dataController.setMapState(prev => ({...map, ...prev}))
+                    dataController.setCosts(prev => ({...costs, ...prev}))
+                }
+            })
+            .finally(() => setLoad(false))
+    }
 
+
+    /**
+     * По дефолту (у main календаря) тригером является didMount
+     * У модального окна тригер - open=true
+     */
+    function IsNotInitByInitializationParameter() {
+        return initializationParameter !== undefined && !initializationParameter
+    }
+    /**
+     * При инициализации scrollController.currentMonthIndex = 0 (сегодняшний месяц)
+     * При прокрутке будем расширять mapState, если в нем еще нет рассматриваемого месяца (+ opacity)
+     */
+    useEffect(() => {
+        if (IsNotInitByInitializationParameter()) return
+        if (selectionController.isStart) {
+            setCheckInCalendar()
+        } else {
+            setCommonCalendar()
+        }
+    }, [scrollController.currentMonthIndex])
 
     useEffect(() => {
         if (selectionController.isStart) {
-            setLoad(true)
-            getCheckInCalendar(selectionController.dateBegin!, opacity)
-                .then(result => {
-                    const [map, costs] = result
-                    dataController.setMapState(map)
-                    dataController.setCosts(costs)
-                })
-                .finally(() => setLoad(false))
+            setCheckInCalendar(true)
         }
     }, [selectionController.isStart]);
 

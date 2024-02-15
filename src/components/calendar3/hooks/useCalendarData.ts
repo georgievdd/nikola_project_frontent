@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {DayType} from "../helpers";
 
 export interface CalendarDataController {
@@ -6,14 +6,21 @@ export interface CalendarDataController {
     setMapState: Dispatch<SetStateAction<Record<string, DayType>>>
     costs: Record<string, DayType>
     setCosts:  Dispatch<SetStateAction<Record<string, number>>>
-    beenLoaded: Array<boolean>
-    setBeenLoaded: Dispatch<SetStateAction<Array<boolean>>>
+    beenLoaded: boolean[],
+    setBeenLoaded: Dispatch<SetStateAction<boolean[]>>,
+    clear: () => void
 }
 
 export function useCalendarData(opacity: number): CalendarDataController {
     const [mapState, setMapState] = useState<Record<string, DayType>>({})
     const [costs, setCosts] = useState<Record<string, number>>({})
     const [beenLoaded, setBeenLoaded] = useState<Array<boolean>>(Array(opacity).fill(false))
+    function clear() {
+        setMapState({})
+        setCosts({})
+        setBeenLoaded(prev => Array(opacity).fill(false))
+    }
+
     return {
         mapState,
         setMapState,
@@ -21,5 +28,6 @@ export function useCalendarData(opacity: number): CalendarDataController {
         setCosts,
         beenLoaded,
         setBeenLoaded,
+        clear,
     }
 }

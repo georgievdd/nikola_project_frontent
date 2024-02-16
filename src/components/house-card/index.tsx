@@ -1,7 +1,9 @@
 import React from 'react'
 import { IHouse } from '../../interfaces/houses'
-import {Button, Container, Paper, Typography} from '@mui/material'
-
+import {Button, Container, Grid, Paper, Typography} from '@mui/material'
+import {apiUrl, staticUrl} from "../../api/instance";
+import Carousel from 'react-bootstrap/Carousel';
+import './style.css'
 const HouseCard = ({
                        data,
                        onClick
@@ -10,20 +12,34 @@ const HouseCard = ({
     onClick: () => void
 }) => {
 
-
   return (
-    <Paper sx={{padding: '20px', backgroundColor: 'rgba(0, 0, 0, 0.1)', marginBottom: '20px'}}>
-      <Typography variant='h6'>"id": {data.id}</Typography>
-      <Typography variant='h6'>"name": {data.name}</Typography>
-      <Typography variant='h6'>"description": {data.description}</Typography>
-      <Typography variant='h6'>"base_price": {data.base_price}</Typography>
-      <Typography variant='h6'>"total_price": {data.total_price}</Typography>
-      <Typography variant='h6'>"base_persons_amount": {data.base_persons_amount}</Typography>
-      <Typography variant='h6'>"max_persons_amount": {data.max_persons_amount}</Typography>
-      <Typography variant='h6'>"price_per_extra_person": {data.price_per_extra_person}</Typography>
-      <Typography variant='h6'>"pictures.length": {data.pictures.length}</Typography>
-      <Typography variant='h6'>"features.length": {data.features.length}</Typography>
-        <Button variant='contained' color='success' onClick={onClick}>забронировать</Button>
+    <Paper className={'house-card'}>
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Carousel>
+            {data.pictures.map(({picture_path}) =>
+              <Carousel.Item>
+                <img src={`${staticUrl}${picture_path}`}/>
+              </Carousel.Item>
+            )}
+          </Carousel>
+        </Grid>
+        <Grid item xs={8}>
+          <h1>{data.name}</h1>
+          <p>{data.description}</p>
+          <p>Максимальное количество жильцов: {data.max_persons_amount}</p>
+          {data.features.map(e =>
+          <div className='house-feature'>
+            {e.name}
+          </div>)}
+          {data.total_price &&
+          <div>
+              <p>будет стоить: <span style={{color: 'red'}}>{data.total_price}</span></p>
+              <Button onClick={onClick} variant='contained' color='success'>Забронировать</Button>
+          </div>
+          }
+        </Grid>
+      </Grid>
     </Paper>
   )
 }

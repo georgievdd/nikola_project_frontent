@@ -11,11 +11,12 @@ import {api} from "../../api";
 import {createTimesList, showAlert} from "../../utils/utils";
 import {Input} from "@mui/base";
 import {Space} from "../../components/space";
-import NumberInput from "../../components/number-input";
+import NumberInput from "../../components/input-number";
 import {IReservationPrice, IReservationPriceRequest} from "../../interfaces/houses/reservation";
 import AutocompleteDateInput, {useAutocompleteDateInputController} from "../../components/autocomlete_date_input";
 import {CalendarController, useCalendar} from "../../components/calendar3/hooks/useCalendar";
 import Calendar3 from "../../components/calendar3";
+import HouseCard from "../../components/house-card";
 
 
 export interface HouseModalController {
@@ -155,16 +156,23 @@ export default function HouseModal({
                 <Fade in={open}>
                     <ModalContent sx={style}>
                        <Grid container display='flex'>
-                           <Grid item xs={6} display='flex'>
-                                <div>
-                                    <h2>{state.name}</h2>
-                                    <p>{state.description}</p>
-                                </div>
+                           <Grid item xs={6}>
+                               <h1>{state.name}</h1>
+                               <p>{state.description}</p>
+                               <p>Максимальное количество жильцов: {state.max_persons_amount}</p>
+                               <div>
+                                   <p>стандартное количество
+                                       жителей {reservationOptions.base_persons_amount.value}</p>
+                                   <p>цена за каждого компаньона
+                                       {reservationOptions.price_per_extra_person.value}</p>
+                               </div>
+                               {state.features.map(e =>
+                                 <div className='house-feature'>
+                                     {e.name}
+                                 </div>)}
                            </Grid>
                            <Grid item xs={6}>
-                               <NumberInput value={max_persons_amount} setValue={setMPA} check={checkMPA}/>
-                               <Space h='20px'/>
-                               <Calendar3 controller={controller.calendarController} />
+                               <Calendar3 controller={controller.calendarController}/>
                            </Grid>
                        </Grid>
                         <Grid display='flex' justifyContent='center'>
@@ -189,14 +197,6 @@ export default function HouseModal({
                                             <Input {...modalInput.preferred_contact} style={inputStyle}></Input>
                                         </div>
                                     </div>
-                                    <div>
-                                        <p>максимальное количество
-                                            жителей {reservationOptions.max_persons_amount.value}</p>
-                                        <p>стандартное количество
-                                            жителей {reservationOptions.base_persons_amount.value}</p>
-                                        <p>цена за каждого компаньона
-                                            {reservationOptions.price_per_extra_person.value}</p>
-                                    </div>
                                 </Grid>
                                 {priceList.data &&
                                     <>
@@ -214,7 +214,10 @@ export default function HouseModal({
                                                 <AutocompleteDateInput controller={modalInput.checkoutInput}/>
                                             </label>
                                         </Grid>
-                                        <h3>едет со мной: {priceList.data.extra_persons_amount}</h3>
+                                        <Grid display='flex'>
+                                            <h3>едет со мной:</h3>
+                                            <NumberInput value={max_persons_amount} setValue={setMPA}/>
+                                        </Grid>
                                         <h3>Дополнительные услуги:</h3>
                                         <ul>
                                             {priceList.data.receipt.extra_services.map(service => <li>

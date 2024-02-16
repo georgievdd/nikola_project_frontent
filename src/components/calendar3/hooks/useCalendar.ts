@@ -17,7 +17,7 @@ export interface CalendarController {
     calendarCellsRef: RefObject<HTMLDivElement>
 }
 
-export function useCalendar (id: string, initializationParameter?: boolean): CalendarController {
+export function useCalendar (id: string, initializationParameter?: any): CalendarController {
     /**
      * Сколько месяцев вперед отображаем
      */
@@ -95,6 +95,7 @@ export function useCalendar (id: string, initializationParameter?: boolean): Cal
      * У модального окна тригер - open=true
      */
     function IsNotInitByInitializationParameter() {
+        console.log(initializationParameter)
         return initializationParameter !== undefined && !initializationParameter
     }
     /**
@@ -109,7 +110,7 @@ export function useCalendar (id: string, initializationParameter?: boolean): Cal
         } else {
             setCommonCalendar()
         }
-    }, [scrollController.currentMonthIndex])
+    }, [scrollController.currentMonthIndex, initializationParameter])
 
     useEffect(() => {
         if (selectionController.isStart) {

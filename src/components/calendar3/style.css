@@ -4,11 +4,11 @@
     height: 500px;
     display: flex;
     flex-direction: row;
-    background-color: rgba(236, 234, 234, 0.8);
+    background-color: rgba(236, 234, 234, 1);
     border-radius: 10px;
     padding: 20px;
     padding-top: 0;
-
+    z-index: 1000;
     font-size: 12px;
 
     -webkit-user-select: none;

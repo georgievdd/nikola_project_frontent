@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <Grid display='flex' justifyContent='space-between'>
+    <Grid display='flex' justifyContent='space-between' style={{minHeight: '200px'}}>
       {/*<img */}
       {/*  src={require('../../res/img/logo.png')}*/}
       {/*  style={{*/}

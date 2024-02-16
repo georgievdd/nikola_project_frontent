@@ -1,0 +1,24 @@
+.house-card {
+    position: relative;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #c1b5b5 !important;
+}
+
+.house-card img {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+    min-height: 320px;
+}
+
+.house-card h1 {
+}
+
+.house-feature {
+    background-color: gray;
+    display: inline-block;
+    padding: 8px;
+    border-radius: 10px;
+    margin-right: 10px;
+}

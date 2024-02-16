@@ -24,11 +24,6 @@ export default function DateFieldValue({controller, show, setShow}:
   useEffect(() => {
     if (controller.selectionController.isActive) setShow(0)
   }, [controller.selectionController.isActive]);
-  // useEffect(() => {
-  //   if (show === 1) {
-  //     controller.dataController.clear()
-  //   }
-  // }, [show]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

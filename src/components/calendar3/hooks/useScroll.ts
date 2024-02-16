@@ -4,6 +4,7 @@ import debounce from "lodash/debounce";
 export interface ScrollController {
     currentMonthIndex: number,
     handleScroll: () => void,
+    scrollToMonth: (v: number) => void
 }
 export function useScroll(calendarCellsRef: RefObject<HTMLDivElement>): ScrollController {
     const [currentMonthIndex, setCurrentMonthIndex] = useState(0)
@@ -22,8 +23,16 @@ export function useScroll(calendarCellsRef: RefObject<HTMLDivElement>): ScrollCo
         })
         setCurrentMonthIndex(+visibleBlocks[0].id)
     }, 7)
+    const scrollToMonth = (monthIndex: number) => {
+        const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title');
+        const monthElement = visibilityCells[monthIndex]
+        monthElement.scrollIntoView({
+            behavior: 'smooth',
+        });
+    }
     return {
         currentMonthIndex,
         handleScroll,
+        scrollToMonth,
     }
 }

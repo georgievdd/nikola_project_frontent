@@ -113,6 +113,15 @@ export function useCalendar (id: string, initializationParameter?: any): Calenda
     }, [scrollController.currentMonthIndex, initializationParameter])
 
     useEffect(() => {
+        if (IsNotInitByInitializationParameter()) return
+        if (selectionController.isActive) {
+            setTimeout(() =>
+                scrollController.scrollToMonth(selectionController.dateBegin!.getMonth() - new Date().getMonth())
+            , 50)
+        }
+    }, [initializationParameter]);
+
+    useEffect(() => {
         if (selectionController.isStart) {
             setCheckInCalendar(true)
         }

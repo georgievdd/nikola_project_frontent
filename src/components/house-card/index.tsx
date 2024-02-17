@@ -4,6 +4,7 @@ import {Button, Container, Grid, Paper, Typography} from '@mui/material'
 import {apiUrl, staticUrl} from "../../api/instance";
 import Carousel from 'react-bootstrap/Carousel';
 import './style.css'
+import {Space} from "../space";
 const HouseCard = ({
                        data,
                        onClick
@@ -35,9 +36,10 @@ const HouseCard = ({
           {data.total_price &&
           <div>
               <p>будет стоить: <span style={{color: 'red'}}>{data.total_price}</span></p>
-              <Button onClick={onClick} variant='contained' color='success'>Забронировать</Button>
           </div>
           }
+          <Space h={'10px'} />
+          <Button onClick={onClick} variant='contained' color='success'>Забронировать</Button>
         </Grid>
       </Grid>
     </Paper>

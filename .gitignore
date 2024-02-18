@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+/nginx-1.25.4/html/build
 
 # misc
 .DS_Store

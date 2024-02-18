@@ -44,7 +44,7 @@ export default function DateFieldValue({controller, show, setShow}:
           }
           <Button
             variant='contained'
-            color={'success'}
+            color={'error'}
             size='small'
             disabled={!controller.selectionController.dateBegin}
             onClick={() => {

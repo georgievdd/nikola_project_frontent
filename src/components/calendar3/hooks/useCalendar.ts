@@ -26,7 +26,7 @@ export function useCalendar (id: string, initializationParameter?: any): Calenda
     const selectionController = useSelection()
     const scrollController = useScroll(calendarCellsRef)
     const dataController = useCalendarData(opacity)
-    const [onLoad, setLoad] = useState(false)
+    const [onLoad, setLoad] = useState(true)
 
     function validDate(date: Date): boolean {
         if (!dataController.mapState[date.getKey()]) return true
@@ -126,6 +126,12 @@ export function useCalendar (id: string, initializationParameter?: any): Calenda
             setCheckInCalendar(true)
         }
     }, [selectionController.isStart]);
+
+    useEffect(() => {
+        if (!selectionController.isStart && !selectionController.isActive) {
+            setCommonCalendar()
+        }
+    }, [selectionController.dateBegin]);
 
     return {
         id,

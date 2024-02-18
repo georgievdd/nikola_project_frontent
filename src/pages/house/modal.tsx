@@ -2,7 +2,7 @@ import * as React from 'react';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import Fade from '@mui/material/Fade';
-import { Button } from '@mui/base/Button';
+import { Button } from '@mui/material';
 import {useEffect, useState} from "react";
 import {IHouse, INewReservationRequest} from "../../interfaces/houses";
 import {Grid, Paper} from "@mui/material";
@@ -10,13 +10,11 @@ import {format} from "date-fns";
 import {api} from "../../api";
 import {createTimesList, showAlert} from "../../utils/utils";
 import {Input} from "@mui/base";
-import {Space} from "../../components/space";
 import NumberInput from "../../components/input-number";
 import {IReservationPrice, IReservationPriceRequest} from "../../interfaces/houses/reservation";
 import AutocompleteDateInput, {useAutocompleteDateInputController} from "../../components/autocomlete_date_input";
 import {CalendarController, useCalendar} from "../../components/calendar3/hooks/useCalendar";
 import Calendar3 from "../../components/calendar3";
-import HouseCard from "../../components/house-card";
 
 
 export interface HouseModalController {
@@ -86,7 +84,6 @@ export default function HouseModal({
             .then(res => res.data)
             .then(data => {
                 reservationOptions.set(data)
-                console.log(data)
                 modalInput.setInOutTimes(
                     createTimesList(data.check_in_times),
                     createTimesList(data.check_out_times),
@@ -108,8 +105,8 @@ export default function HouseModal({
         api.house.getReservationPrice(id!, reservationPriceData)
             .then(res => res.data)
             .then(data => {
-                console.log(data)
                 priceList.set(data)
+                console.log(data)
             })
     }
 
@@ -173,6 +170,17 @@ export default function HouseModal({
                            </Grid>
                            <Grid item xs={6}>
                                <Calendar3 controller={controller.calendarController}/>
+                               <Button
+                                 variant='contained'
+                                 color={'error'}
+                                 size='small'
+                                 disabled={!controller.calendarController.selectionController.dateBegin}
+                                 onClick={() => {
+                                     controller.calendarController.dataController.clear()
+                                     controller.calendarController.selectionController.clear()
+                                 }}
+                               >
+                                   Сбросить</Button>
                            </Grid>
                        </Grid>
                         <Grid display='flex' justifyContent='center'>
@@ -216,7 +224,9 @@ export default function HouseModal({
                                         </Grid>
                                         <Grid display='flex'>
                                             <h3>едет со мной:</h3>
-                                            <NumberInput value={max_persons_amount} setValue={setMPA}/>
+                                            <NumberInput maxValue={reservationOptions.max_persons_amount.value!-reservationOptions.base_persons_amount.value!}
+                                              value={max_persons_amount}
+                                              setValue={setMPA}/>
                                         </Grid>
                                         <h3>Дополнительные услуги:</h3>
                                         <ul>
@@ -231,9 +241,9 @@ export default function HouseModal({
                                             </li>)}
                                         </ul>
                                         <h3>Итоговая стоимость: {priceList.data.total}</h3>
+                                        <Button variant='contained' color={'success'} onClick={bookHouse}>Забронировать</Button>
                                     </>
                                 }
-                                <Button onClick={bookHouse}>Забронировать</Button>
                             </Paper>
                         </Grid>
                     </ModalContent>

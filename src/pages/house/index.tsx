@@ -23,14 +23,15 @@ const HousePage = () => {
             api.house.getAll({
                 check_in_date: calendar.selectionController.dateBegin!.getKey(),
                 check_out_date: calendar.selectionController.dateEnd!.getKey(),
+                max_persons_amount,
             })
                 .then(res => setData(res.data))
                 .catch(e => showAlert(e.response?.data?.message || 'Ошибка', 'alert-danger'))
         } else {
-            api.house.getAll({})
+            api.house.getAll({max_persons_amount})
                 .then(res => setData(res.data))
         }
-    }, [calendar.selectionController.isActive]);
+    }, [calendar.selectionController.isActive, max_persons_amount]);
 
     return (
         <div style={{marginTop: '100px'}}>
@@ -41,7 +42,7 @@ const HousePage = () => {
                         <Grid display='flex' justifyContent='space-around'>
                             <Box>
                                 <p>Количество людей</p>
-                                <NumberInput value={max_persons_amount} setValue={setMPA}/>
+                                <NumberInput maxValue={100} value={max_persons_amount} setValue={setMPA}/>
                             </Box>
                             <CaledarInput controller={calendar} show={mainCalendarShow} setShow={setMainCalendarShow}/>
                         </Grid>

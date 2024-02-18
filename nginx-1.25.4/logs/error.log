@@ -1,0 +1,106 @@
+2024/02/18 21:37:16 [notice] 13988#20788: signal process started
+2024/02/18 21:37:29 [notice] 20628#6256: signal process started
+2024/02/18 21:38:21 [notice] 11388#2164: signal process started
+2024/02/18 21:38:21 [error] 3940#16540: *1 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1:3000", referrer: "http://127.0.0.1:3000/"
+2024/02/18 21:39:11 [notice] 9968#23408: signal process started
+2024/02/18 21:39:17 [notice] 20180#4532: signal process started
+2024/02/18 21:40:31 [emerg] 18408#3740: unknown directive "root/build/static" in C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/conf/nginx.conf:14
+2024/02/18 21:43:17 [notice] 16256#9076: signal process started
+2024/02/18 21:53:44 [notice] 21632#22700: signal process started
+2024/02/18 21:54:31 [notice] 11080#23108: signal process started
+2024/02/18 21:55:50 [notice] 19436#20240: signal process started
+2024/02/18 21:56:18 [notice] 15368#18524: signal process started
+2024/02/18 21:56:18 [error] 15368#18524: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:00:08 [error] 17016#17116: *4 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:00:11 [error] 17016#17116: *6 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:01:36 [notice] 19912#9732: signal process started
+2024/02/18 22:02:40 [notice] 17040#17092: signal process started
+2024/02/18 22:04:39 [notice] 6536#8584: signal process started
+2024/02/18 22:04:57 [notice] 2628#15680: signal process started
+2024/02/18 22:05:32 [emerg] 13688#13096: duplicate location "/" in C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/conf/nginx.conf:18
+2024/02/18 22:05:58 [notice] 6036#19320: signal process started
+2024/02/18 22:14:37 [notice] 13972#20456: signal process started
+2024/02/18 22:15:30 [notice] 17860#13812: signal process started
+2024/02/18 22:16:02 [emerg] 3168#17100: invalid parameter "POST" in C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/conf/nginx.conf:18
+2024/02/18 22:16:40 [notice] 4516#9424: signal process started
+2024/02/18 22:16:59 [notice] 15064#17548: signal process started
+2024/02/18 22:17:37 [error] 13064#9388: *19 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:17:38 [error] 13064#9388: *19 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:17:50 [error] 13064#9388: *19 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:11 [notice] 17780#2636: signal process started
+2024/02/18 22:18:16 [error] 12360#13568: *22 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:19 [notice] 20856#9036: signal process started
+2024/02/18 22:18:20 [notice] 17548#15064: signal process started
+2024/02/18 22:18:20 [notice] 15904#9640: signal process started
+2024/02/18 22:18:20 [notice] 16356#13576: signal process started
+2024/02/18 22:18:20 [notice] 8212#18916: signal process started
+2024/02/18 22:18:22 [error] 12360#13568: *24 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:22 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:23 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:23 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:23 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:23 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:23 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:23 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:24 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:31 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:32 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:34 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:35 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:36 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:36 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:36 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:37 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:37 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:37 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:38 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:18:38 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:19:01 [error] 4876#20716: *25 CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/html/build/house" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /house HTTP/1.1", host: "127.0.0.1"
+2024/02/18 22:19:49 [notice] 7860#4216: signal process started
+2024/02/18 22:28:22 [notice] 8628#9616: signal process started
+2024/02/18 22:28:24 [notice] 7868#1904: signal process started
+2024/02/18 22:28:24 [error] 7868#1904: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:30:35 [notice] 10260#3008: signal process started
+2024/02/18 22:34:33 [notice] 9696#11888: signal process started
+2024/02/18 22:42:09 [notice] 21556#17548: signal process started
+2024/02/18 22:42:31 [notice] 22080#2464: signal process started
+2024/02/18 22:42:31 [error] 22080#2464: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:32 [notice] 21556#21112: signal process started
+2024/02/18 22:42:32 [error] 21556#21112: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:32 [notice] 2492#19460: signal process started
+2024/02/18 22:42:32 [error] 2492#19460: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:33 [notice] 13780#3452: signal process started
+2024/02/18 22:42:33 [error] 13780#3452: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:33 [notice] 21876#8080: signal process started
+2024/02/18 22:42:33 [error] 21876#8080: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:33 [notice] 22420#2024: signal process started
+2024/02/18 22:42:33 [error] 22420#2024: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:34 [notice] 17068#20992: signal process started
+2024/02/18 22:42:34 [error] 17068#20992: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:34 [notice] 8472#18480: signal process started
+2024/02/18 22:42:34 [error] 8472#18480: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:34 [notice] 11452#22056: signal process started
+2024/02/18 22:42:34 [error] 11452#22056: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:34 [notice] 22264#20416: signal process started
+2024/02/18 22:42:34 [error] 22264#20416: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:35 [notice] 12496#22352: signal process started
+2024/02/18 22:42:35 [error] 12496#22352: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:42:35 [notice] 5336#10500: signal process started
+2024/02/18 22:42:35 [error] 5336#10500: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 22:47:31 [notice] 8812#22476: signal process started
+2024/02/18 22:53:20 [notice] 11332#11752: signal process started
+2024/02/18 22:55:01 [notice] 10204#16448: signal process started
+2024/02/18 22:55:12 [notice] 21416#9620: signal process started
+2024/02/18 22:56:39 [notice] 10300#21640: signal process started
+2024/02/18 23:00:57 [notice] 21184#2720: signal process started
+2024/02/18 23:01:36 [notice] 11340#18112: signal process started
+2024/02/18 23:02:01 [notice] 12672#20668: signal process started
+2024/02/18 23:02:55 [notice] 21972#7196: signal process started
+2024/02/18 23:02:59 [notice] 7636#6776: signal process started
+2024/02/18 23:03:50 [notice] 18024#19320: signal process started
+2024/02/18 23:04:12 [notice] 3108#14372: signal process started
+2024/02/18 23:08:16 [notice] 1620#1020: signal process started
+2024/02/18 23:19:59 [notice] 22192#16256: signal process started
+2024/02/18 23:19:59 [error] 22192#16256: CreateFile() "C:\Users\akade\projetcs\nikola_project\nikola_project_frontent\nginx-1.25.4/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2024/02/18 23:20:47 [notice] 22340#20024: signal process started
+2024/02/19 00:08:51 [notice] 5208#17880: signal process started

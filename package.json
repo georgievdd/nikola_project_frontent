@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts nginx-1.25.4/html/build",
+    "build": "build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

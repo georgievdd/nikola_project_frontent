@@ -27,7 +27,7 @@ export default function Swiper(props: SwiperProps) {
         className={[styles.swiper, props?.className].join(' ')}
       >
         {props.links.map(link => (
-          <SwiperSlide className={styles.slide}>
+          <SwiperSlide key={link.picture_path} className={styles.slide}>
             <img 
               src={`${STATIC_URL}${link.picture_path}`} 
               // fill 

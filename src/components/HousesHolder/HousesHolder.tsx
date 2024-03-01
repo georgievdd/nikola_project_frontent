@@ -23,7 +23,7 @@ const HousesHolder = ({ houses }: {houses: House[]}) => {
       <div className={styles.houses}>
         {
           houses.map(house => (
-            <HouseCard data={house} />
+            <HouseCard key={house.id} data={house} />
           ))
         }
       </div>

@@ -17,7 +17,7 @@ const HouseCard = ({data}: {data: House}) => {
           <p className={styles.description}>{data.description}</p>
           <div className={styles.features}>
             {data.features.map((feature) => (
-              <div className={styles.item}>
+              <div key={feature.id} className={styles.item}>
                 <Image width={17} height={17} alt='icon' src={feature.icon}/>
                 <p>{feature.name}</p>
               </div>

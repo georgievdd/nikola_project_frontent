@@ -1,1 +1,0 @@
-export const Space = ({h}: {h: string}) => <div style={{height: h}} />

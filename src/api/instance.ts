@@ -1,10 +1,5 @@
-import axios from "axios";
+export const HOST = process.env.BACKEND_HOST
+export const PORT = process.env.BACKEND_PORT
+export const API_URL = `${HOST}:${PORT}/api/v1`
 
-const HOST = process.env.REACT_APP_BACKEND_HOST
-const PORT = process.env.REACT_APP_BACKEND_PORT
-export const apiUrl = `http://${HOST}:${PORT}/api/v1`
-export const staticUrl = `http://${HOST}:${PORT}`
-
-export const axiosInstance = axios.create({
-  baseURL: apiUrl,
-});
+export const STATIC_URL = `${HOST}:${PORT}`

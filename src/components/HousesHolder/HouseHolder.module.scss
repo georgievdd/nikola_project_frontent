@@ -1,0 +1,32 @@
+@import "../../app/variables.scss";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 50px;
+
+    .filters {
+        width: 42%;
+        display: flex;
+        justify-content: space-between;
+
+        @media (max-width: $first-point) {
+            width: 70%;
+        }
+        @media (max-width: $second-point) {
+            width: 70%;
+        }
+        @media (max-width: $third-point) {
+            width: 100%;
+        }
+    }
+
+    .houses {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        margin-bottom: 50px;
+    }
+
+}

@@ -128,12 +128,22 @@ input {
 .swiper-button-prev {
   color: black !important;
   transform: scaleX(0.8);
+  opacity: 0;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: rgb(154, 150, 150) !important;
+  background-color: rgb(104, 103, 103) !important;
 }
 
 .swiper-pagination-bullet {
-  // transform: scale(1.5)
+  border-radius: 10px !important;
+  width: 30px !important;
+  height: 4px !important;
+}
+
+.swiper-scrollbar {
+  background-color: rgb(206, 204, 204) !important;
+}
+.swiper-scrollbar-drag {
+  background-color: rgb(123, 114, 114) !important;
 }

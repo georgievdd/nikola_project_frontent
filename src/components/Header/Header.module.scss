@@ -1,0 +1,61 @@
+@import '../../app/variables.scss';
+
+.container {
+    height: 70px;
+    top: 0;
+    width: 100%;
+    background-color: $secondary-color;
+    z-index: 20;
+    .burger {
+        display: none;
+    }
+    .data {
+        position: relative;
+        max-width: $container-width;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: end;
+        color: white;
+        padding-top: 18px;
+        
+        a {
+            color: white;
+            &:hover {
+                color: rgba(255, 255, 255, 0.366);
+            }
+        }
+        .active {
+            color: rgba(255, 255, 255, 0.366);
+        }
+
+        @media (max-width: $first-point) {
+            max-width: $first-point-to;
+        }
+
+        @media (max-width: $second-point) {
+            .logo {
+                display: none;
+            }
+            max-width: $second-point-to;
+        }
+
+        @media (max-width: $third-point) {
+            .logo {
+                display: none;
+            }
+            max-width: $third-point-to;
+        }
+
+    }
+    @media (max-width: $fourth-point) {
+        .data:first-child {
+            display: none;
+        }
+        .burger {
+            display: flex;
+            z-index: 101;
+        }
+    }
+}

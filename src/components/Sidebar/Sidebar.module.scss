@@ -1,0 +1,66 @@
+@import '../../app/variables.scss';
+
+.container {
+    position: absolute;
+    width: 300px;
+    height: 350px;
+    border-radius: 0 0 100% 0;
+    background-color: $secondary-color;
+    align-items: center;
+    transform: rotate(45deg) translate(-50%, -50%);
+    z-index: 100;
+    .links {
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:start;
+        gap: 35px;
+        padding-left: 50px;
+        a {
+            color: white;
+            &:hover {
+                color: rgba(255, 255, 255, 0.366);
+            }
+        }
+    }    
+}
+
+.opacity_0 {
+    opacity: 0;
+}
+
+.hide {
+    animation: animation_hide 0.35s ease-in-out forwards;
+}
+
+.show {
+    animation: animation_show 0.35s ease-in-out forwards;
+}
+
+@keyframes animation_hide {
+    0% {
+        transform: rotate(0deg) translate(0, 0);
+        opacity: 1;
+    }
+    99% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(45deg) translate(-50%, -50%);
+        opacity: 0;
+    }
+}
+
+@keyframes animation_show {
+    0% {
+        transform: rotate(45deg) translate(-50%, -50%);
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(0deg) translate(0, 0);
+        opacity: 1;
+    }
+}

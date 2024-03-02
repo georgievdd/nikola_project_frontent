@@ -6,11 +6,9 @@ import NumberInput from "../ui/Inputs/number-input/NumberInput";
 import Image from "next/image";
 import RoundArrowImg from '../../../public/images/round-arrow.svg'
 import { useNumberInput } from "../ui/Inputs/number-input/useNumberInput";
-import { useRouter } from "next/navigation";
 
 const HousesHolder = ({ houses }: {houses: House[]}) => {
 
-  const router = useRouter()
   const guests = useNumberInput('Гостей')
 
   return (

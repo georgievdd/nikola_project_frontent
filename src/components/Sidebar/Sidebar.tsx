@@ -13,26 +13,16 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
   const pathname = usePathname()
   const ref = useRef<HTMLElement>(null)
 
-  // Переделать
-
   useEffect(() => {
-    
     if (ref.current) {
-      // if (ref.current.style.opacity !== 'flex') {
-      //   ref.current.style.display = 'flex'
-      //   return
-      // }
-      if (!ref.current.classList.contains(styles.opacity_0)) {
-        ref.current.classList.add(styles.opacity_0)
-        ref.current.style.display = 'flex'
-        return
-      }
       if (sidebarOpen) {
+        ref.current.style.display = 'flex'
         ref.current.classList.add(styles.show)
         ref.current.classList.remove(styles.hide)
       } else {
         ref.current.classList.add(styles.hide)
         ref.current.classList.remove(styles.show)
+        setTimeout(() => {ref.current!.style.display = 'none'}, 350)
       }
     }
   }, [sidebarOpen])

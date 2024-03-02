@@ -41,12 +41,15 @@
   }
 }
 
+body {
+  background-color: $primary-color;
+}
 
 main {
   max-width: $container-width;
   min-height: 100vh;
   margin: 0 auto;
-
+  
   @media (max-width: $first-point) {
     max-width: $first-point-to;
   }
@@ -69,6 +72,7 @@ h1 {
   font-weight: 500;
   line-height: 49px;
   letter-spacing: 0em;
+  color: $secondary-color;
 
   @media (max-width: $first-point) {
     font-size: 35px;

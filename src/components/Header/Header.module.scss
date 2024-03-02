@@ -17,11 +17,11 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: end;
-        color: white;
+        color: $primary-color;
         padding-top: 18px;
         
         a {
-            color: white;
+            color: $primary-color;
             &:hover {
                 color: rgba(255, 255, 255, 0.366);
             }

@@ -30,7 +30,7 @@
     }
     &:hover {
         p {
-            color: white;
+            color: $primary-color;
         }
         background-color: $secondary-color;
     }
@@ -38,7 +38,7 @@
 .contained {
     background-color: $secondary-color;
     p {
-        color: white;
+        color: $primary-color;
     }
     &:hover {
         p {

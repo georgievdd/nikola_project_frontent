@@ -1,9 +1,9 @@
 import { House } from '@/entity/House'
 import styles from './HouseCard.module.scss'
-import Image from 'next/image'
 import Swiper from '../Swiper/Swiper'
-import { STATIC_URL } from '@/api/instance'
 import Button from '../ui/Button/Button'
+import Link from 'next/link'
+import Feature from '../ui/Feature/Feature'
 
 const HouseCard = ({data}: {data: House}) => {
   return (
@@ -17,17 +17,16 @@ const HouseCard = ({data}: {data: House}) => {
           <p className={styles.description}>{data.description}</p>
           <div className={styles.features}>
             {data.features.map((feature) => (
-              <div key={feature.id} className={styles.item}>
-                <Image width={17} height={17} alt='icon' src={feature.icon}/>
-                <p>{feature.name}</p>
-              </div>
+              <Feature key={feature.id} icon={feature.icon} name={feature.name}/>
             ))}
           </div>
         </div>
         <div className={styles["bottom-group"]}>
-          <Button onClick={() => {}}>
-            Забронировать
-          </Button>
+          <Link href={`house/${data.id}`}>
+            <Button onClick={() => {}}>
+              Забронировать
+            </Button>
+          </Link>
           <p className={styles.cost}>{data.base_price} <span>₽</span></p>
         </div>
       </article>

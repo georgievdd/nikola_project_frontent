@@ -45,12 +45,6 @@
                 flex-wrap: wrap;
                 max-height: 30px;
                 overflow: hidden;
-                .item {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    min-width: 0;
-                }
             }
         }
         .bottom-group {

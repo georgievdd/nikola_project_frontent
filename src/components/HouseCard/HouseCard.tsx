@@ -22,7 +22,7 @@ const HouseCard = ({data}: {data: House}) => {
           </div>
         </div>
         <div className={styles["bottom-group"]}>
-          <Link href={`house/${data.id}`}>
+          <Link href={`house/2`}>
             <Button onClick={() => {}}>
               Забронировать
             </Button>

@@ -101,7 +101,7 @@ $smooth-w: 0.17 * $w;
   [class*="arrow_"] {
     position: absolute;
     right: 0;
-    padding-right: $smooth-w / 2 - 18;
+    width: $smooth-w;
   }
   .arrow_bottom_show {
     animation: ab_show 0.1s ease-in-out;

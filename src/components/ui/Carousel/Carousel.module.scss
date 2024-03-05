@@ -162,7 +162,7 @@ $smooth-w: 0.17 * $w;
     }
     100% {
       padding-bottom: 5px;
-      bottom: 0;
+      top: 0;
       opacity: 0;
       transform: translateY(-100%);
     }
@@ -170,7 +170,7 @@ $smooth-w: 0.17 * $w;
   @keyframes at_show {
     0% {
       padding-bottom: 5px;
-      bottom: 0;
+      top: 0;
       opacity: 0;
       transform: translateY(-100%);
     }

@@ -1,0 +1,27 @@
+@import '../../../../app/variables.scss';
+
+.container {
+    position: relative;
+    width: 100%;
+    border: 3px dashed $secondary-color;
+    border-radius: 15px;
+    height: 200px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .wrapper {
+        display: flex;
+        .content {
+            width: 50%;
+        }
+
+        .submit {
+            width: 50%;
+        }
+
+    }
+
+
+}

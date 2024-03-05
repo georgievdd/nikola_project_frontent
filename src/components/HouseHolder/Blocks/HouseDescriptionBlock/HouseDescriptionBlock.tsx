@@ -1,12 +1,11 @@
 import { House } from '@/entity/House'
 import React from 'react'
 import styles from './HouseDescriptionBlock.module.scss'
-import Carousel from '../ui/Carousel/Carousel'
-import Feature from '../ui/Feature/Feature'
+import Carousel from '../../../ui/Carousel/Carousel'
+import Feature from '../../../ui/Feature/Feature'
 interface HouseDescriptionBlock {
   data: House
 }
-
 const HouseDescriptionBlock = ({data}: HouseDescriptionBlock) => {
   return (
     <div className={styles.container}>

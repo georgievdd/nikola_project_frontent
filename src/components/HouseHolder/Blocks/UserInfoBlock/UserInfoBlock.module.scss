@@ -1,0 +1,19 @@
+.container {
+    position: relative;
+    width: 91.66%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    form {
+        display: grid;
+        width: 100%;
+        column-gap: 60px;
+        row-gap: 80px;
+        grid-template-columns: auto auto;
+    }
+}
+
+.comment {
+    // display: block;
+    // min-width: 1000px;
+}

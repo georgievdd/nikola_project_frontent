@@ -4,7 +4,6 @@ import { Swiper as LibSwiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y, EffectFade, Scrollbar } from 'swiper/modules';
 import styles from './Swiper.module.scss'
 import { Picture } from '@/entity/House';
-import { STATIC_URL } from '@/api/instance';
 
 import 'swiper/swiper-bundle.css'
 
@@ -27,9 +26,9 @@ export default function Swiper(props: SwiperProps) {
         className={[styles.swiper, props?.className].join(' ')}
       >
         {props.links.map(link => (
-          <SwiperSlide key={link.picture_path} className={styles.slide}>
+          <SwiperSlide key={link.picture} className={styles.slide}>
             <img 
-              src={`${STATIC_URL}${link.picture_path}`} 
+              src={link.picture} 
               // fill 
               alt=''
             />

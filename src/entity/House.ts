@@ -12,7 +12,7 @@ export interface House {
 }
 
 export interface Picture {
-    picture_path: string
+    picture: string
 }
   
 export interface Feature {

@@ -71,8 +71,8 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
       <div className={styles.container}>
         <div className={styles.img_current}>
         <img 
-          key={imgs[current].picture}
-          src={imgs[current].picture} 
+          key={current < imgs.length ? imgs[current].picture : 'text'}
+          src={current < imgs.length ? imgs[current].picture : ''} 
           alt=''
           // fill
           // priority

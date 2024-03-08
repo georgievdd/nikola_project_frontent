@@ -89,24 +89,7 @@ const houseExample: House =  {
           }
   ],
   "pictures": [
-      {
-          "picture_path": "/media/houses/pictures/1/1.jpg"
-      },
-      {
-          "picture_path": "/media/houses/pictures/1/2.jpg"
-      },
-      {
-          "picture_path": "/media/houses/pictures/1/3.jpg"
-      },
-      {
-          "picture_path": "/media/houses/pictures/1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2024-01-12_025030.png"
-      },
-      {
-          "picture_path": "/media/houses/pictures/1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2024-01-12_171556.png"
-      },
-      {
-          "picture_path": "/media/houses/pictures/1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2024-01-13_155646.png"
-      }
+
   ],
   "base_price": 10000,
   "total_price": null,

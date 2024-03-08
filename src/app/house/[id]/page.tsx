@@ -47,10 +47,66 @@ const houseExample: House =  {
   Эстетичный дизайн, удобная планировка и качество — все об этой серии модульных домов. Выполнен в лучших традициях Скандинавского стиля — использование натурального дерева в наружной и внутренней отделке, минимум лишних деталей.
   `,
   "features": [
-
+    //   {
+    //       "id": 1,
+    //       "name": "Кондиционер",
+    //       "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
+    //   },
+    //   {
+    //     "id": 1,
+    //     "name": "Кондиционер",
+    //     "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
+    //     },
+    //     {
+    //         "id": 1,
+    //         "name": "Кондиционер",
+    //         "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
+    //     },
+    //     {
+    //         "id": 1,
+    //         "name": "Кондиционер",
+    //         "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
+    //     },
+    //     {
+    //         "id": 1,
+    //         "name": "Кондиционер",
+    //         "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
+    //     },
+    //     {
+    //       "id": 1,
+    //       "name": "Кондиционер",
+    //       "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
+    //       },
+    //       {
+    //           "id": 1,
+    //           "name": "Кондиционер",
+    //           "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
+    //       },
+    //       {
+    //           "id": 1,
+    //           "name": "Кондиционер",
+    //           "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
+    //       }
   ],
   "pictures": [
-
+    //   {
+    //       "picture": "/media/houses/pictures/1/1.jpg"
+    //   },
+    //   {
+    //       "picture": "/media/houses/pictures/1/2.jpg"
+    //   },
+    //   {
+    //       "picture": "/media/houses/pictures/1/3.jpg"
+    //   },
+    //   {
+    //       "picture": "/media/houses/pictures/1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2024-01-12_025030.png"
+    //   },
+    //   {
+    //       "picture": "/media/houses/pictures/1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2024-01-12_171556.png"
+    //   },
+    //   {
+    //       "picture": "/media/houses/pictures/1/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA_%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2024-01-13_155646.png"
+    //   }
   ],
   "base_price": 10000,
   "total_price": null,

@@ -71,8 +71,8 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
       <div className={styles.container}>
         <div className={styles.img_current}>
         <img 
-          key={imgs[current].picture_path}
-          src={`http://127.0.0.1:8002${imgs[current].picture_path}`} 
+          key={imgs[current].picture}
+          src={imgs[current].picture} 
           alt=''
           // fill
           // priority
@@ -83,7 +83,7 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
         />
         </div>
         <ul className={styles.img_group} ref={columnRef}>
-          {imgs.map((img, i) => (<div key={img.picture_path}>
+          {imgs.map((img, i) => (<div key={img.picture}>
             <input
               value={i}
               type="radio" 
@@ -96,7 +96,7 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
             <label htmlFor={`img-${i}`} className={styles.group_element}>
               <div className={styles.imgholder}>
                 <img
-                  src={`http://127.0.0.1:8002${img.picture_path}`} 
+                  src={img.picture} 
                   alt=''
                   // fill
                   style={{

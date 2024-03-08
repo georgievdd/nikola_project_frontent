@@ -47,46 +47,7 @@ const houseExample: House =  {
   Эстетичный дизайн, удобная планировка и качество — все об этой серии модульных домов. Выполнен в лучших традициях Скандинавского стиля — использование натурального дерева в наружной и внутренней отделке, минимум лишних деталей.
   `,
   "features": [
-      {
-          "id": 1,
-          "name": "Кондиционер",
-          "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
-      },
-      {
-        "id": 1,
-        "name": "Кондиционер",
-        "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
-        },
-        {
-            "id": 1,
-            "name": "Кондиционер",
-            "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
-        },
-        {
-            "id": 1,
-            "name": "Кондиционер",
-            "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
-        },
-        {
-            "id": 1,
-            "name": "Кондиционер",
-            "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
-        },
-        {
-          "id": 1,
-          "name": "Кондиционер",
-          "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
-          },
-          {
-              "id": 1,
-              "name": "Кондиционер",
-              "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
-          },
-          {
-              "id": 1,
-              "name": "Кондиционер",
-              "icon": "http://localhost:8002/media/houses_features/icons/%D0%9A%D0%BE%D0%BD%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%B5%D1%80_90EHe4l.png"
-          }
+
   ],
   "pictures": [
 

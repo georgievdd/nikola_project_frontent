@@ -1,9 +1,8 @@
+import { Metadata } from 'next';
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import HousesHolder from "@/components/HousesHolder/HousesHolder";
-import { House } from "@/entity/House";
 import { getHouses } from "@/api/house";
-import { Metadata } from "next";
-
+import { House } from '@/entity/House';
 
 export const metadata: Metadata = {
   title: "Nikola | Houses",
@@ -11,12 +10,13 @@ export const metadata: Metadata = {
   keywords: "nikola, house"
 }
 
-
-export default async function House() {
-  const houses = await getHouses()
+const HousesPage = async () => {
+  const houses: House[] = await getHouses()
   return (
     <DefaultLayout>
-      <HousesHolder houses={houses}/>
+      <HousesHolder houses={houses} />
     </DefaultLayout>
   );
 }
+
+export default HousesPage;

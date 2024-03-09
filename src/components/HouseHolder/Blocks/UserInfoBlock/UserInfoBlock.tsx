@@ -1,7 +1,6 @@
 'use client'
 import LabelInput, { LabelInputController, useLabelInput } from '@/components/ui/Inputs/LabelInput/LabelInput'
 import styles from './UserInfoBlock.module.scss'
-import useLabelInputGroup from '@/components/ui/Inputs/LabelInput/useLabelInputGroup'
 
 const UserInfoBlock = ({inputGroup}: {inputGroup: LabelInputController[]}) => {
   /**

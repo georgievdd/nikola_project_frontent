@@ -1,8 +1,6 @@
 import { DatePickerController, useDatePicker } from './useDatePicker'
 import styles from './DatePicker.module.scss'
 import SelectInput from '../SelectInput/SelectInput'
-import MoonImage from '../../../../../public/images/moon.svg'
-
 
 const DatePicker = ({controller}: {
   controller: DatePickerController

@@ -13,6 +13,8 @@ services:
       - nikola-docker-network
     volumes:
       - .:/app
+      - /app/node_modules
+      - /app/.next
 
 networks:
   nikola-docker-network:

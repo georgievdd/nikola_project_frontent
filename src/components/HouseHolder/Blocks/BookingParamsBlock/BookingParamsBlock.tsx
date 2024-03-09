@@ -1,6 +1,6 @@
 import NumberInput from '@/components/ui/Inputs/number-input/NumberInput'
 import styles from './BookingParamsBlock.module.scss'
-import { INumberInput, useNumberInput } from '@/components/ui/Inputs/number-input/useNumberInput'
+import { INumberInput } from '@/components/ui/Inputs/number-input/useNumberInput'
 import DatePicker from '@/components/ui/Inputs/DatePicker/DatePicker'
 import { DatePickerController } from '@/components/ui/Inputs/DatePicker/useDatePicker'
 

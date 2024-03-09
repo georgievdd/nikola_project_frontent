@@ -4,7 +4,6 @@ import {
   selectClasses,
   SelectListboxSlotProps,
   SelectProps,
-  SelectRootSlotProps,
 } from '@mui/base/Select'
 import { Option as BaseOption, optionClasses } from '@mui/base/Option'
 import { styled } from '@mui/system'

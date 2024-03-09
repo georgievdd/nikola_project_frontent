@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: false,
     images: {
-        domains: [process.env.BACKEND_DOMAIN],
+        domains: [process.env.NEXT_PUBLIC_BACKEND_DOMAIN],
     },
 };
 

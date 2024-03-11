@@ -7,6 +7,7 @@ export interface INumberInput {
     add: () => void
     substract: () => void
     value: number
+    reset: () => void
 }
 
 export const useNumberInput = (label: string): INumberInput => {
@@ -23,5 +24,6 @@ export const useNumberInput = (label: string): INumberInput => {
         value,
         add,
         substract,
+        reset: () => setValue(0)
     }
 }

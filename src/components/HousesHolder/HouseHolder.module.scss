@@ -30,26 +30,6 @@
             justify-content: space-around;
         }
 
-        button {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .imgc {
-                position: absolute;
-            }
-            .rotate {
-                animation: rotate-animation 0.25s ease-in-out;
-            }
-        }
-        @keyframes rotate-animation {
-            0% {
-                transform: rotate(0);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
     }
 
     .houses {

@@ -5,6 +5,7 @@ import DatePicker from '@/components/ui/Inputs/DatePicker/DatePicker'
 import { DatePickerController } from '@/components/ui/Inputs/DatePicker/useDatePicker'
 import { CalendarController } from '@/components/Calendar/CalendarBody/hooks/useCalendar'
 import Calendar from '@/components/Calendar/Calendar'
+import Reloader from '@/components/ui/Reloader/Reloader'
 
 
 const BookingParamsBlock = ({
@@ -17,11 +18,11 @@ const BookingParamsBlock = ({
   calendarController: CalendarController,
 }) => {
   
-  
   return (
     <section className={styles.container}>
       <NumberInput {...guestsController}/>
-      <Calendar calendarController={calendarController}></Calendar>
+      <Calendar calendarController={calendarController}/>
+      <Reloader onClick={() => {calendarController.reset(), guestsController.reset()}} />
       <DatePicker controller={datePickerController}/>
     </section>
   )

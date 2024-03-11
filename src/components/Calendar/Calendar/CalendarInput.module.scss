@@ -67,21 +67,40 @@ $w: 302px;
     }
 }
 
-.calendar {
+.calendar-start {
     position: absolute;
     z-index: 10;
     margin-top: $h * 0.3;
-    animation: calendar-start 0.35s ease-in-out;
+    animation: animation-calendar-start 0.35s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-@keyframes calendar-start {
+@keyframes animation-calendar-start {
     0% {
         opacity: 0;
         /* transform: translate(0, -100%); */
     }
     100% {
         opacity: 1;
+        /* transform: translate(0, 0); */
+    }
+}
+
+.calendar-hide {
+    position: absolute;
+    z-index: 10;
+    margin-top: $h * 0.3;
+    animation: animation-calendar-hide 0.35s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes animation-calendar-hide {
+    0% {
+        opacity: 1;
+        /* transform: translate(0, -100%); */
+    }
+    100% {
+        opacity: 0;
         /* transform: translate(0, 0); */
     }
 }

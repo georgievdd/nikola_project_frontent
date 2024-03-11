@@ -17,10 +17,19 @@ const Calendar = ({calendarController}: {calendarController: CalendarController}
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  const hideCalendar = () => {
+    wrapperRef.current!.classList.add(styles['calendar-hide'])
+    setTimeout(() => {
+      wrapperRef.current!.classList.remove(styles['calendar-hide'])
+      setShow(false)
+    }, 350)
+  }
+
   useEffect(() => {
+    
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-        setShow(false);
+        hideCalendar()
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -28,8 +37,11 @@ const Calendar = ({calendarController}: {calendarController: CalendarController}
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [setShow]);
+  }, [show]);
 
+  useEffect(() => {
+    calendarController.selectionController.isActive && hideCalendar()
+  }, [calendarController.selectionController.isActive])
 
   return (
     <div>
@@ -47,7 +59,7 @@ const Calendar = ({calendarController}: {calendarController: CalendarController}
         </div>
       </div>
       { show &&
-        <div className={styles.calendar} ref={wrapperRef}>
+        <div className={styles['calendar-start']} ref={wrapperRef}>
           <Calendar3 controller={calendarController} />
         </div>
       }

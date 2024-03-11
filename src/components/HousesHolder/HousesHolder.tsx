@@ -3,42 +3,33 @@ import { House } from "@/entity/House"
 import styles from './HouseHolder.module.scss'
 import HouseCard from "../HouseCard/HouseCard";
 import NumberInput from "../ui/Inputs/number-input/NumberInput";
-import Image from "next/image";
-import RoundArrowImg from '../../../public/images/round-arrow.svg'
-import CircleImg from '../../../public/images/black-circle.svg'
 import { useNumberInput } from "../ui/Inputs/number-input/useNumberInput";
 import Calendar from "../Calendar/Calendar";
 import { useCalendar } from "../Calendar/CalendarBody/hooks/useCalendar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { axiosInstance } from "@/api/instance";
+import Reloader from "../ui/Reloader/Reloader";
 
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
-  const guests = useNumberInput('Гостей')
-  const calendar = useCalendar('houses', false, '/houses/calendar/')
-  const ref = useRef<HTMLImageElement>(null)
+  const guestsController = useNumberInput('Гостей')
+  const calendarController = useCalendar('houses', false, '/houses/calendar/')
   const [houses, setHouses] = useState<House[]>(initHouses)
   
 
-  const click = () => {
-    calendar.reset()
-    ref.current!.classList.add(styles.rotate)
-    setTimeout(() => ref.current!.classList.remove(styles.rotate), 250)
-  }
-
   useEffect(() => {
     function getDates() {
-      return calendar.selectionController.isActive ? {
-        check_in_date: calendar.selectionController.dateBegin!.getKey(),
-        check_out_date: calendar.selectionController.dateEnd!.getKey(),
+      return calendarController.selectionController.isActive ? {
+        check_in_date: calendarController.selectionController.dateBegin!.getKey(),
+        check_out_date: calendarController.selectionController.dateEnd!.getKey(),
       } : {}
     }
     axiosInstance.get('/houses/', {params: {
-      extra_persons_amount: guests.value,
+      max_persons_amount: guestsController.value,
       ...getDates(),
     }}).then(res => setHouses(res.data))
 
-  }, [guests.value, calendar.selectionController.isActive])
+  }, [guestsController.value, calendarController.selectionController.isActive])
 
   // useEffect(() => {
   //   if (calendar.selectionController.isActive) {
@@ -49,17 +40,14 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
   return (
     <div className={styles.container}>
       <div className={styles.filters}>
-        <NumberInput className={styles.guests} {...guests}/>
-        <Calendar calendarController={calendar}/>
-        <button onClick={click}>
-          <Image src={RoundArrowImg} width={20} height={20} alt='' ref={ref}/>
-          <Image className={styles.imgc} src={CircleImg} width={32} height={32} alt=''/>
-        </button>
+        <NumberInput className={styles.guests} {...guestsController}/>
+        <Calendar calendarController={calendarController}/>
+        <Reloader onClick={() => {calendarController.reset(), guestsController.reset()}}/>
       </div>
       <div className={styles.houses}>
         {
           houses.map(house => (
-            <HouseCard key={house.id} data={house} selectionController={calendar.selectionController}/>
+            <HouseCard key={house.id} data={house} selectionController={calendarController.selectionController}/>
           ))
         }
       </div>

@@ -14,3 +14,16 @@ export const getHouses = async(): Promise<House[]> =>
         console.log(e);
         return [];
     })
+
+export const getHouse = async(id: string): Promise<House> => 
+    fetch(`${INTERNAL_API_URL}/houses/${id}`, {
+        next: {
+            revalidate: 10
+        },
+        method: 'GET',
+    })
+    .then(res => res.json())
+    .catch(e => {
+        console.log(e);
+        return [];
+    })

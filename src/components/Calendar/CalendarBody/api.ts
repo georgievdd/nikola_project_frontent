@@ -10,7 +10,8 @@ import { API_URL, axiosInstance } from "@/api/instance";
 export async function getCommonCalendar(
     opacity: number,
     dataController: CalendarDataController,
-    dateIndex: number
+    dateIndex: number,
+    endpoint: string,
 ) {
     try {
         const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
@@ -26,7 +27,7 @@ export async function getCommonCalendar(
                 month: month.getMonth() + 1,
                 year: month.getFullYear()
             }
-            return axiosInstance.get<CommonCalendar>('/houses/calendar/', {params: data}).then(r => r.data)
+            return axiosInstance.get<CommonCalendar>(endpoint, {params: data}).then(r => r.data)
         }))
         dataController.setBeenLoaded(prev => dataCashMask)
         return mapFromCommonCalendar(response)
@@ -40,7 +41,8 @@ export async function getCheckInCalendar(
     dataController: CalendarDataController,
     dateIndex: number,
     checkInDate: Date,
-    withClear: boolean
+    withClear: boolean,
+    endpoint: string,
 ) {
     try {
         const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
@@ -59,7 +61,7 @@ export async function getCheckInCalendar(
                 year: month.getFullYear(),
                 chosen_check_in_date: checkInDate.getKey(),
             }
-            return axiosInstance.get<CheckInCalendar>('/houses/calendar/', {params: data}).then(r => r.data)
+            return axiosInstance.get<CheckInCalendar>(endpoint, {params: data}).then(r => r.data)
         }));
         dataController.setBeenLoaded(prev => dataCashMask)
         return mapFromCheckInDateCalendar(checkInDate, response)

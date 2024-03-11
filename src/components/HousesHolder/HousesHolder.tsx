@@ -15,7 +15,7 @@ import { axiosInstance } from "@/api/instance";
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
   const guests = useNumberInput('Гостей')
-  const calendar = useCalendar('houses', false)
+  const calendar = useCalendar('houses', false, '/houses/calendar/')
   const ref = useRef<HTMLImageElement>(null)
   const [houses, setHouses] = useState<House[]>(initHouses)
   
@@ -59,7 +59,7 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
       <div className={styles.houses}>
         {
           houses.map(house => (
-            <HouseCard key={house.id} data={house}/>
+            <HouseCard key={house.id} data={house} selectionController={calendar.selectionController}/>
           ))
         }
       </div>

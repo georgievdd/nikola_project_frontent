@@ -14,7 +14,7 @@ import Image from 'next/image'
 export default function SelectInput(props: any) {
   return (
     <Select {...props} defaultValue={0}>
-      <Option value={0}>15:00</Option>
+      <Option value={0}>13:00</Option>
       <Option value={1}>16:00</Option>
       <Option value={2}>14:00</Option>
     </Select>

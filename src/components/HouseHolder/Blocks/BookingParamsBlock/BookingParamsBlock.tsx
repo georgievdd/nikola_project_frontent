@@ -3,21 +3,25 @@ import styles from './BookingParamsBlock.module.scss'
 import { INumberInput } from '@/components/ui/Inputs/number-input/useNumberInput'
 import DatePicker from '@/components/ui/Inputs/DatePicker/DatePicker'
 import { DatePickerController } from '@/components/ui/Inputs/DatePicker/useDatePicker'
+import { CalendarController } from '@/components/Calendar/CalendarBody/hooks/useCalendar'
+import Calendar from '@/components/Calendar/Calendar'
 
 
 const BookingParamsBlock = ({
   guestsController,
-  datePickerController
+  datePickerController,
+  calendarController,
 }: {
   guestsController: INumberInput,
-  datePickerController: DatePickerController
+  datePickerController: DatePickerController,
+  calendarController: CalendarController,
 }) => {
   
   
   return (
     <section className={styles.container}>
       <NumberInput {...guestsController}/>
-      <h1>Calendar element</h1>
+      <Calendar calendarController={calendarController}></Calendar>
       <DatePicker controller={datePickerController}/>
     </section>
   )

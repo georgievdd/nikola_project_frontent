@@ -19,8 +19,7 @@ export interface CalendarController {
     setShow: Dispatch<SetStateAction<boolean>>
     reset: () => void
 }
-const currentMonthIndex = new Date().getMonth()
-export function useCalendar (id: string, defaultShow: boolean): CalendarController {
+export function useCalendar (id: string, defaultShow: boolean, endpoint: string): CalendarController {
     /**
      * Сколько месяцев вперед отображаем
      */
@@ -67,6 +66,7 @@ export function useCalendar (id: string, defaultShow: boolean): CalendarControll
             1, // сколько месяцев вперед смотрим дополнительно
             dataController,
             scrollController.currentMonthIndex,
+            endpoint,
         )
             .then(result => dataController.setMapState(prev =>
                 ({...prev, ...result})))
@@ -81,6 +81,7 @@ export function useCalendar (id: string, defaultShow: boolean): CalendarControll
             Math.max(scrollController.currentMonthIndex - 1, 0),
             selectionController.dateBegin!,
             withClear,
+            endpoint,
         )
             .then(result => {
                 const [map, costs] = result
@@ -129,6 +130,7 @@ export function useCalendar (id: string, defaultShow: boolean): CalendarControll
         dataController.clear()
         setShow(false)
     }
+
 
     return {
         id,

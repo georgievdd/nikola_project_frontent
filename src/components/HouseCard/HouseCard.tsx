@@ -4,8 +4,16 @@ import Swiper from '../Swiper/Swiper'
 import Button from '../ui/Button/Button'
 import Link from 'next/link'
 import Feature from '../ui/Feature/Feature'
+import { SelectionController } from '../Calendar/CalendarBody/hooks/useSelection'
 
-const HouseCard = ({data}: {data: House}) => {
+const HouseCard = ({data, selectionController}: {data: House, selectionController: SelectionController}) => {
+
+  const getPath = () => 
+    selectionController.isActive ? `house/${data.id}?${new URLSearchParams({
+      check_in_date: selectionController.dateBegin!.getKey(),
+      check_out_date: selectionController.dateEnd!.getKey(),
+    }).toString()}` : `house/${data.id}`
+  
   return (
     <div className={styles.container}>
       <Swiper className={styles.preview} links={data.pictures}/>
@@ -22,7 +30,7 @@ const HouseCard = ({data}: {data: House}) => {
           </div>
         </div>
         <div className={styles["bottom-group"]}>
-          <Link href={`house/${data.id}`}>
+          <Link href={getPath()}>
             <Button onClick={() => {}}>
               Забронировать
             </Button>

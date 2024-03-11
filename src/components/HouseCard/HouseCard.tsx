@@ -27,7 +27,7 @@ const HouseCard = ({data}: {data: House}) => {
               Забронировать
             </Button>
           </Link>
-          <p className={styles.cost}>{data.base_price} <span>₽</span></p>
+          <p className={styles.cost}>от {data.base_price} <span>₽</span></p>
         </div>
       </article>
     </div>

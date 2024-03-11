@@ -3,10 +3,10 @@ import styles from './LabelInput.module.scss'
 
 
 
-const LabelInput = ({controller}: 
-  {controller: LabelInputController}) => {
+const LabelInput = ({controller, className}: 
+  {controller: LabelInputController, className?: string}) => {
   return (
-    <div className={[styles.container, controller.className].join(' ')}>
+    <div className={[styles.container, controller.className, className].join(' ')}>
       <h3>{controller.label}</h3>
       <input 
         {...controller}

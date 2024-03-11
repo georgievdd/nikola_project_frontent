@@ -9,10 +9,7 @@ export const getHouses = async(): Promise<House[]> =>
         },
         method: 'GET',
     })
-    .then(res => {
-        console.log(res);
-        return res.json()
-    })
+    .then(res => res.json())
     .catch(e => {
         console.log(e);
         return [];

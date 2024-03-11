@@ -5,15 +5,16 @@
     flex-direction: column;
     gap: 50px;
     form {
-        display: grid;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
         width: 100%;
-        column-gap: 60px;
-        row-gap: 80px;
-        grid-template-columns: auto auto;
+        row-gap: 60px;
+        .userinfo {
+            width: 45%;
+        }
+        .comment {
+            width: 100%;
+        }
     }
-}
-
-.comment {
-    // display: block;
-    // min-width: 1000px;
 }

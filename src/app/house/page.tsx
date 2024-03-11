@@ -14,7 +14,7 @@ const HousesPage = async () => {
   const houses: House[] = await getHouses()
   return (
     <DefaultLayout>
-      <HousesHolder houses={houses} />
+      <HousesHolder initHouses={houses} />
     </DefaultLayout>
   );
 }

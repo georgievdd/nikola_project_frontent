@@ -22,7 +22,7 @@ export default function Swiper(props: SwiperProps) {
         slidesPerView={1}
         effect={'fade'}
         pagination={{clickable: true}}
-        modules={[Navigation, EffectFade, Pagination/*Scrollbar, A11y*/]}
+        modules={[Navigation, Pagination/*Scrollbar, A11y*/]}
         className={[styles.swiper, props?.className].join(' ')}
       >
         {props.links.map(link => (

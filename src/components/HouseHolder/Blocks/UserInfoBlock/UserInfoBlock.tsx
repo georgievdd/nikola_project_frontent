@@ -10,8 +10,8 @@ const UserInfoBlock = ({inputGroup}: {inputGroup: LabelInputController[]}) => {
     <section className={styles.container}>
       <h2>Контактная информация</h2>
       <form>
-        {inputGroup.map(controller => 
-          <LabelInput controller={controller}/>
+        {inputGroup.map((controller, i) => 
+          <LabelInput className={i == 4 ? styles.comment : styles.userinfo} controller={controller}/>
         )}
       </form>
     </section>

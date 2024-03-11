@@ -7,9 +7,9 @@ import PlusImg from '../../../../../public/images/plus.svg'
 import MinusImg from '../../../../../public/images/minus.svg'
 import Image from 'next/image'
 
-const NumberInput = (props: INumberInput) => {
+const NumberInput = (props: INumberInput & {className?: string}) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={[styles.wrapper, props.className].join(' ')}>
       <div className={styles.container}>
         <label>
           <p>{props.label}</p>

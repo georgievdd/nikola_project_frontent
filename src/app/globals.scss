@@ -157,7 +157,13 @@ input {
   width: 20px !important;
   height: 4px !important;
   opacity: 1 !important;
-  background-color: $primary-color !important;
+  background-color: rgba($color: white, $alpha: 1) !important;
+  // background-color: rgba($color: $secondary-color, $alpha: 1) !important;
+  transition: all 0.3s ease-in-out;
+  // &::before {
+  //   position: absolute;
+  //   text-align: center;
+  // }
 }
 
 .swiper-pagination-bullet-active {

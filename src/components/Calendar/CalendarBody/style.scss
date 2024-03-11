@@ -1,0 +1,262 @@
+@import '../../../app/variables.scss';
+$w: 581px;
+$h: 458px;
+$sidebar-w: $w * 153/581;
+$cell-borde-size: 50px;
+
+.calendar-container {
+    position: relative;
+    width: $w;
+    height: 458px;
+    display: flex;
+    flex-direction: row;
+    background-color: $third-color;
+    border-radius: 10px;
+    padding-top: 0;
+    z-index: 11;
+    outline: 2px solid $secondary-color;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+
+    h3 {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    p {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .calendar-container_disabled {
+        pointer-events: none;
+        cursor: default;
+        opacity: 0.4;
+        transition: ease-in 0.5s;
+    }
+    
+    .calendar-months {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        
+        padding-left: 12px;
+        padding-top: 10px;
+        width: $sidebar-w;
+        overflow-y: hidden;
+        align-items: start;
+        background-color: $primary-color;
+        border-radius: 10px 0 0 10px;
+    }
+    
+    .month-name-title {
+        font-size: 22px !important;
+        font-weight: 400 !important;
+        line-height: 24px !important;
+        text-align: initial !important;
+        margin-left: 10px;
+        margin-bottom: 5px;
+    }
+    
+    .month-name {
+        margin-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        z-index: 20;
+    }
+    
+    .year-name {
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .month-name::first-letter, .month-name-title::first-letter {
+        text-transform: uppercase;
+    }
+    
+    .month-name-highlighter {
+        position: absolute;
+        top: 0;
+        border-radius: 10px;
+        background-color: $third-color;
+        height: 30px;
+        margin-top: 5px;
+        transition: all 0.25s;
+    }
+    
+    .calendar-days {
+        width: 85%;
+    }
+    
+    .days-header {
+        text-align: center;
+        height: 10%;
+        line-height: 10%;
+        background-color: $primary-color;
+        margin-left: 7px;
+        margin-right: 7px;
+        border-radius: 0 0 10px 10px;
+    }
+    
+    .calendar-cells {
+        height: 100%;
+        /*scroll-snap-type: y mandatory;*/
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+    
+    .calendar-cells::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .calendar__row {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .calendar__cell {
+        position: relative;
+        flex: 1;
+        height: $cell-borde-size;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    
+    .date {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $cell-borde-size;
+        height: $cell-borde-size;
+    }
+    .date_disabled {
+        cursor: not-allowed;
+    }
+    
+    .date__coin {
+        position: absolute;
+        font-size: 8px;
+        font-weight: 400;
+        line-height: 10px;
+        letter-spacing: 0em;
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    .date_disabled {
+        opacity: 0.4;
+    }
+    
+    // .date_holiday {
+    //     background-color: bisque;
+    // }
+    
+    .date_select-left,
+    .date_select-right,
+    .date_select-point,
+    .date_select,
+    .date_select-start {
+        border-radius: 5px;
+        outline: 1px solid $third-acent-color;
+    }
+    
+    .date_holiday {
+        border-radius: 10px;
+        background-color: $secondary-acent-color;
+    }
+    
+    .date_weekend {
+        background-color: $secondary-acent-color;
+    }
+    
+    // .date_select-left {
+    //     border-radius: 10px 0 0 10px;
+    // }
+    
+    // .date_select-right {
+    //     border-radius: 0 10px 10px 0;
+    // }
+
+    .calendar__month {
+        position: relative;
+        width: auto;
+        background-color: $primary-color;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 10px;
+    
+        .weekend_style {
+            position: absolute;
+            height: 100%;
+            width: 118px;
+            right: 5px;
+            background-color: $secondary-acent-color;
+
+        }
+    
+    }
+
+    @media (max-width: $second-point) {
+        width: $w * 0.85;
+        height: $h * 0.85;
+        .calendar__month {
+            .weekend_style {
+                width: 95px;
+            }
+        }
+        .date {
+            width: $cell-borde-size * 0.85;
+            height: $cell-borde-size * 0.85;
+        }
+    }
+
+    @media (max-width: $fourth-point) {
+        justify-content: center;
+        width: 0.6*$w;
+
+        .calendar-months {
+            display: none;
+        }
+        .date {
+            width: $cell-borde-size * 0.7;
+            height: $cell-borde-size * 0.7;
+            .date__coin {
+                margin-top: 24px;
+                font-size: 8px;
+            }
+        }
+        .calendar__month {
+            .weekend_style {
+                width: 79px;
+            }
+        }
+        p {
+            font-size: 15px;
+        }
+        .calendar__row {
+            padding: 0;
+        }
+    }
+
+}

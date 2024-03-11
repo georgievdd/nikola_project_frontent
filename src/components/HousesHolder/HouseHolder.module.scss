@@ -7,7 +7,7 @@
     margin-top: 50px;
 
     .filters {
-        width: 42%;
+        width: 50%;
         display: flex;
         justify-content: space-between;
 
@@ -19,6 +19,36 @@
         }
         @media (max-width: $third-point) {
             width: 100%;
+            .guests {
+                order: 1;
+            }
+        }
+        @media (max-width: $fourth-point) {
+            .guests {
+                display: none;
+            }
+            justify-content: space-around;
+        }
+
+        button {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .imgc {
+                position: absolute;
+            }
+            .rotate {
+                animation: rotate-animation 0.25s ease-in-out;
+            }
+        }
+        @keyframes rotate-animation {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     }
 

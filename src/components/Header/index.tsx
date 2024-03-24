@@ -15,13 +15,13 @@ interface HeaderProps {
 const Logo = () => {
   return (
     <div className={styles.logo}>
+      <h1>Len</h1>
       <Image
         className={styles.logo}
         src={LogoImg}
         alt=''
         height={40}
       />
-      <h1>NIKOLA</h1>
     </div>
   )
 }
@@ -37,7 +37,7 @@ const Header = (props: HeaderProps) => {
         <Link href="/house" legacyBehavior>
           <a className={pathname === "/house" ? styles.active : ' '}>
             Домики
-            </a>
+          </a>
         </Link>
         <Link href="/about" legacyBehavior>
           <a className={pathname === "/about" ? styles.active : ' '}>

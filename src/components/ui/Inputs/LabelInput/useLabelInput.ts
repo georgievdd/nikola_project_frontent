@@ -82,7 +82,7 @@ const inputsConfig = [
     },
     {
       label: 'Контакт для связи',
-      placeholder: 'Фамилия',
+      placeholder: 'Например "telegram: @username"',
       required: true,
     },
     {

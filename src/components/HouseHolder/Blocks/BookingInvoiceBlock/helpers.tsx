@@ -6,7 +6,8 @@ import peoples from '../../../../../public/images/peoples.svg'
 type Type = 
 'early_check_in' | 
 'night' |
-'extra_persons'
+'extra_persons' | 
+'late_check_out'
 
 export function getIconByType(type: string) {
     switch (type) {
@@ -16,5 +17,7 @@ export function getIconByType(type: string) {
             return night
         case 'extra_persons':
             return peoples
+        case 'late_check_out':
+            return watch
     }
 }

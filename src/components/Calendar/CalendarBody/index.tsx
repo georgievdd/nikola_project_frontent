@@ -30,14 +30,14 @@ export default function Calendar3({controller}: {controller: CalendarController}
                 )}
                 {Array.from({length: opacity}).map((_, i) => {
                 const date = addMonths(new Date(), i)
-                return (<>
+                return (<div style={{zIndex: 1}} key={date.getKey()}>
                     {(date.getMonth() === 0 || i == 0) && 
                       <h3 className={"year-name"}>{date.getFullYear()}</h3>
                     }
                     <p id={`${id}month-name${i}`} className="month-name" key={id + i}>
                       {getMonthName(date.getMonth())}
                     </p>
-                </>)}
+                </div>)}
                 )}
             </div>
             <div className='calendar-days'>
@@ -58,7 +58,7 @@ export default function Calendar3({controller}: {controller: CalendarController}
                   {Array.from({length: opacity}).map((_, i) => {
                       const month = addMonths(new Date(), i)
                       return (
-                      <div style={{marginBottom: '10px'}}>
+                      <div key={month.getKey()} style={{marginBottom: '10px'}}>
                           <h3 id={i+''} className='month-name-title'>{getMonthName(month.getMonth())}</h3>
                           <Month
                               key={i + 'month'}

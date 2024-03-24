@@ -55,7 +55,7 @@ $cell-borde-size: 50px;
         padding-top: 10px;
         width: $sidebar-w;
         overflow-y: hidden;
-        align-items: start;
+        align-items: flex-start;
         background-color: $primary-color;
         border-radius: 10px 0 0 10px;
     }

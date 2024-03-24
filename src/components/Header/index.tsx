@@ -2,7 +2,7 @@
 
 import styles from './Header.module.scss'
 import Image from 'next/image'
-import Logo from '../../../public/images/logo-with-letters.svg'
+import LogoImg from '../../../public/images/logo.svg'
 import Link from 'next/link'
 import Burger from '../Burger/Burger'
 import { usePathname } from 'next/navigation'
@@ -12,7 +12,19 @@ interface HeaderProps {
   setSidebarOpen: (arg: boolean) => void;
 }
 
-
+const Logo = () => {
+  return (
+    <div className={styles.logo}>
+      <Image
+        className={styles.logo}
+        src={LogoImg}
+        alt=''
+        height={40}
+      />
+      <h1>NIKOLA</h1>
+    </div>
+  )
+}
 
 const Header = (props: HeaderProps) => {
 
@@ -21,13 +33,7 @@ const Header = (props: HeaderProps) => {
   return (
     <header className={styles.container}>
       <nav className={styles.data}>
-        <Image
-          className={styles.logo}
-          src={Logo}
-          alt=''
-          width={213}
-          height={30}
-        />
+        <Logo />
         <Link href="/house" legacyBehavior>
           <a className={pathname === "/house" ? styles.active : ' '}>
             Домики

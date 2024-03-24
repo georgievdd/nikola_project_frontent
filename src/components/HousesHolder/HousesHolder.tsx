@@ -9,6 +9,7 @@ import { useCalendar } from "../Calendar/CalendarBody/hooks/useCalendar";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "@/api/instance";
 import Reloader from "../ui/Reloader/Reloader";
+import { getDateFromKey } from "@/helpers";
 
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
@@ -17,37 +18,33 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
   const [houses, setHouses] = useState<House[]>(initHouses)
   
 
+  function getDates() {
+    return calendarController.selectionController.isActive ? {
+      check_in_date: calendarController.selectionController.dateBegin!.getKey(),
+      check_out_date: calendarController.selectionController.dateEnd!.getKey(),
+    } : {}
+  }
+
   useEffect(() => {
-    function getDates() {
-      return calendarController.selectionController.isActive ? {
-        check_in_date: calendarController.selectionController.dateBegin!.getKey(),
-        check_out_date: calendarController.selectionController.dateEnd!.getKey(),
-      } : {}
-    }
     axiosInstance.get('/houses/', {params: {
       max_persons_amount: guestsController.value,
       ...getDates(),
-    }}).then(res => setHouses(res.data))
-
+    }}).then(res => {
+      setHouses(res.data)
+    })
   }, [guestsController.value, calendarController.selectionController.isActive])
-
-  // useEffect(() => {
-  //   if (calendar.selectionController.isActive) {
-  //     calendar.setShow(false)
-  //   }
-  // }, [calendar.selectionController.isActive])
 
   return (
     <div className={styles.container}>
       <div className={styles.filters}>
         <NumberInput className={styles.guests} {...guestsController}/>
         <Calendar calendarController={calendarController}/>
-        <Reloader onClick={() => {calendarController.reset(), guestsController.reset()}}/>
+        <Reloader onClick={() => {calendarController.reset(), guestsController.reset(), localStorage.clear()}}/>
       </div>
       <div className={styles.houses}>
         {
           houses.map(house => (
-            <HouseCard key={house.id} data={house} selectionController={calendarController.selectionController}/>
+            <HouseCard key={house.id} guestsController={guestsController} data={house} selectionController={calendarController.selectionController}/>
           ))
         }
       </div>

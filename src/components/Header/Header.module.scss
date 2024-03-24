@@ -6,6 +6,8 @@
     width: 100%;
     background-color: $secondary-color;
     z-index: 20;
+    
+    
     .burger {
         display: none;
     }
@@ -16,9 +18,19 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        align-items: end;
+        align-items: center;
         color: $primary-color;
-        padding-top: 18px;
+        padding-top: 10px;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            h1 {
+                color: $primary-color;
+                font-weight: 600;
+            }
+        }
         
         a {
             color: $primary-color;
@@ -38,6 +50,7 @@
             .logo {
                 display: none;
             }
+            padding-top: 20px;
             max-width: $second-point-to;
         }
 
@@ -45,6 +58,7 @@
             .logo {
                 display: none;
             }
+            padding-top: 20px;
             max-width: $third-point-to;
         }
 

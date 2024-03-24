@@ -11,12 +11,13 @@ import { CssTransition } from '@mui/base/Transitions'
 import { PopupContext } from '@mui/base/Unstable_Popup'
 import Image from 'next/image'
 
-export default function SelectInput(props: any) {
+export default function SelectInput(props: {onChange: (v: string) => void, times: string[], [key: string]: any}) {
+  const {times, onChange, ...otherProps} = props
   return (
-    <Select {...props} defaultValue={0}>
-      <Option value={0}>13:00</Option>
-      <Option value={1}>16:00</Option>
-      <Option value={2}>14:00</Option>
+    <Select {...otherProps} defaultValue={0} onChange={(_, v) => onChange(times[v as number])}>
+      {times.map((time, i) => (
+        <Option value={i} key={time + i}><p>{time}</p></Option>
+      ))}
     </Select>
   );
 }
@@ -64,11 +65,11 @@ const Button = React.forwardRef(function Button<
   props: any,
   ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
-  const { ownerState, ...other } = props;
+  const { ownerState, children, labelImage, ...other } = props;
   return (
     <button type="button" {...other} ref={ref}>
-      {other.children}
-      <Image src={props.labelImage} width={18} height={18} alt=''/>
+      {children}
+      <Image src={labelImage} style={{width: '18px', height: 'auto'}} alt=''/>
     </button>
   );
 });
@@ -118,7 +119,7 @@ const StyledButton = styled(Button, { shouldForwardProp: () => true })(
 
 const Listbox = styled('ul')(
   ({ theme }) => `
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: var(--montserrat-font);
   font-size: 0.875rem;
   box-sizing: border-box;
   padding: 6px;
@@ -185,8 +186,12 @@ const AnimatedListbox = React.forwardRef(function AnimatedListbox<
 
 const Option = styled(BaseOption)(
   ({ theme }) => `
+  font-family: var(--montserrat-font);
   list-style: none;
-  padding: 8px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 20px;
   border-radius: 8px;
   cursor: default;
 

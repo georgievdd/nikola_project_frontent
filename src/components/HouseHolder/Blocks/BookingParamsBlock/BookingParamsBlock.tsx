@@ -12,17 +12,24 @@ const BookingParamsBlock = ({
   guestsController,
   datePickerController,
   calendarController,
+  resetAction,
 }: {
   guestsController: INumberInput,
   datePickerController: DatePickerController,
   calendarController: CalendarController,
+  resetAction: () => void
 }) => {
   
   return (
     <section className={styles.container}>
       <NumberInput {...guestsController}/>
       <Calendar calendarController={calendarController}/>
-      <Reloader onClick={() => {calendarController.reset(), guestsController.reset()}} />
+      <Reloader onClick={() => {
+        calendarController.reset(), 
+        guestsController.reset(), 
+        localStorage.clear(),
+        resetAction()
+      }} />
       <DatePicker controller={datePickerController}/>
     </section>
   )

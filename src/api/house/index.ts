@@ -1,4 +1,4 @@
-import { House } from "@/entity/House"
+import { House, HouseOptions } from "@/entity/House"
 import { INTERNAL_API_URL } from "../instance"
 
 
@@ -23,4 +23,17 @@ export const getHouse = async(id: string): Promise<House> =>
     .catch(e => {
         console.log(e);
         return [];
+    })
+
+export const getHouseOptions = async(id: string): Promise<HouseOptions> => 
+    fetch(`${INTERNAL_API_URL}/houses/reservations/${id}/options`, {
+        next: {
+            revalidate: 10
+        },
+        method: 'GET',
+    })
+    .then(res => res.json())
+    .catch(e => {
+        console.log(e);
+        return null;
     })

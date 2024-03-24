@@ -21,13 +21,13 @@ const BookingInvoiceBlock = ({
       <div className={styles.wrapper}>
         <div className={styles.content}>
           {
-            bill.chronological_positions.map(event => (
-              <ChronologicalEvent event={event} />
+            bill.chronological_positions.map((event, i) => (
+              <ChronologicalEvent event={event} key={event.description + i} />
             ))
           }
           {
-            bill.non_chronological_positions.map(event => (
-              <ChronologicalEvent event={event} />
+            bill.non_chronological_positions.map((event, i) => (
+              <ChronologicalEvent event={event} key={event.description + i} />
             ))
           }
 
@@ -36,7 +36,7 @@ const BookingInvoiceBlock = ({
           <div className={styles.box}>
             <div className={styles.upshot}>
               <h2>Итого</h2>
-              <p>{bill.total} <span>₽</span></p>
+              <p>{bill.total.toLocaleString('ru-RU')} <span>₽</span></p>
             </div>
             <Button 
               round0 

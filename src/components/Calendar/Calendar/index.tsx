@@ -18,9 +18,9 @@ const Calendar = ({calendarController}: {calendarController: CalendarController}
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const hideCalendar = () => {
-    wrapperRef.current!.classList.add(styles['calendar-hide'])
+    wrapperRef.current?.classList.add(styles['calendar-hide'])
     setTimeout(() => {
-      wrapperRef.current!.classList.remove(styles['calendar-hide'])
+      wrapperRef.current?.classList.remove(styles['calendar-hide'])
       setShow(false)
     }, 350)
   }

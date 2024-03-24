@@ -1,9 +1,8 @@
-'use client'
-import { getHouse } from "@/api/house";
+import { getHouse, getHouseOptions } from "@/api/house";
 import HouseHolder from "@/components/HouseHolder/HouseHolder";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { House } from "@/entity/House";
-import { Metadata } from "next";
+import { House, HouseOptions } from "@/entity/House";
+import { Metadata, ResolvingMetadata } from "next";
 
 interface Props {
   params: {
@@ -11,19 +10,31 @@ interface Props {
   }
 }
 
-export const metadata: Metadata = {
-  title: "Nikola | {Вставить домик}",
-  description: "{Вставить description}",
-  keywords: "{Вставить features}",
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const house = await getHouse(params.id)
+  const previousImages = (await parent).openGraph?.images || []
+ 
+  return {
+    title:  `Nikola | ${house.name}`,
+    description: house.description,
+    keywords: house.features.map(e => e.name),
+    openGraph: {
+      images: [...house.pictures.map(e => e.picture), ...previousImages],
+    },
+  }
 }
 
 export default async function HouseId({params}: Props) {
 
   const house: House = await getHouse(params.id)
+  const houseOptions: HouseOptions | null = await getHouseOptions(params.id)
 
   return (
     <DefaultLayout>
-      <HouseHolder data={house}/>
+      <HouseHolder house={house} houseOptions={houseOptions}/>
     </DefaultLayout>
   );
 }

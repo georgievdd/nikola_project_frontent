@@ -16,8 +16,22 @@ export interface Picture {
 }
   
 export interface Feature {
-    id:   number
+    id: number
     name: string
     icon: string
 }
   
+
+export interface HouseOptions {
+    "base_persons_amount": number
+    "max_persons_amount": number
+    "price_per_extra_person": number
+    "check_in_times": {
+        "default": string
+        "times": string[]
+    },
+    "check_out_times": {
+        "default": string
+        "times": string[]
+    }
+}

@@ -5,14 +5,25 @@ import Button from '../ui/Button/Button'
 import Link from 'next/link'
 import Feature from '../ui/Feature/Feature'
 import { SelectionController } from '../Calendar/CalendarBody/hooks/useSelection'
+import { INumberInput } from '../ui/Inputs/number-input/useNumberInput'
 
-const HouseCard = ({data, selectionController}: {data: House, selectionController: SelectionController}) => {
+const HouseCard = ({
+  data, 
+  selectionController, 
+  guestsController
+}: {
+  data: House, 
+  selectionController: SelectionController,
+  guestsController: INumberInput
+}) => {
 
-  const getPath = () => 
-    selectionController.isActive ? `house/${data.id}?${new URLSearchParams({
-      check_in_date: selectionController.dateBegin!.getKey(),
-      check_out_date: selectionController.dateEnd!.getKey(),
-    }).toString()}` : `house/${data.id}`
+  const buttonOnClick = () => {
+    if (selectionController.isActive) {
+      localStorage.setItem('check_in_date', selectionController.dateBegin!.getKey())
+      localStorage.setItem('check_out_date', selectionController.dateEnd!.getKey())
+      localStorage.setItem('guests', guestsController.value.toString())
+    }
+  }
   
   return (
     <div className={styles.container}>
@@ -30,8 +41,8 @@ const HouseCard = ({data, selectionController}: {data: House, selectionControlle
           </div>
         </div>
         <div className={styles["bottom-group"]}>
-          <Link href={getPath()}>
-            <Button onClick={() => {}}>
+          <Link href={`house/${data.id}`}>
+            <Button onClick={buttonOnClick}>
               Забронировать
             </Button>
           </Link>

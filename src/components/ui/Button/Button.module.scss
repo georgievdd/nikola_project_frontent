@@ -49,10 +49,10 @@
 }
 
 .round0 {
-    border-radius: 0;
+    border-radius: 3px;
 }
 
 .muted {
     opacity: 0.6;
-    pointer-events: none;
+    cursor: not-allowed;
 }

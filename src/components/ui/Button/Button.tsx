@@ -30,6 +30,7 @@ const Button = ({
         muted ? styles.muted : '',
       ].join(' ')}
       onClick={onClick}
+      disabled={muted}
     >
       <p>{children}</p>
     </button>

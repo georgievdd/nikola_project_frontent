@@ -5,17 +5,12 @@ import { getHouses } from "@/api/house";
 import { House } from '@/entity/House';
 import Logo from '../../../public/images/logo.svg'
 
-export const metadata: Metadata = {
-  title: "Nikola | Houses",
-  description: "houses to book",
-  keywords: "nikola, house"
-}
-
 export async function generateMetadata(
+  { params }: any,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const previousImages = (await parent).openGraph?.images || []
- 
+
   return {
     title:  `Nikola | Houses`,
     description: "Забранируйте домик для отдыха",

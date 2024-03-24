@@ -25,6 +25,8 @@ export interface LabelInputController {
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   className?: string
+  isValid: boolean
+  required?: boolean
 }
 
 export const useLabelInput = ({
@@ -43,5 +45,6 @@ export const useLabelInput = ({
     placeholder,
     label,
     className,
+    isValid: !!value
   }
 }

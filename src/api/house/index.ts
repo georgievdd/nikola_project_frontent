@@ -10,10 +10,7 @@ export const getHouses = async(): Promise<House[]> =>
         method: 'GET',
     })
     .then(res => res.json())
-    .catch(e => {
-        console.log(e);
-        return [];
-    })
+    .catch(e => [])
 
 export const getHouse = async(id: string): Promise<House> => 
     fetch(`${INTERNAL_API_URL}/houses/${id}`, {

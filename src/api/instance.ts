@@ -6,4 +6,7 @@ export const INTERNAL_API_URL = `${process.env.NEXT_PUBLIC_INTERNAL_BACKEND_URL}
 
 export const axiosInstance = axios.create({
     baseURL: API_URL,
+    headers: {
+        'Content-Type': 'application/json'
+    }
 })

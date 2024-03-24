@@ -19,7 +19,7 @@ export async function generateMetadata(
  
   return {
     title:  `Nikola | Houses`,
-    description: "Забранируйте домик для отдыха, ради христа",
+    description: "Забранируйте домик для отдыха",
     keywords: "nikola, houses, ",
     openGraph: {
       images: [Logo, ...previousImages],

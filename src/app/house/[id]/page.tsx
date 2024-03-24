@@ -1,3 +1,4 @@
+'use client'
 import { getHouse } from "@/api/house";
 import HouseHolder from "@/components/HouseHolder/HouseHolder";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";

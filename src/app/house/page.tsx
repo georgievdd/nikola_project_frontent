@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const houses = await getHouses()
   const previousImages = (await parent).openGraph?.images || []
  
   return {

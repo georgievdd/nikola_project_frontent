@@ -39,7 +39,7 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
       <div className={styles.filters}>
         <NumberInput className={styles.guests} {...guestsController}/>
         <Calendar calendarController={calendarController}/>
-        <Reloader onClick={() => {calendarController.reset(), guestsController.reset(), localStorage.clear()}}/>
+        <Reloader onClick={() => {calendarController.reset(), guestsController.reset(), sessionStorage.clear()}}/>
       </div>
       <div className={styles.houses}>
         {

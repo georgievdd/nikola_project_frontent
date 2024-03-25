@@ -34,7 +34,7 @@ export const useNumberInput = (
         value,
         add,
         substract,
-        reset: () => setValue(0),
+        reset: () => setValue(prev => minValue),
         set: (v: number) => setValue(prev => v)
     }
 }

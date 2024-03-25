@@ -69,9 +69,9 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
    * проверка на активное выделение сразу при переходе на страницу
    */
   useEffect(() => {
-    const check_in_date = localStorage.getItem('check_in_date')
-    const check_out_date = localStorage.getItem('check_out_date')
-    const guests = localStorage.getItem('guests')
+    const check_in_date = sessionStorage.getItem('check_in_date')
+    const check_out_date = sessionStorage.getItem('check_out_date')
+    const guests = sessionStorage.getItem('guests')
     if (check_in_date == null) {
       return
     }

@@ -81,6 +81,13 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
             height: '100%',
           }}
         />
+        {/* <Image 
+          key={current < imgs.length ? imgs[current].picture : 'text'}
+          src={current < imgs.length ? imgs[current].picture : ''} 
+          alt=""
+          layout="fill"
+          objectFit="cover"
+        /> */}
         </div>
         <ul className={styles.img_group} ref={columnRef}>
           {imgs.map((img, i) => (<div key={img.picture}>

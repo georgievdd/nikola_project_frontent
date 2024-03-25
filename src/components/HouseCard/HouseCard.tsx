@@ -19,9 +19,9 @@ const HouseCard = ({
 
   const buttonOnClick = () => {
     if (selectionController.isActive) {
-      localStorage.setItem('check_in_date', selectionController.dateBegin!.getKey())
-      localStorage.setItem('check_out_date', selectionController.dateEnd!.getKey())
-      localStorage.setItem('guests', guestsController.value.toString())
+      sessionStorage.setItem('check_in_date', selectionController.dateBegin!.getKey())
+      sessionStorage.setItem('check_out_date', selectionController.dateEnd!.getKey())
+      sessionStorage.setItem('guests', guestsController.value.toString())
     }
   }
   

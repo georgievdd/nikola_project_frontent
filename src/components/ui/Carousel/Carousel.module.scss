@@ -16,11 +16,13 @@ $smooth-w: 0.17 * $w;
   gap: 10px;
   img {
     border-radius: $preview-br;
+    object-fit: cover;
   }
   .img_current {
     position: relative;
     width: 83%;
     height: 100%;
+    object-fit: cover;
   }
   .img_group {
     width: 17%;

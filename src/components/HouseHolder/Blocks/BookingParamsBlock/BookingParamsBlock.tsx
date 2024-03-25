@@ -27,7 +27,7 @@ const BookingParamsBlock = ({
       <Reloader onClick={() => {
         calendarController.reset(), 
         guestsController.reset(), 
-        localStorage.clear(),
+        sessionStorage.clear(),
         resetAction()
       }} />
       <DatePicker controller={datePickerController}/>

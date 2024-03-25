@@ -11,11 +11,20 @@ export interface INumberInput {
     set: (v: number) => void
 }
 
-export const useNumberInput = (label: string): INumberInput => {
-    const [value, setValue] = useState(0)
-    const add = () => setValue(prev => prev + 1)
+export const useNumberInput = (
+    label: string,
+    minValue: number = 0,
+    maxValue: number = 100000
+    ): INumberInput => {
+    const [value, setValue] = useState(minValue)
+    const add = () => {
+        if (value === maxValue) {
+            return
+        }
+        setValue(prev => prev + 1)
+    }
     const substract = () => {
-        if (value === 0) {
+        if (value === minValue) {
             return
         }
         setValue(prev => prev - 1)

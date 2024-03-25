@@ -24,7 +24,7 @@ interface HouseHolderProps {
 }
 
 const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
-  const guestsController = useNumberInput('Гостей');
+  const guestsController = useNumberInput('Гостей', 1, houseOptions.max_persons_amount);
   const datePickerController = useDatePicker(houseOptions)
   const userInfoController = useLabelInputGroup()
   const calendarController = useCalendar('house_id', false, `/houses/${house.id}/calendar/`)
@@ -60,10 +60,9 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     const reservationPriceData: IReservationPriceRequest = {
       check_in_datetime: `${dateBegin!.getKey()} ${datePickerController.currentFirst}`,
       check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
-      total_persons_amount: guestsController.value + 1,
+      total_persons_amount: guestsController.value,
     }
     // console.log(reservationPriceData);
-    
     priceList.set(await getReservationPrice(house.id, reservationPriceData));
   }
   /**
@@ -93,14 +92,19 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
 
   return (
     <div className={styles.container}>
-      <HouseDescriptionBlock data={house}/>
+      <HouseDescriptionBlock
+        data={house} 
+        houseOptions={houseOptions}
+      />
       <BookingParamsBlock 
         guestsController={guestsController}
         datePickerController={datePickerController}
         calendarController={calendarController}
         resetAction={resetAction}
       />
-      <UserInfoBlock inputGroup={userInfoController.controllers}/>
+      <UserInfoBlock 
+        inputGroup={userInfoController.controllers}
+      />
       {priceList.data &&
       <BookingInvoiceBlock
         controller={priceList}

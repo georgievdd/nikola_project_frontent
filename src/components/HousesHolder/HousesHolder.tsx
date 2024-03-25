@@ -13,7 +13,7 @@ import { getDateFromKey } from "@/helpers";
 
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
-  const guestsController = useNumberInput('Гостей')
+  const guestsController = useNumberInput('Гостей', 1)
   const calendarController = useCalendar('houses', false, '/houses/calendar/')
   const [houses, setHouses] = useState<House[]>(initHouses)
   

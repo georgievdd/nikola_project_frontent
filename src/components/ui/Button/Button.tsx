@@ -8,7 +8,7 @@ interface ButtonProps {
     style?: Record<string, string>
     variant?: 'contained' | 'base'
     round0?: boolean
-    muted?: boolean,
+    disabled?: boolean,
 }
 
 const Button = ({
@@ -17,7 +17,7 @@ const Button = ({
     className,
     variant,
     round0,
-    muted,
+    disabled,
 }: ButtonProps) => {
   variant = variant || 'base'
 
@@ -27,10 +27,10 @@ const Button = ({
         className, 
         styles[variant],
         round0 ? (styles.round0) : '',
-        muted ? styles.muted : '',
+        disabled ? styles.disabled : '',
       ].join(' ')}
       onClick={onClick}
-      disabled={muted}
+      disabled={disabled}
     >
       <p>{children}</p>
     </button>

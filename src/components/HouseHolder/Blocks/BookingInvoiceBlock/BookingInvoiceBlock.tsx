@@ -40,7 +40,7 @@ const BookingInvoiceBlock = ({
             </div>
             <Button 
               round0 
-              muted={!canMakeReservation}
+              disabled={!canMakeReservation}
               variant={'contained'} 
               onClick={makeReservation}
             >

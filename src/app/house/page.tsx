@@ -3,7 +3,6 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import HousesHolder from "@/components/HousesHolder/HousesHolder";
 import { getHouses } from "@/api/house";
 import { House } from '@/entity/House';
-import Logo from '../../../public/images/logo.svg'
 
 export async function generateMetadata(
   { params }: any,
@@ -14,9 +13,9 @@ export async function generateMetadata(
   return {
     title:  `Nikola | Houses`,
     description: "Забранируйте домик для отдыха",
-    keywords: "nikola, houses, ",
+    keywords: "nikola,houses,",
     openGraph: {
-      images: [Logo, ...previousImages],
+      images: ['вставать абсолютный url icon', ...previousImages],
     },
   }
 }

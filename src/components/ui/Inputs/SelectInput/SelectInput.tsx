@@ -11,10 +11,15 @@ import { CssTransition } from '@mui/base/Transitions'
 import { PopupContext } from '@mui/base/Unstable_Popup'
 import Image from 'next/image'
 
-export default function SelectInput(props: {onChange: (v: string) => void, times: string[], [key: string]: any}) {
-  const {times, onChange, ...otherProps} = props
+export default function SelectInput(props: {
+  onChange: (v: string) => void, 
+  defaultValue: string,
+  times: string[], [key: string]: any}) {
+  const {times, defaultValue, onChange, ...otherProps} = props
   return (
-    <Select {...otherProps} defaultValue={0} onChange={(_, v) => onChange(times[v as number])}>
+    <Select {...otherProps} defaultValue={
+      times.findIndex(e => e === defaultValue)
+    } onChange={(_, v) => onChange(times[v as number])}>
       {times.map((time, i) => (
         <Option value={i} key={time + i}><p>{time}</p></Option>
       ))}

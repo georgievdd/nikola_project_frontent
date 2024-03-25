@@ -41,18 +41,6 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
       }
     }
   }
-  useEffect(() => {
-    const columnElement = columnRef.current;
-    if (columnElement) {
-      columnElement.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (columnElement) {
-        columnElement.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [])
   
   const handleNext = (e: any) => {
     e.stopPropagation();
@@ -65,6 +53,16 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
       e.preventDefault();
       setCurrent(prev => (prev - 1 + imgs.length) % imgs.length)
   }
+
+  // listener for arrows
+  useEffect(() => {
+    const columnElement = columnRef.current;
+    columnElement?.addEventListener('scroll', handleScroll);
+
+    return () => {
+      columnElement?.removeEventListener('scroll', handleScroll);
+    };
+  }, [])
 
   return (
     <div>

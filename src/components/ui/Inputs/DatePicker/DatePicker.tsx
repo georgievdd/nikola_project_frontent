@@ -18,15 +18,17 @@ const DatePicker = ({controller}: {
           <SelectInput
            labelImage={Circle}
            times={controller.data.check_in_times.times}
+           defaultValue={controller.data.check_in_times.default}
            onChange={(v: string) => controller.setCurrentFirst(v)}
           />
         </div>
         <div className={styles.group}>
           <label>Время выезда</label>
           <SelectInput
-           labelImage={Moon}
-           times={controller.data.check_out_times.times}
-           onChange={(v: string) => controller.setCurrentSecond(v)}
+            labelImage={Moon}
+            times={controller.data.check_out_times.times}
+            defaultValue={controller.data.check_out_times.default}
+            onChange={(v: string) => controller.setCurrentSecond(v)}
           />
         </div>
       </div>

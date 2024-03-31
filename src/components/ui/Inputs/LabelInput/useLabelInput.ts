@@ -10,16 +10,19 @@ export interface LabelInputController {
     className?: string
     isValid: boolean
     required?: boolean
+    type?: string
 }
 
 export const useLabelInput = ({
     label,
     placeholder,
     className,
+    type
 }: {
     label: string
     placeholder: string
     className?: string
+    type?: string
 }): LabelInputController => {
     const [value, setValue] = useState('')
     return {
@@ -28,7 +31,8 @@ export const useLabelInput = ({
         placeholder,
         label,
         className,
-        isValid: !!value
+        isValid: !!value,
+        type
     }
 }
 

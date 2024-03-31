@@ -12,6 +12,7 @@ const LabelInput = ({controller, className}:
         value={controller.value}
         onChange={controller.onChange}
         placeholder={controller.placeholder}
+        type={controller.type}
       />
     </div>
   )

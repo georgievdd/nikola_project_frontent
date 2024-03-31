@@ -16,6 +16,9 @@
         position: relative;
         display: flex;
         .content {
+            .header {
+                margin-bottom: 30px;
+            }
             position: relative;
             width: 50%;
             display: flex;
@@ -39,7 +42,6 @@
             display: flex;
             justify-content: center;
             .box {
-                position: absolute;
                 bottom: 0;
                 width: 55%;
                 display: flex;
@@ -61,16 +63,6 @@
                     justify-content: space-between;
                     align-items: center;
                 }
-                // button {
-                //     background-color: $secondary-color;
-                //     color: $primary-color;
-                //     font-size: 30px;
-                //     font-weight: 400;
-                //     line-height: 36.57px;
-                //     text-align: left;
-                //     padding: 10px;
-                //     text-align: center;
-                // }
             }
         }
 

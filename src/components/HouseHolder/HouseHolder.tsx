@@ -9,8 +9,6 @@ import BookingInvoiceBlock from './Blocks/BookingInvoiceBlock/BookingInvoiceBloc
 import { useDatePicker } from '../ui/Inputs/DatePicker/useDatePicker'
 import { useLabelInputGroup } from '../ui/Inputs/LabelInput/useLabelInput'
 import { useNumberInput } from '../ui/Inputs/number-input/useNumberInput'
-import CircleImage from '../../../public/images/circle.svg'
-import MoonImage from '../../../public/images/moon.svg'
 import { useCalendar } from '../Calendar/CalendarBody/hooks/useCalendar'
 import { IReservationPriceRequest, MakeReservationRequest } from './dto/Reservations'
 import { getDateFromKey, showAlert } from '@/helpers'
@@ -62,7 +60,8 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
       check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
       total_persons_amount: guestsController.value,
     }
-    // console.log(reservationPriceData);
+    console.log(reservationPriceData);
+    
     priceList.set(await getReservationPrice(house.id, reservationPriceData));
   }
   /**
@@ -84,7 +83,12 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     if (isActive) {
       getPriceList();
     }
-  }, [isActive, guestsController.value, datePickerController.currentFirst, datePickerController.currentSecond])
+  }, [
+    isActive, 
+    guestsController.value, 
+    datePickerController.currentFirst, 
+    datePickerController.currentSecond,
+  ])
 
   const resetAction = useCallback(() => {
     priceList.set(null)

@@ -4,6 +4,7 @@ import styles from './BookingInvoiceBlock.module.scss'
 import { getIconByType } from './helpers'
 import { BookingInvoiceController } from './useBookingInvoice'
 import Image from 'next/image'
+import LabelInput from '@/components/ui/Inputs/LabelInput/LabelInput'
 
 const BookingInvoiceBlock = ({
   controller, 
@@ -17,9 +18,9 @@ const BookingInvoiceBlock = ({
   const {bill} = controller.data!.reservation
   return (
     <section className={styles.container}>
-      <h2>Детализация по дням</h2>
       <div className={styles.wrapper}>
         <div className={styles.content}>
+          <h2 className={styles.header}>Детализация по дням</h2>
           {
             bill.chronological_positions.map((event, i) => (
               <ChronologicalEvent event={event} key={event.description + i} />
@@ -34,6 +35,7 @@ const BookingInvoiceBlock = ({
         </div>
         <div className={styles.submit}>
           <div className={styles.box}>
+            <LabelInput controller={controller.promo} />
             <div className={styles.upshot}>
               <h2>Итого</h2>
               <p>{bill.total.toLocaleString('ru-RU')} <span>₽</span></p>

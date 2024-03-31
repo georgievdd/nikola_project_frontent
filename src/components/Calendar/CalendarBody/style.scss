@@ -148,22 +148,24 @@ $cell-borde-size: 50px;
         width: $cell-borde-size;
         height: $cell-borde-size;
     }
+
     .date_disabled {
+        opacity: 0.4;
         cursor: not-allowed;
     }
-    
+
+    .noclickable {
+        pointer-events: none;
+    }    
+
     .date__coin {
         position: absolute;
-        font-size: 8px;
+        font-size: 9px;
         font-weight: 400;
         line-height: 10px;
         letter-spacing: 0em;
         text-align: center;
         margin-top: 30px;
-    }
-    
-    .date_disabled {
-        opacity: 0.4;
     }
     
     // .date_holiday {
@@ -186,6 +188,20 @@ $cell-borde-size: 50px;
     
     .date_weekend {
         background-color: $secondary-acent-color;
+    }
+
+    .date_select-left::before,
+    .date_select-start::before {
+        content: '';
+        background-image: url('../../../../public/images/cross.svg');
+        width: 18px;
+        height: 18px;
+        right: -1px;
+        top: -2px;
+        position: absolute;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
     }
     
     // .date_select-left {

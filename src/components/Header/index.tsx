@@ -2,7 +2,7 @@
 
 import styles from './Header.module.scss'
 import Image from 'next/image'
-import LogoImg from '../../../public/images/logo.svg'
+import LogoImg from '../../../public/images/logo-with-letters.svg'
 import Link from 'next/link'
 import Burger from '../Burger/Burger'
 import { usePathname } from 'next/navigation'
@@ -14,13 +14,12 @@ interface HeaderProps {
 
 const Logo = () => {
   return (
-    <div className={styles.logo}>
-      <h1>Len</h1>
+    <div>
       <Image
         className={styles.logo}
         src={LogoImg}
         alt=''
-        height={40}
+        height={50}
       />
     </div>
   )

@@ -1,4 +1,4 @@
-import {RefObject, useState} from "react";
+import {RefObject, useCallback, useState} from "react";
 import debounce from "lodash/debounce";
 
 export interface ScrollController {
@@ -15,21 +15,51 @@ export function useScroll(calendarCellsRef: RefObject<HTMLDivElement>): ScrollCo
         visibilityCells.forEach(cell => {
             const cellRect = cell.getBoundingClientRect()
             if (
-                cellRect.top >= containerRect.top &&
-                cellRect.bottom <= containerRect.bottom
+                cellRect.top+10 >= containerRect.top &&
+                cellRect.bottom <= containerRect.bottom+10
             ) {
                 visibleBlocks.push(cell)
             }
         })
         setCurrentMonthIndex(+visibleBlocks[0].id)
     }, 7)
-    const scrollToMonth = (monthIndex: number) => {
-        const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title');
-        const monthElement = visibilityCells[monthIndex]
-        monthElement.scrollIntoView({
-            behavior: 'smooth',
+    const scrollToMonth = useCallback((monthIndex: number) => {
+
+        const scrollContainer = calendarCellsRef.current!;
+        scrollContainer.scrollTo({
+            top: monthIndex * 362.42,
+            behavior: 'smooth'
         });
-    }
+
+        // const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title');
+        // const monthElement = visibilityCells[monthIndex];
+        // monthElement.scrollIntoView({
+        //     behavior: 'smooth',
+        //     inline: 'nearest'
+        // })
+        // console.log(monthElement.clientHeight, monthElement.clientTop);
+        
+        
+        // const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title');
+        // if (visibilityCells.length > monthIndex) {
+        //     const monthElement = visibilityCells[monthIndex];
+        //     const scrollContainer = calendarCellsRef.current;
+            
+        //     if (scrollContainer && monthElement) {
+        //         console.log(calendarCellsRef.current.offsetTop, scrollContainer.offsetTop);
+                
+        //         // Рассчитываем необходимый отступ для scrollTop.
+        //         // Вычисляем позицию элемента относительно верхней границы родительского контейнера
+        //         const elementTopRelativeToContainer = calendarCellsRef.current.offsetTop - scrollContainer.offsetTop;
+                
+        //         // Устанавливаем scrollTop родительского контейнера, чтобы прокрутить к элементу
+        //         scrollContainer.scrollTo({
+        //             top: elementTopRelativeToContainer,
+        //             behavior: 'smooth'
+        //         });
+        //     }
+        // }
+    }, []);
     return {
         currentMonthIndex,
         handleScroll,

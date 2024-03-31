@@ -1,4 +1,4 @@
-import React, {RefObject, useEffect, useRef, useState} from 'react';
+import React, {RefObject, useCallback, useEffect, useRef, useState} from 'react';
 import './style.scss'
 import {addDays, addMonths, endOfMonth, format, isSameDay, isWeekend, startOfMonth, startOfWeek} from "date-fns";
 import {dayStyle, DayType, getMonthName, monday, weekArray} from "./helpers";
@@ -15,7 +15,8 @@ export default function Calendar3({controller}: {controller: CalendarController}
         opacity,
         calendarCellsRef,
         scrollController,
-        dataController
+        dataController,
+        onLoad,
     } = controller
     const calendarMonthNameColumnRef = useRef<HTMLDivElement>(null)
 
@@ -61,19 +62,20 @@ export default function Calendar3({controller}: {controller: CalendarController}
                       <div key={month.getKey()} style={{marginBottom: '10px'}}>
                           <h3 id={i+''} className='month-name-title'>{getMonthName(month.getMonth())}</h3>
                           <Month
-                              key={i + 'month'}
-                              month={month}
-                              selectionController={selectionController}
-                              processDateClick={processDateClick}
-                              mapState={dataController.mapState}
-                              costs={dataController.costs}
+                            onLoad={onLoad}
+                            key={i + 'month'}
+                            month={month}
+                            selectionController={selectionController}
+                            processDateClick={processDateClick}
+                            mapState={dataController.mapState}
+                            costs={dataController.costs}
                           />
                       </div>
                   )})}
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 const CalendarHighlighter = (
@@ -92,34 +94,39 @@ const CalendarHighlighter = (
         setHighlighterTop(top - 5);
         setHighlighterWidth(month.width + 20);
     }, [selectedMonthIndex, calendarMonthNameColumnRef]);
+    
 
-
+    const [prevHighlighterRect, setPrevHighlighterRect] = useState(0);
     useEffect(() => {
-        const column = calendarMonthNameColumnRef.current!;
-        const columnRect = column.getBoundingClientRect();
-        const highlighter = calendarHighlighterRef.current!;
-        const highlighterRect = highlighter.getBoundingClientRect();
-
-        if (columnRect.bottom - highlighterRect.bottom < 200) {
+        const column = calendarMonthNameColumnRef.current!
+        const columnRect = column.getBoundingClientRect()
+        const highlighter = calendarHighlighterRef.current!
+        const highlighterRect = highlighter.getBoundingClientRect()
+        const direction = highlighterRect.bottom - prevHighlighterRect
+        
+        
+        if (columnRect.bottom - highlighterRect.bottom < 100) {
             column.scrollTo({
                 top: column.scrollTop + 120,
                 behavior: 'smooth',
             })
+            setPrevHighlighterRect(prev => highlighterRect.bottom - 120)
             return
         }
-        if (highlighterRect.bottom - columnRect.bottom < 120) {
+
+        if (highlighterRect.bottom - columnRect.bottom < 60 && direction <= 0) {
             column.scrollTo({
                 top: column.scrollTop - 200,
                 behavior: 'smooth',
             })
+            setPrevHighlighterRect(prev => highlighterRect.bottom + 200)
+            return
         }
-    }, [highlighterTop, calendarMonthNameColumnRef]);
-
-
+        setPrevHighlighterRect(highlighterRect.bottom)
+    }, [highlighterTop, calendarMonthNameColumnRef])
     return (
         <div id="calendar-highlighter" className='month-name-highlighter' ref={calendarHighlighterRef} style={{ top: `${highlighterTop}px`, width: `${highlighterWidth}px` }} />
-    );
-};
+)}
 
 
 interface MonthProps {
@@ -128,8 +135,9 @@ interface MonthProps {
     processDateClick: (day: Date) => void
     mapState: Record<string, DayType>
     costs: Record<string, number>
+    onLoad: boolean
 }
-const Month = ({month, processDateClick, mapState, selectionController, costs}: MonthProps) => {
+const Month = ({month, processDateClick, mapState, selectionController, costs, onLoad}: MonthProps) => {
 
     const {
         dateBegin,
@@ -179,7 +187,7 @@ const Month = ({month, processDateClick, mapState, selectionController, costs}: 
                                 processDateClick(dayCopy)
                             }}
                         >
-                          <div className={`date ${getStyle(day)}`}>
+                          <div className={`date ${getStyle(day)} ${onLoad ? 'noclickable' : ''}`}>
                             <p>{format(day, dateFormat)}</p>
                             {costs[day.getKey()] &&
                             <div className='date__coin'>

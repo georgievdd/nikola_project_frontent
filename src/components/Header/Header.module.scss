@@ -22,16 +22,6 @@
         color: $primary-color;
         padding-top: 10px;
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            h1 {
-                color: $primary-color;
-                font-weight: 600;
-            }
-        }
-        
         a {
             color: $primary-color;
             &:hover {

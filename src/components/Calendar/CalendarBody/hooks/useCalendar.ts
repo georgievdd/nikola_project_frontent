@@ -1,10 +1,11 @@
-import {Dispatch, RefObject, SetStateAction, useEffect, useRef, useState} from "react";
+import {Dispatch, RefObject, SetStateAction, useCallback, useEffect, useRef, useState} from "react";
 import {getCheckInCalendar, getCommonCalendar} from "../api";
 import {showAlert} from "../../../../helpers";
 import {ScrollController, useScroll} from "./useScroll";
 import {SelectionController, useSelection} from "./useSelection";
 import {DayType} from "../helpers";
 import {CalendarDataController, useCalendarData} from "./useCalendarData";
+import { differenceInMonths, differenceInYears, isSameDay } from "date-fns";
 
 export interface CalendarController {
     id: string
@@ -38,8 +39,14 @@ export function useCalendar (id: string, defaultShow: boolean, endpoint: string)
         if (!dataController.mapState[date.getKey()]) return true
         return dataController.mapState[date.getKey()] !== DayType.Disabled
     }
-    function processDateClick(date: Date) {
+    const processDateClick = function(date: Date) {
         if (!validDate(date)) {
+            return
+        }
+        if ((selectionController.isStart || selectionController.isActive) && 
+            isSameDay(date, selectionController.dateBegin!)
+        ) {
+            reset()
             return
         }
         if (selectionController.isActive) {
@@ -93,7 +100,7 @@ export function useCalendar (id: string, defaultShow: boolean, endpoint: string)
                     dataController.setCosts(prev => ({...costs, ...prev}))
                 }
             })
-            .catch(e => showAlert(e.response?.data?.message, 'alert-danger'))
+            .catch(e => showAlert(e.response?.data?.message || 'Ошибка', 'alert-danger'))
             .finally(() => setLoad(false))
     }
     /**
@@ -110,25 +117,35 @@ export function useCalendar (id: string, defaultShow: boolean, endpoint: string)
         }
     }, [scrollController.currentMonthIndex, show])
 
+
     useEffect(() => {
         if (!show) return
         if (selectionController.isActive) {
             setTimeout(() =>
-                scrollController.scrollToMonth(selectionController.dateBegin!.getMonth() - new Date().getMonth())
-            , 50)
+                scrollController.scrollToMonth(
+                    differenceInMonths(selectionController.dateBegin!, new Date()) + 1
+                )
+            , 75)
         }
     }, [show])
 
     useEffect(() => {
         if (selectionController.isStart) {
+            console.log(selectionController.dateBegin!);
             setCheckInCalendar(true)
         }
     }, [selectionController.isStart])
 
+
+    useEffect(() => {
+        if (dataController.wasCleared) {
+            setCommonCalendar()
+        }
+    }, [dataController.wasCleared])
+
     const reset = () => {
         selectionController.clear()
         dataController.clear()
-        setShow(false)
     }
 
 

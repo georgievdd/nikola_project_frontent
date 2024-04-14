@@ -68,17 +68,20 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
     <div>
       <div className={styles.container}>
         <div className={styles.img_current}>
-        <img 
-          key={current < imgs.length ? imgs[current].picture : 'text'}
-          src={current < imgs.length ? imgs[current].picture : ''} 
-          alt=''
-          // fill
-          // priority
-          style={{
-            width: '100%',
-            height: '100%',
-          }}
-        />
+          <img 
+            key={current < imgs.length ? imgs[current].picture : 'text'}
+            src={current < imgs.length ? imgs[current].picture : ''} 
+            alt='background'
+            className={styles.background}
+          />
+          <img 
+            key={current < imgs.length ? imgs[current].picture : 'text'}
+            src={current < imgs.length ? imgs[current].picture : ''} 
+            alt='foreground'
+            className={styles.foreground}
+          />
+
+
         {/* <Image 
           key={current < imgs.length ? imgs[current].picture : 'text'}
           src={current < imgs.length ? imgs[current].picture : ''} 
@@ -102,12 +105,13 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
               <div className={styles.imgholder}>
                 <img
                   src={img.picture} 
-                  alt=''
-                  // fill
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                  }}
+                  alt='background'
+                  className={styles.background}
+                />
+                <img
+                  src={img.picture} 
+                  alt='foreground'
+                  className={styles.foreground}
                 />
               </div>
             </label>

@@ -1,6 +1,6 @@
 $w: 720px;
 $h: $w * 0.625;
-$preview-br: 10px;
+$preview-br: 12px;
 $preview-h: 0.2 * $h;
 $preview-gap: 10px;
 $preview-h-border: $preview-h * 8/9;
@@ -16,13 +16,19 @@ $smooth-w: 0.17 * $w;
   gap: 10px;
   img {
     border-radius: $preview-br;
-    object-fit: cover;
+    overflow: hidden;
   }
   .img_current {
+    pointer-events: none;
     position: relative;
     width: 83%;
     height: 100%;
     object-fit: cover;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
   .img_group {
     width: 17%;
@@ -52,8 +58,13 @@ $smooth-w: 0.17 * $w;
       cursor: pointer;
 
       .imgholder {
+        position: relative;
         width: 91.666%;
         height: $preview-h-border;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
     input[type="radio"]:checked + .group_element::after {
@@ -186,4 +197,15 @@ $smooth-w: 0.17 * $w;
     }
   }
 
+}
+
+.background {
+  position: absolute;
+  filter: blur(7px);
+  mask-image: radial-gradient(circle, transparent, transparent 0, black 0);
+  -webkit-mask-image: radial-gradient(circle, transparent, transparent 0, black 0);
+}
+.foreground {
+  object-fit: contain;
+  position: absolute;
 }

@@ -5,7 +5,7 @@ import {ScrollController, useScroll} from "./useScroll";
 import {SelectionController, useSelection} from "./useSelection";
 import {DayType} from "../helpers";
 import {CalendarDataController, useCalendarData} from "./useCalendarData";
-import { differenceInMonths, differenceInYears, isSameDay } from "date-fns";
+import { differenceInMonths, differenceInYears, isSameDay, startOfMonth } from "date-fns";
 
 export interface CalendarController {
     id: string
@@ -123,7 +123,7 @@ export function useCalendar (id: string, defaultShow: boolean, endpoint: string)
         if (selectionController.isActive) {
             setTimeout(() =>
                 scrollController.scrollToMonth(
-                    differenceInMonths(selectionController.dateBegin!, new Date()) + 1
+                    differenceInMonths(selectionController.dateBegin!, startOfMonth(new Date()))
                 )
             , 75)
         }

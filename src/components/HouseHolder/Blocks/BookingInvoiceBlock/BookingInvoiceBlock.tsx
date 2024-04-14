@@ -23,19 +23,19 @@ const BookingInvoiceBlock = ({
           <h2 className={styles.header}>Детализация по дням</h2>
           {
             bill.chronological_positions.map((event, i) => (
-              <ChronologicalEvent event={event} key={event.description + i} />
+              <BillEvent event={event} key={event.description + i} />
             ))
           }
           {
             bill.non_chronological_positions.map((event, i) => (
-              <ChronologicalEvent event={event} key={event.description + i} />
+              <BillEvent event={event} key={event.description + i} />
             ))
           }
 
         </div>
         <div className={styles.submit}>
           <div className={styles.box}>
-            <LabelInput controller={controller.promo} />
+            <LabelInput controller={controller.promoController} />
             <div className={styles.upshot}>
               <h2>Итого</h2>
               <p>{bill.total.toLocaleString('ru-RU')} <span>₽</span></p>
@@ -59,7 +59,9 @@ export default BookingInvoiceBlock
 
 
 
-const ChronologicalEvent = ({event}: {event: ChronologicalPosition | NonChronologicalPosition}) => (
+const BillEvent = (
+  {event}: {event: ChronologicalPosition | NonChronologicalPosition}
+) => (
   <div className={styles.event}>
     <div className={styles.title}>
       <Image

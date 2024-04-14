@@ -17,12 +17,13 @@ export interface IReservationOptionsTimes {
 }
 
 export interface IReservationPriceRequest {
-    "check_in_datetime": string,
-    "check_out_datetime": string,
+    "check_in_datetime": string
+    "check_out_datetime": string
     "total_persons_amount": number
+    "promo_code"?: string
 }
 
-export  interface IReservationPrice {
+export interface IReservationPrice {
     "reservation": {
         "house": House
         "client": null
@@ -39,7 +40,7 @@ export interface Bill {
     "total": 2153000
     "chronological_positions": ChronologicalPosition[]
     "non_chronological_positions": NonChronologicalPosition[]
-    "promo_code": null
+    "promo_code"?: null
 }
 
 export interface ChronologicalPosition {
@@ -68,4 +69,5 @@ export interface MakeReservationRequest {
     "last_name": string
     "preferred_contact": string
     "comment"?: string
+    "promo_code"?: string
 }

@@ -25,6 +25,7 @@ export const useLabelInput = ({
     type?: string
 }): LabelInputController => {
     const [value, setValue] = useState('')
+
     return {
         value,
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value),

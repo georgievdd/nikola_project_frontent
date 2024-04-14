@@ -1,14 +1,10 @@
 import { IReservationPrice, IReservationPriceRequest } from "@/components/HouseHolder/dto/Reservations"
 import { axiosInstance } from "../instance"
 import { showAlert } from "@/helpers"
+import { AxiosResponse } from "axios"
 
-export function getReservationPrice(id: number, data: IReservationPriceRequest): Promise<IReservationPrice | null> {
+export function getReservationPrice(id: number, data: IReservationPriceRequest): Promise<AxiosResponse<IReservationPrice>> {
     return axiosInstance.put<IReservationPrice>(`houses/reservations/${id}/price/`, data)
-    .then(res => res.data)
-    .catch(err => {
-        // showAlert(err?.response?.data?.non_field_errors[0] || 'Неизвестная ошибка')
-        return null
-    })
 }
 
 export function postMakeReservation(id: number, data: IReservationPriceRequest) {

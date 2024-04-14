@@ -35,35 +35,48 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     setDateBegin,
     setDateEnd
   } = calendarController.selectionController
+
+  const reservationRequestDto = (): MakeReservationRequest => ({
+    check_in_datetime: `${dateBegin!.getKey()} ${datePickerController.currentFirst}`,
+    check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
+    total_persons_amount: guestsController.value + 1,
+    first_name: userInfoController.controllers[0].value,
+    last_name: userInfoController.controllers[1].value,
+    email: userInfoController.controllers[2].value,
+    preferred_contact: userInfoController.controllers[3].value,
+    promo_code: priceList.promoValue,
+    comment: userInfoController.controllers[4].value || undefined,
+  })
+  const reservationPriceRequestDto = (withOutPromo: boolean): IReservationPriceRequest => ({
+    check_in_datetime: `${dateBegin!.getKey()} ${datePickerController.currentFirst}`,
+    check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
+    total_persons_amount: guestsController.value,
+    promo_code: withOutPromo ? undefined : priceList.promoValue,
+  })
   
   async function makeReservation() {
-    const reservatonData: MakeReservationRequest = {
-      check_in_datetime: `${dateBegin!.getKey()} ${datePickerController.currentFirst}`,
-      check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
-      total_persons_amount: guestsController.value + 1,
-      first_name: userInfoController.controllers[0].value,
-      last_name: userInfoController.controllers[1].value,
-      email: userInfoController.controllers[2].value,
-      preferred_contact: userInfoController.controllers[3].value,
-    }
-    if (userInfoController.controllers[4].value) {
-      reservatonData.comment = userInfoController.controllers[4].value
-    }
+    const reservatonData = reservationRequestDto()
     if (await postMakeReservation(house.id, reservatonData)) {
       showAlert("Успешно забронировано", 'alert-success')
     }
   }
-  
-  async function getPriceList() {
-    const reservationPriceData: IReservationPriceRequest = {
-      check_in_datetime: `${dateBegin!.getKey()} ${datePickerController.currentFirst}`,
-      check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
-      total_persons_amount: guestsController.value,
-    }
-    console.log(reservationPriceData);
-    
-    priceList.set(await getReservationPrice(house.id, reservationPriceData));
+  async function getPriceList(withOutPromo: boolean = false) {
+    const reservationPriceData = reservationPriceRequestDto(withOutPromo)
+    getReservationPrice(house.id, reservationPriceData)
+      .then(res => priceList.set(res.data))
+      .catch(err => {
+        showAlert(err.response?.data?.non_field_errors[0] || 'Ошибка')
+        if (err.response.data.non_field_errors[0] === `Промокод "${priceList.promoValue}" не найден`) {
+          getPriceList(true)
+        } else {
+          priceList.set(null)
+        }
+      })
   }
+
+
+
+
   /**
    * проверка на активное выделение сразу при переходе на страницу
    */
@@ -85,9 +98,10 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     }
   }, [
     isActive, 
-    guestsController.value, 
+    guestsController.value,
     datePickerController.currentFirst, 
     datePickerController.currentSecond,
+    priceList.promoValue,
   ])
 
   const resetAction = useCallback(() => {

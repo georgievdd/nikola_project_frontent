@@ -13,6 +13,8 @@ export interface House {
 
 export interface Picture {
     picture: string
+    width: number
+    height: number
 }
   
 export interface Feature {

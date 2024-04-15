@@ -1,4 +1,5 @@
-import { House, HouseOptions } from "@/entity/House"
+import { House, HouseOptions, Picture } from "@/entity/House"
+import sizeOf from 'image-size'
 import { INTERNAL_API_URL } from "../instance"
 
 
@@ -19,9 +20,25 @@ export const getHouse = async(id: string): Promise<House> =>
         },
         method: 'GET',
     })
-    .then(res => res.json())
+    .then(res => {
+        const data = res.json()
+            .then(async (house) => {
+            await Promise.all(house.pictures.map((pic: Picture, idx: number) =>
+                fetch(pic.picture)
+                    .then(res => res.arrayBuffer())
+                    .then(arrayBuffer => Buffer.from(arrayBuffer))
+                    .then(buffer => sizeOf(buffer))
+                    .then(({height, width}) => {
+                        house.pictures[idx].height = height
+                        house.pictures[idx].width = width
+                    })
+            ))
+            return house
+        })
+        return data
+    })
     .catch(e => {
-        console.log(e);
+        console.log(e)
         return [];
     })
 

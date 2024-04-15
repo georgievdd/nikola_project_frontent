@@ -5,6 +5,7 @@ import styles from './Carousel.module.scss'
 import Image from 'next/image'
 import arrowDown from '../../../../public/images/arrow-down.svg'
 import arrowUp from '../../../../public/images/arrow-up.svg'
+import { needToShowBackground } from './helper'
 /**
  * Если будет беда - заменить img на Image; добавить fill
  */
@@ -58,7 +59,6 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
   useEffect(() => {
     const columnElement = columnRef.current;
     columnElement?.addEventListener('scroll', handleScroll);
-
     return () => {
       columnElement?.removeEventListener('scroll', handleScroll);
     };
@@ -68,27 +68,26 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
     <div>
       <div className={styles.container}>
         <div className={styles.img_current}>
-          <img 
-            key={current < imgs.length ? imgs[current].picture : 'text'}
-            src={current < imgs.length ? imgs[current].picture : ''} 
-            alt='background'
-            className={styles.background}
-          />
-          <img 
-            key={current < imgs.length ? imgs[current].picture : 'text'}
-            src={current < imgs.length ? imgs[current].picture : ''} 
-            alt='foreground'
-            className={styles.foreground}
-          />
-
-
-        {/* <Image 
-          key={current < imgs.length ? imgs[current].picture : 'text'}
-          src={current < imgs.length ? imgs[current].picture : ''} 
-          alt=""
-          layout="fill"
-          objectFit="cover"
-        /> */}
+          {
+            needToShowBackground(imgs[current]) ?
+            <>
+              <img 
+                src={current < imgs.length ? imgs[current].picture : ''} 
+                alt='background'
+                className={styles.background}
+              />
+              <img 
+                src={current < imgs.length ? imgs[current].picture : ''} 
+                alt='foreground'
+                className={styles.foreground}
+              />
+            </> : 
+            <img 
+              src={current < imgs.length ? imgs[current].picture : ''} 
+              alt='simple'
+              className={styles.simple}
+            />
+          }
         </div>
         <ul className={styles.img_group} ref={columnRef}>
           {imgs.map((img, i) => (<div key={img.picture}>

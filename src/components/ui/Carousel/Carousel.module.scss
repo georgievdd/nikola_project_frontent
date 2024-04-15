@@ -209,3 +209,7 @@ $smooth-w: 0.17 * $w;
   object-fit: contain;
   position: absolute;
 }
+.simple {
+  object-fit: cover;
+  position: absolute;
+}

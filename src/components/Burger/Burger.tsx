@@ -13,7 +13,7 @@ const Burger = ({sidebarOpen, setSidebarOpen}: BurgerProps) => {
 
   return (
     <div style={{zIndex: 10000}} onClick={toggleClass} className={`${styles.ham} ${styles.hamRotate} ${styles.ham1} ${sidebarOpen ? styles.active : ''}`}>
-      <svg viewBox="0 0 100 100" width="80">
+      <svg viewBox="0 0 100 100" width="55">
         <path
           className={`${styles.line} ${styles.top}`}
           d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40" />

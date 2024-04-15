@@ -19,7 +19,7 @@ const Logo = () => {
         className={styles.logo}
         src={LogoImg}
         alt=''
-        height={50}
+        height={30}
       />
     </div>
   )
@@ -32,7 +32,9 @@ const Header = (props: HeaderProps) => {
   return (
     <header className={styles.container}>
       <nav className={styles.data}>
-        <Logo />
+        <Link href="/">
+          <Logo />
+        </Link>
         <Link href="/house" legacyBehavior>
           <a className={pathname === "/house" ? styles.active : ' '}>
             Домики
@@ -41,11 +43,6 @@ const Header = (props: HeaderProps) => {
         <Link href="/about" legacyBehavior>
           <a className={pathname === "/about" ? styles.active : ' '}>
             Об отеле
-          </a>
-        </Link>
-        <Link href="/service" legacyBehavior>
-          <a className={pathname === "/service" ? styles.active : ' '}>
-            Услуги
           </a>
         </Link>
       </nav>

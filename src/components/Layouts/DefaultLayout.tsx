@@ -6,11 +6,14 @@ import { useState } from "react";
 import Footer from "../Footer/Footer";
 import { Mode, useThemeMode } from "@/theme/useMode";
 import Head from "next/head";
+import styles from './DefaultLayout.module.scss'
 
 export default function DefaultLayout({
   children,
+  noContainer,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
+  noContainer?: boolean
 }) {
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -26,7 +29,11 @@ export default function DefaultLayout({
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
       <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
       <div>
-        <main>
+        <main style={noContainer ? {
+            margin: 0,
+            padding: 0,
+            maxWidth: '100%',
+        } : {}}>
           {children}
         </main>
       </div>

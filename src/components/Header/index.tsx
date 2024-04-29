@@ -40,9 +40,9 @@ const Header = (props: HeaderProps) => {
             Домики
           </a>
         </Link>
-        <Link href="/about" legacyBehavior>
-          <a className={pathname === "/about" ? styles.active : ' '}>
-            Об отеле
+        <Link href="/service" legacyBehavior>
+          <a className={pathname === "/service" ? styles.active : ' '}>
+            Услуги
           </a>
         </Link>
       </nav>

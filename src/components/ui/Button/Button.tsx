@@ -6,7 +6,7 @@ interface ButtonProps {
         => void
     className?: string
     style?: Record<string, string>
-    variant?: 'contained' | 'base'
+    variant?: 'contained' | 'base' | 'link'
     round0?: boolean
     disabled?: boolean,
 }

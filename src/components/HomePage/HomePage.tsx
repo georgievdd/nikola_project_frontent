@@ -1,4 +1,3 @@
-'use client'
 import img1 from '../../../public/home/1.png'
 import img2 from '../../../public/home/2.png'
 import img3 from '../../../public/home/3.png'
@@ -38,8 +37,8 @@ const HomePage = () => {
             <Link href={'house'}>
               <Button 
                 round0 
-                variant='link' 
-                onClick={() => {}}
+                variant='link'
+                statical
                 >
                 Выбрать домик
               </Button>
@@ -57,7 +56,7 @@ const HomePage = () => {
               <Button 
                 round0 
                 variant='base'
-                onClick={() => {}}
+                statical
                 >
                 Выбрать домик
               </Button>
@@ -106,7 +105,7 @@ const HomePage = () => {
               <Button 
                 round0 
                 variant='base' 
-                onClick={() => {}}
+                statical
                 >
                 Выбрать домик
               </Button>
@@ -155,7 +154,7 @@ const HomePage = () => {
               <Button 
                 round0 
                 variant='base'
-                onClick={() => {}}
+                statical
                 >
                 Выбрать домик
               </Button>
@@ -204,7 +203,7 @@ const HomePage = () => {
               <Button 
                 round0 
                 variant='base' 
-                onClick={() => {}}
+                statical
                 >
                 Выбрать домик
               </Button>

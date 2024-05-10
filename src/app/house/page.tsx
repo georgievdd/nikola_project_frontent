@@ -15,7 +15,7 @@ export async function generateMetadata(
     description: "Забранируйте домик для отдыха",
     keywords: "nikola,houses,",
     openGraph: {
-      images: ['вставать абсолютный url icon', ...previousImages],
+      images: ['/static/logo.png', ...previousImages],
     },
   }
 }

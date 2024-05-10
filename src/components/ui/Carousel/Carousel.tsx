@@ -5,7 +5,7 @@ import styles from './Carousel.module.scss'
 import Image from 'next/image'
 import arrowDown from '../../../../public/images/arrow-down.svg'
 import arrowUp from '../../../../public/images/arrow-up.svg'
-import { needToShowBackground } from './helper'
+import PictureWithBackground from '../PictureWithBackground/PictureWithBackground'
 /**
  * Если будет беда - заменить img на Image; добавить fill
  */
@@ -68,26 +68,7 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
     <div>
       <div className={styles.container}>
         <div className={styles.img_current}>
-          {
-            needToShowBackground(imgs[current]) ?
-            <>
-              <img 
-                src={current < imgs.length ? imgs[current].picture : ''} 
-                alt='background'
-                className={styles.background}
-              />
-              <img 
-                src={current < imgs.length ? imgs[current].picture : ''} 
-                alt='foreground'
-                className={styles.foreground}
-              />
-            </> : 
-            <img 
-              src={current < imgs.length ? imgs[current].picture : ''} 
-              alt='simple'
-              className={styles.simple}
-            />
-          }
+          <PictureWithBackground img={imgs[current]}/>
         </div>
         <ul className={styles.img_group} ref={columnRef}>
           {imgs.map((img, i) => (<div key={img.picture}>
@@ -102,16 +83,7 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
             />
             <label htmlFor={`img-${i}`} className={styles.group_element}>
               <div className={styles.imgholder}>
-                <img
-                  src={img.picture} 
-                  alt='background'
-                  className={styles.background}
-                />
-                <img
-                  src={img.picture} 
-                  alt='foreground'
-                  className={styles.foreground}
-                />
+                <PictureWithBackground img={img}/>
               </div>
             </label>
           </div>))}

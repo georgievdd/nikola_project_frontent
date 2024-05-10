@@ -1,3 +1,4 @@
+
 export const showAlert = (message: string, variant?: 'alert-danger' | 'alert-success') => {
     const alertDiv = document.createElement('div');
     alertDiv.className = variant || 'alert-danger';

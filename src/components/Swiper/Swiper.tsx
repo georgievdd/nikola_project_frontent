@@ -6,6 +6,7 @@ import styles from './Swiper.module.scss'
 import { Picture } from '@/entity/House';
 
 import 'swiper/swiper-bundle.css'
+import PictureWithBackground from '../ui/PictureWithBackground/PictureWithBackground';
 
 
 interface SwiperProps {
@@ -27,11 +28,7 @@ export default function Swiper(props: SwiperProps) {
       >
         {props.links.map(link => (
           <SwiperSlide key={link.picture} className={styles.slide}>
-            <img 
-              src={link.picture} 
-              // fill 
-              alt=''
-            />
+            <PictureWithBackground always img={link}/>
           </SwiperSlide>
         ))}
       </LibSwiper>

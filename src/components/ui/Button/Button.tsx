@@ -1,15 +1,17 @@
+import { CSSProperties } from 'react'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-    children: React.ReactNode,
-    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) 
-        => void
-    className?: string
-    style?: Record<string, string>
-    variant?: 'contained' | 'base' | 'link'
-    round0?: boolean
-    disabled?: boolean
-    statical?: boolean
+  children: React.ReactNode,
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) 
+      => void
+  className?: string
+  style?: CSSProperties
+  variant?: 'contained' | 'base' | 'link'
+  round0?: boolean
+  disabled?: boolean
+  statical?: boolean
+  fontSize?: number
 }
 
 const Button = ({
@@ -20,11 +22,17 @@ const Button = ({
     round0,
     disabled,
     statical,
+    style,
+    fontSize,
 }: ButtonProps) => {
   variant = variant || 'base'
+  
+  const fontStyle: CSSProperties = {}
+  fontSize && (fontStyle.fontSize = `${fontSize}px`)
 
   return statical ? (
     <button
+      style={style}
       className={[
         className, 
         styles[variant],
@@ -33,7 +41,7 @@ const Button = ({
       ].join(' ')}
       disabled={disabled}
     >
-      <p>{children}</p>
+      <p style={fontStyle}>{children}</p>
     </button>
   )
   :
@@ -48,7 +56,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
     >
-      <p>{children}</p>
+      <p style={fontStyle}>{children}</p>
     </button>
   )
 }

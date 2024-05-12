@@ -71,3 +71,14 @@ export interface MakeReservationRequest {
     "comment"?: string
     "promo_code"?: string
 }
+
+export interface CompletedReservation {
+    "house": House
+    "client": string
+    "total": number
+    "check_in_datetime": string // ISO
+    "check_out_datetime": string // ISO
+    "total_persons_amount": number
+    "preferred_contact": string
+    "comment": string
+}

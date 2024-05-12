@@ -4,6 +4,11 @@ const nextConfig = {
     images: {
         domains: [process.env.NEXT_PUBLIC_BACKEND_DOMAIN],
     },
+    webpack: (config) => {
+        config.resolve.fallback = { fs: false };
+    
+        return config;
+      },
 };
 
 export default nextConfig;

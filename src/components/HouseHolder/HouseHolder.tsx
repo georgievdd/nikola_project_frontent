@@ -10,10 +10,10 @@ import { useDatePicker } from '../ui/Inputs/DatePicker/useDatePicker'
 import { useLabelInputGroup } from '../ui/Inputs/LabelInput/useLabelInput'
 import { useNumberInput } from '../ui/Inputs/number-input/useNumberInput'
 import { useCalendar } from '../Calendar/CalendarBody/hooks/useCalendar'
-import { IReservationPriceRequest, MakeReservationRequest } from './dto/Reservations'
 import { getDateFromKey, showAlert } from '@/helpers'
 import { getReservationPrice, postMakeReservation } from '@/api/reservation'
 import { useBookingInvoice } from './Blocks/BookingInvoiceBlock/useBookingInvoice'
+import { IReservationPriceRequest, MakeReservationRequest } from '@/entity/Reservation'
 
 
 interface HouseHolderProps {

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
-import { IReservationPrice } from "../../dto/Reservations"
 import { LabelInputController, useLabelInput } from "@/components/ui/Inputs/LabelInput/useLabelInput"
 import { debounce } from "lodash"
+import { IReservationPrice } from "@/entity/Reservation"
 
 export interface BookingInvoiceController {
     data: IReservationPrice | null

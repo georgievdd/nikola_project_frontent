@@ -1,10 +1,10 @@
 import Button from '@/components/ui/Button/Button'
-import { ChronologicalPosition, NonChronologicalPosition } from '../../dto/Reservations'
 import styles from './BookingInvoiceBlock.module.scss'
 import { getIconByType } from './helpers'
 import { BookingInvoiceController } from './useBookingInvoice'
 import Image from 'next/image'
 import LabelInput from '@/components/ui/Inputs/LabelInput/LabelInput'
+import { ChronologicalPosition, NonChronologicalPosition } from '@/entity/Reservation'
 
 const BookingInvoiceBlock = ({
   controller, 

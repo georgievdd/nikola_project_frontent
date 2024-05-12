@@ -73,6 +73,7 @@ export interface MakeReservationRequest {
 }
 
 export interface CompletedReservation {
+    "id": number
     "house": House
     "client": string
     "total": number

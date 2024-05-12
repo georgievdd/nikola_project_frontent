@@ -1,0 +1,55 @@
+.container {
+    h1, section, .description {
+        margin-top: 60px;
+    }
+    .description {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    section {
+        cursor: pointer;
+        display: flex;
+        position: relative;
+        height: 100%;
+        border: 2px dashed black;
+        padding: 50px;
+        border-radius: 24px;
+        .house-preview {
+            width: 35%;
+            max-height: 315px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .house-description {
+            width: 65%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            .line {
+                display: flex;
+                justify-content: flex-end;
+                div, h3 {
+                    flex: 0 0 43%;
+                }
+                .clock {
+                    margin-top: 10px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+            }
+        }
+        .clip {
+            position: absolute;
+            bottom: 20px;
+            right: 24px;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+        &:hover .clip {
+            opacity: 1;
+        }
+    }
+}

@@ -21,7 +21,7 @@ export function postMakeReservation(id: number, data: IReservationPriceRequest) 
 }
 
 export function getCompletedReservation(id: number): Promise<CompletedReservation> {
-    return new Promise(r => {})
+    return mockedRequest()
 }
 
 const mockedRequest = (): Promise<CompletedReservation> => getHouse('1')
@@ -30,11 +30,12 @@ const mockedRequest = (): Promise<CompletedReservation> => getHouse('1')
         return d
     })
     .then(house => ({
+        id: 1,
         house,
         client: 'client@mail.ru',
         total: 124314,
-        check_in_datetime: '123',
-        check_out_datetime: '234',
+        check_in_datetime: '2024-02-12T22:18:06.119Z',
+        check_out_datetime: '2024-05-12T22:18:06.119Z',
         total_persons_amount: 3,
         comment: 'qqdfwfr4fehqfo',
         preferred_contact: 'contact@mail.ru',

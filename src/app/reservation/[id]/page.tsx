@@ -18,7 +18,7 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || []
  
   return {
-    title:  `Nikola | бронирование ${reservation.house.name}`,
+    title: `Nikola | бронирование ${reservation.house.name}`,
     description: reservation.house.description,
     keywords: reservation.house.features.map(e => e.name),
     openGraph: {

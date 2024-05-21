@@ -1,5 +1,5 @@
 # Стадия сборки
-FROM node:18 as builder
+FROM node:20 as builder
 
 # Устанавливаем рабочую директорию
 WORKDIR /app

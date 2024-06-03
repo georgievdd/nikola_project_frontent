@@ -3,13 +3,14 @@ import { axiosInstance } from "../instance"
 import { showAlert } from "@/helpers"
 import { AxiosResponse } from "axios"
 import { getHouse } from "../house"
+import { POST_MAKE_RESERVATION, PUT_RESERVATION_PRICE } from "../endpoints"
 
 export function getReservationPrice(id: number, data: IReservationPriceRequest): Promise<AxiosResponse<IReservationPrice>> {
-    return axiosInstance.put<IReservationPrice>(`houses/reservations/${id}/price/`, data)
+    return axiosInstance.put<IReservationPrice>(PUT_RESERVATION_PRICE(id), data)
 }
 
 export function postMakeReservation(id: number, data: IReservationPriceRequest) {
-    return axiosInstance.post<IReservationPrice>(`houses/reservations/${id}/new_reservation/`, data)
+    return axiosInstance.post<IReservationPrice>(POST_MAKE_RESERVATION(id), data)
     .catch(err => {
         console.log(err);
         showAlert(

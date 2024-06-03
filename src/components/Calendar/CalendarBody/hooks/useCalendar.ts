@@ -20,7 +20,7 @@ export interface CalendarController {
     setShow: Dispatch<SetStateAction<boolean>>
     reset: () => void
 }
-export function useCalendar (id: string, defaultShow: boolean, endpoint: string): CalendarController {
+export function useCalendar(id: string, defaultShow: boolean, endpoint: string): CalendarController {
     /**
      * Сколько месяцев вперед отображаем
      */

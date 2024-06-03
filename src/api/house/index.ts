@@ -1,10 +1,10 @@
 import { House, HouseOptions, Picture } from "@/entity/House"
 import sizeOf from 'image-size'
-import { INTERNAL_API_URL } from "../instance"
+import { FETCH_HOUSES, FETCH_HOUSE, FETCH_HOUSE_OPTIONS } from "../endpoints"
 
 
 export const getHouses = async(): Promise<House[]> => 
-    fetch(`${INTERNAL_API_URL}/houses/`, {
+    fetch(FETCH_HOUSES, {
         next: {
             revalidate: 10
         },
@@ -14,7 +14,7 @@ export const getHouses = async(): Promise<House[]> =>
     .catch(e => [])
 
 export const getHouse = async(id: string): Promise<House> => 
-    fetch(`${INTERNAL_API_URL}/houses/${id}`, {
+    fetch(FETCH_HOUSE(id), {
         next: {
             revalidate: 10
         },
@@ -41,9 +41,9 @@ export const getHouse = async(id: string): Promise<House> =>
         console.log(e)
         return [];
     })
-
+// `${INTERNAL_API_URL}/house_reservation_management/${id}/options`
 export const getHouseOptions = async(id: string): Promise<HouseOptions> => 
-    fetch(`${INTERNAL_API_URL}/houses/reservations/${id}/options`, {
+    fetch(FETCH_HOUSE_OPTIONS(id), {
         next: {
             revalidate: 10
         },

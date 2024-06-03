@@ -14,6 +14,7 @@ import { getDateFromKey, showAlert } from '@/helpers'
 import { getReservationPrice, postMakeReservation } from '@/api/reservation'
 import { useBookingInvoice } from './Blocks/BookingInvoiceBlock/useBookingInvoice'
 import { IReservationPriceRequest, MakeReservationRequest } from '@/entity/Reservation'
+import { GET_HOUSE_CALENDAR } from '@/api/endpoints'
 
 
 interface HouseHolderProps {
@@ -25,7 +26,7 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
   const guestsController = useNumberInput('Гостей', 1, houseOptions.max_persons_amount);
   const datePickerController = useDatePicker(houseOptions)
   const userInfoController = useLabelInputGroup()
-  const calendarController = useCalendar('house_id', false, `/houses/${house.id}/calendar/`)
+  const calendarController = useCalendar('house_id', false, GET_HOUSE_CALENDAR(house.id))
   const priceList = useBookingInvoice()
 
   const {

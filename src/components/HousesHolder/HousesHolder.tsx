@@ -9,12 +9,12 @@ import { useCalendar } from "../Calendar/CalendarBody/hooks/useCalendar";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "@/api/instance";
 import Reloader from "../ui/Reloader/Reloader";
-import { getDateFromKey } from "@/helpers";
+import { GET_HOUSES, GET_HOUSES_CALENDAR } from "@/api/endpoints";
 
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
   const guestsController = useNumberInput('Гостей', 1)
-  const calendarController = useCalendar('houses', false, '/houses/calendar/')
+  const calendarController = useCalendar('houses', false, GET_HOUSES_CALENDAR)
   const [houses, setHouses] = useState<House[]>(initHouses)
   
 
@@ -26,7 +26,7 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
   }
 
   useEffect(() => {
-    axiosInstance.get('/houses/', {params: {
+    axiosInstance.get(GET_HOUSES, {params: {
       max_persons_amount: guestsController.value,
       ...getDates(),
     }}).then(res => {

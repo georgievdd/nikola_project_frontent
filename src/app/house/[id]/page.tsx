@@ -11,12 +11,12 @@ interface Props {
 }
 
 export async function generateMetadata(
-  { params }: Props,
+  {params}: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const house = await getHouse(params.id)
   const previousImages = (await parent).openGraph?.images || []
- 
+  
   return {
     title:  `Nikola | ${house.name}`,
     description: house.description,

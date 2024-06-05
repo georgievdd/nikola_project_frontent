@@ -16,7 +16,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const reservation = await getCompletedReservation(params.id)
   const previousImages = (await parent).openGraph?.images || []
- 
+
   return {
     title: `Nikola | бронирование ${reservation.house.name}`,
     description: reservation.house.description,

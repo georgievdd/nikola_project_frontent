@@ -59,6 +59,7 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     const reservatonData = reservationRequestDto()
     if (await postMakeReservation(house.id, reservatonData)) {
       showAlert("Успешно забронировано", 'alert-success')
+      
     }
   }
   async function getPriceList(withOutPromo: boolean = false) {

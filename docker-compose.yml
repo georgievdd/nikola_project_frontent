@@ -10,7 +10,13 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
+    networks:
+      - nikola-docker-network
     volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
+
+networks:
+  nikola-docker-network:
+    external: true

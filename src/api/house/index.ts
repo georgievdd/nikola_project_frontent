@@ -14,7 +14,7 @@ export const getHouses = async(): Promise<House[]> =>
     .catch(e => [])
 
 export const getHouse = async(id: string): Promise<House> => 
-    fetch(FETCH_HOUSE(id), {
+    fetch((() => {console.log(id);return FETCH_HOUSE(id)})(), {
         next: {
             revalidate: 10
         },
@@ -38,8 +38,8 @@ export const getHouse = async(id: string): Promise<House> =>
         return data
     })
     .catch(e => {
-        console.log(e)
-        return [];
+        console.log(FETCH_HOUSE(id));
+        return null;
     })
 // `${INTERNAL_API_URL}/house_reservation_management/${id}/options`
 export const getHouseOptions = async(id: string): Promise<HouseOptions> => 

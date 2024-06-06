@@ -1,4 +1,4 @@
-import { CompletedReservation } from '@/entity/Reservation';
+import { Reservation } from '@/entity/Reservation';
 import { format } from 'date-fns';
 import {ru} from 'date-fns/locale'; 
 
@@ -14,12 +14,13 @@ export function getClock(iso: string): string {
     })
 }
 
-export function copyReservationToBuffer(reservation: CompletedReservation) {
+export function copyReservationToBuffer(reservation: Reservation) {
     const data =
-`Домик: ${reservation.house.name}
+        `Домик: ${reservation.house.name}
 Заезд: ${prepareDate(reservation.check_in_datetime)} в ${getClock(reservation.check_in_datetime)}
 Выезд: ${prepareDate(reservation.check_out_datetime)} в ${getClock(reservation.check_out_datetime)}
 Едет человек: ${reservation.total_persons_amount}
-Итоговая стоимость в рублях: ${reservation.total}`
-    navigator.clipboard.writeText(data)
+Итоговая стоимость в рублях: ${reservation.bill.total}
+Ссылка на заявку: ${window.location.href}`
+            navigator.clipboard.writeText(data)
 }

@@ -11,3 +11,4 @@ export const GET_HOUSES_CALENDAR = `/houses/calendar/`
 export const GET_HOUSES = `/houses/`
 export const PUT_RESERVATION_PRICE = (id: number) => `/houses/${id}/reservations/price/`
 export const POST_MAKE_RESERVATION = (id: number) => `/houses/${id}/reservations/`
+export const GET_HOUSE_RESERVATION = (slug: string) => `/houses/reservations/by_slug/?slug=${slug}`

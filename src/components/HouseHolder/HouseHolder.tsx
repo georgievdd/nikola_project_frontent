@@ -15,6 +15,7 @@ import { getReservationPrice, postMakeReservation } from '@/api/reservation'
 import { useBookingInvoice } from './Blocks/BookingInvoiceBlock/useBookingInvoice'
 import { IReservationPriceRequest, MakeReservationRequest } from '@/entity/Reservation'
 import { GET_HOUSE_CALENDAR } from '@/api/endpoints'
+import { useRouter } from 'next/navigation'
 
 
 interface HouseHolderProps {
@@ -28,6 +29,7 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
   const userInfoController = useLabelInputGroup()
   const calendarController = useCalendar('house_id', false, GET_HOUSE_CALENDAR(house.id))
   const priceList = useBookingInvoice()
+  const router = useRouter()
 
   const {
     dateBegin,
@@ -57,10 +59,11 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
   
   async function makeReservation() {
     const reservatonData = reservationRequestDto()
-    if (await postMakeReservation(house.id, reservatonData)) {
-      showAlert("Успешно забронировано", 'alert-success')
-      
+    const reservation = await postMakeReservation(house.id, reservatonData)
+    if (reservation) {
+      router.push(`/reservation/${reservation.slug}`)
     }
+    console.log(reservation);
   }
   async function getPriceList(withOutPromo: boolean = false) {
     const reservationPriceData = reservationPriceRequestDto(withOutPromo)

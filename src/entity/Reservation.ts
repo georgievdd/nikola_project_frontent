@@ -36,6 +36,10 @@ export interface IReservationPrice {
     }
 }
 
+export interface MakeReservationResponse {
+    slug: string
+}
+
 export interface Bill {
     "total": 2153000
     "chronological_positions": ChronologicalPosition[]
@@ -72,14 +76,20 @@ export interface MakeReservationRequest {
     "promo_code"?: string
 }
 
-export interface CompletedReservation {
-    "id": number
-    "house": House
-    "client": string
-    "total": number
-    "check_in_datetime": string // ISO
-    "check_out_datetime": string // ISO
-    "total_persons_amount": number
-    "preferred_contact": string
-    "comment": string
+interface Client {
+    "email": string,
+    "first_name": string,
+    "last_name": string
+}
+
+export interface Reservation {
+    "slug": string,
+    "house": House,
+    "client": Client,
+    "check_in_datetime": string, // ISO
+    "check_out_datetime": string, // ISO
+    "total_persons_amount": number,
+    "preferred_contact": string,
+    "comment": string,
+    "bill": Bill
 }

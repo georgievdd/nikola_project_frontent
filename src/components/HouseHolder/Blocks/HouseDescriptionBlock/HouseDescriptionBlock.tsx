@@ -4,6 +4,7 @@ import styles from './HouseDescriptionBlock.module.scss'
 import Carousel from '../../../ui/Carousel/Carousel'
 import Feature from '../../../ui/Feature/Feature'
 import BasePersonsImage from '../../../../../public/images/square-with-arrow.svg'
+import { getImageUrl } from '@/helpers'
 interface HouseDescriptionBlock {
   data: House
   houseOptions: HouseOptions
@@ -21,7 +22,7 @@ const HouseDescriptionBlock = ({
         <Carousel imgs={data.pictures}/>
         <div className={styles.features}>
           {data.features.map(feature => (
-            <Feature key={feature.id} name={feature.name} icon={feature.icon}/>
+            <Feature key={feature.id} name={feature.name} icon={getImageUrl(feature.picture)}/>
           ))}
           <Feature name={
             `${houseOptions.base_persons_amount} гостя без доплаты`

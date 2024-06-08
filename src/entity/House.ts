@@ -7,20 +7,20 @@ export interface House {
     base_price: number;
     total_price?: any;
     base_persons_amount: number;
-    max_persons_amount: number;
+    total_persons_amount: number;
     price_per_extra_person: number;
 }
 
 export interface Picture {
     picture: string
-    width?: number
-    height?: number
+    width: number
+    height: number
 }
   
 export interface Feature {
     id: number
     name: string
-    icon: string
+    picture: string
 }
   
 

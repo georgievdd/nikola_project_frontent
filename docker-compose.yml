@@ -2,20 +2,35 @@ version: '3'
 
 services:
   frontend:
+    image: nikola/frontend
     container_name: frontend
     env_file:
       - ../.env
     build:
       context: .
       dockerfile: ./Dockerfile
+      args:
+        NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL}
+        NEXT_PUBLIC_INTERNAL_BACKEND_URL: ${NEXT_PUBLIC_INTERNAL_BACKEND_URL}
+        NEXT_PUBLIC_BACKEND_DOMAIN: ${NEXT_PUBLIC_BACKEND_DOMAIN}
     ports:
       - "3000:3000"
     networks:
       - nikola-docker-network
     volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
+      - type: bind
+        source: .
+        target: /app
+      - type: volume
+        source: app_node_modules
+        target: /app/node_modules
+      - type: volume
+        source: app_next
+        target: /app/.next
+
+volumes:
+  app_node_modules:
+  app_next:
 
 networks:
   nikola-docker-network:

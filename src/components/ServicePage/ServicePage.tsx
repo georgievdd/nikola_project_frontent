@@ -6,6 +6,7 @@ import Image from 'next/image'
 import TGImage from '../../../public/images/tg.svg'
 import { fontSize } from '@mui/system'
 import Swiper from '../Swiper/Swiper'
+import { Picture } from '@/entity/House'
 const ServicePage = () => {
   return (
     <div className={styles.container}>
@@ -15,6 +16,8 @@ const ServicePage = () => {
     </div>
   )
 }
+const getServicePictures = (pictures: string[]): Picture[] => 
+  pictures.map(url => ({width: 0, height: 0, picture: `/service/${url}`}))
 
 const Block = ({
   title,
@@ -55,7 +58,7 @@ const Block = ({
     </section>
     <div className={styles['img-wrapper']}>
       <Swiper
-        links={imgUrls.map(url => ({picture: `/service/${url}`}))}
+        links={getServicePictures(imgUrls)}
       />
     </div>
   </div>

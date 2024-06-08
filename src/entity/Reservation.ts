@@ -2,7 +2,7 @@ import { House } from "@/entity/House"
 
 export interface IReservationOptions {
     "base_persons_amount": number
-    "max_persons_amount": number
+    "total_persons_amount": number
     "price_per_extra_person": IReservationOptionsTimes
     "check_out_times": IReservationOptionsTimes,
     "check_in_times": IReservationOptionsTimes

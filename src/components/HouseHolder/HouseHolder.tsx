@@ -18,7 +18,6 @@ import { GET_HOUSE_CALENDAR } from '@/api/endpoints'
 import { useRouter } from 'next/navigation'
 import { sendMail } from '@/mail'
 
-
 interface HouseHolderProps {
   house: House
   houseOptions: HouseOptions
@@ -43,7 +42,7 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
   const reservationRequestDto = (): MakeReservationRequest => ({
     check_in_datetime: `${dateBegin!.getKey()} ${datePickerController.currentFirst}`,
     check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
-    total_persons_amount: guestsController.value + 1,
+    total_persons_amount: guestsController.value,
     first_name: userInfoController.controllers[0].value,
     last_name: userInfoController.controllers[1].value,
     email: userInfoController.controllers[2].value,

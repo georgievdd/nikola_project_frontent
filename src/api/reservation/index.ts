@@ -2,7 +2,6 @@ import { IReservationPrice, IReservationPriceRequest, MakeReservationResponse, R
 import { axiosInstance } from "../instance"
 import { showAlert } from "@/helpers"
 import { AxiosResponse } from "axios"
-import { getHouse } from "../house"
 import { GET_HOUSE_RESERVATION, POST_MAKE_RESERVATION, PUT_RESERVATION_PRICE } from "../endpoints"
 
 export function getReservationPrice(id: number, data: IReservationPriceRequest): Promise<AxiosResponse<IReservationPrice>> {

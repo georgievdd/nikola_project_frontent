@@ -22,3 +22,7 @@ export const useValue = <T>(defaultValue: any = null) => {
         set: (v: T) => setValue(v)
     }
 }
+
+export const getImageUrl = (path: string) => {
+    return `${process.env.NEXT_PUBLIC_BACKEND_URL}/${path}`
+}

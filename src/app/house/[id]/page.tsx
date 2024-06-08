@@ -14,9 +14,8 @@ export async function generateMetadata(
   {params}: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const house = await getHouse(params.id)
+  const house = (await getHouse(params.id))!
   const previousImages = (await parent).openGraph?.images || []
-  
   return {
     title:  `Nikola | ${house.name}`,
     description: house.description,
@@ -29,7 +28,8 @@ export async function generateMetadata(
 
 export default async function HouseId({params}: Props) {
 
-  const house: House = await getHouse(params.id)
+  const house: House = (await getHouse(params.id))!
+  // показывать ошибку если null
   const houseOptions: HouseOptions | null = await getHouseOptions(params.id)
 
   return (

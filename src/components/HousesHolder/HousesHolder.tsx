@@ -27,7 +27,7 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
   useEffect(() => {
     axiosInstance.get(GET_HOUSES, {params: {
-      max_persons_amount: guestsController.value,
+      total_persons_amount: guestsController.value,
       ...getDates(),
     }}).then(res => {
       setHouses(res.data)

@@ -1,5 +1,6 @@
 import { Picture } from '@/entity/House'
 import styles from './PictureWithBackground.module.scss'
+import { getImageUrl } from '@/helpers'
 
 export function needToShowBackground({width, height}: Picture) {
     if (!width || !height) return false
@@ -19,22 +20,24 @@ const PictureWithBackground = ({
   img,
   always,
 }: Props) => {
+  console.log(getImageUrl(img.picture));
+  
   return (
       always || needToShowBackground(img) ?
       <>
         <img 
-          src={img.picture}
+          src={getImageUrl(img.picture)}
           alt='background'
           className={styles.background}
         />
         <img 
-          src={img.picture}
+          src={getImageUrl(img.picture)}
           alt='foreground'
           className={styles.foreground}
         />
       </> : 
       <img 
-        src={img.picture} 
+        src={getImageUrl(img.picture)}
         alt='simple'
         className={styles.simple}
       />

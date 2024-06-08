@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Feature from '../ui/Feature/Feature'
 import { SelectionController } from '../Calendar/CalendarBody/hooks/useSelection'
 import { INumberInput } from '../ui/Inputs/number-input/useNumberInput'
+import { getImageUrl } from '@/helpers'
 
 const HouseCard = ({
   data, 
@@ -24,7 +25,8 @@ const HouseCard = ({
       sessionStorage.setItem('guests', guestsController.value.toString())
     }
   }
-  
+  console.log(data.base_price, data.total_price);
+    
   return (
     <div className={styles.container}>
       <Swiper className={styles.preview} links={data.pictures}/>
@@ -36,7 +38,7 @@ const HouseCard = ({
           <p className={styles.description}>{data.description}</p>
           <div className={styles.features}>
             {data.features.map((feature) => (
-              <Feature key={feature.id} icon={feature.icon} name={feature.name}/>
+              <Feature key={feature.id} icon={getImageUrl(feature.picture)} name={feature.name}/>
             ))}
           </div>
         </div>
@@ -46,7 +48,7 @@ const HouseCard = ({
               Забронировать
             </Button>
           </Link>
-          <p className={styles.cost}>от {data.base_price} <span>₽</span></p>
+          <p className={styles.cost}>от {data.total_price || data.base_price} <span>₽</span></p>
         </div>
       </article>
     </div>

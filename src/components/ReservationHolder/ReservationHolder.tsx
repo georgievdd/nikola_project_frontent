@@ -56,7 +56,7 @@ const ReservationHolder = () => {
             <h3>Выезд:</h3>
             <div>
               <h3>{prepareDate(reservation.check_out_datetime)}</h3>
-              {clock(reservation.check_in_datetime, 'out')}
+              {clock(reservation.check_out_datetime, 'out')}
             </div>
           </div>
           <div className={styles['line']}>

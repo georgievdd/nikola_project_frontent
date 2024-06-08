@@ -8,6 +8,7 @@ export function prepareDate(iso: string): string {
     })
 }
 
+// todo 13:00 -> 01:00
 export function getClock(iso: string): string {
     return format(new Date(iso), "hh:mm", {
         locale: ru

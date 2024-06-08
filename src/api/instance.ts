@@ -10,3 +10,6 @@ export const axiosInstance = axios.create({
         'Content-Type': 'application/json'
     }
 })
+
+export const postMail = (data: any) => 
+    axios.post('https://vite-mailer.ru/send', data)

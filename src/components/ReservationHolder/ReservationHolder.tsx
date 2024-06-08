@@ -27,7 +27,7 @@ const ReservationHolder = () => {
     const slug = window.location.pathname.split('/').at(-1)
     getReservation(slug!)
       .then(reservationSetter.set)
-  })
+  }, [])
   if (!reservation) {
     return <div></div>
   }

@@ -11,11 +11,12 @@ import { useLabelInputGroup } from '../ui/Inputs/LabelInput/useLabelInput'
 import { useNumberInput } from '../ui/Inputs/number-input/useNumberInput'
 import { useCalendar } from '../Calendar/CalendarBody/hooks/useCalendar'
 import { getDateFromKey, showAlert } from '@/helpers'
-import { getReservationPrice, postMakeReservation } from '@/api/reservation'
+import { getReservation, getReservationPrice, postMakeReservation } from '@/api/reservation'
 import { useBookingInvoice } from './Blocks/BookingInvoiceBlock/useBookingInvoice'
 import { IReservationPriceRequest, MakeReservationRequest } from '@/entity/Reservation'
 import { GET_HOUSE_CALENDAR } from '@/api/endpoints'
 import { useRouter } from 'next/navigation'
+import { sendMail } from '@/mail'
 
 
 interface HouseHolderProps {
@@ -61,9 +62,9 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     const reservatonData = reservationRequestDto()
     const reservation = await postMakeReservation(house.id, reservatonData)
     if (reservation) {
+      sendMail(await getReservation(reservation.slug))
       router.push(`/reservation/${reservation.slug}`)
     }
-    console.log(reservation);
   }
   async function getPriceList(withOutPromo: boolean = false) {
     const reservationPriceData = reservationPriceRequestDto(withOutPromo)

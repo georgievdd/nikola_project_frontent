@@ -36,7 +36,6 @@ export async function getCommonCalendar(
         const begin = startOfMonth(new Date())
         const nonCachedDates = preprocessDates(dataController, dateIndex, opacity)
         const response = await Promise.all(nonCachedDates.map(async daysToAdd => {
-            console.log(begin, daysToAdd)
             const month = addMonths(begin, daysToAdd)
             const data = {
                 month: month.getMonth() + 1,

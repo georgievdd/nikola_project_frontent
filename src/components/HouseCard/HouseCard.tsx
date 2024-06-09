@@ -36,7 +36,7 @@ const HouseCard = ({
   const getCostText = () => {
     if (data.total_price) {
       const diff = getTimeDiff(
-        selectionController.dateBegin!, selectionController.dateEnd!)
+        selectionController.dateEnd!, selectionController.dateBegin!)
       return `${data.total_price} ₽ за ${diff} ${getNightsDeclension(diff)}`
     }
     return `от ${data.base_price} ₽ за ночь`

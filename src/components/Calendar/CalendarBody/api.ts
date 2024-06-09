@@ -64,7 +64,6 @@ export async function getCheckInCalendar(
         const nonCachedDates = preprocessDates(
             dataController, dateIndex, opacity, withClear)
         const response = await Promise.all(nonCachedDates.map(async daysToAdd => {
-            console.log(daysToAdd);
             const month = addMonths(begin, daysToAdd)
             const data = {
                 month: month.getMonth() + 1,

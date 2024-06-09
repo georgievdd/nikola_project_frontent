@@ -14,7 +14,6 @@ function useLocalStorage<T>(
         return item ? JSON.parse(item) : initialValue;
       }
     } catch (error) {
-      console.log(error);
       return initialValue;
     }
   });

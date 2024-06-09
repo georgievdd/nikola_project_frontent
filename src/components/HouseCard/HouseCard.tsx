@@ -25,7 +25,6 @@ const HouseCard = ({
       sessionStorage.setItem('guests', guestsController.value.toString())
     }
   }
-  console.log(data.base_price, data.total_price);
     
   return (
     <div className={styles.container}>

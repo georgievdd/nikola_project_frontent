@@ -20,7 +20,6 @@ const PictureWithBackground = ({
   img,
   always,
 }: Props) => {
-  console.log(getImageUrl(img.picture));
   
   return (
       always || needToShowBackground(img) ?

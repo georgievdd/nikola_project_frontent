@@ -36,6 +36,5 @@ export const sendMail = (reservation: Reservation) => {
     try {
         return postMail(mail)
     } catch(e) {
-        console.log(e);
     }
 }

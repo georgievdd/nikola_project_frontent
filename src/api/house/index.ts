@@ -14,7 +14,6 @@ export const getHouses = async(): Promise<House[]> =>
     .catch(e => [])
 
 export const getHouse = async(id: string): Promise<House | null> => {
-    console.log(FETCH_HOUSE(id));
     return fetch(FETCH_HOUSE(id), {
         next: {
             revalidate: 10
@@ -37,6 +36,5 @@ fetch(FETCH_HOUSE_OPTIONS(id), {
     })
     .then(res => res.json())
     .catch(e => {
-        console.log(e);
         return null;
     })

@@ -37,7 +37,6 @@ export function useScroll(calendarCellsRef: RefObject<HTMLDivElement>): ScrollCo
         //     behavior: 'smooth',
         //     inline: 'nearest'
         // })
-        // console.log(monthElement.clientHeight, monthElement.clientTop);
         
         
         // const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title');
@@ -46,7 +45,6 @@ export function useScroll(calendarCellsRef: RefObject<HTMLDivElement>): ScrollCo
         //     const scrollContainer = calendarCellsRef.current;
             
         //     if (scrollContainer && monthElement) {
-        //         console.log(calendarCellsRef.current.offsetTop, scrollContainer.offsetTop);
                 
         //         // Рассчитываем необходимый отступ для scrollTop.
         //         // Вычисляем позицию элемента относительно верхней границы родительского контейнера

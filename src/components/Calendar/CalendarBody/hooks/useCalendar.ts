@@ -131,7 +131,6 @@ export function useCalendar(id: string, defaultShow: boolean, endpoint: string):
 
     useEffect(() => {
         if (selectionController.isStart) {
-            console.log(selectionController.dateBegin!);
             setCheckInCalendar(true)
         }
     }, [selectionController.isStart])

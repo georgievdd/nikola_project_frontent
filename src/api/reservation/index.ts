@@ -12,7 +12,6 @@ export function postMakeReservation(id: number, data: IReservationPriceRequest):
     return axiosInstance.post<MakeReservationResponse>(POST_MAKE_RESERVATION(id), data)
         .then(response => response.data)
         .catch(err => {
-            console.log(err);
             showAlert(
                 err?.response?.data?.email?.[0] || 
                 err?.response?.data?.non_field_errors[0] ||

@@ -21,7 +21,9 @@ export function useScroll(calendarCellsRef: RefObject<HTMLDivElement>): ScrollCo
                 visibleBlocks.push(cell)
             }
         })
-        setCurrentMonthIndex(+visibleBlocks[0].id)
+        if (visibleBlocks[0]) {
+            setCurrentMonthIndex(+visibleBlocks[0].id)
+        }
     }, 7)
     const scrollToMonth = useCallback((monthIndex: number) => {
 

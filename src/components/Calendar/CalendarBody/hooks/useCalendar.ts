@@ -99,9 +99,9 @@ export function useCalendar(
             dataController,
             Math.max(scrollController.currentMonthIndex - 1, 0),
             selectionController.dateBegin!,
-            withClear,
             endpoint,
             guestsController.value,
+            withClear,
         )
             .then(result => {
                 const [map, costs] = result

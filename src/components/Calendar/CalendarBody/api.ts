@@ -1,11 +1,29 @@
 import {CheckInCalendar, CommonCalendar, CommonCalendarRequest} from "./dto";
 import {mapFromCheckInDateCalendar, mapFromCommonCalendar} from "./mapper";
-import {addDays, addMonths, startOfMonth} from "date-fns";
+import {addMonths, startOfMonth} from "date-fns";
 import {CalendarDataController} from "./hooks/useCalendarData";
 import {getMonthFromIndexInCalendar} from "./helpers";
-import axios from "axios";
-import { API_URL, axiosInstance } from "@/api/instance";
+import {axiosInstance} from "@/api/instance";
 
+const preprocessDates = (
+    controller: CalendarDataController,
+    dateIndex: number, 
+    opacity: number,
+    withClear: boolean = false,
+) => {
+    const whiteList: number[] = []
+    const blackList = withClear ?
+        controller.beenLoaded.map(() => false) :
+        controller.beenLoaded.slice()
+    Array.from({length: opacity + 1}).forEach((_, index) => {
+        if (!blackList[dateIndex + index]) {
+            whiteList.push(dateIndex + index)
+            blackList[dateIndex + index] = true
+        }
+    })
+    controller.setBeenLoaded(prev => blackList)
+    return whiteList
+}
 
 export async function getCommonCalendar(
     opacity: number,
@@ -16,14 +34,9 @@ export async function getCommonCalendar(
 ) {
     try {
         const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
-        const dataCashMask = dataController.beenLoaded.slice()
-
-        const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
-            if (dataCashMask[dateIndex + i]) {
-                return Promise.resolve({calendar: {}})
-            }
-            dataCashMask[dateIndex + i] = true
-            const month = addMonths(begin, i)
+        const nonCachedDates = preprocessDates(dataController, dateIndex, opacity)
+        const response = await Promise.all(nonCachedDates.map(async daysToAdd => {
+            const month = addMonths(begin, daysToAdd)
             const data = {
                 month: month.getMonth() + 1,
                 year: month.getFullYear(),
@@ -31,7 +44,6 @@ export async function getCommonCalendar(
             }
             return axiosInstance.get<CommonCalendar>(endpoint, {params: data}).then(r => r.data)
         }))
-        dataController.setBeenLoaded(prev => dataCashMask)
         return mapFromCommonCalendar(response)
     } catch (e) {
         throw e
@@ -43,22 +55,17 @@ export async function getCheckInCalendar(
     dataController: CalendarDataController,
     dateIndex: number,
     checkInDate: Date,
-    withClear: boolean,
     endpoint: string,
     total_persons_amount: number,
+    withClear: boolean,
 ) {
     try {
         const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
-        const dataCashMask = withClear ?
-            dataController.beenLoaded.map(() => false) :
-            dataController.beenLoaded.slice()
-
-        const response = await Promise.all(Array.from({length: opacity + 1}).map((_, i) => {
-            if (dataCashMask[dateIndex + i]) {
-                return Promise.resolve({calendar: {}})
-            }
-            dataCashMask[dateIndex + i] = true
-            const month = addMonths(begin, i)
+        const nonCachedDates = preprocessDates(
+            dataController, dateIndex, opacity, withClear)
+        const response = await Promise.all(nonCachedDates.map(async daysToAdd => {
+            console.log(daysToAdd);
+            const month = addMonths(begin, daysToAdd)
             const data = {
                 month: month.getMonth() + 1,
                 year: month.getFullYear(),
@@ -66,8 +73,7 @@ export async function getCheckInCalendar(
                 total_persons_amount,
             }
             return axiosInstance.get<CheckInCalendar>(endpoint, {params: data}).then(r => r.data)
-        }));
-        dataController.setBeenLoaded(prev => dataCashMask)
+        }))
         return mapFromCheckInDateCalendar(checkInDate, response)
     } catch (e) {
         throw e

@@ -12,6 +12,7 @@ export async function getCommonCalendar(
     dataController: CalendarDataController,
     dateIndex: number,
     endpoint: string,
+    total_persons_amount: number,
 ) {
     try {
         const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
@@ -25,7 +26,8 @@ export async function getCommonCalendar(
             const month = addMonths(begin, i)
             const data = {
                 month: month.getMonth() + 1,
-                year: month.getFullYear()
+                year: month.getFullYear(),
+                total_persons_amount,
             }
             return axiosInstance.get<CommonCalendar>(endpoint, {params: data}).then(r => r.data)
         }))
@@ -43,6 +45,7 @@ export async function getCheckInCalendar(
     checkInDate: Date,
     withClear: boolean,
     endpoint: string,
+    total_persons_amount: number,
 ) {
     try {
         const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
@@ -60,6 +63,7 @@ export async function getCheckInCalendar(
                 month: month.getMonth() + 1,
                 year: month.getFullYear(),
                 chosen_check_in_date: checkInDate.getKey(),
+                total_persons_amount,
             }
             return axiosInstance.get<CheckInCalendar>(endpoint, {params: data}).then(r => r.data)
         }));

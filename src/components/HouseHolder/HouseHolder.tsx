@@ -24,10 +24,19 @@ interface HouseHolderProps {
 }
 
 const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
-  const guestsController = useNumberInput('Гостей', 1, houseOptions.max_persons_amount);
+  const guestsController = useNumberInput(
+    'Гостей',
+    1,
+    houseOptions.max_persons_amount
+  )
   const datePickerController = useDatePicker(houseOptions)
   const userInfoController = useLabelInputGroup()
-  const calendarController = useCalendar('house_id', false, GET_HOUSE_CALENDAR(house.id))
+  const calendarController = useCalendar(
+    'house_id',
+    false,
+    GET_HOUSE_CALENDAR(house.id),
+    guestsController
+  )
   const priceList = useBookingInvoice()
   const router = useRouter()
 

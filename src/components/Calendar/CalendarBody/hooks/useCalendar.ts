@@ -1,4 +1,11 @@
-import {Dispatch, RefObject, SetStateAction, useCallback, useEffect, useRef, useState} from "react";
+import {
+    Dispatch, 
+    RefObject, 
+    SetStateAction, 
+    useEffect, 
+    useRef, 
+    useState
+} from "react";
 import {getCheckInCalendar, getCommonCalendar} from "../api";
 import {showAlert} from "../../../../helpers";
 import {ScrollController, useScroll} from "./useScroll";
@@ -6,6 +13,7 @@ import {SelectionController, useSelection} from "./useSelection";
 import {DayType} from "../helpers";
 import {CalendarDataController, useCalendarData} from "./useCalendarData";
 import { differenceInMonths, differenceInYears, isSameDay, startOfMonth } from "date-fns";
+import { INumberInput } from "@/components/ui/Inputs/number-input/useNumberInput";
 
 export interface CalendarController {
     id: string
@@ -20,12 +28,16 @@ export interface CalendarController {
     setShow: Dispatch<SetStateAction<boolean>>
     reset: () => void
 }
-export function useCalendar(id: string, defaultShow: boolean, endpoint: string): CalendarController {
+export function useCalendar(
+    id: string,
+    defaultShow: boolean,
+    endpoint: string,
+    guestsController: INumberInput): CalendarController {
     /**
      * Сколько месяцев вперед отображаем
      */
     const [show, setShow] = useState(defaultShow);
-    const opacity = 16 //- currentMonthIndex
+    const opacity = 16 // currentMonthIndex
     const calendarCellsRef = useRef<HTMLDivElement>(null)
     const selectionController = useSelection()
     const scrollController = useScroll(calendarCellsRef)
@@ -66,14 +78,14 @@ export function useCalendar(id: string, defaultShow: boolean, endpoint: string):
         selectionController.setDateBegin(date)
     }
 
-
     function setCommonCalendar() {
         setLoad(true)
         getCommonCalendar(
-            1, // сколько месяцев вперед смотрим дополнительно
+            2, // сколько месяцев вперед смотрим дополнительно
             dataController,
             scrollController.currentMonthIndex,
             endpoint,
+            guestsController.value,
         )
             .then(result => dataController.setMapState(prev =>
                 ({...prev, ...result})))
@@ -89,6 +101,7 @@ export function useCalendar(id: string, defaultShow: boolean, endpoint: string):
             selectionController.dateBegin!,
             withClear,
             endpoint,
+            guestsController.value,
         )
             .then(result => {
                 const [map, costs] = result

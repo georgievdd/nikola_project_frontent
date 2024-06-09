@@ -14,15 +14,22 @@ import { GET_HOUSES, GET_HOUSES_CALENDAR } from "@/api/endpoints";
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
   const guestsController = useNumberInput('Гостей', 1)
-  const calendarController = useCalendar('houses', false, GET_HOUSES_CALENDAR)
   const [houses, setHouses] = useState<House[]>(initHouses)
-  
+  const calendarController = useCalendar(
+    'houses',
+    false,
+    GET_HOUSES_CALENDAR,
+    guestsController
+  )
+  const {selectionController} = calendarController
 
   function getDates() {
-    return calendarController.selectionController.isActive ? {
-      check_in_date: calendarController.selectionController.dateBegin!.getKey(),
-      check_out_date: calendarController.selectionController.dateEnd!.getKey(),
-    } : {}
+    const check_in_date = selectionController.dateBegin?.getKey()
+    const check_out_date = selectionController.dateEnd?.getKey()
+    return {
+      check_in_date,
+      check_out_date,
+    }
   }
 
   useEffect(() => {
@@ -32,7 +39,11 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
     }}).then(res => {
       setHouses(res.data)
     })
-  }, [guestsController.value, calendarController.selectionController.isActive])
+  }, [
+    guestsController.value,
+    selectionController.isActive,
+    selectionController.isStart,
+  ])
 
   return (
     <div className={styles.container}>

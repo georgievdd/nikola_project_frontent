@@ -7,6 +7,13 @@ import Feature from '../ui/Feature/Feature'
 import { SelectionController } from '../Calendar/CalendarBody/hooks/useSelection'
 import { INumberInput } from '../ui/Inputs/number-input/useNumberInput'
 import { getImageUrl } from '@/helpers'
+import { differenceInBusinessDays } from 'date-fns'
+import { getNightsDeclension } from '@/localization'
+
+const getTimeDiff = (dateStart: Date, dateEnd: Date) => {
+  return differenceInBusinessDays(dateStart, dateEnd)
+} 
+
 
 const HouseCard = ({
   data, 
@@ -25,7 +32,16 @@ const HouseCard = ({
       sessionStorage.setItem('guests', guestsController.value.toString())
     }
   }
-    
+
+  const getCostText = () => {
+    if (data.total_price) {
+      const diff = getTimeDiff(
+        selectionController.dateBegin!, selectionController.dateEnd!)
+      return `${data.total_price}₽ за ${diff} ${getNightsDeclension(diff)}`
+    }
+    return `от ${data.base_price}₽ за ночь`
+  }
+  
   return (
     <div className={styles.container}>
       <Swiper className={styles.preview} links={data.pictures}/>
@@ -47,7 +63,7 @@ const HouseCard = ({
               Забронировать
             </Button>
           </Link>
-          <p className={styles.cost}>от {data.total_price || data.base_price} <span>₽</span></p>
+          <p className={styles.cost}>{getCostText()}</p>
         </div>
       </article>
     </div>

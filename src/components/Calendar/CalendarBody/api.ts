@@ -33,9 +33,10 @@ export async function getCommonCalendar(
     total_persons_amount: number,
 ) {
     try {
-        const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
+        const begin = startOfMonth(new Date())
         const nonCachedDates = preprocessDates(dataController, dateIndex, opacity)
         const response = await Promise.all(nonCachedDates.map(async daysToAdd => {
+            console.log(begin, daysToAdd)
             const month = addMonths(begin, daysToAdd)
             const data = {
                 month: month.getMonth() + 1,
@@ -60,7 +61,7 @@ export async function getCheckInCalendar(
     withClear: boolean,
 ) {
     try {
-        const begin = startOfMonth(getMonthFromIndexInCalendar(dateIndex))
+        const begin = startOfMonth(new Date())
         const nonCachedDates = preprocessDates(
             dataController, dateIndex, opacity, withClear)
         const response = await Promise.all(nonCachedDates.map(async daysToAdd => {

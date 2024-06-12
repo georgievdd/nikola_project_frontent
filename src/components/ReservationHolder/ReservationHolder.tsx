@@ -38,7 +38,7 @@ const ReservationHolder = () => {
       </h1>
       <section onClick={onClick}>
         <div className={styles['house-preview']} onClick={stopClick}>
-          <Swiper links={reservation.house.pictures.map(e => ({...e, picture: "https://floppa.space/"+e.picture}))}/>
+          <Swiper links={reservation.house.pictures}/>
         </div>
         <div className={styles['house-description']}>
           <div className={styles['line']}>
@@ -75,7 +75,7 @@ const ReservationHolder = () => {
       </section>
       <div className={styles.description}>
         <h3>
-          Информация уже была отправлена Вам на электронную почту
+          Информация о бронировании была отправлена Вам на электронную почту
         </h3>
         <h3>
           В ближайшее время с вами свяжутся для подтверждения бронирования

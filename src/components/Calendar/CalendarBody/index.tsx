@@ -137,31 +137,36 @@ interface MonthProps {
     costs: Record<string, number>
     onLoad: boolean
 }
+let c = 0
 const Month = ({month, processDateClick, mapState, selectionController, costs, onLoad}: MonthProps) => {
-
+    if (!c++) {
+        console.log(mapState);
+    }
     const {
         dateBegin,
         dateEnd,
         isActive
     } = selectionController
     const getStyle = (day: Date): string => {
+        let style = ''
         if (isActive) {
             if (isSameDay(day, dateBegin!)) {
-                if (isSameDay(day, dateEnd!))
-                    return 'date_select-point'
-                return 'date_select-left'
-            }
-            if (isSameDay(day, dateEnd!)) {
-                return 'date_select-right'
-            }
-            if (dateBegin! < day && day < dateEnd!) {
-                return 'date_select'
+                if (isSameDay(day, dateEnd!)) {
+                    style += 'date_select-point '
+                } else {
+                    style += 'date_select-left '
+                }
+            } else if (isSameDay(day, dateEnd!)) {
+                style += 'date_select-right '
+            } else if (dateBegin! < day && day < dateEnd!) {
+                style += 'date_select '
             }
         } else if (dateBegin && isSameDay(day, dateBegin)) {
-            return 'date_select-start'
+            style += 'date_select-start '
         }
-        if (mapState[day.getKey()] === undefined) return ''
-        return dayStyle[mapState[day.getKey()]]
+        day.getKey() === '01-01-2025' && console.log(mapState);
+        if (mapState[day.getKey()] == undefined) return style
+        return style + dayStyle[mapState[day.getKey()]]
     }
     const renderCells = () => {
         const dateFormat = "d";

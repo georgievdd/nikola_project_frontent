@@ -32,6 +32,9 @@ export function mapFromCheckInDateCalendar(checkInDate: Date, data: CheckInCalen
                 costs[key] = calendar[key].price!
             }
             if (checkInDate.getKey() === key) {
+                if (calendar[key].is_holiday) {
+                    result[key] = DayType.Holiday
+                }
                 return
             }
             if (!calendar[key].check_out_is_available) {

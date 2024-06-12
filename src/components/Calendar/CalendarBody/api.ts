@@ -2,7 +2,6 @@ import {CheckInCalendar, CommonCalendar, CommonCalendarRequest} from "./dto";
 import {mapFromCheckInDateCalendar, mapFromCommonCalendar} from "./mapper";
 import {addMonths, startOfMonth} from "date-fns";
 import {CalendarDataController} from "./hooks/useCalendarData";
-import {getMonthFromIndexInCalendar} from "./helpers";
 import {axiosInstance} from "@/api/instance";
 
 const preprocessDates = (
@@ -15,12 +14,12 @@ const preprocessDates = (
     const blackList = withClear ?
         controller.beenLoaded.map(() => false) :
         controller.beenLoaded.slice()
-    Array.from({length: opacity + 1}).forEach((_, index) => {
+    for (let index = dateIndex > 0 ? -1 : 0; index <= opacity; ++index) {
         if (!blackList[dateIndex + index]) {
             whiteList.push(dateIndex + index)
             blackList[dateIndex + index] = true
         }
-    })
+    }
     controller.setBeenLoaded(prev => blackList)
     return whiteList
 }

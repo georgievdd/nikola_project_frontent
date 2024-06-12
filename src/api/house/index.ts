@@ -1,5 +1,4 @@
 import { House, HouseOptions, Picture } from "@/entity/House"
-import sizeOf from 'image-size'
 import { FETCH_HOUSES, FETCH_HOUSE, FETCH_HOUSE_OPTIONS } from "../endpoints"
 
 

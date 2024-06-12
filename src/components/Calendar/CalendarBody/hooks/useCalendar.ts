@@ -155,11 +155,16 @@ export function useCalendar(
         }
     }, [dataController.wasCleared])
 
+    useEffect(() => {
+        if (guestsController.wasChangedByUser) {
+            reset()
+        }
+    }, [guestsController.value])
+
     const reset = () => {
         selectionController.clear()
         dataController.clear()
     }
-
 
     return {
         id,

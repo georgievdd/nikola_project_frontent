@@ -16,7 +16,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <link rel="stylesheet" href="/favicon-light.ico"/>
         <link rel="preload" href="style.css" as="style" />
       </Head>
       <body className={montserrat.className}>

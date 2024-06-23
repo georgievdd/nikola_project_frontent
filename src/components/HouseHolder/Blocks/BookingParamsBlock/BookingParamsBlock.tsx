@@ -1,6 +1,6 @@
-import NumberInput from '@/components/ui/Inputs/number-input/NumberInput'
+import NumberInput from '@/components/ui/Inputs/NumberInput/NumberInput'
 import styles from './BookingParamsBlock.module.scss'
-import { INumberInput } from '@/components/ui/Inputs/number-input/useNumberInput'
+import { INumberInput } from '@/components/ui/Inputs/NumberInput/useNumberInput'
 import DatePicker from '@/components/ui/Inputs/DatePicker/DatePicker'
 import { DatePickerController } from '@/components/ui/Inputs/DatePicker/useDatePicker'
 import { CalendarController } from '@/components/Calendar/CalendarBody/hooks/useCalendar'
@@ -21,6 +21,7 @@ const BookingParamsBlock = ({
 }) => {
 
   const clear = () => {
+    datePickerController.clear(),
     calendarController.reset(), 
     guestsController.reset(), 
     sessionStorage.clear(),

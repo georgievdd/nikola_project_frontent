@@ -3,11 +3,11 @@
 import React from 'react'
 import styles from './NumberInput.module.scss'
 import { INumberInput } from './useNumberInput'
-import PlusImg from '../../../../../public/images/plus.svg'
-import MinusImg from '../../../../../public/images/minus.svg'
-import Image from 'next/image'
+import IconPlus from '../../../../../public/images/svg/plus'
+import IconMinus from '../../../../../public/images/svg/minus'
 
 const NumberInput = (props: INumberInput & {className?: string}) => {
+
   return (
     <div className={[styles.wrapper, props.className].join(' ')}>
       <div className={styles.container}>
@@ -16,11 +16,11 @@ const NumberInput = (props: INumberInput & {className?: string}) => {
         </label>
         <div className={styles.under_labale}>
           <button onClick={props.substract}>
-            <Image src={MinusImg} alt='' width={18} height={18}/>
+            <IconMinus muted={props.value === props.minValue}/>
           </button>
           <p className={styles.value}>{props.value}</p>
           <button onClick={props.add}>
-            <Image src={PlusImg} alt='' width={18} height={18}/>
+            <IconPlus muted={props.value === props.maxValue}/>
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import img1 from '../../../public/home/1.png'
+const img2path = '../../../public/home/2.png'
 import img2 from '../../../public/home/2.png'
 import img3 from '../../../public/home/3.png'
 import img4 from '../../../public/home/4.png'
@@ -62,13 +63,19 @@ const HomePage = () => {
               </Button>
             </Link>
           </section>
-          <Image
-            src={img2}
-            alt='2'
-          />
+          <div className={styles['img-holder']} style={{ width: '100%', height: 'auto' }}>
+            {/* <Image
+              src={img2}
+              alt='2'
+              style={{ width: '100%', height: 'auto' }}
+            /> */}
+            <img
+              src={require(img2path)}
+            />
+          </div>
         </div>
       </div>
-      <div className={styles['block-3']}>
+      {/* <div className={styles['block-3']}>
         <Image
           src={img3}
           alt='3'
@@ -241,12 +248,12 @@ const HomePage = () => {
           alt='15'
           layout="responsive"
         />
-      </div>
-      <div className={styles['footer']}>
+      </div> */}
+      {/* <div className={styles['footer']}>
         <p>Источники фотоматериалов:</p>
         <p>Unsplash (Philipp Trubchenko)</p>
         <p>ВКонтакте (Никола-Ленивец)</p>
-      </div>
+      </div> */}
     </div>
   )
 }

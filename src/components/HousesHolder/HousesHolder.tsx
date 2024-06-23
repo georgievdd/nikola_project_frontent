@@ -2,8 +2,8 @@
 import { House } from "@/entity/House"
 import styles from './HouseHolder.module.scss'
 import HouseCard from "../HouseCard/HouseCard";
-import NumberInput from "../ui/Inputs/number-input/NumberInput";
-import { useNumberInput } from "../ui/Inputs/number-input/useNumberInput";
+import NumberInput from "../ui/Inputs/NumberInput/NumberInput";
+import { useNumberInput } from "../ui/Inputs/NumberInput/useNumberInput";
 import Calendar from "../Calendar/Calendar";
 import { useCalendar } from "../Calendar/CalendarBody/hooks/useCalendar";
 import { useEffect, useState } from "react";

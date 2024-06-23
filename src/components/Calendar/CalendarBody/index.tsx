@@ -137,11 +137,7 @@ interface MonthProps {
     costs: Record<string, number>
     onLoad: boolean
 }
-let c = 0
 const Month = ({month, processDateClick, mapState, selectionController, costs, onLoad}: MonthProps) => {
-    if (!c++) {
-        console.log(mapState);
-    }
     const {
         dateBegin,
         dateEnd,
@@ -164,7 +160,6 @@ const Month = ({month, processDateClick, mapState, selectionController, costs, o
         } else if (dateBegin && isSameDay(day, dateBegin)) {
             style += 'date_select-start '
         }
-        day.getKey() === '01-01-2025' && console.log(mapState);
         if (mapState[day.getKey()] == undefined) return style
         return style + dayStyle[mapState[day.getKey()]]
     }

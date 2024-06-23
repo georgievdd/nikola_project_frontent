@@ -10,6 +10,8 @@ export interface INumberInput {
     reset: () => void
     set: (v: number) => void
     wasChangedByUser: boolean
+    minValue: number
+    maxValue: number
 }
 
 export const useNumberInput = (
@@ -40,5 +42,7 @@ export const useNumberInput = (
         reset: () => setValue(prev => minValue),
         set: (v: number) => setValue(prev => v),
         wasChangedByUser,
+        minValue,
+        maxValue,
     }
 }

@@ -1,8 +1,6 @@
 import { DatePickerController } from './useDatePicker'
 import styles from './DatePicker.module.scss'
 import SelectInput from '../SelectInput/SelectInput'
-import Moon from '../../../../../public/images/moon.svg'
-import Circle from '../../../../../public/images/circle.svg'
 
 
 const DatePicker = ({controller}: {
@@ -16,18 +14,16 @@ const DatePicker = ({controller}: {
         <div className={styles.group}>
           <label>Время заезда</label>
           <SelectInput
-           labelImage={Circle}
-           times={controller.data.check_in_times.times}
-           defaultValue={controller.data.check_in_times.default}
-           onChange={(v: string) => controller.setCurrentFirst(v)}
+            times={controller.data.check_in_times.times}
+            value={controller.currentFirst}
+            onChange={(v: string) => controller.setCurrentFirst(v)}
           />
         </div>
         <div className={styles.group}>
           <label>Время выезда</label>
           <SelectInput
-            labelImage={Moon}
             times={controller.data.check_out_times.times}
-            defaultValue={controller.data.check_out_times.default}
+            value={controller.currentSecond}
             onChange={(v: string) => controller.setCurrentSecond(v)}
           />
         </div>

@@ -13,7 +13,7 @@ import {SelectionController, useSelection} from "./useSelection";
 import {DayType} from "../helpers";
 import {CalendarDataController, useCalendarData} from "./useCalendarData";
 import { differenceInMonths, differenceInYears, isSameDay, startOfMonth } from "date-fns";
-import { INumberInput } from "@/components/ui/Inputs/number-input/useNumberInput";
+import { INumberInput } from "@/components/ui/Inputs/NumberInput/useNumberInput";
 
 export interface CalendarController {
     id: string

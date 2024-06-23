@@ -1,239 +1,84 @@
-import * as React from 'react'
-import {
-  Select as BaseSelect,
-  selectClasses,
-  SelectListboxSlotProps,
-  SelectProps,
-} from '@mui/base/Select'
-import { Option as BaseOption, optionClasses } from '@mui/base/Option'
-import { styled } from '@mui/system'
-import { CssTransition } from '@mui/base/Transitions'
-import { PopupContext } from '@mui/base/Unstable_Popup'
-import Image from 'next/image'
+import React, { MouseEventHandler, MouseEvent, useCallback } from 'react'
+import IconCircle from '../../../../../public/images/svg/circle'
+import IconMoon from '../../../../../public/images/svg/moon'
+import styles from './Selection.Input.module.scss'
 
-export default function SelectInput(props: {
-  onChange: (v: string) => void, 
-  defaultValue: string,
-  times: string[], [key: string]: any}) {
-  const {times, defaultValue, onChange, ...otherProps} = props
-  return (
-    <Select {...otherProps} defaultValue={
-      times.findIndex(e => e === defaultValue)
-    } onChange={(_, v) => onChange(times[v as number])}>
-      {times.map((time, i) => (
-        <Option value={i} key={time + i}><p>{time}</p></Option>
-      ))}
-    </Select>
-  );
+interface Props {
+  times: string[]
+  value: string
+  onChange: (value: string) => void
 }
 
-const Select = React.forwardRef(function CustomSelect<
-  TValue extends {},
-  Multiple extends boolean,
->(props: SelectProps<TValue, Multiple>, ref: React.ForwardedRef<HTMLButtonElement>) {
-  const slots = {
-    root: StyledButton,
-    listbox: AnimatedListbox,
-    popup: Popup,
-    ...props.slots,
-  };
-
-  return <BaseSelect {...props} ref={ref} slots={slots} />;
-});
-
-const blue = {
-  100: '#DAECFF',
-  200: '#99CCF3',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0059B2',
-  900: '#003A75',
-};
-
-const grey = {
-  50: '#F3F6F9',
-  100: '#E5EAF2',
-  200: '#DAE2ED',
-  300: '#C7D0DD',
-  400: '#B0B8C4',
-  500: '#9DA8B7',
-  600: '#6B7A90',
-  700: '#434D5B',
-  800: '#303740',
-  900: '#1C2025',
-};
-
-const Button = React.forwardRef(function Button<
-  TValue extends {},
-  Multiple extends boolean>(
-  props: any,
-  ref: React.ForwardedRef<HTMLButtonElement>,
-) {
-  const { ownerState, children, labelImage, ...other } = props;
+const SelectInput = ({
+  times,
+  value,
+  onChange,
+}: Props) => {
+  const onClick = useCallback((e: unknown) => {
+    onChange((e as {target: {textContent: string}}).target.textContent);
+  }, [])
   return (
-    <button type="button" {...other} ref={ref}>
-      {children}
-      <Image src={labelImage} style={{width: '18px', height: 'auto'}} alt=''/>
-    </button>
-  );
-});
+    <div>
+      <Option time={value} className={[
+        styles['option-wrapper'],
+        styles['option-focus'],
+        styles['current-option'],
+      ].join(' ')}/>
+      <OptionList times={times} currentTime={value} onClick={onClick}/>
+    </div>
+  )
+}
 
-const StyledButton = styled(Button, { shouldForwardProp: () => true })(
-  ({ theme }) => `
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 30px;
-  letter-spacing: 0em;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  
-  border-radius: 10px;
-  box-sizing: border-box;
-  text-align: left;
-  line-height: 1.5;
-  color: ${grey[900]};
-  position: relative;
-
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 120ms;
-
-  &:hover {
-    background: ${grey[50]};
-    border-color: ${grey[300]};
+const getIcon = (hours: number) => {
+  if (6 < hours && hours < 15) {
+    return <IconCircle/>
   }
+  return <IconMoon/>
+}
 
-  &.${selectClasses.focusVisible} {
-    outline: 0;
-    border-color: ${blue[400]};
-    box-shadow: 0 0 0 3px ${blue[200]};
-  }
-
-  & > svg {
-    font-size: 1rem;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    right: 10px;
-  }
-  `,
-);
-
-const Listbox = styled('ul')(
-  ({ theme }) => `
-  font-family: var(--montserrat-font);
-  font-size: 0.875rem;
-  box-sizing: border-box;
-  padding: 6px;
-  margin: 12px 0;
-  border-radius: 12px;
-  overflow: auto;
-  outline: 0px;
-  background: #fff;
-  border: 1px solid ${grey[200]};
-  box-shadow: 0px 2px 4px ${
-    'rgba(0,0,0, 0.05)'
-  };
-  
-  .closed & {
-    opacity: 0;
-    transform: scale(0.95, 0.8);
-    transition: opacity 200ms ease-in, transform 200ms ease-in;
-  }
-  
-  .open & {
-    opacity: 1;
-    transform: scale(1, 1);
-    transition: opacity 100ms ease-out, transform 100ms cubic-bezier(0.43, 0.29, 0.37, 1.48);
-  }
-
-  .placement-top & {
-    transform-origin: bottom;
-  }
-
-  .placement-bottom & {
-    transform-origin: top;
-  }
-  `,
-);
-
-const AnimatedListbox = React.forwardRef(function AnimatedListbox<
-  Value extends {},
-  Multiple extends boolean,
->(
-  props: SelectListboxSlotProps<Value, Multiple>,
-  ref: React.ForwardedRef<HTMLUListElement>,
-) {
-  const { ownerState, ...other } = props;
-  const popupContext = React.useContext(PopupContext);
-
-  if (popupContext == null) {
-    throw new Error(
-      'The `AnimatedListbox` component cannot be rendered outside a `Popup` component',
-    );
-  }
-
-  const verticalPlacement = popupContext.placement.split('-')[0];
-
+const Option = ({
+  time,
+  className,
+  onClick,
+  current,
+}: {
+  time: string
+  className?: string
+  onClick?: MouseEventHandler<HTMLDivElement>
+  current?: boolean
+}) => {
+  const hours = +time.split(':')[0]
   return (
-    <CssTransition
-      className={`placement-${verticalPlacement}`}
-      enterClassName="open"
-      exitClassName="closed"
-    >
-      <Listbox {...other} ref={ref} />
-    </CssTransition>
-  );
-});
+    <div className={[
+      styles.option,
+      className,
+      current && styles['current-option']].join(' ')}
+      onClick={onClick}
+      tabIndex={0}>
+      <p>{time}</p>
+      {getIcon(hours)}
+    </div>
+  )
+}
 
-const Option = styled(BaseOption)(
-  ({ theme }) => `
-  font-family: var(--montserrat-font);
-  list-style: none;
-  padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 20px;
-  border-radius: 8px;
-  cursor: default;
+const OptionList = ({
+  times,
+  currentTime,
+  onClick}: {
+    times: string[],
+    currentTime: string,
+    onClick: MouseEventHandler<HTMLDivElement>
+  }) => {
+  return (
+    <div className={styles['option-list']}>
+      {times.map(time => (
+        <div key={time} className={styles['option-wrapper']}>
+          <Option time={time} current={currentTime == time} onClick={onClick}/>
+        </div>
+      ))}
+    </div>
+  )
+}
 
-  &:last-of-type {
-    border-bottom: none;
-  }
 
-  &.${optionClasses.selected} {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
-  }
-
-  &.${optionClasses.highlighted} {
-    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  }
-
-  &:focus-visible {
-    outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
-  }
-  
-  &.${optionClasses.highlighted}.${optionClasses.selected} {
-    background-color: ${theme.palette.mode === 'dark' ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === 'dark' ? blue[100] : blue[900]};
-  }
-
-  &.${optionClasses.disabled} {
-    color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
-  }
-
-  &:hover:not(.${optionClasses.disabled}) {
-    background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
-    color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  }
-  `,
-);
-
-const Popup = styled('div')`
-  z-index: 1;
-`;
+export default SelectInput

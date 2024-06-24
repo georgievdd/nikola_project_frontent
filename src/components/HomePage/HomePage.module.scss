@@ -6,6 +6,9 @@
 }
 
 .container {
+    gap: 100px;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: auto;
     .block-1 {
@@ -34,30 +37,34 @@
         }
     }
     .block-2 {
-        @extend .width-wrapper;
         position: relative;
-        height: 600px;
         display: flex;
         align-items: center;
         justify-content: center;
+      
         .wrapper {
-            width: 100%;
-            display: flex;
-            gap: 5px;
             position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            gap: 120px;
+      
             section {
                 flex: 1;
                 width: 580px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+        
                 h2 {
                     font-weight: 400;
                     line-height: 32px;
                     @media (max-width: $first-point) {
+                        line-height: 30px;
                         font-size: 22px;
                     }
                     @media (max-width: $second-point) {
+                        line-height: 24px;
                         font-size: large;
                     }
                     @media (max-width: $third-point) {
@@ -65,6 +72,7 @@
                         line-height: 20px;
                     }
                 }
+        
                 button {
                     width: 258px;
                     height: 55px;
@@ -86,36 +94,44 @@
                     }
                 }
             }
+        
             .img-holder {
+                position: relative;
                 flex: 1;
             }
+            @media (max-width: $first-point) {
+                gap: 20px;
+            }
             @media (max-width: $fourth-point) {
-                width: 90%;
                 flex-direction: column;
-                .img-holder {
-                    order: 1;
-                }
+                gap: 10px;
                 section {
                     order: 2;
+                    width: 90%;
+                    margin: 0 auto;
+                    align-items: center;
+                    gap: 15px;
                 }
             }
         }
-    }
-    $i: 4;
-    @while $i <= 16 {
-        .block-#{$i} {
-            @extend .block-2;
-            .wrapper {
-                gap: 100px;
-            }
+        @media (max-width: $fourth-point) {
+            width: 100%;
+            height: 100%;
         }
-        $i: $i + 2;
     }
     .footer {
-        margin-top: 100px;
-        @extend .width-wrapper;
         display: flex;
         justify-content: space-between;
+        @media (max-width: $third-point) {
+            margin-bottom: 22px;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+        }
+    }
+    @media (max-width: $fourth-point) {
+        gap: 20px;
     }
 }
 
@@ -196,5 +212,11 @@
                 width: 150px;
             }
         }
+    }
+}
+
+@media (max-width: $fourth-point) {
+    .big-size-only {
+        display: none;
     }
 }

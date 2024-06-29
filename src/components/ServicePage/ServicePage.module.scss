@@ -32,5 +32,154 @@
             border-radius: 15px;
             overflow: hidden;
         }
+
+        @media (max-width: $first-point) {
+            height: 400px;
+            section .bottom-group .cost {
+                font-size: 27px;
+            }
+        }
+        
+        @media (max-width: $second-point) {
+            height: 320px;
+            section {
+                justify-content: start;
+                gap: 10px;
+            }
+            section .bottom-group {
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                right: -100%;
+                button {
+                    width: 200px;
+                    img {
+                        width: 20px;
+                    }
+                    padding: 5px;
+                    p {font-size: large;}
+                }
+            }
+            .img-wrapper {
+                height: 80%;
+            }
+        }
+        
+        @media (max-width: $third-point) {
+            section {
+                .description {
+                    gap: 20px;
+                    p {
+                        font-size: 14px;
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
+                .bottom-group {
+                    width: 100%;
+                    position: absolute;
+                    button {
+                        width: 200px;
+                        img {
+                            width: 20px;
+                        }
+                        padding: 0;
+                        p {font-size: medium;}
+                    }
+                    .cost {
+                        font-size: medium;
+                    }
+                }
+            }
+            .img-wrapper {
+                height: 80%;
+            }
+        }
+        
+        @media (max-width: $fourth-point) {
+            section .bottom-group {
+                width: 100%;
+                position: absolute;
+                button {
+                    width: 200px;
+                    img {
+                        width: 20px;
+                    }
+                    padding: 0;
+                    p {font-size: medium;}
+                }
+                .cost {
+                    font-size: medium;
+                }
+            }
+        }
+
+        @media (max-width: 650px) {
+            section .bottom-group {
+                button {
+                    width: 170px;
+                    img {
+                        width: 20px;
+                    }
+                    padding: 0;
+                    p {font-size: medium;}
+                }
+                .cost {
+                    font-size: medium;
+                }
+            }
+            .img-wrapper {
+                height: 70%;
+            }
+        }
+        @media (max-width: 590px) {
+            section .title {
+                position: absolute;
+                width: 100vw;
+            }
+            section .description, .img-wrapper {
+                margin-top: 70px;
+            }
+            section .description {
+                gap: 5px;
+                p {
+                    font-size: small;
+                }
+                max-height: 70%;
+                overflow: scroll;
+                &::-webkit-scrollbar {
+                    display: none;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            }
+            section .bottom-group {
+                position: absolute;
+                top: 100%;
+                width: 200%;
+                justify-content: center;
+                gap: 20px;
+                button {
+                    width: 100%;
+                }
+                .cost {
+                    font-size: x-large;
+                }
+            }
+        }
+        @media (max-width: 450px) {
+            .img-wrapper {
+                height: 50%;
+            }
+        }
+        
+        @media (max-width: $sixth-point) {
+            section .bottom-group .cost {
+                font-size: medium;
+            }
+        }
+    }
+    @media (max-width: $third-point) {
+        margin-bottom: 100px;
     }
 }

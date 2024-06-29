@@ -29,7 +29,7 @@ const Block = ({
 }: Service) => (
   <div className={styles['item-wrapper']}>
     <section>
-      <h1>
+      <h1 className={styles.title}>
         {title}
       </h1>
       <div className={styles['description']}>
@@ -51,7 +51,7 @@ const Block = ({
             />
           </Button>
         </Link>
-        <h2>
+        <h2 className={styles.cost}>
           {`${cost} ${measurement}`}
         </h2>
       </div>

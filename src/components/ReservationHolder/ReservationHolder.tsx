@@ -88,7 +88,7 @@ const ReservationHolder = () => {
 const clock = (time: string, type: string) => (
   <span className={styles.clock}>
     <p>{getClock(time)}</p>
-    <Image 
+    <Image
       src={type === 'in' ? CircleImg : MoonImg}
       alt='type of date'
       width={18}

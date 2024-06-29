@@ -190,7 +190,10 @@
                 font-size: x-large;
             }
             button {
+                position: absolute;
+                bottom: 0;
                 width: 200px;
+                margin-left: -100px;
             }
         }
     }
@@ -209,7 +212,38 @@
                 font-size: large;
             }
             button {
-                width: 150px;
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: $fifth-point) {
+    .container .block-1 {
+        width: 100%;
+        section {
+            top: 40px;
+            width: 90%;
+            flex-direction: row;
+            justify-content: space-around;
+            h1 {
+                width: 200px;
+                font-size: large;
+            }
+            button {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: $sixth-point) {
+    .container .block-1 {
+        section {
+            top: 20px;
+            h1 {
+                width: 200px;
+                font-size: small;
             }
         }
     }

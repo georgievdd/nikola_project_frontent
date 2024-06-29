@@ -9,13 +9,24 @@ interface Props {
   onChange: (value: string) => void
 }
 
+interface onChangeEvent {
+  target: {
+    parentNode: HTMLElement | SVGElement
+  }
+}
+
 const SelectInput = ({
   times,
   value,
   onChange,
 }: Props) => {
-  const onClick = useCallback((e: unknown) => {
-    onChange((e as {target: {textContent: string}}).target.textContent);
+  const onClick = useCallback((e: onChangeEvent) => {
+    let parent = e.target.parentNode
+    if (parent instanceof SVGElement) {
+      parent = parent.parentNode as HTMLElement
+    }
+    const pNode = parent.querySelector('p')!
+    onChange(pNode.textContent!)
   }, [])
   return (
     <div>
@@ -24,8 +35,10 @@ const SelectInput = ({
         styles['option-focus'],
         styles['current-option'],
       ].join(' ')}/>
-      <OptionList times={times} currentTime={value} onClick={onClick}/>
-    </div>
+      <OptionList times={times} currentTime={value} onClick={
+        onClick as unknown as MouseEventHandler<HTMLDivElement>
+      }/>
+      </div>
   )
 }
 

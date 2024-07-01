@@ -30,14 +30,14 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
   return (
     <nav className={[styles.container].join(' ')} ref={ref}>
       <div className={styles.links}>
+        <Link href="/" legacyBehavior>
+          <a className={pathname === "/" ? styles.active : ' '}>
+            Главная
+          </a>
+        </Link>
         <Link href="/house" legacyBehavior>
           <a className={pathname === "/house" ? styles.active : ' '}>
             Домики
-          </a>
-        </Link>
-        <Link href="/about" legacyBehavior>
-          <a className={pathname === "/about" ? styles.active : ' '}>
-            Об отеле
           </a>
         </Link>
         <Link href="/service" legacyBehavior>

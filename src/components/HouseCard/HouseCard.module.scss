@@ -21,9 +21,6 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        header {
-            max-height: 15%;
-        }
 
         .description-group {
             min-height: 50%;
@@ -35,7 +32,7 @@
                 max-width: 100%;
                 -webkit-line-clamp: 5;
                 display: -webkit-box;
-                -webkit-box-orient: vertical;  
+                -webkit-box-orient: vertical;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
@@ -66,44 +63,43 @@
         height: $second-point-to / 4;
     }
 
-    // @media (max-width: $third-point) {
-    //     max-width: $third-point-to;
-    //     height: $third-point-to / 4;
-    // }
-
     @media (max-width: $fourth-point) {
         flex-direction: column;
         align-items: center;
-        max-width: 100%;
-        height: 100%;
+        height: 45vh;
+        margin-bottom: 10vh;
         .preview {
-            max-width: 350px;
-            max-height: 220px;
-            object-fit: cover;
-            object-position: center;
+            min-height: 50vw;
+            min-width: 70vw;
         }
         article {
             text-align: center;
             width: 100%;
+            gap: 10px;
             .description-group {
                 .features {
                     display: none;
                 }
                 .description {
-                     word-wrap: break-word;
+                    word-wrap: break-word;
                     max-width: 100%;
                     -webkit-line-clamp: 25;
                     display: -webkit-box;
-                    -webkit-box-orient: vertical;  
+                    -webkit-box-orient: vertical;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
             }
             .bottom-group {
                 justify-content: center;
-                margin-top: 20px;
                 .cost {
                     display: none;
+                }
+                button {
+                    width: 190px;
+                    p {
+                        font-size: large;
+                    }
                 }
             }
         }

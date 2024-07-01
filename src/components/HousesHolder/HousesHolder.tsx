@@ -1,6 +1,6 @@
 'use client'
 import { House } from "@/entity/House"
-import styles from './HouseHolder.module.scss'
+import styles from './HousesHolder.module.scss'
 import HouseCard from "../HouseCard/HouseCard";
 import NumberInput from "../ui/Inputs/NumberInput/NumberInput";
 import { useNumberInput } from "../ui/Inputs/NumberInput/useNumberInput";

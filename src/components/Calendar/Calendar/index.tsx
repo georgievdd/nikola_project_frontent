@@ -2,11 +2,15 @@
 import styles from './CalendarInput.module.scss'
 import { CalendarController } from '../CalendarBody/hooks/useCalendar'
 import { getDateOrPlug } from '../CalendarBody/helpers'
-import { useEffect, useRef, useState } from 'react'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
 import Calendar3 from '../CalendarBody'
 
 
-const Calendar = ({calendarController}: {calendarController: CalendarController}) => {
+const Calendar = ({calendarController, style, className}: {
+  calendarController: CalendarController,
+  style?: CSSProperties,
+  className?: string,
+}) => {
 
   const {
     show,
@@ -44,7 +48,7 @@ const Calendar = ({calendarController}: {calendarController: CalendarController}
   }, [calendarController.selectionController.isActive])
 
   return (
-    <div>
+    <div style={style}>
       <div className={styles.wrapper}>
         <div className={styles.divider}/>
         <div className={styles.container}>

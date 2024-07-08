@@ -1,14 +1,17 @@
 import { DatePickerController } from './useDatePicker'
 import styles from './DatePicker.module.scss'
 import SelectInput from '../SelectInput/SelectInput'
+import { CSSProperties } from 'react'
 
 
-const DatePicker = ({controller}: {
-  controller: DatePickerController
+const DatePicker = ({controller, style, className}: {
+  controller: DatePickerController,
+  style?: CSSProperties,
+  className?: string,
 }) => {
 
   return (
-    <div className={styles.wrapper}>
+    <div className={[styles.wrapper, className].join(' ')} style={style}>
       <div className={styles.divider}/>
       <div className={styles.container}>
         <div className={styles.group}>

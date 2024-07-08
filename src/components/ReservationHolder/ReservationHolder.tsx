@@ -10,6 +10,7 @@ import ClipImg from '../../../public/images/clip.svg'
 import { useCallback, useEffect } from 'react'
 import { useValue } from '@/helpers'
 import { getReservation } from '@/api/reservation'
+import AddressIcon from '../../../public/images/svg/address'
 
 const ReservationHolder = () => {
   
@@ -28,6 +29,7 @@ const ReservationHolder = () => {
     getReservation(slug!)
       .then(reservationSetter.set)
   }, [])
+
   if (!reservation) {
     return <div></div>
   }
@@ -37,10 +39,14 @@ const ReservationHolder = () => {
         Заявка отправлена
       </h1>
       <section onClick={onClick}>
-        <div className={styles['house-preview']} onClick={stopClick}>
+        <div className={styles['first-column']} onClick={stopClick}>
           <Swiper links={reservation.house.pictures}/>
+          <div className={styles['address-header']}>
+            <AddressIcon />
+            <p>Адрес:</p>
+          </div>
         </div>
-        <div className={styles['house-description']}>
+        <div className={styles['second-column']}>
           <div className={styles['line']}>
             <h3>Домик:</h3>
             <h3>{reservation.house.name}</h3>

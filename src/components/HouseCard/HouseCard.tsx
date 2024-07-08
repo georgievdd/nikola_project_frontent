@@ -3,12 +3,13 @@ import styles from './HouseCard.module.scss'
 import Swiper from '../Swiper/Swiper'
 import Button from '../ui/Button/Button'
 import Link from 'next/link'
-import Feature from '../ui/Feature/Feature'
+import Feature from '../ui/FeatureList/Feature/Feature'
 import { SelectionController } from '../Calendar/CalendarBody/hooks/useSelection'
 import { INumberInput } from '../ui/Inputs/NumberInput/useNumberInput'
 import { getImageUrl } from '@/helpers'
 import { differenceInBusinessDays } from 'date-fns'
 import { getNightsDeclension } from '@/localization'
+import FeatureList from '../ui/FeatureList/FeatureList'
 
 const getTimeDiff = (dateStart: Date, dateEnd: Date) => {
   return differenceInBusinessDays(dateStart, dateEnd)
@@ -52,9 +53,7 @@ const HouseCard = ({
         <div className={styles["description-group"]}>
           <p className={styles.description}>{data.description}</p>
           <div className={styles.features}>
-            {data.features.map((feature) => (
-              <Feature key={feature.id} icon={getImageUrl(feature.picture)} name={feature.name}/>
-            ))}
+            <FeatureList features={data.features} limit={4}/>
           </div>
         </div>
         <div className={styles["bottom-group"]}>

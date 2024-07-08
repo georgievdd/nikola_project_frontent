@@ -1,4 +1,16 @@
+@import "../../../../app/variables.scss";
+
 .container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin: 0 auto;
+    width: 100%;
     gap: 50px;
+    @media (max-width: $first-point) {
+        justify-content: center;
+    }
+    @media (max-width: $fifth-point) {
+        flex-wrap: wrap-reverse;
+    }
 }

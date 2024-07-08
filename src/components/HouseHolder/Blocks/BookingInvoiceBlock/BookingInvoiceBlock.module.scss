@@ -1,8 +1,8 @@
 @import '../../../../app/variables.scss';
-
 .container {
+
     position: relative;
-    border: 3px dashed $secondary-color;
+    border: dashed 3px $secondary-color;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -27,13 +27,13 @@
             .event {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 .title {
-                    display: flex;
                     align-items: center;
+                    display: flex;
                     gap: 10px;
                 }
             }
-
         }
 
         .submit {
@@ -42,31 +42,79 @@
             display: flex;
             justify-content: center;
             .box {
+                width: 60%;
                 bottom: 0;
-                width: 55%;
                 display: flex;
+                justify-content: space-between;
                 flex-direction: column;
-                gap: 30px;
-                .upshot {
-                    h2, p {
-                        font-size: 30px;
-                        font-weight: 600;
-                    }
-                    p {
-                        color: $third-acent-color;
-                    }
-                    span {
-                        font-weight: 500;
-                    }
-
+                .inner {
+                    width: 100%;
                     display: flex;
-                    justify-content: space-between;
                     align-items: center;
+                    flex-direction: column;
+                    gap: 10px;
+                    .upshot {
+                        h2, p {
+                            font-size: 30px;
+                            font-weight: 600;
+                        }
+                        p {
+                            color: $third-acent-color;
+                        }
+                        span {
+                            font-weight: 500;
+                        }
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    button {
+                        width: 100%;
+                    }
                 }
             }
         }
-
+    }
+    @media (max-width: $first-point) {
+        .wrapper .submit .box .inner .upshot {
+            h2, p {
+                font-size: 24px;
+            }
+        }
     }
 
-
+    @media (max-width: $third-point) {
+        margin-bottom: 20px;
+        .wrapper .submit .box .inner .upshot {
+            h2, p {
+                font-size: 20px;
+            }
+        }
+        .wrapper .content .header {
+            font-size: 24px;
+        }
+    }
+    @media (max-width: $fourth-point) {
+        .wrapper .content .header {
+            font-size: 20px;
+        }
+    }
+    @media (max-width: 650px) {
+        padding: 40px;
+        .wrapper {
+            .content {
+                display: none;
+            }
+            .submit {
+                width: 100%;
+                .box {
+                    width: 60%;
+                }
+            }
+        }
+    }
+    @media (max-width: 480px) {
+        padding: 10px;
+    }
 }

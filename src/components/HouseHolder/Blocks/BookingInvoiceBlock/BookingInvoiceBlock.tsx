@@ -7,7 +7,7 @@ import LabelInput from '@/components/ui/Inputs/LabelInput/LabelInput'
 import { ChronologicalPosition, NonChronologicalPosition } from '@/entity/Reservation'
 
 const BookingInvoiceBlock = ({
-  controller, 
+  controller,
   makeReservation,
   canMakeReservation
 }: {
@@ -31,23 +31,24 @@ const BookingInvoiceBlock = ({
               <BillEvent event={event} key={event.description + i} />
             ))
           }
-
         </div>
         <div className={styles.submit}>
           <div className={styles.box}>
             <LabelInput controller={controller.promoController} />
-            <div className={styles.upshot}>
-              <h2>Итого</h2>
-              <p>{bill.total.toLocaleString('ru-RU')} <span>₽</span></p>
+            <div className={styles.inner}>
+              <div className={styles.upshot}>
+                <h2>Итого</h2>
+                <p>{bill.total.toLocaleString('ru-RU')} <span>₽</span></p>
+              </div>
+              <Button 
+                round0 
+                disabled={!canMakeReservation}
+                variant={'contained'} 
+                onClick={makeReservation}
+              >
+                Забронировать
+              </Button>
             </div>
-            <Button 
-              round0 
-              disabled={!canMakeReservation}
-              variant={'contained'} 
-              onClick={makeReservation}
-            >
-              Забронировать
-            </Button>
           </div>
         </div>
       </div>

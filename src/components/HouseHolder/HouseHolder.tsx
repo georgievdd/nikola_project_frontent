@@ -118,10 +118,6 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     priceList.promoValue,
   ])
 
-  const resetAction = useCallback(() => {
-    priceList.set(null)
-  }, [])
-
   return (
     <div className={styles.container}>
       <HouseDescriptionBlock
@@ -132,7 +128,6 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
         guestsController={guestsController}
         datePickerController={datePickerController}
         calendarController={calendarController}
-        resetAction={resetAction}
       />
       <UserInfoBlock 
         inputGroup={userInfoController.controllers}

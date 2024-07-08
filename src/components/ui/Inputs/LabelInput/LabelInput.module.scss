@@ -2,7 +2,6 @@
 
 
 .container {
-
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -24,5 +23,18 @@
         letter-spacing: 0em;
         text-align: left;
 
+    }
+    @media (max-width: $second-point) {
+        input {
+            font-size: large;
+        }
+    }
+    @media (max-width: $third-point) {
+        input {
+            font-size: medium;
+        }
+        h3 {
+            font-size: larger;
+        }
     }
 }

@@ -1,10 +1,17 @@
+@import "../../../app/variables.scss";
+
 $w: 720px;
 $h: $w * 0.625;
+$w3: $w * 3/4;
+$h3: $h * 3/4;
 $preview-br: 12px;
 $preview-h: 0.2 * $h;
 $preview-gap: 10px;
 $preview-h-border: $preview-h * 8/9;
 $smooth-w: 0.17 * $w;
+$arrow-right: 0;
+$img-element-w: 100px; // for 3 point
+$img-element-h: 90px;
 
 .container {
   position: relative;
@@ -113,7 +120,7 @@ $smooth-w: 0.17 * $w;
 
   [class*="arrow_"] {
     position: absolute;
-    right: 0;
+    right: $arrow-right;
     width: $smooth-w;
   }
   .arrow_bottom_show {
@@ -197,4 +204,69 @@ $smooth-w: 0.17 * $w;
     }
   }
 
+  @media (max-width: $first-point) {
+    width: $w * 4/5;
+    height: $h * 4/5;
+    .fade_overlay_bottom, .fade_overlay_top {
+      width: $smooth-w * 4/5;
+    }
+    [class*="arrow_"] {
+      right: -10px;
+    }
+  }
+  @media (max-width: 900px) {
+    width: $w * 3/4;
+    height: $h * 3/4;
+    .fade_overlay_bottom, .fade_overlay_top {
+      width: $smooth-w * 3/4;
+    }
+    [class*="arrow_"] {
+      right: -15px;
+    }
+  }
+  @media (max-width: $third-point) {
+    flex-direction: column;
+    align-items: center;
+    width: $w3 - $img-element-w;
+    height: $h3 + $img-element-h;
+    .img_group {
+      flex-direction: row;
+      width: 100%;
+      .group_element {
+        min-width: 100px;
+      }
+    }
+    .img_current {
+      width: 100%;
+      min-height: 300px;
+    }
+    [class*="arrow_"] {
+      display: none;
+    }
+    [class*="fade_overlay_"] {
+      display: none;
+    }
+  }
+  @media (max-width: $fourth-point) {
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    .img_group {
+      flex-direction: row;
+      width: 100%;
+      .group_element {
+        min-width: 100px;
+      }
+    }
+    .img_current {
+      width: 100%;
+      min-height: 300px;
+    }
+  }
+  @media (max-width: 450px) {
+    .img_current {
+      width: 100%;
+      min-height: 200px;
+    }
+  }
 }

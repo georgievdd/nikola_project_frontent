@@ -14,12 +14,12 @@ export interface BookingInvoiceController {
 
 export function useBookingInvoice(): BookingInvoiceController {
     const [data, setData] = useState<IReservationPrice | null>(null)
-    const promoController = useLabelInput({ label: 'Промокод', placeholder: 'ваш промокод', type: 'text'})
-    const [promoValue, setPromoValue] = useState('');
+    const promoController = useLabelInput({ label: '', placeholder: 'ваш промокод', type: 'text'})
+    const [promoValue, setPromoValue] = useState('')
 
     const debouncePromo = useCallback(debounce((value) => {
-      setPromoValue(value);
-    }, 300), []);
+      setPromoValue(value)
+    }, 300), [])
 
     useEffect(() => {
       debouncePromo(promoController.value)

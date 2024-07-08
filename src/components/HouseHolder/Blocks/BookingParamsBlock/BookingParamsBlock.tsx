@@ -12,28 +12,17 @@ const BookingParamsBlock = ({
   guestsController,
   datePickerController,
   calendarController,
-  resetAction,
 }: {
   guestsController: INumberInput,
   datePickerController: DatePickerController,
   calendarController: CalendarController,
-  resetAction: () => void
 }) => {
 
-  const clear = () => {
-    datePickerController.clear(),
-    calendarController.reset(), 
-    guestsController.reset(), 
-    sessionStorage.clear(),
-    resetAction()
-  }
-  
   return (
     <section className={styles.container}>
-      <NumberInput {...guestsController}/>
-      <Calendar calendarController={calendarController}/>
-      <Reloader onClick={clear}/>
-      <DatePicker controller={datePickerController}/>
+      <NumberInput {...guestsController} style={{gridArea: 'a'}}/>
+      <Calendar calendarController={calendarController} style={{gridArea: 'b'}}/>
+      <DatePicker controller={datePickerController} style={{gridArea: 'd'}}/>
     </section>
   )
 }

@@ -67,27 +67,27 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
   return (
     <div>
       <div className={styles.container}>
-        <div className={styles.img_current}>
-          <PictureWithBackground img={imgs[current]}/>
-        </div>
-        <ul className={styles.img_group} ref={columnRef}>
-          {imgs.map((img, i) => (<div key={img.picture}>
-            <input
-              value={i}
-              type="radio" 
-              id={`img-${i}`} 
-              name="carousel" 
-              className={styles.customcheckbox}
-              checked={i === current}
-              onChange={handleImageChange}
-            />
-            <label htmlFor={`img-${i}`} className={styles.group_element}>
-              <div className={styles.imgholder}>
-                <PictureWithBackground img={img}/>
-              </div>
-            </label>
-          </div>))}
-        </ul>
+          <div className={styles.img_current}>
+            <PictureWithBackground img={imgs[current]}/>
+          </div>
+          <ul className={styles.img_group} ref={columnRef}>
+            {imgs.map((img, i) => (<div key={img.picture}>
+              <input
+                value={i}
+                type="radio" 
+                id={`img-${i}`} 
+                name="carousel" 
+                className={styles.customcheckbox}
+                checked={i === current}
+                onChange={handleImageChange}
+              />
+              <label htmlFor={`img-${i}`} className={styles.group_element}>
+                <div className={styles.imgholder}>
+                  <PictureWithBackground img={img}/>
+                </div>
+              </label>
+            </div>))}
+          </ul>
         <div className={styles.fade_overlay_top} ref={topSmoothRef}/>
         <div className={styles.fade_overlay_bottom} ref={bottomSmoothRef}/>
         <button onClick={handlePrev} className={styles.arrow_top_hide} ref={topArrowRef}>

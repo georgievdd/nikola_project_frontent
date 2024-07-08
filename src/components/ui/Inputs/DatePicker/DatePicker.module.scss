@@ -2,11 +2,11 @@
 @import '../NumberInput/NumberInput.module.scss';
 
 $h: 70px;
-
+$w: 302px;
 
 .wrapper {
     position: relative;
-    width: 302px;
+    width: $w;
     position: relative;
     border-radius: 15px;
     height: $h;
@@ -31,8 +31,24 @@ $h: 70px;
             flex-direction: column;
             gap: 5px;
             label {
+                white-space: nowrap;
                 margin-left: 16px;
             }
+        }
+    }
+
+    @media (max-width: $second-point) {
+        .container .group label {
+            margin-left: 5px;
+            padding-right: 5px;
+        }
+    }
+
+    @media (max-width: $fifth-point) {
+        width: $w * 0.9;
+        .container .group label {
+            margin-left: 5px;
+            padding-right: 5px;
         }
     }
 }

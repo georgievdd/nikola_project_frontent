@@ -62,8 +62,14 @@ $w: 302px;
             }
         }
     }
-    @media (max-width: $fourth-point) {
-        
+    @media (max-width: 510px) {
+        width: $w * 0.7;
+        .container .group {
+            label, p {
+                font-size: 17px;
+            }
+            margin-left: 15px;
+        }
     }
 }
 

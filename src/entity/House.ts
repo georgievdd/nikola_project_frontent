@@ -21,6 +21,7 @@ export interface Feature {
     id: number
     name: string
     picture: string
+    withoutPrefix?: boolean
 }
   
 

@@ -32,3 +32,16 @@ export function waitForNextTask() {
         setTimeout(resolve, 0)
     })
 }
+
+export class Cookie {
+    private data: Record<string, string> = {}
+    constructor(str: string) {
+        str.split(';').forEach(pair => {
+            const [key, value] = pair.split('=')
+            this.data[key] = value
+        })
+    }
+    get(key: string) {
+        return this.data[key]
+    }
+}

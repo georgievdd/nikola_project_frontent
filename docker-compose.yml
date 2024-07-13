@@ -17,16 +17,6 @@ services:
       - "3000:3000"
     networks:
       - nikola-docker-network
-    volumes:
-      - type: bind
-        source: .
-        target: /app
-      - type: volume
-        source: app_node_modules
-        target: /app/node_modules
-      - type: volume
-        source: app_next
-        target: /app/.next
 
 volumes:
   app_node_modules:

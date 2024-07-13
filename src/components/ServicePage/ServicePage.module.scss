@@ -17,26 +17,59 @@
                 width: 90%;
                 display: flex;
                 flex-direction: column;
-                gap: 30px;
+                overflow-y: scroll;
+                &::-webkit-scrollbar {
+                    display: none;
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+                p {
+                    white-space: pre-wrap;
+                }
+            }
+            .description-preview {
+                display: none;
+                font-size: medium;
+                text-align: start;
+                text-decoration: underline;
+                cursor: pointer;
             }
             .bottom-group {
                 width: 90%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                gap: 20px;
+                .cost {
+                    white-space: nowrap;
+                }
             }
         }
         .img-wrapper {
             position: relative;
+            height: 100%;
             width: 50%;
-            border-radius: 15px;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .img-holder {
+                width: 100%;
+                align-items: center;
+                position: relative;
+                border-radius: 15px;
+                height: 450px;
+                overflow: hidden;
+            }
         }
 
         @media (max-width: $first-point) {
             height: 400px;
             section .bottom-group .cost {
                 font-size: 27px;
+            }
+            .img-wrapper .img-holder {
+                height: 337.5px;
             }
         }
         
@@ -61,7 +94,11 @@
                 }
             }
             .img-wrapper {
-                height: 80%;
+                justify-content: start;
+                .img-holder {
+                    height: 270px;
+                    width: 360px;
+                }
             }
         }
         
@@ -114,69 +151,66 @@
             }
         }
 
-        @media (max-width: 650px) {
-            section .bottom-group {
-                button {
-                    width: 170px;
-                    img {
-                        width: 20px;
-                    }
-                    padding: {left: 10px; right: 10px;};
-                    p {font-size: medium;}
-                }
-                .cost {
-                    font-size: medium;
+        @media (max-width: 710px) {
+            height: 100vw;
+            flex-direction: column-reverse;
+            gap: 20px;
+            section {
+                width: 100%;
+                .bottom-group {
+                    position: relative;
+                    left: 0;
+                    justify-content: space-around;
                 }
             }
             .img-wrapper {
-                height: 70%;
-            }
-        }
-        @media (max-width: 590px) {
-            section .title {
-                position: absolute;
-                width: 100vw;
-            }
-            section .description, .img-wrapper {
-                margin-top: 70px;
-            }
-            section .description {
-                gap: 5px;
-                p {
-                    font-size: small;
-                }
-                max-height: 70%;
-                overflow: scroll;
-                &::-webkit-scrollbar {
-                    display: none;
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-            }
-            section .bottom-group {
-                position: absolute;
-                top: 100%;
-                width: 200%;
-                justify-content: center;
-                gap: 20px;
-                button {
+                width: 100%;
+                min-height: 70vw;
+                max-height: 70vw;
+                .img-holder {
                     width: 100%;
-                    padding: {left: 5px; right: 5px;};
-                }
-                .cost {
-                    font-size: x-large;
+                    height: 100%;
                 }
             }
         }
-        @media (max-width: 450px) {
-            .img-wrapper {
-                height: 50%;
+
+        @media (max-width: 680px) {
+            text-align: center;
+            section {
+                gap: 15px;
+                .description {
+                    display: none;
+                }
+                .bottom-group {
+                    button {
+                        width: 240px;
+                        img {
+                            width: 25px;
+                        }
+                        padding: 8px;
+                        p {font-size: x-large;}
+                    }
+                    .cost {
+                        font-size: xx-large;
+                    }
+                }
             }
         }
-        
-        @media (max-width: $sixth-point) {
-            section .bottom-group .cost {
-                font-size: medium;
+        @media (max-width: 550px) {
+            section {
+                .bottom-group {
+                    button {
+                        width: 200px;
+                        img {
+                            width: 25px;
+                        }
+                        padding: 5px;
+                        p {font-size: large;}
+                    }
+                    .cost {
+                        font-size: x-large;
+                    }
+                }
             }
         }
     }

@@ -34,3 +34,6 @@ export class JSONCookie {
         return this.data[key]
     }
 }
+
+
+export const normalize = (v: number) => v > 1 ? 1 / v : v

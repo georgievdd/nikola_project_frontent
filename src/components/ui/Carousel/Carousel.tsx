@@ -5,7 +5,7 @@ import styles from './Carousel.module.scss'
 import Image from 'next/image'
 import arrowDown from '../../../../public/images/arrow-down.svg'
 import arrowUp from '../../../../public/images/arrow-up.svg'
-import PictureWithBackground from '../PictureWithBackground/PictureWithBackground'
+import PictureWithBlur from '../PictureWithBlur/PictureWithBlur'
 /**
  * Если будет беда - заменить img на Image; добавить fill
  */
@@ -68,7 +68,7 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
     <div>
       <div className={styles.container}>
           <div className={styles.img_current}>
-            <PictureWithBackground img={imgs[current]}/>
+            <PictureWithBlur img={imgs[current]}/>
           </div>
           <ul className={styles.img_group} ref={columnRef}>
             {imgs.map((img, i) => (<div key={img.picture}>
@@ -83,7 +83,7 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
               />
               <label htmlFor={`img-${i}`} className={styles.group_element}>
                 <div className={styles.imgholder}>
-                  <PictureWithBackground img={img}/>
+                  <PictureWithBlur img={img}/>
                 </div>
               </label>
             </div>))}

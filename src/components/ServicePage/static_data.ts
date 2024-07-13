@@ -1,11 +1,3 @@
-export interface Service {
-    imgUrls: string[]
-    tgLink: string
-    title: string
-    descpriptions: string[]
-    cost: string
-    measurement: string
-}
 
 const genImgLinks = (prefix: string, length: number) => 
     Array.from({length}).map((_, i) => `${prefix}/${i + 1}.png`)

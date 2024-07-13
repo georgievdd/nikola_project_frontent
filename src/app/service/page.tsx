@@ -1,3 +1,4 @@
+import { getServices } from "@/api/service";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import ServicePage from "@/components/ServicePage/ServicePage";
 import type { Metadata } from "next";
@@ -9,10 +10,11 @@ export const metadata: Metadata = {
   keywords: "nikola, services",
 }
 
-export default function Service() {
+export default async function Service() {
+  const services = await getServices()
   return (
     <DefaultLayout>
-      <ServicePage/>
+      <ServicePage services={services}/>
     </DefaultLayout>
   );
 }

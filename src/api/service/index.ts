@@ -1,0 +1,7 @@
+import { Service } from "@/entity/Service";
+import { FETCH_SERVICES } from "../endpoints";
+
+export async function getServices(): Promise<Service[]> {
+    return fetch(FETCH_SERVICES)
+        .then(res => res.json())
+}

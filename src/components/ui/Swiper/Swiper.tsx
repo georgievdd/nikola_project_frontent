@@ -5,7 +5,7 @@ import { Navigation, Pagination, A11y, EffectFade, Scrollbar } from 'swiper/modu
 import styles from './Swiper.module.scss'
 import { Picture } from '@/entity/House';
 import 'swiper/swiper-bundle.css'
-import PictureWithBackground from '../PictureWithBackground/PictureWithBackground';
+import PictureWithBlur from '../PictureWithBlur/PictureWithBlur'
 
 interface SwiperProps {
   className?: any
@@ -26,7 +26,7 @@ export default function Swiper(props: SwiperProps) {
       >
         {props.links.map(link => (
           <SwiperSlide key={link.picture} className={styles.slide}>
-            <PictureWithBackground always img={link}/>
+            <PictureWithBlur img={link}/>
           </SwiperSlide>
         ))}
       </LibSwiper>

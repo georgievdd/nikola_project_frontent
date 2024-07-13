@@ -4,6 +4,7 @@ import { INTERNAL_API_URL } from "./instance";
 export const FETCH_HOUSES = `${INTERNAL_API_URL}/houses/`
 export const FETCH_HOUSE = (id: string) => `${INTERNAL_API_URL}/houses/${id}`
 export const FETCH_HOUSE_OPTIONS = (id: string) => `${INTERNAL_API_URL}/houses/${id}/reservations/options`
+export const FETCH_SERVICES = `${INTERNAL_API_URL}/additional_services`
 
 // for axios
 export const GET_HOUSE_CALENDAR = (id: number) => `/houses/${id}/calendar/`

@@ -1,46 +1,44 @@
 import Link from 'next/link'
 import Button from '../ui/Button/Button'
 import styles from './ServicePage.module.scss'
-import { Service, serviceData } from './static_data'
+import { serviceData } from './static_data'
 import Image from 'next/image'
 import TGImage from '../../../public/images/tg.svg'
 import { fontSize } from '@mui/system'
 import Swiper from '../ui/Swiper/Swiper'
 import { Picture } from '@/entity/House'
-const ServicePage = () => {
+import { Service } from '@/entity/Service'
+
+const ServicePage = ({services}: {services: Service[]}) => {
   return (
     <div className={styles.container}>
-      {serviceData.map((service: Service) => 
+      {services.map((service: Service) => 
         <Block {...service}/>
       )}
     </div>
   )
 }
-const getServicePictures = (pictures: string[]): Picture[] => 
-  pictures.map(url => ({width: 0, height: 0, picture: `/service/${url}`}))
+
 
 const Block = ({
-  title,
-  descpriptions,
-  cost,
-  measurement,
-  tgLink,
-  imgUrls
+  name,
+  description,
+  pictures,
+  price_string,
+  telegram_contact_link,
 }: Service) => (
   <div className={styles['item-wrapper']}>
     <section>
       <h1 className={styles.title}>
-        {title}
+        {name}
       </h1>
       <div className={styles['description']}>
-        {descpriptions.map((text: string) => 
         <p>
-          {text}
+          {description}
         </p>
-        )}
       </div>
       <div className={styles['bottom-group']}>
-        <Link href={tgLink} target="_blank">
+        <Link href={telegram_contact_link} target="_blank">
           <Button variant='base' statical round0>
             Забронировать <Image 
               alt=''
@@ -52,14 +50,16 @@ const Block = ({
           </Button>
         </Link>
         <h2 className={styles.cost}>
-          {`${cost} ${measurement}`}
+          {price_string}
         </h2>
       </div>
     </section>
     <div className={styles['img-wrapper']}>
-      <Swiper
-        links={getServicePictures(imgUrls)}
-      />
+      <div className={styles['img-holder']}>
+        <Swiper
+          links={pictures}
+        />
+      </div>
     </div>
   </div>
 )

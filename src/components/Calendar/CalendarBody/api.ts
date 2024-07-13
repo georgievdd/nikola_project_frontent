@@ -30,10 +30,11 @@ export async function getCommonCalendar(
     dateIndex: number,
     endpoint: string,
     total_persons_amount: number,
+    withClear: boolean,
 ) {
     try {
         const begin = startOfMonth(new Date())
-        const nonCachedDates = preprocessDates(dataController, dateIndex, opacity)
+        const nonCachedDates = preprocessDates(dataController, dateIndex, opacity, withClear)
         const response = await Promise.all(nonCachedDates.map(async daysToAdd => {
             const month = addMonths(begin, daysToAdd)
             const data = {

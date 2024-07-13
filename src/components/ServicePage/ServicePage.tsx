@@ -5,7 +5,7 @@ import { Service, serviceData } from './static_data'
 import Image from 'next/image'
 import TGImage from '../../../public/images/tg.svg'
 import { fontSize } from '@mui/system'
-import Swiper from '../Swiper/Swiper'
+import Swiper from '../ui/Swiper/Swiper'
 import { Picture } from '@/entity/House'
 const ServicePage = () => {
   return (

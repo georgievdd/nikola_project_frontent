@@ -1,7 +1,7 @@
 'use client'
 import { Reservation } from '@/entity/Reservation'
 import styles from './ReservationHolder.module.scss'
-import Swiper from '../Swiper/Swiper'
+import Swiper from '../ui/Swiper/Swiper'
 import { copyReservationToBuffer, getClock, prepareDate } from './helpers'
 import CircleImg from '../../../public/images/circle.svg'
 import MoonImg from '../../../public/images/moon.svg'

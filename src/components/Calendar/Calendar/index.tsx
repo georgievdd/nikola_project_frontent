@@ -40,8 +40,8 @@ const Calendar = ({calendarController, style, className}: {
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [show]);
+    }
+  }, [show])
 
   useEffect(() => {
     calendarController.selectionController.isActive && hideCalendar()

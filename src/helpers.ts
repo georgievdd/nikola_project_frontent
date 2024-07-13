@@ -26,3 +26,9 @@ export const useValue = <T>(defaultValue: any = null) => {
 export const getImageUrl = (path: string) => {
     return `${process.env.NEXT_PUBLIC_BACKEND_URL}${path}`
 }
+
+export function waitForNextTask() {
+    return new Promise(resolve => {
+        setTimeout(resolve, 0)
+    })
+}

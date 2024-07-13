@@ -187,7 +187,7 @@ const Month = ({month, processDateClick, mapState, selectionController, costs, o
                                 processDateClick(dayCopy)
                             }}
                         >
-                          <div className={`date ${getStyle(day)} ${onLoad ? 'noclickable' : ''}`}>
+                        <div className={`date ${getStyle(day)} ${onLoad ? 'noclickable' : ''}`}>
                             <p>{format(day, dateFormat)}</p>
                             {costs[day.getKey()] &&
                             <div className='date__coin'>

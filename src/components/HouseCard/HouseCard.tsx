@@ -1,18 +1,16 @@
 import { House } from '@/entity/House'
 import styles from './HouseCard.module.scss'
-import Swiper from '../Swiper/Swiper'
+import Swiper from '../ui/Swiper/Swiper'
 import Button from '../ui/Button/Button'
 import Link from 'next/link'
-import Feature from '../ui/FeatureList/Feature/Feature'
 import { SelectionController } from '../Calendar/CalendarBody/hooks/useSelection'
 import { INumberInput } from '../ui/Inputs/NumberInput/useNumberInput'
-import { getImageUrl } from '@/helpers'
-import { differenceInBusinessDays } from 'date-fns'
-import { getNightsDeclension } from '@/localization'
+import { differenceInCalendarDays } from 'date-fns'
+import { getNightsDeclension } from '@/localization/night'
 import FeatureList from '../ui/FeatureList/FeatureList'
 
 const getTimeDiff = (dateStart: Date, dateEnd: Date) => {
-  return differenceInBusinessDays(dateStart, dateEnd)
+  return differenceInCalendarDays(dateStart, dateEnd)
 } 
 
 
@@ -42,7 +40,7 @@ const HouseCard = ({
     }
     return `от ${data.base_price} ₽ за ночь`
   }
-  
+
   return (
     <div className={styles.container}>
       <Swiper className={styles.preview} links={data.pictures}/>

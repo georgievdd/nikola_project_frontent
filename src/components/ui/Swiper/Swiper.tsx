@@ -5,7 +5,7 @@ import { Navigation, Pagination, A11y, EffectFade, Scrollbar } from 'swiper/modu
 import styles from './Swiper.module.scss'
 import { Picture } from '@/entity/House';
 import 'swiper/swiper-bundle.css'
-import PictureWithBackground from '../ui/PictureWithBackground/PictureWithBackground';
+import PictureWithBackground from '../PictureWithBackground/PictureWithBackground';
 
 interface SwiperProps {
   className?: any

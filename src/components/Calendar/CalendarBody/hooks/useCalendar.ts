@@ -7,7 +7,7 @@ import {
     useState
 } from "react";
 import {getCheckInCalendar, getCommonCalendar} from "../api";
-import {showAlert} from "../../../../helpers";
+import {showAlert, waitForNextTask} from "../../../../helpers";
 import {ScrollController, useScroll} from "./useScroll";
 import {SelectionController, useSelection} from "./useSelection";
 import {DayType} from "../helpers";
@@ -32,7 +32,9 @@ export function useCalendar(
     id: string,
     defaultShow: boolean,
     endpoint: string,
-    guestsController: INumberInput): CalendarController {
+    guestsController: INumberInput,
+    isNoHouses?: () => boolean,
+): CalendarController {
     /**
      * Сколько месяцев вперед отображаем
      */
@@ -48,8 +50,10 @@ export function useCalendar(
 
 
     function validDate(date: Date): boolean {
-        if (!dataController.mapState[date.getKey()]) return true
-        return dataController.mapState[date.getKey()] !== DayType.Disabled
+        const key = date.getKey()
+        const {mapState} = dataController
+        if (!mapState[key]) return true
+        return mapState[key] !== DayType.Disabled
     }
     const processDateClick = function(date: Date) {
         if (!validDate(date)) {
@@ -78,7 +82,7 @@ export function useCalendar(
         selectionController.setDateBegin(date)
     }
 
-    function setCommonCalendar() {
+    function setCommonCalendar(withClear: boolean = false) {
         setLoad(true)
         getCommonCalendar(
             2, // сколько месяцев вперед смотрим дополнительно
@@ -86,13 +90,14 @@ export function useCalendar(
             scrollController.currentMonthIndex,
             endpoint,
             guestsController.value,
+            withClear,
         )
             .then(result => dataController.setMapState(prev =>
                 ({...prev, ...result})))
             .catch(e => showAlert(e.response?.data?.message, 'alert-danger'))
             .finally(() => setLoad(false))
     }
-    function setCheckInCalendar(withClear: boolean = false) {
+    function setCheckInCalendar(withClear: boolean = false, callback?: (...args: any) => void) {
         setLoad(true)
         getCheckInCalendar(
             2,
@@ -112,6 +117,7 @@ export function useCalendar(
                     dataController.setMapState(prev => ({...map, ...prev}))
                     dataController.setCosts(prev => ({...costs, ...prev}))
                 }
+                callback && callback(result)
             })
             .catch(e => showAlert(e.response?.data?.message || 'Ошибка', 'alert-danger'))
             .finally(() => setLoad(false))
@@ -157,13 +163,21 @@ export function useCalendar(
 
     useEffect(() => {
         if (guestsController.wasChangedByUser) {
-            reset()
+            updateCalendar()
         }
     }, [guestsController.value])
 
     const reset = () => {
         selectionController.clear()
         dataController.clear()
+    }
+
+    function updateCalendar() {
+        if (selectionController.isActive) {
+            setCheckInCalendar(true)
+        } else {
+            setCommonCalendar(true)
+        }
     }
 
     return {

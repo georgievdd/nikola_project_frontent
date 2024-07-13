@@ -14,12 +14,13 @@ import { GET_HOUSES, GET_HOUSES_CALENDAR } from "@/api/endpoints";
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
   const guestsController = useNumberInput('Гостей', 1)
-  const [houses, setHouses] = useState<House[]>(initHouses)
+  const [houses, setHouses] = useState(initHouses)
   const calendarController = useCalendar(
     'houses',
     false,
     GET_HOUSES_CALENDAR,
-    guestsController
+    guestsController,
+    () => houses.length === 0
   )
   const {selectionController} = calendarController
 

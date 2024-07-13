@@ -132,6 +132,9 @@
     }
     @media (max-width: $fourth-point) {
         gap: 20px;
+        .block-1 {
+            margin-bottom: -24px;
+        }
     }
 }
 

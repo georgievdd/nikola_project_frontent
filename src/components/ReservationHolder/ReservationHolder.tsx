@@ -10,7 +10,7 @@ import ClipImg from '../../../public/images/clip.svg'
 import { useCallback, useEffect } from 'react'
 import { getReservation } from '@/api/reservation'
 import AddressIcon from '../../../public/images/svg/address'
-import { useValue } from '../../../rhelpers'
+import { useValue } from '@/rhelpers'
 
 const ReservationHolder = () => {
   

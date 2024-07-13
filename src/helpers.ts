@@ -26,7 +26,7 @@ export class JSONCookie {
     private data: Record<string, string> = {}
     constructor(str: string) {
         str.split(';').forEach(pair => {
-            const [key, value] = pair.split('=')
+            const [key, value] = pair.trim().split('=')
             this.data[key] = value
         })
     }

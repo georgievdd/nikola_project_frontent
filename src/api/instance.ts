@@ -13,6 +13,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(config => {
     const csrf = new JSONCookie(document.cookie).get('csrftoken')
+    console.log(csrf)
     config.headers['X-Csrftoken'] = csrf
     return config
 })

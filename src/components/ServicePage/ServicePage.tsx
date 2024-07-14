@@ -1,12 +1,9 @@
 import Link from 'next/link'
 import Button from '../ui/Button/Button'
 import styles from './ServicePage.module.scss'
-import { serviceData } from './static_data'
 import Image from 'next/image'
 import TGImage from '../../../public/images/tg.svg'
-import { fontSize } from '@mui/system'
 import Swiper from '../ui/Swiper/Swiper'
-import { Picture } from '@/entity/House'
 import { Service } from '@/entity/Service'
 
 const ServicePage = ({services}: {services: Service[]}) => {

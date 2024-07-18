@@ -1,4 +1,4 @@
 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="33" y="3" width="30" height="30" rx="15" transform="rotate(90 33 3)" stroke="black" stroke-width="2"/>
-<path d="M18 10L18 26M18 26L26 18M18 26L10 18" stroke="black" transform="rotate(180 18 18)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="33" y="3" width="30" height="30" rx="15" transform="rotate(90 33 3)" stroke="black" strokeWidth="2"/>
+<path d="M18 10L18 26M18 26L26 18M18 26L10 18" stroke="black" transform="rotate(180 18 18)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>

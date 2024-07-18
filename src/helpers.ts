@@ -37,3 +37,12 @@ export class JSONCookie {
 
 
 export const normalize = (v: number) => v > 1 ? 1 / v : v
+
+
+export const importStyles = (styles: Record<string, string>) =>
+    (strings: TemplateStringsArray): string =>
+        strings[0].split(' ').map(e => styles[e]).join(' ')
+
+export const v2 = (path: string) => {
+    const styles = eval(`require(path)`)
+} 

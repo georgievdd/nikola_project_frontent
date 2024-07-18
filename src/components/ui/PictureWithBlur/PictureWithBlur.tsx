@@ -36,9 +36,8 @@ const PictureWithBlur = ({
     }
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
-    return () => {
+    return () =>
       window.removeEventListener('resize', updateDimensions);
-    }
   }, [imgRef])
   return (
       needToShowBlur(img, dimensions) ?

@@ -15,6 +15,8 @@ export function getClock(iso: string): string {
     })
 }
 
+export const getSlug = () => window.location.pathname.split('/').at(-1)!
+
 export function copyReservationToBuffer(reservation: Reservation) {
     const data =
         `Домик: ${reservation.house.name}
@@ -23,5 +25,5 @@ export function copyReservationToBuffer(reservation: Reservation) {
 Едет человек: ${reservation.total_persons_amount}
 Итоговая стоимость в рублях: ${reservation.bill.total}
 Ссылка на заявку: ${window.location.href}`
-            navigator.clipboard.writeText(data)
+    navigator.clipboard.writeText(data)
 }

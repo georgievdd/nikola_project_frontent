@@ -1,3 +1,5 @@
+@import '../../app/variables.scss';
+
 .container {
     h1, section, .description {
         margin-top: 60px;
@@ -16,11 +18,28 @@
         padding: 50px;
         border-radius: 24px;
         .first-column {
-            width: 35%;
-            .address-header {
+            width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            .address {
                 display: flex;
-                gap: 10px;
-                align-items: center;
+                flex-direction: column;
+                gap: 15px;
+                .address-header {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                }
+                .address-text {
+                    font-size: x-large;
+                }
+            }
+            .preview {
+                width: 420px;
+                height: 315px;
+                border-radius: 15px;
+                overflow: hidden;
             }
         }
         .second-column {
@@ -45,13 +64,23 @@
         }
         .clip {
             position: absolute;
-            bottom: 20px;
-            right: 24px;
+            bottom: 50px;
+            left: 50px;
             opacity: 0;
             transition: opacity 0.2s ease-in-out;
         }
         &:hover .clip {
             opacity: 1;
+        }
+    }
+
+    @media (max-width: $first-point) {
+        section {
+            padding: 40px;
+            .first-column .preview {
+                width: 360px;
+                height: 270px;
+            }
         }
     }
 }

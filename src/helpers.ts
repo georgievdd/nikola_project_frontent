@@ -1,3 +1,5 @@
+import { ApiError } from "./entity/Error";
+
 export const showAlert = (message: string, variant?: 'alert-danger' | 'alert-success') => {
     const alertDiv = document.createElement('div');
     alertDiv.className = variant || 'alert-danger';
@@ -43,6 +45,6 @@ export const importStyles = (styles: Record<string, string>) =>
     (strings: TemplateStringsArray): string =>
         strings[0].split(' ').map(e => styles[e]).join(' ')
 
-export const v2 = (path: string) => {
-    const styles = eval(`require(path)`)
-} 
+export const isApiError = (data: any): data is ApiError => {
+    return 'detail' in data
+}

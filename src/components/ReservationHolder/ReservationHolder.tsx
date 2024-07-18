@@ -1,7 +1,6 @@
 'use client'
 import { Reservation } from '@/entity/Reservation'
-import Swiper from '../ui/Swiper/Swiper'
-import { copyReservationToBuffer, getClock, getSlug, prepareDate } from './helpers'
+import { address, copyReservationToBuffer, getClock, getSlug, prepareDate } from './helpers'
 import CircleImg from '../../../public/images/circle.svg'
 import MoonImg from '../../../public/images/moon.svg'
 import Image from 'next/image'
@@ -9,8 +8,12 @@ import ClipImg from '../../../public/images/clip.svg'
 import { useCallback, useEffect, useState } from 'react'
 import { getReservation } from '@/api/reservation'
 import AddressIcon from '../../../public/images/svg/address'
+import PictureWithBlur from '../ui/PictureWithBlur/PictureWithBlur'
+import Swiper from '../ui/Swiper/Swiper'
 const s = require('@/helpers')
   .importStyles(require('./ReservationHolder.module.scss'))
+
+
 
 const ReservationHolder = () => {
   
@@ -31,7 +34,6 @@ const ReservationHolder = () => {
   if (!reservation) {
     return <div></div>
   }
-  console.log(reservation);
   return (
     <div className={s`container`}>
       <h1>
@@ -40,17 +42,17 @@ const ReservationHolder = () => {
       <section onClick={onClick}>
         <div className={s`first-column`} onClick={stopClick}>
           <div className={s`preview`}>
-            <Swiper links={reservation.house.pictures}/>
+            <Swiper links={[reservation.house.pictures[0]]}/>
           </div>
-          <div className={s`address`}>
+          <a href={address.link} target='blank'><div className={s`address`}>
             <div className={s`address-header`}>
               <AddressIcon />
               <p>Адрес:</p>
             </div>
             <p className={s`address-text`}>
-              Центральная улица, 10, деревня Звизжи, сельское поселение Угорское
+              {address.text}
             </p>
-          </div>
+          </div></a>
         </div>
         <div className={s`second-column`}>
           <div className={s`line`}>
@@ -60,36 +62,36 @@ const ReservationHolder = () => {
           <div className={s`line`}>
             <h3>Заезд:</h3>
             <div>
-              <h3>{prepareDate(reservation.check_in_datetime)}</h3>
+              <h3 className={s`nowrap`}>{prepareDate(reservation.check_in_datetime)}</h3>
               {clock(reservation.check_in_datetime, 'in')}
             </div>
           </div>
           <div className={s`line`}>
             <h3>Выезд:</h3>
             <div>
-              <h3>{prepareDate(reservation.check_out_datetime)}</h3>
+              <h3 className={s`nowrap`}>{prepareDate(reservation.check_out_datetime)}</h3>
               {clock(reservation.check_out_datetime, 'out')}
             </div>
           </div>
           <div className={s`line`}>
             <h3>Фамилия:</h3>
-            <h3>{reservation.client.first_name}</h3>
+            <h3 className={s`ellipsis`}>{reservation.client.first_name}</h3>
           </div>
           <div className={s`line`}>
             <h3>Имя:</h3>
-            <h3>{reservation.client.last_name}</h3>
+            <h3 className={s`ellipsis`}>{reservation.client.last_name}</h3>
           </div>
           <div className={s`line`}>
             <h3>Почта:</h3>
-            <h3>{reservation.client.email}</h3>
+            <h3 className={s`ellipsis`}>{reservation.client.email}</h3>
           </div>
           <div className={s`line`}>
             <h3>Контакт:</h3>
-            <h3>{reservation.preferred_contact}</h3>
+            <h3 className={s`ellipsis`}>{reservation.preferred_contact}</h3>
           </div>
           <div className={s`line`}>
             <h3>ID заявки:</h3>
-            <h3>{reservation.slug}</h3>
+            <h3 className={s`ellipsis`}>{reservation.slug}</h3>
           </div>
           <div className={s`line`}>
             <h3>Стоимость:</h3>

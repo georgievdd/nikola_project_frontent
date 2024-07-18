@@ -27,3 +27,8 @@ export function copyReservationToBuffer(reservation: Reservation) {
 Ссылка на заявку: ${window.location.href}`
     navigator.clipboard.writeText(data)
 }
+
+export const address = {
+    text: `Деревня Никола-Ленивец, 10, сельское поселение Угорское, Дзержинский район, Калужская область`,
+    link: `https://yandex.ru/maps/?ll=35.599293%2C54.748715&mode=whatshere&whatshere%5Bpoint%5D=35.599179%2C54.748626&whatshere%5Bzoom%5D=17.871925&z=17`,
+}

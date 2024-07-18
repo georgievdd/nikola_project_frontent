@@ -8,7 +8,7 @@ interface Dimensions {
   height: number
 }
 
-const kBlur = 0.9
+const kBlur = 0.85
 
 export function needToShowBlur(picture: Picture, dimensions: Dimensions) {
     if (!picture.width || !picture.height) return false

@@ -1,3 +1,4 @@
+import { SyntheticEvent } from "react";
 import { ApiError } from "./entity/Error";
 
 export const showAlert = (message: string, variant?: 'alert-danger' | 'alert-success') => {
@@ -43,7 +44,7 @@ export const normalize = (v: number) => v > 1 ? 1 / v : v
 
 export const importStyles = (styles: Record<string, string>) =>
     (strings: TemplateStringsArray): string =>
-        strings[0].split(' ').map(e => styles[e]).join(' ')
+        strings[0].split(' ').map(e => styles[e] || '').join(' ')
 
 export const isApiError = (data: any): data is ApiError => {
     return 'detail' in data

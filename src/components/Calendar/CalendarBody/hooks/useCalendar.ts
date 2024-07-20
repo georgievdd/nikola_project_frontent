@@ -33,7 +33,6 @@ export function useCalendar(
     defaultShow: boolean,
     endpoint: string,
     guestsController: INumberInput,
-    isNoHouses?: () => boolean,
 ): CalendarController {
     /**
      * Сколько месяцев вперед отображаем
@@ -45,9 +44,6 @@ export function useCalendar(
     const scrollController = useScroll(calendarCellsRef)
     const dataController = useCalendarData(opacity)
     const [onLoad, setLoad] = useState(false)
-
-
-
 
     function validDate(date: Date): boolean {
         const key = date.getKey()
@@ -81,7 +77,6 @@ export function useCalendar(
         }
         selectionController.setDateBegin(date)
     }
-
     function setCommonCalendar(withClear: boolean = false) {
         setLoad(true)
         getCommonCalendar(
@@ -136,7 +131,6 @@ export function useCalendar(
         }
     }, [scrollController.currentMonthIndex, show])
 
-
     useEffect(() => {
         if (!show) return
         if (selectionController.isActive) {
@@ -153,7 +147,6 @@ export function useCalendar(
             setCheckInCalendar(true)
         }
     }, [selectionController.isStart])
-
 
     useEffect(() => {
         if (dataController.wasCleared) {

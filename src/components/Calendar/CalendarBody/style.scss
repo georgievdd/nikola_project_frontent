@@ -4,6 +4,10 @@ $h: 458px;
 $sidebar-w: $w * 153/581;
 $cell-borde-size: 50px;
 
+.pointer {
+    cursor: pointer;
+}
+
 .calendar-container {
     position: relative;
     width: $w;

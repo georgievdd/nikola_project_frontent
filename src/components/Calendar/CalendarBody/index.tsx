@@ -1,7 +1,7 @@
-import React, {RefObject, useCallback, useEffect, useRef, useState} from 'react';
+import React, {RefObject, SyntheticEvent, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import './style.scss'
 import {addDays, addMonths, endOfMonth, format, isSameDay, isWeekend, startOfMonth, startOfWeek} from "date-fns";
-import {dayStyle, DayType, getMonthName, monday, weekArray} from "./helpers";
+import {dayStyle, DayType, extractIdFromEvent, extractMonthIdFromYear, getMonthName, monday, weekArray} from "./helpers";
 import {ru} from "date-fns/locale";
 import {CalendarController} from "./hooks/useCalendar";
 import {SelectionController} from "./hooks/useSelection";
@@ -19,6 +19,14 @@ export default function Calendar3({controller}: {controller: CalendarController}
         onLoad,
     } = controller
     const calendarMonthNameColumnRef = useRef<HTMLDivElement>(null)
+    const monthClick = useCallback((e: SyntheticEvent) => {
+        const id = extractIdFromEvent(e)!
+        scrollController.scrollToMonth(id)
+    }, [])
+    const yearClick = useCallback((e: SyntheticEvent) => {
+        const id = extractMonthIdFromYear(e)!
+        scrollController.scrollToMonth(id)
+    }, [])
 
     return (
         <div className={`calendar-container`}>
@@ -33,12 +41,12 @@ export default function Calendar3({controller}: {controller: CalendarController}
                 const date = addMonths(new Date(), i)
                 return (<div style={{zIndex: 1}} key={date.getKey()}>
                     {(date.getMonth() === 0 || i == 0) && 
-                      <h3 className={"year-name"}>{date.getFullYear()}</h3>
+                      <h3 onClick={yearClick} className={"year-name pointer"}>{date.getFullYear()}</h3>
                     }
-                    <p id={`${id}month-name${i}`} className="month-name" key={id + i}>
+                    <p onClick={monthClick} id={`${id}month-name${i}`} className="month-name pointer" key={id + i}>
                       {getMonthName(date.getMonth())}
                     </p>
-                </div>)}
+                </div>)}  
                 )}
             </div>
             <div className='calendar-days'>

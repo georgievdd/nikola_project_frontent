@@ -1,5 +1,6 @@
 import {startOfWeek, format, addDays, addMonths} from "date-fns";
 import { ru } from "date-fns/locale";
+import { SyntheticEvent } from "react";
 export const monday = startOfWeek(new Date(), { weekStartsOn: 1 });
 export const weekArray = Array.from({length: 7})
 
@@ -44,4 +45,20 @@ export enum DayType {
 export const dayStyle = {
     [DayType.Disabled]: 'date_disabled',
     [DayType.Holiday]: 'date_holiday',
+}
+
+
+const extractMonthIdFromElement = (e: Element): number | undefined => {
+    const id = e.id.at(-1)
+    return id ? +id : undefined
+}
+
+export const extractIdFromEvent = (e: SyntheticEvent) =>
+    extractMonthIdFromElement(e.target as Element)
+
+
+
+export const extractMonthIdFromYear = (e: SyntheticEvent): number | undefined => {
+    const month = (e.target as Element).parentNode!.querySelector('p')!
+    return extractMonthIdFromElement(month)
 }

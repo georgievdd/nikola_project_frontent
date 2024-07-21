@@ -20,7 +20,6 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
     false,
     GET_HOUSES_CALENDAR,
     guestsController,
-    () => houses.length === 0
   )
   const {selectionController} = calendarController
 

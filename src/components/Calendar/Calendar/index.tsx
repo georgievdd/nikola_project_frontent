@@ -68,14 +68,14 @@ const Calendar = ({calendarController, style}: {
       <div className={s`wrapper`}>
         <div className={s`divider`}/>
         <div className={s`container`}>
-          <div className={s`group`} id='group-0' onClick={groupClick} ref={groupRefs[0]}>
+          <div className={s`group border-right`} id='group-0' onClick={groupClick} ref={groupRefs[0]}>
             <div id='d-0'>
               <label id='l-0'>Заезд</label>
               <p id='p-0'>{check_in_date}</p>
             </div>
           </div>
           <div className={s`group`} id='group-1' onClick={groupClick} ref={groupRefs[1]}>
-            <div  id='d-1'>
+            <div id='d-1'>
               <label  id='l-1'>Выезд</label>
               <p  id='p-1'>{check_out_date}</p>
             </div>

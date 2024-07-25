@@ -12,11 +12,6 @@ $w: 302px;
     overflow: hidden;
     height: $h;
     border: 2px solid $secondary-color;
-    .divider {
-        position: absolute;
-        height: 100%;
-        border-right: 2px solid $secondary-color;
-    }
     .container {
         width: 100%;
         height: 100%;
@@ -24,7 +19,7 @@ $w: 302px;
         flex-direction: row;     
         display: flex;
         align-items: center;
-
+        gap: 0;
         .group {
             flex: 1;
             width: 100%;
@@ -56,7 +51,7 @@ $w: 302px;
             }
         }
         .selected {
-            background-color: $secondary-acent-color;
+            background-color: rgba(194,238,232,0.4);
         }
     }
     @media (max-width: $third-point) {
@@ -116,4 +111,8 @@ $w: 302px;
         opacity: 0;
         transform: scale(0.475, 0.4);
     }
+}
+
+.border-right {
+    border-right: 2px solid $secondary-color;
 }

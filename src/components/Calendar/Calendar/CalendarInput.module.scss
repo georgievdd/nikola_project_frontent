@@ -70,7 +70,6 @@ $w: 302px;
             label, p {
                 font-size: 17px;
             }
-            margin-left: 15px;
         }
     }
 }
@@ -81,12 +80,15 @@ $w: 302px;
     margin-top: $h * 0.3;
     animation: animation-calendar-start 0.2s cubic-bezier(0.43, 0.29, 0.37, 1.48);
     animation-fill-mode: forwards;
+    @media (max-width: $third-point) {
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .calendar-hide {
-    position: absolute;
-    z-index: 10;
-    margin-top: $h * 0.3;
     animation: animation-calendar-hide 0.2s cubic-bezier(0.43, 0.29, 0.37, 1.48);
     animation-fill-mode: forwards;
 }

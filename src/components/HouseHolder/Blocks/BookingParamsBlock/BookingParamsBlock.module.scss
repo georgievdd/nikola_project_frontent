@@ -7,10 +7,14 @@
     margin: 0 auto;
     width: 100%;
     gap: 50px;
+
     @media (max-width: $first-point) {
         justify-content: center;
     }
-    @media (max-width: $fifth-point) {
-        flex-wrap: wrap-reverse;
+    @media (max-width: $second-point) {
+        justify-content: start;
+    }
+    @media (max-width: $third-point) {
+        justify-content: center;
     }
 }

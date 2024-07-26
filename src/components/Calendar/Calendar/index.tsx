@@ -8,7 +8,7 @@ const s = require('@/helpers')
   .importStyles(require('./CalendarInput.module.scss'))
 
 
-const Calendar = ({calendarController, style}: {
+const Calendar = ({calendarController, style, className}: {
   calendarController: CalendarController,
   style?: CSSProperties,
   className?: string,
@@ -64,7 +64,7 @@ const Calendar = ({calendarController, style}: {
 
 
   return (
-    <div style={style}>
+    <div style={style} className={className}>
       <div className={s`wrapper`}>
         <div className={s`divider`}/>
         <div className={s`container`}>

@@ -37,6 +37,10 @@ $w: 302px;
         }
     }
 
+    @media (max-width: $third-point) {
+        height: 63px;
+    }
+
     @media (max-width: $second-point) {
         .container .group label {
             margin-left: 5px;

@@ -5,8 +5,8 @@ import DatePicker from '@/components/ui/Inputs/DatePicker/DatePicker'
 import { DatePickerController } from '@/components/ui/Inputs/DatePicker/useDatePicker'
 import { CalendarController } from '@/components/Calendar/CalendarBody/hooks/useCalendar'
 import Calendar from '@/components/Calendar/Calendar'
-import Reloader from '@/components/ui/Reloader/Reloader'
-
+const s = require('@/helpers')
+  .importStyles(require('./BookingParamsBlock.module.scss'))
 
 const BookingParamsBlock = ({
   guestsController,
@@ -20,9 +20,9 @@ const BookingParamsBlock = ({
 
   return (
     <section className={styles.container}>
-      <NumberInput {...guestsController} style={{gridArea: 'a'}}/>
-      <Calendar calendarController={calendarController} style={{gridArea: 'b'}}/>
-      <DatePicker controller={datePickerController} style={{gridArea: 'd'}}/>
+      <NumberInput {...guestsController}/>
+      <Calendar calendarController={calendarController}/>
+      <DatePicker controller={datePickerController}/>
     </section>
   )
 }

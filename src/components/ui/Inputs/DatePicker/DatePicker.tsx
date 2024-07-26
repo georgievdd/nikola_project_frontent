@@ -2,6 +2,8 @@ import { DatePickerController } from './useDatePicker'
 import styles from './DatePicker.module.scss'
 import SelectInput from '../SelectInput/SelectInput'
 import { CSSProperties } from 'react'
+const s = require('@/helpers')
+  .importStyles(require('./DatePicker.module.scss'))
 
 
 const DatePicker = ({controller, style, className}: {
@@ -11,7 +13,7 @@ const DatePicker = ({controller, style, className}: {
 }) => {
 
   return (
-    <div className={[styles.wrapper, className].join(' ')} style={style}>
+    <div className={s`wrapper ${className}`} style={style}>
       <div className={styles.divider}/>
       <div className={styles.container}>
         <div className={styles.group}>

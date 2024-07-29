@@ -43,7 +43,7 @@ const HouseCard = ({
 
   return (
     <div className={styles.container}>
-      <Swiper className={styles.preview} links={data.pictures}/>
+      <Swiper className={styles.preview} links={data.pictures.slice(0, 8)}/>
       <article>
         <header>
           <h1>{data.name}</h1>

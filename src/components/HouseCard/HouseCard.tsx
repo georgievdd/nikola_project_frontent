@@ -8,6 +8,7 @@ import { INumberInput } from '../ui/Inputs/NumberInput/useNumberInput'
 import { differenceInCalendarDays } from 'date-fns'
 import { getNightsDeclension } from '@/localization/night'
 import FeatureList from '../ui/FeatureList/FeatureList'
+import BasePersonsImage from '../../../public/images/persons.svg'
 
 const getTimeDiff = (dateStart: Date, dateEnd: Date) => {
   return differenceInCalendarDays(dateStart, dateEnd)
@@ -51,7 +52,15 @@ const HouseCard = ({
         <div className={styles["description-group"]}>
           <p className={styles.description}>{data.description}</p>
           <div className={styles.features}>
-            <FeatureList features={data.features} limit={4}/>
+            <FeatureList features={[
+              {
+                name: `${data.base_persons_amount} без доплаты`,
+                picture: BasePersonsImage,
+                id: 0,
+                withoutPrefix: true,
+              },
+              ...data.features
+            ]} limit={4}/>
           </div>
         </div>
         <div className={styles["bottom-group"]}>

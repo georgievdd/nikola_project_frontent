@@ -2,8 +2,7 @@ import { House, HouseOptions } from '@/entity/House'
 import React from 'react'
 import styles from './HouseDescriptionBlock.module.scss'
 import Carousel from '../../../ui/Carousel/Carousel'
-import Feature from '../../../ui/FeatureList/Feature/Feature'
-import BasePersonsImage from '../../../../../public/images/square-with-arrow.svg'
+import BasePersonsImage from '../../../../../public/images/persons.svg'
 import FeatureList from '@/components/ui/FeatureList/FeatureList'
 interface HouseDescriptionBlock {
   data: House

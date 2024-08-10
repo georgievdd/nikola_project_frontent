@@ -77,7 +77,7 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
   async function getPriceList(withOutPromo: boolean = false) {
     const reservationPriceData = reservationPriceRequestDto(withOutPromo)
     getReservationPrice(house.id, reservationPriceData)
-      .then(res => priceList.set(res.data))
+      .then(priceList.set)
       .catch(err => {
         showAlert(err.response?.data?.non_field_errors[0] || 'Ошибка')
         if (err.response.data.non_field_errors[0] === `Промокод "${priceList.promoValue}" не найден`) {
@@ -103,7 +103,7 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     }
     setDateBegin(getDateFromKey(check_in_date))
     setDateEnd(getDateFromKey(check_out_date!))
-    guestsController.set(+guests!)
+    guestsController.setValue(+guests!)
   }, [])
 
   useEffect(() => {

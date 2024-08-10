@@ -1,4 +1,3 @@
-import { SyntheticEvent } from "react";
 import { ApiError } from "./entity/Error";
 
 export const showAlert = (message: string, variant?: 'alert-danger' | 'alert-success') => {
@@ -38,9 +37,7 @@ export class JSONCookie {
     }
 }
 
-
 export const normalize = (v: number) => v > 1 ? 1 / v : v
-
 
 export const importStyles = (styles: Record<string, string>) =>
     (strings: TemplateStringsArray): string =>
@@ -49,3 +46,5 @@ export const importStyles = (styles: Record<string, string>) =>
 export const isApiError = (data: any): data is ApiError => {
     return 'detail' in data
 }
+
+export type Setter<T> = (v: T) => void

@@ -7,9 +7,9 @@ import { useNumberInput } from "../ui/Inputs/NumberInput/useNumberInput";
 import Calendar from "../Calendar/Calendar";
 import { useCalendar } from "../Calendar/CalendarBody/hooks/useCalendar";
 import { useEffect, useState } from "react";
-import { axiosInstance } from "@/api/instance";
 import Reloader from "../ui/Reloader/Reloader";
 import { GET_HOUSES, GET_HOUSES_CALENDAR } from "@/api/endpoints";
+import { get } from "@/api/instance";
 
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
@@ -33,11 +33,13 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
   }
 
   useEffect(() => {
-    axiosInstance.get(GET_HOUSES, {params: {
+    get<House[]>(GET_HOUSES, {params: {
       total_persons_amount: guestsController.value,
       ...getDates(),
     }}).then(res => {
-      setHouses(res.data)
+      setHouses(res)
+      const newMaxValue = Math.max(...res.map(house => house.max_persons_amount))
+      guestsController.setMaxValue(newMaxValue)
     })
   }, [
     guestsController.value,

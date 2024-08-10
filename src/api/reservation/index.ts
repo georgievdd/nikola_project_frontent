@@ -1,16 +1,14 @@
 import { IReservationPrice, IReservationPriceRequest, MakeReservationResponse, Reservation } from "@/entity/Reservation"
-import { axiosInstance } from "../instance"
+import { post, put, get } from "../instance"
 import { showAlert } from "@/helpers"
-import { AxiosResponse } from "axios"
 import { GET_HOUSE_RESERVATION, POST_MAKE_RESERVATION, PUT_RESERVATION_PRICE } from "../endpoints"
 
-export function getReservationPrice(id: number, data: IReservationPriceRequest): Promise<AxiosResponse<IReservationPrice>> {
-    return axiosInstance.put<IReservationPrice>(PUT_RESERVATION_PRICE(id), data)
+export function getReservationPrice(id: number, data: IReservationPriceRequest): Promise<IReservationPrice> {
+    return put<IReservationPrice>(PUT_RESERVATION_PRICE(id), data)
 }
 
 export function postMakeReservation(id: number, data: IReservationPriceRequest): Promise<MakeReservationResponse | null> {
-    return axiosInstance.post<MakeReservationResponse>(POST_MAKE_RESERVATION(id), data)
-        .then(response => response.data)
+    return post<MakeReservationResponse>(POST_MAKE_RESERVATION(id), data)
         .catch(err => {
             showAlert(
                 err?.response?.data?.email?.[0] || 
@@ -21,6 +19,6 @@ export function postMakeReservation(id: number, data: IReservationPriceRequest):
 }
 
 export function getReservation(slug: string): Promise<Reservation> {
-    return axiosInstance.get<{reservation: Reservation}>(GET_HOUSE_RESERVATION(slug))
-        .then(response => response.data.reservation)
+    return get<{reservation: Reservation}>(GET_HOUSE_RESERVATION(slug))
+        .then(response => response.reservation)
 }

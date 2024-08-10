@@ -1,26 +1,30 @@
 'use client'
+import type { Setter } from "@/helpers"
 import { useState } from "react"
-
 
 export interface INumberInput {
     label: string
     add: () => void
     substract: () => void
-    value: number
     reset: () => void
-    set: (v: number) => void
     wasChangedByUser: boolean
+    value: number
     minValue: number
     maxValue: number
+    setValue: Setter<number>
+    setMinValue: Setter<number>
+    setMaxValue: Setter<number>
 }
 
 export const useNumberInput = (
     label: string,
-    minValue: number = 0,
-    maxValue: number = 100000
+    minValueDefault: number = 0,
+    maxValueDefault: number = 100000
     ): INumberInput => {
-    const [value, setValue] = useState(minValue)
-    const [wasChangedByUser, setWasChangedByUser] = useState(false)
+        const [value, setValue] = useState(minValueDefault)
+        const [minValue, setMinValue] = useState(minValueDefault)
+        const [maxValue, setMaxValue] = useState(maxValueDefault)
+        const [wasChangedByUser, setWasChangedByUser] = useState(false)
     const add = () => {
         setWasChangedByUser(true)
         if (value === maxValue) {
@@ -36,13 +40,15 @@ export const useNumberInput = (
     }
     return {
         label,
-        value,
         add,
         substract,
         reset: () => setValue(prev => minValue),
-        set: (v: number) => setValue(prev => v),
         wasChangedByUser,
         minValue,
         maxValue,
+        value,
+        setValue,
+        setMinValue,
+        setMaxValue
     }
 }

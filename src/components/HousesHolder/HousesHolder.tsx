@@ -6,10 +6,11 @@ import NumberInput from "../ui/Inputs/NumberInput/NumberInput";
 import { useNumberInput } from "../ui/Inputs/NumberInput/useNumberInput";
 import Calendar from "../Calendar/Calendar";
 import { useCalendar } from "../Calendar/CalendarBody/hooks/useCalendar";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Reloader from "../ui/Reloader/Reloader";
 import { GET_HOUSES, GET_HOUSES_CALENDAR } from "@/api/endpoints";
 import { get } from "@/api/instance";
+import { debounce } from "@/helpers";
 
 const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
 
@@ -32,15 +33,19 @@ const HousesHolder = ({ initHouses }: {initHouses: House[]}) => {
     }
   }
 
-  useEffect(() => {
+  const debouncedGet = useCallback(debounce((persons: number) => 
     get<House[]>(GET_HOUSES, {params: {
-      total_persons_amount: guestsController.value,
+      total_persons_amount: persons,
       ...getDates(),
-    }}).then(res => {
-      setHouses(res)
-      const newMaxValue = Math.max(...res.map(house => house.max_persons_amount))
+    }}).then(houses => {
+      setHouses(houses)
+      const newMaxValue = Math.max(...houses.map(house => house.max_persons_amount))
       guestsController.setMaxValue(newMaxValue)
     })
+  , 300), [])
+
+  useEffect(() => {
+    debouncedGet(guestsController.value)
   }, [
     guestsController.value,
     selectionController.isActive,

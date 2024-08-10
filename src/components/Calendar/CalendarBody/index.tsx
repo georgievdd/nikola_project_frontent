@@ -1,6 +1,6 @@
-import React, {RefObject, SyntheticEvent, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {RefObject, SyntheticEvent, useCallback, useEffect, useRef, useState} from 'react';
 import './style.scss'
-import {addDays, addMonths, endOfMonth, format, isSameDay, isWeekend, startOfMonth, startOfWeek} from "date-fns";
+import {addDays, addMonths, endOfMonth, format, isSameDay, startOfMonth, startOfWeek} from "date-fns";
 import {dayStyle, DayType, extractIdFromEvent, extractMonthIdFromYear, getMonthName, monday, weekArray} from "./helpers";
 import {ru} from "date-fns/locale";
 import {CalendarController} from "./hooks/useCalendar";
@@ -133,8 +133,13 @@ const CalendarHighlighter = (
         setPrevHighlighterRect(highlighterRect.bottom)
     }, [highlighterTop, calendarMonthNameColumnRef])
     return (
-        <div id="calendar-highlighter" className='month-name-highlighter' ref={calendarHighlighterRef} style={{ top: `${highlighterTop}px`, width: `${highlighterWidth}px` }} />
-)}
+        <div
+            id="calendar-highlighter"
+            className='month-name-highlighter'
+            ref={calendarHighlighterRef}
+            style={{ top: `${highlighterTop}px`, width: `${highlighterWidth}px` }}
+        />)
+}
 
 
 interface MonthProps {

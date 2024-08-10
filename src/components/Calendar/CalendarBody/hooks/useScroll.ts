@@ -31,35 +31,8 @@ export function useScroll(calendarCellsRef: RefObject<HTMLDivElement>): ScrollCo
         scrollContainer.scrollTo({
             top: monthIndex * 362.42,
             behavior: 'smooth'
-        });
-
-        // const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title');
-        // const monthElement = visibilityCells[monthIndex];
-        // monthElement.scrollIntoView({
-        //     behavior: 'smooth',
-        //     inline: 'nearest'
-        // })
-        
-        
-        // const visibilityCells = calendarCellsRef.current!.querySelectorAll('.month-name-title');
-        // if (visibilityCells.length > monthIndex) {
-        //     const monthElement = visibilityCells[monthIndex];
-        //     const scrollContainer = calendarCellsRef.current;
-            
-        //     if (scrollContainer && monthElement) {
-                
-        //         // Рассчитываем необходимый отступ для scrollTop.
-        //         // Вычисляем позицию элемента относительно верхней границы родительского контейнера
-        //         const elementTopRelativeToContainer = calendarCellsRef.current.offsetTop - scrollContainer.offsetTop;
-                
-        //         // Устанавливаем scrollTop родительского контейнера, чтобы прокрутить к элементу
-        //         scrollContainer.scrollTo({
-        //             top: elementTopRelativeToContainer,
-        //             behavior: 'smooth'
-        //         });
-        //     }
-        // }
-    }, []);
+        })
+    }, [])
     return {
         currentMonthIndex,
         handleScroll,

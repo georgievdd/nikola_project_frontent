@@ -20,7 +20,7 @@ export function useCalendarData(opacity: number): CalendarDataController {
     function clear() {
         setMapState({})
         setCosts({})
-        setBeenLoaded(prev => Array(opacity).fill(false))
+        setBeenLoaded(Array(opacity).fill(false))
     }
     useEffect(() => {
         if (Object.keys(mapState).length === 0) {

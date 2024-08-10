@@ -48,3 +48,13 @@ export const isApiError = (data: any): data is ApiError => {
 }
 
 export type Setter<T> = (v: T) => void
+
+export const debounce = (callback: (...params: any) => void, delay: number) => {
+    let timer: NodeJS.Timeout | null = null
+    return (...params: any) => {
+        if (timer) {
+            clearTimeout(timer)
+        }
+        timer = setTimeout(() => callback(...params), delay)
+    }
+}

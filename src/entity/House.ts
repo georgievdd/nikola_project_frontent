@@ -17,10 +17,9 @@ export interface Picture {
     height: number
 }
   
-export interface Feature {
+export interface Feature extends Picture {
     id: number
     name: string
-    picture: string
     withoutPrefix?: boolean
 }
   

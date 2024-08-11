@@ -1,7 +1,7 @@
-import watch from '../../../../../public/images/watch.svg'
-import night from '../../../../../public/images/house-mini.svg'
-import peoples from '../../../../../public/images/peoples.svg'
-import promo from '../../../../../public/images/promo.svg'
+import watch from '../../../../public/images/watch.svg'
+import night from '../../../../public/images/house-mini.svg'
+import peoples from '../../../../public/images/peoples.svg'
+import promo from '../../../../public/images/promo.svg'
 
 type Type = 
 'early_check_in' | 

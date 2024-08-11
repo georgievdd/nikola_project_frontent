@@ -1,0 +1,11 @@
+.event {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+    }
+}

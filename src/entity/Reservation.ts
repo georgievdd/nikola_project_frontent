@@ -41,27 +41,28 @@ export interface MakeReservationResponse {
 }
 
 export interface Bill {
-    "total": 2153000
+    "total": number
     "chronological_positions": ChronologicalPosition[]
     "non_chronological_positions": NonChronologicalPosition[]
-    "promo_code"?: null
+    "promo_code"?: string
 }
 
 export interface ChronologicalPosition {
     "type": string
-    "time": string
-    "date": string
     "price": number
     "description": string
+    "end_date": string
+    "start_date": string
 }
 
 export interface NonChronologicalPosition {
     "type": string
-    "extra_persons_amount": number
-    "price_per_extra_person": number
-    "nights_amount": number
+    "extra_persons_amount"?: number
+    "price_per_extra_person"?: number
+    "nights_amount"?: number
     "price": number
     "description": string
+    "promo_code"?: string
 }
 
 export interface MakeReservationRequest {

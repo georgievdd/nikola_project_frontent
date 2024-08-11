@@ -1,10 +1,8 @@
 import Button from '@/components/ui/Button/Button'
 import styles from './BookingInvoiceBlock.module.scss'
-import { getIconByType } from './helpers'
 import { BookingInvoiceController } from './useBookingInvoice'
-import Image from 'next/image'
 import LabelInput from '@/components/ui/Inputs/LabelInput/LabelInput'
-import { ChronologicalPosition, NonChronologicalPosition } from '@/entity/Reservation'
+import { BillEvent } from '@/components/Bill/BillEvent/BillEvent'
 
 const BookingInvoiceBlock = ({
   controller,
@@ -57,22 +55,3 @@ const BookingInvoiceBlock = ({
 }
 
 export default BookingInvoiceBlock
-
-
-
-const BillEvent = (
-  {event}: {event: ChronologicalPosition | NonChronologicalPosition}
-) => (
-  <div className={styles.event}>
-    <div className={styles.title}>
-      <Image
-        width={22}
-        height={22}
-        alt='icon'
-        src={getIconByType(event.type)}
-      />
-      <p>{event.description}</p>
-    </div>
-    <p>{event.price} ₽</p>
-  </div>
-)

@@ -24,16 +24,6 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            .event {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                .title {
-                    align-items: center;
-                    display: flex;
-                    gap: 10px;
-                }
-            }
         }
 
         .submit {

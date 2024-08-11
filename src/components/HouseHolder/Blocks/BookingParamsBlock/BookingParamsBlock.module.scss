@@ -1,20 +1,20 @@
-@import "../../../../app/variables.scss";
+@import 'app/variables.scss';
 
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    margin: 0 auto;
-    width: 100%;
-    gap: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin: 0 auto;
+  width: 100%;
+  gap: 50px;
 
-    @media (max-width: $first-point) {
-        justify-content: center;
-    }
-    @media (max-width: $second-point) {
-        justify-content: start;
-    }
-    @media (max-width: $third-point) {
-        justify-content: center;
-    }
+  @media (max-width: $first-point) {
+    justify-content: center;
+  }
+  @media (max-width: $second-point) {
+    justify-content: start;
+  }
+  @media (max-width: $third-point) {
+    justify-content: center;
+  }
 }

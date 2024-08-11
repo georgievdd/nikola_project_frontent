@@ -1,22 +1,32 @@
 'use client'
-import { House, HouseOptions } from '@/entity/House'
-import React, { useCallback, useEffect } from 'react'
-import HouseDescriptionBlock from './Blocks/HouseDescriptionBlock/HouseDescriptionBlock'
-import styles from './HouseHolder.module.scss'
-import BookingParamsBlock from './Blocks/BookingParamsBlock/BookingParamsBlock'
-import UserInfoBlock from './Blocks/UserInfoBlock/UserInfoBlock'
+import React, {useEffect} from 'react'
+
+import {useRouter} from 'next/navigation'
+
+import {GET_HOUSE_CALENDAR} from 'api/endpoints'
+import {
+  getReservation,
+  getReservationPrice,
+  postMakeReservation,
+} from 'api/reservation'
+import {useCalendar} from 'Calendar/CalendarBody/hooks/useCalendar'
+import {useDatePicker} from 'components/ui/Inputs/DatePicker/useDatePicker'
+import {useLabelInputGroup} from 'components/ui/Inputs/LabelInput/useLabelInput'
+import {useNumberInput} from 'components/ui/Inputs/NumberInput/useNumberInput'
+import {House, HouseOptions} from 'entity/House'
+import {
+  IReservationPriceRequest,
+  MakeReservationRequest,
+} from 'entity/Reservation'
+import {sendMail} from 'mail/index'
+import {getDateFromKey, showAlert} from 'src/helpers'
+
 import BookingInvoiceBlock from './Blocks/BookingInvoiceBlock/BookingInvoiceBlock'
-import { useDatePicker } from '../ui/Inputs/DatePicker/useDatePicker'
-import { useLabelInputGroup } from '../ui/Inputs/LabelInput/useLabelInput'
-import { useNumberInput } from '../ui/Inputs/NumberInput/useNumberInput'
-import { useCalendar } from '../Calendar/CalendarBody/hooks/useCalendar'
-import { getDateFromKey, showAlert } from '@/helpers'
-import { getReservation, getReservationPrice, postMakeReservation } from '@/api/reservation'
-import { useBookingInvoice } from './Blocks/BookingInvoiceBlock/useBookingInvoice'
-import { IReservationPriceRequest, MakeReservationRequest } from '@/entity/Reservation'
-import { GET_HOUSE_CALENDAR } from '@/api/endpoints'
-import { useRouter } from 'next/navigation'
-import { sendMail } from '@/mail'
+import {useBookingInvoice} from './Blocks/BookingInvoiceBlock/useBookingInvoice'
+import BookingParamsBlock from './Blocks/BookingParamsBlock/BookingParamsBlock'
+import HouseDescriptionBlock from './Blocks/HouseDescriptionBlock/HouseDescriptionBlock'
+import UserInfoBlock from './Blocks/UserInfoBlock/UserInfoBlock'
+import styles from './HouseHolder.module.scss'
 
 interface HouseHolderProps {
   house: House
@@ -27,7 +37,7 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
   const guestsController = useNumberInput(
     'Гостей',
     1,
-    houseOptions.max_persons_amount
+    houseOptions.max_persons_amount,
   )
   const datePickerController = useDatePicker(houseOptions)
   const userInfoController = useLabelInputGroup()
@@ -35,22 +45,20 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     'house_id',
     false,
     GET_HOUSE_CALENDAR(house.id),
-    guestsController
+    guestsController,
   )
   const priceList = useBookingInvoice()
   const router = useRouter()
 
-  const {
-    dateBegin,
-    dateEnd,
-    isActive,
-    setDateBegin,
-    setDateEnd
-  } = calendarController.selectionController
+  const {dateBegin, dateEnd, isActive, setDateBegin, setDateEnd} =
+    calendarController.selectionController
+
+  const firstDate = datePickerController.currentFirst
+  const secondDate = datePickerController.currentSecond
 
   const reservationRequestDto = (): MakeReservationRequest => ({
-    check_in_datetime: `${dateBegin!.getKey()} ${datePickerController.currentFirst}`,
-    check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
+    check_in_datetime: `${dateBegin!.getKey()} ${firstDate}`,
+    check_out_datetime: `${dateEnd!.getKey()} ${secondDate}`,
     total_persons_amount: guestsController.value,
     first_name: userInfoController.controllers[0].value,
     last_name: userInfoController.controllers[1].value,
@@ -59,13 +67,15 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     promo_code: priceList.promoValue,
     comment: userInfoController.controllers[4].value || undefined,
   })
-  const reservationPriceRequestDto = (withOutPromo: boolean): IReservationPriceRequest => ({
-    check_in_datetime: `${dateBegin!.getKey()} ${datePickerController.currentFirst}`,
-    check_out_datetime: `${dateEnd!.getKey()} ${datePickerController.currentSecond}`,
+  const reservationPriceRequestDto = (
+    withOutPromo: boolean,
+  ): IReservationPriceRequest => ({
+    check_in_datetime: `${dateBegin!.getKey()} ${firstDate}`,
+    check_out_datetime: `${dateEnd!.getKey()} ${secondDate}`,
     total_persons_amount: guestsController.value,
     promo_code: withOutPromo ? undefined : priceList.promoValue,
   })
-  
+
   async function makeReservation() {
     const reservatonData = reservationRequestDto()
     const reservation = await postMakeReservation(house.id, reservatonData)
@@ -78,18 +88,18 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
     const reservationPriceData = reservationPriceRequestDto(withOutPromo)
     getReservationPrice(house.id, reservationPriceData)
       .then(priceList.set)
-      .catch(err => {
+      .catch((err) => {
         showAlert(err.response?.data?.non_field_errors[0] || 'Ошибка')
-        if (err.response.data.non_field_errors[0] === `Промокод "${priceList.promoValue}" не найден`) {
+        if (
+          err.response.data.non_field_errors[0] ===
+          `Промокод "${priceList.promoValue}" не найден`
+        ) {
           getPriceList(true)
         } else {
           priceList.set(null)
         }
       })
   }
-
-
-
 
   /**
    * проверка на активное выделение сразу при переходе на страницу
@@ -108,36 +118,32 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
 
   useEffect(() => {
     if (isActive) {
-      getPriceList();
+      getPriceList()
     }
   }, [
-    isActive, 
+    isActive,
     guestsController.value,
-    datePickerController.currentFirst, 
+    datePickerController.currentFirst,
     datePickerController.currentSecond,
     priceList.promoValue,
   ])
 
   return (
     <div className={styles.container}>
-      <HouseDescriptionBlock
-        data={house} 
-        houseOptions={houseOptions}
-      />
-      <BookingParamsBlock 
+      <HouseDescriptionBlock data={house} houseOptions={houseOptions} />
+      <BookingParamsBlock
         guestsController={guestsController}
         datePickerController={datePickerController}
         calendarController={calendarController}
       />
-      <UserInfoBlock 
-        inputGroup={userInfoController.controllers}
-      />
-      {priceList.data &&
-      <BookingInvoiceBlock
-        controller={priceList}
-        makeReservation={makeReservation}
-        canMakeReservation={userInfoController.isValid}
-      />}
+      <UserInfoBlock inputGroup={userInfoController.controllers} />
+      {priceList.data && (
+        <BookingInvoiceBlock
+          controller={priceList}
+          makeReservation={makeReservation}
+          canMakeReservation={userInfoController.isValid}
+        />
+      )}
     </div>
   )
 }

@@ -1,113 +1,115 @@
-@import '../../../../app/variables.scss';
+@import 'app/variables.scss';
 .container {
+  position: relative;
+  border: dashed 3px $secondary-color;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  padding: 40px {
+    left: 50px;
+    right: 0;
+  }
 
+  .wrapper {
     position: relative;
-    border: dashed 3px $secondary-color;
-    border-radius: 15px;
     display: flex;
-    flex-direction: column;
-    row-gap: 40px;
-    padding: 40px {
-        left: 50px;
-        right: 0
-    };
+    .content {
+      .header {
+        margin-bottom: 30px;
+      }
+      position: relative;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-    .wrapper {
-        position: relative;
+    .submit {
+      width: 50%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      .box {
+        width: 60%;
+        bottom: 0;
         display: flex;
-        .content {
-            .header {
-                margin-bottom: 30px;
+        justify-content: space-between;
+        flex-direction: column;
+        .inner {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          gap: 10px;
+          .upshot {
+            h2,
+            p {
+              font-size: 30px;
+              font-weight: 600;
             }
-            position: relative;
-            width: 50%;
+            p {
+              color: $third-acent-color;
+            }
+            span {
+              font-weight: 500;
+            }
+            width: 100%;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .submit {
-            width: 50%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            .box {
-                width: 60%;
-                bottom: 0;
-                display: flex;
-                justify-content: space-between;
-                flex-direction: column;
-                .inner {
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    flex-direction: column;
-                    gap: 10px;
-                    .upshot {
-                        h2, p {
-                            font-size: 30px;
-                            font-weight: 600;
-                        }
-                        p {
-                            color: $third-acent-color;
-                        }
-                        span {
-                            font-weight: 500;
-                        }
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    }
-                    button {
-                        width: 100%;
-                    }
-                }
-            }
-        }
-    }
-    @media (max-width: $first-point) {
-        .wrapper .submit .box .inner .upshot {
-            h2, p {
-                font-size: 24px;
-            }
-        }
-    }
-
-    @media (max-width: $third-point) {
-        margin-bottom: 20px;
-        .wrapper .submit .box .inner .upshot {
-            h2, p {
-                font-size: 20px;
-            }
-        }
-        .wrapper .content .header {
-            font-size: 24px;
-        }
-    }
-    @media (max-width: $fourth-point) {
-        .wrapper .content .header {
-            font-size: 20px;
-        }
-    }
-    @media (max-width: 650px) {
-        padding: 40px;
-        .wrapper {
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            .content {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-            .submit {
-                width: 100%;
-                .box {
-                    width: 60%;
-                }
-            }
+          }
+          button {
+            width: 100%;
+          }
         }
+      }
     }
-    @media (max-width: 480px) {
-        padding: 10px;
+  }
+  @media (max-width: $first-point) {
+    .wrapper .submit .box .inner .upshot {
+      h2,
+      p {
+        font-size: 24px;
+      }
     }
+  }
+
+  @media (max-width: $third-point) {
+    margin-bottom: 20px;
+    .wrapper .submit .box .inner .upshot {
+      h2,
+      p {
+        font-size: 20px;
+      }
+    }
+    .wrapper .content .header {
+      font-size: 24px;
+    }
+  }
+  @media (max-width: $fourth-point) {
+    .wrapper .content .header {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 650px) {
+    padding: 40px;
+    .wrapper {
+      flex-direction: column;
+      align-items: center;
+      .content {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .submit {
+        width: 100%;
+        .box {
+          width: 60%;
+        }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
 }

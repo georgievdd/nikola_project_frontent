@@ -1,15 +1,20 @@
 .background {
-    position: absolute;
-    filter: blur(7px);
-    mask-image: radial-gradient(circle, transparent, transparent 0, black 0);
-    -webkit-mask-image: radial-gradient(circle, transparent, transparent 0, black 0);
+  position: absolute;
+  filter: blur(7px);
+  mask-image: radial-gradient(circle, transparent, transparent 0, black 0);
+  -webkit-mask-image: radial-gradient(
+    circle,
+    transparent,
+    transparent 0,
+    black 0
+  );
 }
 .foreground {
-    object-fit: contain;
-    position: absolute;
+  object-fit: contain;
+  position: absolute;
 }
 .simple {
-    display: block;
-    height: 100%;
-    object-fit: cover;
+  display: block;
+  height: 100%;
+  object-fit: cover;
 }

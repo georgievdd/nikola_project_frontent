@@ -1,11 +1,11 @@
-@import "../../app/variables.scss";
+@import 'app/variables.scss';
 
 .container {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-    @media (max-width: $third-point) {
-        gap: 50px;
-    }
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  @media (max-width: $third-point) {
+    gap: 50px;
+  }
 }

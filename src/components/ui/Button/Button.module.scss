@@ -1,82 +1,81 @@
-@import '../../../app/variables.scss';
+@import 'app/variables.scss';
 
 .base,
 .link,
 .contained {
-    width: min-content;
-    border: 2px solid $secondary-color;
-    height: min-content;
-    border-radius: 10px;
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    transition: all 0.15s ease-in-out;
-    p {
-        font-size: 30px;
-        font-weight: 400;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        @media (max-width: $first-point) {
-            font-size: 20px;
-        }
-    }
+  width: min-content;
+  border: 2px solid $secondary-color;
+  height: min-content;
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: all 0.15s ease-in-out;
+  p {
+    font-size: 30px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @media (max-width: $first-point) {
-        padding: 5px;
-        padding-left: 15px;
-        padding-right: 15px;
+      font-size: 20px;
     }
-    @media (max-width: $fourth-point) {
-        padding-left: 1px;
-        padding-right: 1px;
-        height: min-content;
-        p {
-            font-size: medium;
-        }
+  }
+  @media (max-width: $first-point) {
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @media (max-width: $fourth-point) {
+    padding-left: 1px;
+    padding-right: 1px;
+    height: min-content;
+    p {
+      font-size: medium;
     }
+  }
 }
 
 .base {
+  p {
+    color: $secondary-color;
+  }
+  &:hover {
     p {
-        color: $secondary-color;
+      color: $primary-color;
     }
-    &:hover {
-        p {
-            color: $primary-color;
-        }
-        background-color: $secondary-color;
-    }
+    background-color: $secondary-color;
+  }
 }
 .contained {
-    background-color: $secondary-color;
+  background-color: $secondary-color;
+  p {
+    color: $primary-color;
+  }
+  &:hover {
     p {
-        color: $primary-color;
+      color: $secondary-color;
     }
-    &:hover {
-        p {
-            color: $secondary-color;
-        }
-        background-color: transparent;
-    }
+    background-color: transparent;
+  }
 }
 
 .link {
-    background-color: $primary-color;
-    &:hover {
-        p {
-            color: $primary-color;
-        }
-        background-color: transparent;
-        border: 2px solid $primary-color;
+  background-color: $primary-color;
+  &:hover {
+    p {
+      color: $primary-color;
     }
+    background-color: transparent;
+    border: 2px solid $primary-color;
+  }
 }
 
-
 .round0 {
-    border-radius: 3px;
+  border-radius: 3px;
 }
 
 .disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }

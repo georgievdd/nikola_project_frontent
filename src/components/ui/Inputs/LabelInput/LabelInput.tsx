@@ -1,14 +1,19 @@
 import styles from './LabelInput.module.scss'
-import { LabelInputController } from './useLabelInput'
+import {LabelInputController} from './useLabelInput'
 
-
-
-const LabelInput = ({controller, className}: 
-  {controller: LabelInputController, className?: string}) => {
+const LabelInput = ({
+  controller,
+  className,
+}: {
+  controller: LabelInputController
+  className?: string
+}) => {
   return (
-    <div className={[styles.container, controller.className, className].join(' ')}>
+    <div
+      className={[styles.container, controller.className, className].join(' ')}
+    >
       <h3>{controller.label}</h3>
-      <input 
+      <input
         value={controller.value}
         onChange={controller.onChange}
         placeholder={controller.placeholder}

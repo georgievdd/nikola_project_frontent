@@ -1,4 +1,4 @@
-@import "../../../app/variables.scss";
+@import 'app/variables.scss';
 
 $w: 720px;
 $h: $w * 0.625;
@@ -74,7 +74,7 @@ $img-element-h: 90px;
         }
       }
     }
-    input[type="radio"]:checked + .group_element::after {
+    input[type='radio']:checked + .group_element::after {
       content: '';
       position: absolute;
       top: 0px; // Смещение наружу для имитации границы
@@ -85,14 +85,14 @@ $img-element-h: 90px;
       border-radius: 15px;
       box-sizing: border-box;
     }
-    input[type="radio"] {
+    input[type='radio'] {
       position: fixed;
       opacity: 0;
       pointer-events: none;
     }
   }
 
-  [class*="fade_overlay"] {
+  [class*='fade_overlay'] {
     transition: opacity 0.1s ease-in-out;
     pointer-events: none;
   }
@@ -103,7 +103,12 @@ $img-element-h: 90px;
     bottom: 0;
     width: $smooth-w;
     height: 50px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 254, 252, 0.671) 53.32%, #FFFEFB 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 254, 252, 0.671) 53.32%,
+      #fffefb 100%
+    );
     pointer-events: none;
   }
   .fade_overlay_top {
@@ -113,12 +118,17 @@ $img-element-h: 90px;
     top: 0;
     width: $smooth-w;
     height: 50px;
-    background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 254, 252, 0.671) 53.32%, #FFFEFB 100%);
+    background: linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 254, 252, 0.671) 53.32%,
+      #fffefb 100%
+    );
     pointer-events: none;
     opacity: 0;
   }
 
-  [class*="arrow_"] {
+  [class*='arrow_'] {
     position: absolute;
     right: $arrow-right;
     width: $smooth-w;
@@ -207,20 +217,22 @@ $img-element-h: 90px;
   @media (max-width: $first-point) {
     width: $w * 4/5;
     height: $h * 4/5;
-    .fade_overlay_bottom, .fade_overlay_top {
+    .fade_overlay_bottom,
+    .fade_overlay_top {
       width: $smooth-w * 4/5;
     }
-    [class*="arrow_"] {
+    [class*='arrow_'] {
       right: -10px;
     }
   }
   @media (max-width: 900px) {
     width: $w * 3/4;
     height: $h * 3/4;
-    .fade_overlay_bottom, .fade_overlay_top {
+    .fade_overlay_bottom,
+    .fade_overlay_top {
       width: $smooth-w * 3/4;
     }
-    [class*="arrow_"] {
+    [class*='arrow_'] {
       right: -15px;
     }
   }
@@ -240,10 +252,10 @@ $img-element-h: 90px;
       width: 100%;
       min-height: 300px;
     }
-    [class*="arrow_"] {
+    [class*='arrow_'] {
       display: none;
     }
-    [class*="fade_overlay_"] {
+    [class*='fade_overlay_'] {
       display: none;
     }
   }

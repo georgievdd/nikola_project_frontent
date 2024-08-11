@@ -1,11 +1,14 @@
 'use client'
 
-import { Swiper as LibSwiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y, EffectFade, Scrollbar } from 'swiper/modules';
+import {Navigation, Pagination} from 'swiper/modules'
+import {Swiper as LibSwiper, SwiperSlide} from 'swiper/react'
+
+import PictureWithBlur from 'components/ui/PictureWithBlur/PictureWithBlur'
+import {Picture} from 'entity/House'
+
 import styles from './Swiper.module.scss'
-import { Picture } from '@/entity/House';
+
 import 'swiper/swiper-bundle.css'
-import PictureWithBlur from '../PictureWithBlur/PictureWithBlur'
 
 interface SwiperProps {
   className?: any
@@ -21,15 +24,15 @@ export default function Swiper(props: SwiperProps) {
         slidesPerView={1}
         effect={'fade'}
         pagination={{clickable: true}}
-        modules={[Navigation, Pagination/*Scrollbar, A11y*/]}
+        modules={[Navigation, Pagination /*Scrollbar, A11y*/]}
         className={[styles.swiper, props?.className].join(' ')}
       >
-        {props.links.map(link => (
+        {props.links.map((link) => (
           <SwiperSlide key={link.picture} className={styles.slide}>
-            <PictureWithBlur img={link}/>
+            <PictureWithBlur img={link} />
           </SwiperSlide>
         ))}
       </LibSwiper>
     </>
-  );
+  )
 }

@@ -1,310 +1,316 @@
-@import '../../app/variables.scss';
+@import 'app/variables.scss';
 
 .container {
-    h1, section, .description {
-        margin-top: 60px;
+  h1,
+  section,
+  .description {
+    margin-top: 60px;
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    a {
+      color: black;
+      text-decoration: underline;
+      font-size: inherit;
+    }
+  }
+  section {
+    cursor: pointer;
+    position: relative;
+    border: 2px dashed black;
+    padding: 50px;
+    border-radius: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    .header {
+      font-size: 30px;
+      font-weight: 600;
+    }
+    .house {
+      display: flex;
+      position: relative;
+      gap: 100px;
+      .first-column {
+        width: 450px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        .address {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          .address-header {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+          }
+          .address-text {
+            font-size: x-large;
+            line-height: 30px;
+            text-decoration: underline;
+          }
+        }
+        .preview {
+          width: 420px;
+          height: 315px;
+          border-radius: 15px;
+          overflow: hidden;
+        }
+      }
+      .second-column {
+        width: 65%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        .line {
+          display: flex;
+          div,
+          h3 {
+            flex: 0 0 50%;
+          }
+          .clock {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+        }
+        .ellipsis {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        .nowrap {
+          white-space: nowrap;
+        }
+      }
+    }
+    .comment {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      p {
+        font-size: 20px;
+      }
+    }
+    .detalization {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .events {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+    &:hover .clip {
+      opacity: 1;
+    }
+    .clip {
+      position: absolute;
+      transition: opacity 0.2s ease-in-out;
+      bottom: 50px;
+      right: 50px;
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: $first-point) {
+    section {
+      padding: 30px;
+      .house {
+        gap: 30px;
+        .first-column {
+          .address {
+            gap: 40px;
+            .address-header p {
+              font-size: 20px;
+            }
+            .address-text {
+              font-size: 20px;
+              line-height: 25px;
+            }
+          }
+          .preview {
+            width: 360px;
+            height: 270px;
+          }
+        }
+        .second-column {
+          .line {
+            h3 {
+              font-size: 20px;
+            }
+          }
+        }
+      }
     }
     .description {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        a {
-            color: black;
-            text-decoration: underline;
-            font-size: inherit;
-        }
+      h3 {
+        font-size: 22px;
+      }
     }
+  }
+  @media (max-width: $second-point) {
     section {
-        cursor: pointer;
-        position: relative;
-        border: 2px dashed black;
-        padding: 50px;
-        border-radius: 24px;
-        height: 100%;
-        display: flex;
+      padding: 30px;
+      .house {
+        gap: 20px;
+        .first-column {
+          .address {
+            gap: 30px;
+            .address-header p {
+              font-size: 20px;
+            }
+            .address-text {
+              font-size: 20px;
+              line-height: 25px;
+            }
+          }
+          .preview {
+            width: 360px;
+            height: 270px;
+          }
+        }
+        .second-column {
+          .line {
+            h3 {
+              font-size: 19px;
+            }
+          }
+        }
+      }
+    }
+    .description {
+      h3 {
+        font-size: 20px;
+      }
+    }
+  }
+  @media (max-width: $third-point) {
+    section {
+      .house {
+        width: 100%;
         flex-direction: column;
-        gap: 50px;
-        .header {
-            font-size: 30px;
-            font-weight: 600;
+        .first-column {
+          width: 100%;
+          .preview {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+          }
         }
-        .house {
-            display: flex;
-            position: relative;
-            gap: 100px;
-            .first-column {
-                width: 450px;
-                display: flex;
-                flex-direction: column;
-                gap: 40px;
-                .address {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 15px;
-                    .address-header {
-                        display: flex;
-                        gap: 10px;
-                        align-items: center;
-                    }
-                    .address-text {
-                        font-size: x-large;
-                        line-height: 30px;
-                        text-decoration: underline;
-                    }
-                }
-                .preview {
-                    width: 420px;
-                    height: 315px;
-                    border-radius: 15px;
-                    overflow: hidden;
-                }
-            }
-            .second-column {
-                width: 65%;
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                gap: 30px;
-                .line {
-                    display: flex;
-                    div, h3 {
-                        flex: 0 0 50%;
-                    }
-                    .clock {
-                        margin-top: 10px;
-                        display: flex;
-                        align-items: center;
-                        gap: 10px;
-                    }
-                }
-                .ellipsis {
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                }
-                .nowrap {
-                    white-space: nowrap;
-                }
-            }
+        .second-column {
+          width: 100%;
         }
-        .comment {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            p {
-                font-size: 20px;
-            }
+      }
+      .detalization {
+        width: 100%;
+        .events {
+          width: 100%;
+          div,
+          p {
+            flex: 1;
+          }
         }
-        .detalization {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            .events {
-                width: 50%;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-        }
-        &:hover .clip {
-            opacity: 1;
-        }
-        .clip {
-            position: absolute;
-            transition: opacity 0.2s ease-in-out;
-            bottom: 50px;
-            right: 50px;
-            opacity: 0;
-        }
+      }
     }
-
-    @media (max-width: $first-point) {
-        section {
-            padding: 30px;
-            .house {
-                gap: 30px;
-                .first-column {
-                    .address {
-                        gap: 40px;
-                        .address-header p {
-                            font-size: 20px;
-                        }
-                        .address-text {
-                            font-size: 20px;
-                            line-height: 25px;
-                        }
-                    }
-                    .preview {
-                        width: 360px;
-                        height: 270px;
-                    }
-                }
-                .second-column {
-                    .line {
-                        h3 {
-                            font-size: 20px;
-                        }
-                    }
-                }
+  }
+  @media (max-width: $fourth-point) {
+    section {
+      margin-top: 20px;
+      cursor: auto;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+      .clip {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 520px) {
+    section {
+      .house {
+        .first-column {
+          .address {
+            .address-text {
+              font-size: 15px;
             }
+          }
         }
-        .description {
+        .second-column {
+          gap: 10px;
+          .line {
+            justify-content: space-between;
+            div,
             h3 {
-                font-size: 22px;
+              font-size: 15px;
+              flex: 0 0 auto;
             }
+          }
         }
+      }
+      .comment {
+        p {
+          font-size: 15px;
+        }
+      }
+      .detalization {
+        width: 100%;
+        .events {
+          width: 100%;
+          justify-content: space-between;
+          div,
+          p {
+            flex: 0 0 auto;
+          }
+        }
+      }
     }
-    @media (max-width: $second-point) {
-        section {
-            padding: 30px;
-            .house {
-                gap: 20px;
-                .first-column {
-                    .address {
-                        gap: 30px;
-                        .address-header p {
-                            font-size: 20px;
-                        }
-                        .address-text {
-                            font-size: 20px;
-                            line-height: 25px;
-                        }
-                    }
-                    .preview {
-                        width: 360px;
-                        height: 270px;
-                    }
-                }
-                .second-column {
-                    .line {
-                        h3 {
-                            font-size: 19px;
-                        }
-                    }
-                }
-            }
-        }
-        .description {
-            h3 {
-                font-size: 20px;
-            }
-        }
+    .description {
+      width: 100%;
+      h3 {
+        font-size: 15px;
+      }
+      margin-bottom: 40px;
     }
-    @media (max-width: $third-point) {
-        section {
-            .house {
-                width: 100%;
-                flex-direction: column;
-                .first-column {
-                    width: 100%;
-                    .preview {
-                        max-width: 100%;
-                        width: auto;
-                        height: auto;
-                    }
-                }
-                .second-column {
-                    width: 100%;
-                }
-            }
-            .detalization {
-                width: 100%;
-                .events {
-                    width: 100%;
-                    div, p {
-                        flex: 1;
-                    }
-                }
-            }
+  }
+  @media (max-width: 500px) {
+    section {
+      .house {
+        .first-column {
+          .address {
+            gap: 10px;
+          }
         }
+        .second-column {
+          width: 100%;
+          .line {
+            gap: 0;
+          }
+        }
+      }
+      .header {
+        font-size: x-large;
+      }
     }
-    @media (max-width: $fourth-point) {
-        section {
-            margin-top: 20px;
-            cursor: auto;
-            border: none;
-            padding: 0;
-            border-radius: 0;
-            .clip {
-                display: none;
-            }
+  }
+  @media (max-width: 400px) {
+    section .house {
+      .second-column {
+        .line {
+          div,
+          h3 {
+            flex: 1 1 50%;
+          }
         }
+      }
     }
-    @media (max-width: 520px) {
-        section {
-            .house {
-                .first-column {
-                    .address {
-                        .address-text {
-                            font-size: 15px;
-                        }
-                    }
-                }
-                .second-column {
-                    gap: 10px;
-                    .line {
-                        justify-content: space-between;
-                        div, h3 {
-                            font-size: 15px;
-                            flex: 0 0 auto;
-                        }
-                    }
-                }
-            }
-            .comment {
-                p {
-                    font-size: 15px;
-                }
-            }
-            .detalization {
-                width: 100%;
-                .events {
-                    width: 100%;
-                    justify-content: space-between;
-                    div, p {
-                        flex: 0 0 auto;
-                    }
-                }
-            }
-        }
-        .description {
-            width: 100%;
-            h3 {
-                font-size: 15px;
-            }
-            margin-bottom: 40px;
-        }
-    }
-    @media (max-width: 500px) {
-        section {
-            .house {
-                .first-column {
-                    .address {
-                        gap: 10px
-                    }
-                }
-                .second-column {
-                    width: 100%;
-                    .line {
-                        gap: 0;
-                    }
-                }
-            }
-            .header {
-                font-size: x-large;
-            }
-        }
-    }
-    @media (max-width: 400px) {
-        section .house {
-            .second-column {
-                .line {
-                    div, h3 {
-                        flex: 1 1 50%;
-                    }
-                }
-            }
-        }
-    }
+  }
 }

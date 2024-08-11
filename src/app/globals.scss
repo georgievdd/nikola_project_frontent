@@ -1,11 +1,9 @@
-@import '../app/variables.scss';
-
+@import 'app/variables.scss';
 
 * {
   margin: 0;
   padding: 0;
 }
-
 
 .alert-danger,
 .alert-success,
@@ -24,20 +22,21 @@
   background-color: lightcoral;
 }
 .alert-success {
-  background-color: #66BB6A;
+  background-color: #66bb6a;
 }
 @keyframes fadeInOut {
   0% {
-      opacity: 0;
-      transform: translateX(-50%) translateY(100%);
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
   }
-  10%, 90% {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
   100% {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100%);
   }
 }
 
@@ -49,7 +48,7 @@ main {
   max-width: $container-width;
   min-height: 100vh;
   margin: 0 auto;
-  
+
   @media (max-width: $first-point) {
     max-width: $first-point-to;
   }
@@ -81,7 +80,6 @@ h1 {
   @media (max-width: $second-point) {
     font-size: 30px;
   }
-
 }
 
 h2 {
@@ -152,7 +150,6 @@ input {
   opacity: 0;
 }
 
-
 .swiper-pagination-bullet {
   border-radius: 10px !important;
   width: 20px !important;
@@ -172,7 +169,7 @@ input {
 }
 
 .swiper-pagination-bullet::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -10px;
   left: -10px;

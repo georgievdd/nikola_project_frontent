@@ -12,4 +12,4 @@ export const getNightsDeclension = (count: number) => {
     return 'ночь'
   }
   return 'ночей'
-};
+}

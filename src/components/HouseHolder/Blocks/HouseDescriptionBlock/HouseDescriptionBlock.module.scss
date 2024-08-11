@@ -1,52 +1,52 @@
-@import "../../../../app/variables.scss";
+@import 'app/variables.scss';
 
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  section {
     display: flex;
-    flex-direction: column;
-    gap: 30px;
+    gap: 100px;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+  article {
+    white-space: pre-wrap;
+  }
+  @media (max-width: $first-point) {
+  }
+  @media (max-width: 1100px) {
     section {
-        display: flex;
-        gap: 100px;
-        justify-content: flex-start;
-        margin-bottom: 30px;
-        .features {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+      gap: 50px;
     }
-    article {
-        white-space: pre-wrap;
+  }
+  @media (max-width: $third-point) {
+    section {
+      gap: 30px;
+      .features {
+        gap: 15px;
+      }
     }
-    @media (max-width: $first-point) {
-    }
-    @media (max-width: 1100px) {
-        section {
-            gap: 50px;
-        }
-    }
-    @media (max-width: $third-point) {
-        section {
-            gap: 30px;
-            .features {
-                gap: 15px;
-            }
-        }
-    }
+  }
 
-    @media (max-width: $fourth-point) {
-        section {
-            display: flex;
-            margin-bottom: 0;
-            flex-direction: column;
-            .features {
-                width: 100%;
-                flex-wrap: wrap;
-                display: flex;
-                flex-direction: row;
-                gap: 15px;
-                overflow: visible;
-            }
-        }
+  @media (max-width: $fourth-point) {
+    section {
+      display: flex;
+      margin-bottom: 0;
+      flex-direction: column;
+      .features {
+        width: 100%;
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        overflow: visible;
+      }
     }
+  }
 }

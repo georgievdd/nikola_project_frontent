@@ -1,20 +1,26 @@
-import { DatePickerController } from './useDatePicker'
+import {CSSProperties} from 'react'
+
+import SelectInput from 'components/ui/Inputs/SelectInput/SelectInput'
+
 import styles from './DatePicker.module.scss'
-import SelectInput from '../SelectInput/SelectInput'
-import { CSSProperties } from 'react'
-const s = require('@/helpers')
-  .importStyles(require('./DatePicker.module.scss'))
+import {DatePickerController} from './useDatePicker'
 
+const s = require('src/helpers').importStyles(
+  require('./DatePicker.module.scss'),
+)
 
-const DatePicker = ({controller, style, className}: {
-  controller: DatePickerController,
-  style?: CSSProperties,
-  className?: string,
+const DatePicker = ({
+  controller,
+  style,
+  className,
+}: {
+  controller: DatePickerController
+  style?: CSSProperties
+  className?: string
 }) => {
-
   return (
     <div className={s`wrapper ${className}`} style={style}>
-      <div className={styles.divider}/>
+      <div className={styles.divider} />
       <div className={styles.container}>
         <div className={styles.group}>
           <label>Время заезда</label>

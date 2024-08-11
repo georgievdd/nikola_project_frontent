@@ -1,64 +1,62 @@
-@import '../../app/variables.scss';
+@import 'app/variables.scss';
 
 .container {
-    height: 45px;
-    width: 100%;
-    background-color: $secondary-color;
-    z-index: 20;
-    
-    
+  height: 45px;
+  width: 100%;
+  background-color: $secondary-color;
+  z-index: 20;
+
+  .burger {
+    display: none;
+  }
+  .data {
+    position: relative;
+    max-width: $container-width;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: $primary-color;
+    gap: 100px;
+    padding-top: 7px;
+    a {
+      font-size: 20px;
+      color: $primary-color;
+      &:hover {
+        color: rgba(255, 255, 255, 0.366);
+      }
+    }
+    .active {
+      color: rgba(255, 255, 255, 0.366);
+    }
+
+    @media (max-width: $first-point) {
+      max-width: $first-point-to;
+    }
+
+    @media (max-width: $second-point) {
+      // .logo {
+      //     display: none;
+      // }
+      // padding-top: 20px;
+      max-width: $second-point-to;
+    }
+
+    @media (max-width: $third-point) {
+      // .logo {
+      //     display: none;
+      // }
+      // padding-top: 20px;
+      max-width: $third-point-to;
+    }
+  }
+  @media (max-width: $fourth-point) {
+    .data:first-child {
+      display: none;
+    }
     .burger {
-        display: none;
+      display: flex;
+      z-index: 101;
     }
-    .data {
-        position: relative;
-        max-width: $container-width;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        color: $primary-color;
-        gap: 100px;
-        padding-top: 7px;
-        a {
-            font-size: 20px;
-            color: $primary-color;
-            &:hover {
-                color: rgba(255, 255, 255, 0.366);
-            }
-        }
-        .active {
-            color: rgba(255, 255, 255, 0.366);
-        }
-
-        @media (max-width: $first-point) {
-            max-width: $first-point-to;
-        }
-
-        @media (max-width: $second-point) {
-            // .logo {
-            //     display: none;
-            // }
-            // padding-top: 20px;
-            max-width: $second-point-to;
-        }
-
-        @media (max-width: $third-point) {
-            // .logo {
-            //     display: none;
-            // }
-            // padding-top: 20px;
-            max-width: $third-point-to;
-        }
-
-    }
-    @media (max-width: $fourth-point) {
-        .data:first-child {
-            display: none;
-        }
-        .burger {
-            display: flex;
-            z-index: 101;
-        }
-    }
+  }
 }

@@ -1,40 +1,39 @@
-@import '../../../../app/variables.scss';
-
+@import 'app/variables.scss';
 
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: $secondary-color;
+  input {
     color: $secondary-color;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 1.4px solid $secondary-color;
+    &:active,
+    &:focus {
+      outline: none;
+    }
+
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  @media (max-width: $second-point) {
     input {
-        color: $secondary-color;
-        width: 100%;
-        font-size: 15px;
-        font-weight: 400;
-        font-family: Arial, Helvetica, sans-serif;
-        border-bottom: 1.4px solid $secondary-color;
-        &:active, &:focus {
-            outline: none;
-        }
-
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 24px;
-        letter-spacing: 0em;
-        text-align: left;
-
+      font-size: large;
     }
-    @media (max-width: $second-point) {
-        input {
-            font-size: large;
-        }
+  }
+  @media (max-width: $third-point) {
+    input {
+      font-size: medium;
     }
-    @media (max-width: $third-point) {
-        input {
-            font-size: medium;
-        }
-        h3 {
-            font-size: larger;
-        }
+    h3 {
+      font-size: larger;
     }
+  }
 }

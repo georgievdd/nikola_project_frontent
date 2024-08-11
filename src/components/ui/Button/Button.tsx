@@ -1,10 +1,10 @@
-import { CSSProperties } from 'react'
+import {CSSProperties} from 'react'
+
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-  children: React.ReactNode,
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) 
-      => void
+  children: React.ReactNode
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   className?: string
   style?: CSSProperties
   variant?: 'contained' | 'base' | 'link'
@@ -15,18 +15,18 @@ interface ButtonProps {
 }
 
 const Button = ({
-    children,
-    onClick,
-    className,
-    variant,
-    round0,
-    disabled,
-    statical,
-    style,
-    fontSize,
+  children,
+  onClick,
+  className,
+  variant,
+  round0,
+  disabled,
+  statical,
+  style,
+  fontSize,
 }: ButtonProps) => {
   variant = variant || 'base'
-  
+
   const fontStyle: CSSProperties = {}
   fontSize && (fontStyle.fontSize = `${fontSize}px`)
 
@@ -34,23 +34,21 @@ const Button = ({
     <button
       style={style}
       className={[
-        className, 
+        className,
         styles[variant],
-        round0 ? (styles.round0) : '',
+        round0 ? styles.round0 : '',
         disabled ? styles.disabled : '',
       ].join(' ')}
       disabled={disabled}
     >
       <p style={fontStyle}>{children}</p>
     </button>
-  )
-  :
-  (
+  ) : (
     <button
       className={[
-        className, 
+        className,
         styles[variant],
-        round0 ? (styles.round0) : '',
+        round0 ? styles.round0 : '',
         disabled ? styles.disabled : '',
       ].join(' ')}
       onClick={onClick}

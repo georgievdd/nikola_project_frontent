@@ -1,259 +1,259 @@
-@import "../../app/variables.scss";
+@import 'app/variables.scss';
 
 .width-wrapper {
-    width: 1200px;
-    margin: 0 auto;
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .container {
-    gap: 100px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    .block-1 {
-        position: relative;
-        section {
-            position: absolute;
-            width: 50%;
-            max-width: 580px;
-            top: 150px;
-            display: flex;
-            flex-direction: column;
-            gap: 120px;
-            h1 {
-                font-weight: 500;
-                line-height: 48.76px;
-                text-align: left;
-                color: $primary-color;
-            }
-            button {
-                width: 50%;
-                height: 55px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-    }
-    .block-2 {
-        position: relative;
+  gap: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  .block-1 {
+    position: relative;
+    section {
+      position: absolute;
+      width: 50%;
+      max-width: 580px;
+      top: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+      h1 {
+        font-weight: 500;
+        line-height: 48.76px;
+        text-align: left;
+        color: $primary-color;
+      }
+      button {
+        width: 50%;
+        height: 55px;
         display: flex;
         align-items: center;
         justify-content: center;
-      
-        .wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            gap: 120px;
-      
-            section {
-                flex: 1;
-                width: 580px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-        
-                h2 {
-                    font-weight: 400;
-                    line-height: 32px;
-                    @media (max-width: $first-point) {
-                        line-height: 30px;
-                        font-size: 22px;
-                    }
-                    @media (max-width: $second-point) {
-                        line-height: 24px;
-                        font-size: large;
-                    }
-                    @media (max-width: $third-point) {
-                        font-size: medium;
-                        line-height: 20px;
-                    }
-                }
-        
-                button {
-                    width: 258px;
-                    height: 55px;
-                    p {
-                        font-size: 25px;
-                    }
-                    @media (max-width: $first-point) {
-                        width: 230px;
-                        p {
-                            font-size: x-large;
-                        }
-                    }
-                    @media (max-width: $third-point) {
-                        width: 200px;
-                        height: 45px;
-                        p {
-                            font-size: large;
-                        }
-                    }
-                }
-            }
-        
-            .img-holder {
-                position: relative;
-                flex: 1;
-            }
-            @media (max-width: $first-point) {
-                gap: 20px;
-            }
-            @media (max-width: $fourth-point) {
-                flex-direction: column;
-                gap: 10px;
-                section {
-                    order: 2;
-                    width: 90%;
-                    margin: 0 auto;
-                    align-items: center;
-                    gap: 15px;
-                }
-            }
-        }
-        @media (max-width: $fourth-point) {
-            width: 100%;
-            height: 100%;
-        }
+      }
     }
-    .footer {
+  }
+  .block-2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      gap: 120px;
+
+      section {
+        flex: 1;
+        width: 580px;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        @media (max-width: $third-point) {
-            margin-bottom: 22px;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            gap: 22px;
+
+        h2 {
+          font-weight: 400;
+          line-height: 32px;
+          @media (max-width: $first-point) {
+            line-height: 30px;
+            font-size: 22px;
+          }
+          @media (max-width: $second-point) {
+            line-height: 24px;
+            font-size: large;
+          }
+          @media (max-width: $third-point) {
+            font-size: medium;
+            line-height: 20px;
+          }
         }
+
+        button {
+          width: 258px;
+          height: 55px;
+          p {
+            font-size: 25px;
+          }
+          @media (max-width: $first-point) {
+            width: 230px;
+            p {
+              font-size: x-large;
+            }
+          }
+          @media (max-width: $third-point) {
+            width: 200px;
+            height: 45px;
+            p {
+              font-size: large;
+            }
+          }
+        }
+      }
+
+      .img-holder {
+        position: relative;
+        flex: 1;
+      }
+      @media (max-width: $first-point) {
+        gap: 20px;
+      }
+      @media (max-width: $fourth-point) {
+        flex-direction: column;
+        gap: 10px;
+        section {
+          order: 2;
+          width: 90%;
+          margin: 0 auto;
+          align-items: center;
+          gap: 15px;
+        }
+      }
     }
     @media (max-width: $fourth-point) {
-        gap: 20px;
-        .block-1 {
-            margin-bottom: -24px;
-        }
+      width: 100%;
+      height: 100%;
     }
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: $third-point) {
+      margin-bottom: 22px;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+  }
+  @media (max-width: $fourth-point) {
+    gap: 20px;
+    .block-1 {
+      margin-bottom: -24px;
+    }
+  }
 }
 
 // block-1
 @media (max-width: $first-point) {
-    .width-wrapper {
-        width: $first-point-to
+  .width-wrapper {
+    width: $first-point-to;
+  }
+  .container .block-1 section {
+    top: 50px;
+    gap: 70px;
+    button {
+      width: 40%;
     }
-    .container .block-1 section {
-        top: 50px;
-        gap: 70px;
-        button {
-            width: 40%;
-        }
-    }
+  }
 }
 
 @media (max-width: $second-point) {
-    .width-wrapper {
-        width: $second-point-to
+  .width-wrapper {
+    width: $second-point-to;
+  }
+  .container .block-1 section {
+    width: 400px;
+    gap: 40px;
+    h1 {
+      font-size: xx-large;
+      line-height: normal;
     }
-    .container .block-1 section {
-        width: 400px;
-        gap: 40px;
-        h1 {
-            font-size:xx-large;
-            line-height: normal;
-        }
-        button {
-            width: 50%;
-        }
+    button {
+      width: 50%;
     }
+  }
 }
 
 @media (max-width: $third-point) {
-    .width-wrapper {
-        width: $third-point-to
+  .width-wrapper {
+    width: $third-point-to;
+  }
+  .container .block-1 section {
+    h1 {
+      font-size: x-large;
     }
-    .container .block-1 section {
-        h1 {
-            font-size: x-large;
-        }
-    }
+  }
 }
 
 @media (max-width: $fourth-point) {
-    .container .block-1 {
-        width: 100%;
-        section {
-            top: 20px;
-            width: 90%;
-            flex-direction: row;
-            justify-content: space-around;
-            h1 {
-                width: 200px;
-                font-size: x-large;
-            }
-            button {
-                position: absolute;
-                bottom: 0;
-                width: 200px;
-                margin-left: -100px;
-            }
-        }
+  .container .block-1 {
+    width: 100%;
+    section {
+      top: 20px;
+      width: 90%;
+      flex-direction: row;
+      justify-content: space-around;
+      h1 {
+        width: 200px;
+        font-size: x-large;
+      }
+      button {
+        position: absolute;
+        bottom: 0;
+        width: 200px;
+        margin-left: -100px;
+      }
     }
+  }
 }
 
 @media (max-width: $fifth-point) {
-    .container .block-1 {
-        width: 100%;
-        section {
-            top: 40px;
-            width: 90%;
-            flex-direction: row;
-            justify-content: space-around;
-            h1 {
-                width: 200px;
-                font-size: large;
-            }
-            button {
-                display: none;
-            }
-        }
+  .container .block-1 {
+    width: 100%;
+    section {
+      top: 40px;
+      width: 90%;
+      flex-direction: row;
+      justify-content: space-around;
+      h1 {
+        width: 200px;
+        font-size: large;
+      }
+      button {
+        display: none;
+      }
     }
+  }
 }
 
 @media (max-width: $fifth-point) {
-    .container .block-1 {
-        width: 100%;
-        section {
-            top: 40px;
-            width: 90%;
-            flex-direction: row;
-            justify-content: space-around;
-            h1 {
-                width: 200px;
-                font-size: large;
-            }
-            button {
-                display: none;
-            }
-        }
+  .container .block-1 {
+    width: 100%;
+    section {
+      top: 40px;
+      width: 90%;
+      flex-direction: row;
+      justify-content: space-around;
+      h1 {
+        width: 200px;
+        font-size: large;
+      }
+      button {
+        display: none;
+      }
     }
+  }
 }
 
 @media (max-width: $sixth-point) {
-    .container .block-1 {
-        section {
-            top: 20px;
-            h1 {
-                width: 200px;
-                font-size: small;
-            }
-        }
+  .container .block-1 {
+    section {
+      top: 20px;
+      h1 {
+        width: 200px;
+        font-size: small;
+      }
     }
+  }
 }
 
 @media (max-width: $fourth-point) {
-    .big-size-only {
-        display: none;
-    }
+  .big-size-only {
+    display: none;
+  }
 }

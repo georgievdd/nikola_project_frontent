@@ -1,7 +1,7 @@
 export interface ApiError {
-    detail: string;
+  detail: string
 }
 
 export const ApiErrorNotFound: ApiError = {
-    detail: 'Not found.'
+  detail: 'Not found.',
 }

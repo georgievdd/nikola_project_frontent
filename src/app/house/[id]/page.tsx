@@ -1,10 +1,11 @@
-import { getHouse, getHouseOptions } from "@/api/house";
-import HouseHolder from "@/components/HouseHolder/HouseHolder";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { House, HouseOptions } from "@/entity/House";
-import { isApiError } from "@/helpers";
-import { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
+import {Metadata, ResolvingMetadata} from 'next'
+import {notFound} from 'next/navigation'
+
+import {getHouse, getHouseOptions} from 'api/house'
+import HouseHolder from 'components/HouseHolder/HouseHolder'
+import DefaultLayout from 'components/Layouts/DefaultLayout'
+import {HouseOptions} from 'entity/House'
+import {isApiError} from 'src/helpers'
 
 interface Props {
   params: {
@@ -14,26 +15,24 @@ interface Props {
 
 export async function generateMetadata(
   {params}: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const house = (await getHouse(params.id))
+  const house = await getHouse(params.id)
   if (isApiError(house)) {
     return notFound()
   }
   const previousImages = (await parent).openGraph?.images || []
-  console.log('house', house);
   return {
-    title:  `Nikola | ${house.name}`,
+    title: `Nikola | ${house.name}`,
     description: house.description,
-    keywords: house.features.map(e => e.name),
+    keywords: house.features.map((e) => e.name),
     openGraph: {
-      images: [...house.pictures.map(e => e.picture), ...previousImages],
+      images: [...house.pictures.map((e) => e.picture), ...previousImages],
     },
   }
 }
 
 export default async function HouseId({params}: Props) {
-
   const house = await getHouse(params.id)
   if (isApiError(house)) {
     return notFound()
@@ -43,7 +42,7 @@ export default async function HouseId({params}: Props) {
 
   return (
     <DefaultLayout>
-      <HouseHolder house={house} houseOptions={houseOptions}/>
+      <HouseHolder house={house} houseOptions={houseOptions} />
     </DefaultLayout>
-  );
+  )
 }

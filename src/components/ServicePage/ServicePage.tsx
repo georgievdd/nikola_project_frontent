@@ -35,7 +35,8 @@ const Block = ({
         <Link href={telegram_contact_link} target="_blank">
           <Button variant="base" statical round0>
             Забронировать{' '}
-            <Image quality={100}
+            <Image
+              quality={100}
               alt=""
               src={TGImage}
               width={30}

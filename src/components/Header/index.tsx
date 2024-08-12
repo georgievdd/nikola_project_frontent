@@ -16,7 +16,13 @@ interface HeaderProps {
 const Logo = () => {
   return (
     <div>
-      <Image quality={100} className={styles.logo} src={LogoImg} alt="" height={30} />
+      <Image
+        quality={100}
+        className={styles.logo}
+        src={LogoImg}
+        alt=""
+        height={30}
+      />
     </div>
   )
 }

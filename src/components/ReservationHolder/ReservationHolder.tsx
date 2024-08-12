@@ -125,7 +125,13 @@ const ReservationHolder = () => {
           </div>
         </div>
         <div className={css`clip`}>
-          <Image quality={100} src={ClipImg} width={27} height={34} alt="clip" />
+          <Image
+            quality={100}
+            src={ClipImg}
+            width={27}
+            height={34}
+            alt="clip"
+          />
         </div>
       </section>
       <div className={css`description`}>
@@ -148,7 +154,8 @@ const ReservationHolder = () => {
 const clock = (time: string, type: string) => (
   <span className={css`clock`}>
     <p>{getClock(time)}</p>
-    <Image quality={100}
+    <Image
+      quality={100}
       src={type === 'in' ? CircleImg : MoonImg}
       alt="type of date"
       width={18}

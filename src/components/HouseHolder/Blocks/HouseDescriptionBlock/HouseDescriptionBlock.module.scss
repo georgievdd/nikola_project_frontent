@@ -9,10 +9,15 @@
     gap: 100px;
     justify-content: flex-start;
     margin-bottom: 30px;
-    .features {
+    .feature-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 25px;
+      .features {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
     }
   }
   article {
@@ -39,13 +44,16 @@
       display: flex;
       margin-bottom: 0;
       flex-direction: column;
-      .features {
-        width: 100%;
-        flex-wrap: wrap;
-        display: flex;
+      .feature-group {
         flex-direction: row;
-        gap: 15px;
-        overflow: visible;
+        flex-wrap: wrap;
+        .features {
+          width: 100%;
+          flex-wrap: wrap;
+          flex-direction: row;
+          gap: 15px;
+          overflow: visible;
+        }
       }
     }
   }

@@ -7,7 +7,7 @@ import {INumberInput} from 'components/ui/Inputs/NumberInput/useNumberInput'
 
 import styles from './BookingParamsBlock.module.scss'
 
-const s = require('src/helpers').importStyles(
+const css = require('src/helpers').importStyles(
   require('./BookingParamsBlock.module.scss'),
 )
 

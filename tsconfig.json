@@ -26,12 +26,19 @@
       "theme/*": ["src/theme/*"],
       "mail/*": ["src/mail/*"],
       "hooks/*": ["src/hooks/*"],
+      "alert": ["src/components/Alert/Alert.tsx"],
       "images/*": ["public/images/*"],
       "home-images/*": ["public/home/*"],
       "service-images/*": ["public/service/*"],
       "Calendar/*": ["src/components/Calendar/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.d.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }

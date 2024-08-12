@@ -3,7 +3,9 @@ import {useEffect, useRef} from 'react'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
 
-import styles from './Sidebar.module.scss'
+const css = require('src/helpers').importStyles(
+  require('./Sidebar.module.scss'),
+)
 
 interface SidebarProps {
   sidebarOpen: boolean
@@ -18,11 +20,11 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
     if (ref.current) {
       if (sidebarOpen) {
         ref.current.style.display = 'flex'
-        ref.current.classList.add(styles.show)
-        ref.current.classList.remove(styles.hide)
+        ref.current.classList.add(css`show`)
+        ref.current.classList.remove(css`hide`)
       } else {
-        ref.current.classList.add(styles.hide)
-        ref.current.classList.remove(styles.show)
+        ref.current.classList.add(css`hide`)
+        ref.current.classList.remove(css`show`)
         setTimeout(() => {
           ref.current!.style.display = 'none'
         }, 350)
@@ -31,18 +33,16 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}: SidebarProps) => {
   }, [sidebarOpen])
 
   return (
-    <nav className={[styles.container].join(' ')} ref={ref}>
-      <div className={styles.links}>
+    <nav className={css`container`} ref={ref}>
+      <div className={css`links`}>
         <Link href="/" legacyBehavior>
-          <a className={pathname === '/' ? styles.active : ' '}>Главная</a>
+          <a className={pathname === '/' ? css`active` : ' '}>Главная</a>
         </Link>
         <Link href="/house" legacyBehavior>
-          <a className={pathname === '/house' ? styles.active : ' '}>Домики</a>
+          <a className={pathname === '/house' ? css`active` : ' '}>Домики</a>
         </Link>
         <Link href="/service" legacyBehavior>
-          <a className={pathname === '/service' ? styles.active : ' '}>
-            Услуги
-          </a>
+          <a className={pathname === '/service' ? css`active` : ' '}>Услуги</a>
         </Link>
       </div>
     </nav>

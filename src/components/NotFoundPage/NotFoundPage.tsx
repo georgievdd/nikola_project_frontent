@@ -2,15 +2,15 @@ import React from 'react'
 
 import Link from 'next/link'
 
-const s = require('src/helpers').importStyles(
+const css = require('src/helpers').importStyles(
   require('./NotFoundPage.module.scss'),
 )
 const NotFoundPage = () => {
   return (
-    <div className={s`container`}>
-      <div className={s`island`}>
-        <h1 className={s`error-code`}>404</h1>
-        <div className={s`text`}>
+    <div className={css`container`}>
+      <div className={css`island`}>
+        <h1 className={css`error-code`}>404</h1>
+        <div className={css`text`}>
           <h1>Увы, такой страницы нет</h1>
           <h1>
             Попробуйте вернуться на <Link href={'/'}>главную</Link>

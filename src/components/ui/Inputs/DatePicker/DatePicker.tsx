@@ -5,7 +5,7 @@ import SelectInput from 'components/ui/Inputs/SelectInput/SelectInput'
 import styles from './DatePicker.module.scss'
 import {DatePickerController} from './useDatePicker'
 
-const s = require('src/helpers').importStyles(
+const css = require('src/helpers').importStyles(
   require('./DatePicker.module.scss'),
 )
 
@@ -19,7 +19,7 @@ const DatePicker = ({
   className?: string
 }) => {
   return (
-    <div className={s`wrapper ${className}`} style={style}>
+    <div className={css`wrapper ${className}`} style={style}>
       <div className={styles.divider} />
       <div className={styles.container}>
         <div className={styles.group}>

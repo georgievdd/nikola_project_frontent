@@ -9,10 +9,10 @@ import {
 
 import {differenceInMonths, isSameDay, startOfMonth} from 'date-fns'
 
+import {showAlert} from 'alert'
 import {getCheckInCalendar, getCommonCalendar} from 'Calendar/CalendarBody/api'
 import {DayType} from 'Calendar/CalendarBody/helpers'
 import {INumberInput} from 'components/ui/Inputs/NumberInput/useNumberInput'
-import {showAlert} from 'src/helpers'
 
 import {CalendarDataController, useCalendarData} from './useCalendarData'
 import {ScrollController, useScroll} from './useScroll'

@@ -3,6 +3,7 @@ import React, {useEffect} from 'react'
 
 import {useRouter} from 'next/navigation'
 
+import {showAlert} from 'alert'
 import {GET_HOUSE_CALENDAR} from 'api/endpoints'
 import {
   getReservation,
@@ -19,7 +20,7 @@ import {
   MakeReservationRequest,
 } from 'entity/Reservation'
 import {sendMail} from 'mail/index'
-import {getDateFromKey, showAlert} from 'src/helpers'
+import {getDateFromKey} from 'src/helpers'
 
 import BookingInvoiceBlock from './Blocks/BookingInvoiceBlock/BookingInvoiceBlock'
 import {useBookingInvoice} from './Blocks/BookingInvoiceBlock/useBookingInvoice'

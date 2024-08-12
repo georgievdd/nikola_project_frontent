@@ -8,7 +8,7 @@ import IconPlus from 'images/svg/plus'
 import styles from './NumberInput.module.scss'
 import {INumberInput} from './useNumberInput'
 
-const s = require('src/helpers').importStyles(
+const css = require('src/helpers').importStyles(
   require('./NumberInput.module.scss'),
 )
 
@@ -23,7 +23,7 @@ const NumberInput = ({
   maxValue,
 }: INumberInput & {className?: string; style?: CSSProperties}) => {
   return (
-    <div className={s`wrapper ${className}`} style={style}>
+    <div className={css`wrapper ${className}`} style={style}>
       <div className={styles.container}>
         <label>
           <p>{label}</p>

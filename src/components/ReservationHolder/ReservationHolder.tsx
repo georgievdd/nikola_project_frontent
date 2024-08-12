@@ -21,7 +21,7 @@ import {
   prepareDate,
 } from './helpers'
 
-const s = require('src/helpers').importStyles(
+const css = require('src/helpers').importStyles(
   require('./ReservationHolder.module.scss'),
 )
 
@@ -42,80 +42,80 @@ const ReservationHolder = () => {
     return <div></div>
   }
   return (
-    <div className={s`container`}>
+    <div className={css`container`}>
       <h1>Заявка отправлена</h1>
       <section onClick={onClick}>
-        <div className={s`house`}>
-          <div className={s`first-column`} onClick={stopClick}>
-            <div className={s`preview`}>
+        <div className={css`house`}>
+          <div className={css`first-column`} onClick={stopClick}>
+            <div className={css`preview`}>
               <Swiper links={[reservation.house.pictures[0]]} />
             </div>
             <a href={address.link} target="blank">
-              <div className={s`address`}>
-                <div className={s`address-header`}>
+              <div className={css`address`}>
+                <div className={css`address-header`}>
                   <AddressIcon />
                   <p>Адрес:</p>
                 </div>
-                <p className={s`address-text`}>{address.text}</p>
+                <p className={css`address-text`}>{address.text}</p>
               </div>
             </a>
           </div>
-          <div className={s`second-column`}>
-            <div className={s`line`}>
+          <div className={css`second-column`}>
+            <div className={css`line`}>
               <h3>Домик:</h3>
               <h3>{reservation.house.name}</h3>
             </div>
-            <div className={s`line`}>
+            <div className={css`line`}>
               <h3>Заезд:</h3>
               <div>
-                <h3 className={s`nowrap`}>
+                <h3 className={css`nowrap`}>
                   {prepareDate(reservation.check_in_datetime)}
                 </h3>
                 {clock(reservation.check_in_datetime, 'in')}
               </div>
             </div>
-            <div className={s`line`}>
+            <div className={css`line`}>
               <h3>Выезд:</h3>
               <div>
-                <h3 className={s`nowrap`}>
+                <h3 className={css`nowrap`}>
                   {prepareDate(reservation.check_out_datetime)}
                 </h3>
                 {clock(reservation.check_out_datetime, 'out')}
               </div>
             </div>
-            <div className={s`line`}>
+            <div className={css`line`}>
               <h3>Фамилия:</h3>
-              <h3 className={s`ellipsis`}>{reservation.client.first_name}</h3>
+              <h3 className={css`ellipsis`}>{reservation.client.first_name}</h3>
             </div>
-            <div className={s`line`}>
+            <div className={css`line`}>
               <h3>Имя:</h3>
-              <h3 className={s`ellipsis`}>{reservation.client.last_name}</h3>
+              <h3 className={css`ellipsis`}>{reservation.client.last_name}</h3>
             </div>
-            <div className={s`line`}>
+            <div className={css`line`}>
               <h3>Почта:</h3>
-              <h3 className={s`ellipsis`}>{reservation.client.email}</h3>
+              <h3 className={css`ellipsis`}>{reservation.client.email}</h3>
             </div>
-            <div className={s`line`}>
+            <div className={css`line`}>
               <h3>Контакт:</h3>
-              <h3 className={s`ellipsis`}>{reservation.preferred_contact}</h3>
+              <h3 className={css`ellipsis`}>{reservation.preferred_contact}</h3>
             </div>
-            <div className={s`line`}>
+            <div className={css`line`}>
               <h3>ID заявки:</h3>
-              <h3 className={s`ellipsis`}>{reservation.slug}</h3>
+              <h3 className={css`ellipsis`}>{reservation.slug}</h3>
             </div>
-            <div className={s`line`}>
+            <div className={css`line`}>
               <h3>Стоимость:</h3>
               <h3>{reservation.bill.total} ₽</h3>
             </div>
           </div>
         </div>
-        <div className={s`comment`}>
-          <h2 className={s`header`}>Комментарий:</h2>
+        <div className={css`comment`}>
+          <h2 className={css`header`}>Комментарий:</h2>
           <p>{reservation.comment}</p>
         </div>
-        <div className={s`detalization`}>
-          <h2 className={s`header`}>Детализация по дням:</h2>
-          <div className={s`events`}>
+        <div className={css`detalization`}>
+          <h2 className={css`header`}>Детализация по дням:</h2>
+          <div className={css`events`}>
             {reservation.bill.chronological_positions.map((event, i) => (
               <BillEvent event={event} key={event.description + i} />
             ))}
@@ -124,11 +124,11 @@ const ReservationHolder = () => {
             ))}
           </div>
         </div>
-        <div className={s`clip`}>
+        <div className={css`clip`}>
           <Image src={ClipImg} width={27} height={34} alt="clip" />
         </div>
       </section>
-      <div className={s`description`}>
+      <div className={css`description`}>
         <h3>
           В ближайшее время с вами свяжутся для подтверждения бронирования
         </h3>
@@ -146,7 +146,7 @@ const ReservationHolder = () => {
 }
 
 const clock = (time: string, type: string) => (
-  <span className={s`clock`}>
+  <span className={css`clock`}>
     <p>{getClock(time)}</p>
     <Image
       src={type === 'in' ? CircleImg : MoonImg}

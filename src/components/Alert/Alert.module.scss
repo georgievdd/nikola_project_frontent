@@ -1,0 +1,41 @@
+.alert-danger,
+.alert-success,
+.alert-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  animation: fadeInOut 8s forwards;
+}
+.alert-danger {
+  background-color: lightcoral;
+}
+.alert-success {
+  background-color: #66bb6a;
+}
+.cross {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
+  }
+  2%,
+  98% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-100%);
+  }
+}

@@ -7,10 +7,12 @@ import PictureWithBlur from 'components/ui/PictureWithBlur/PictureWithBlur'
 import {Picture} from 'entity/House'
 import arrowDown from 'images/arrow-down.svg'
 import arrowUp from 'images/arrow-up.svg'
-import { scrollToCenter } from './helpers'
 
-const css = require('src/helpers')
-  .importStyles(require('./Carousel.module.scss'))
+import {scrollToCenter} from './helpers'
+
+const css = require('src/helpers').importStyles(
+  require('./Carousel.module.scss'),
+)
 /**
  * Если будет беда - заменить img на Image; добавить fill
  */
@@ -72,10 +74,12 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
 
   useEffect(() => {
     if (columnRef.current) {
-      const selectedElement = columnRef.current.children[current] as HTMLLIElement;
-      scrollToCenter(selectedElement, columnRef.current);
+      const selectedElement = columnRef.current.children[
+        current
+      ] as HTMLLIElement
+      scrollToCenter(selectedElement, columnRef.current)
     }
-  }, [current]);
+  }, [current])
 
   return (
     <div>

@@ -7,8 +7,7 @@ import {createRoot, Root} from 'react-dom/client'
 
 import Cross from 'images/cross.svg'
 
-const css = require('src/helpers')
-  .importStyles(require('./Alert.module.scss'))
+const css = require('src/helpers').importStyles(require('./Alert.module.scss'))
 
 type Variant = 'alert-danger' | 'alert-success'
 interface Props {
@@ -34,7 +33,12 @@ const mountAlert = (message: string, variant: Variant) => {
 }
 
 const Alert = ({message, variant}: Props) => (
-  <div className={css`${variant}`} onClick={removeAlert}>
+  <div
+    className={css`
+      ${variant}
+    `}
+    onClick={removeAlert}
+  >
     <Image
       className={css`cross`}
       src={Cross}

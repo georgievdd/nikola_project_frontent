@@ -114,14 +114,14 @@ const Carousel = ({imgs}: {imgs: Picture[]}) => {
           className={css`arrow_top_hide`}
           ref={topArrowRef}
         >
-          <Image width={36} height={36} alt="" src={arrowUp} />
+          <Image quality={100} width={36} height={36} alt="" src={arrowUp} />
         </button>
         <button
           onClick={handleNext}
           className={css`arrow_bottom_show`}
           ref={bottomArrowRef}
         >
-          <Image width={36} height={36} alt="" src={arrowDown} />
+          <Image quality={100} width={36} height={36} alt="" src={arrowDown} />
         </button>
       </div>
     </div>

@@ -30,8 +30,8 @@ const Reloader = ({
       className={[styles.container, className].join(' ')}
       style={style}
     >
-      <Image src={RoundArrowImg} width={20} height={20} alt="" ref={ref} />
-      <Image
+      <Image quality={100} src={RoundArrowImg} width={20} height={20} alt="" ref={ref} />
+      <Image quality={100}
         className={styles.imgc}
         src={CircleImg}
         width={32}

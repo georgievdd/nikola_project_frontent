@@ -14,7 +14,7 @@ export const BillEvent = ({
 }) => (
   <div className={styles.event}>
     <div className={styles.title}>
-      <Image
+      <Image quality={100}
         width={22}
         height={22}
         alt="icon"

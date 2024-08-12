@@ -39,7 +39,7 @@ const Alert = ({message, variant}: Props) => (
     `}
     onClick={removeAlert}
   >
-    <Image
+    <Image quality={100}
       className={css`cross`}
       src={Cross}
       alt="cross"

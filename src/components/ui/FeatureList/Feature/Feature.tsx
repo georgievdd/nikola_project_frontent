@@ -19,7 +19,7 @@ const Feature = ({
       className={[className, styles.container].join(' ')}
       style={{display: 'flex'}}
     >
-      <Image
+      <Image quality={100}
         width={17}
         height={17}
         alt="icon"

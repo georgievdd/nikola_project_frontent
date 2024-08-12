@@ -20,6 +20,7 @@ const Block1 = (index: number) => {
         </section>
         <div className={styles['img-holder']}>
           <Image
+            quality={100}
             src={require(`../../../public/home/${index}.png`)}
             alt="Описание"
             layout="responsive"
@@ -33,6 +34,7 @@ const Block2 = (index: number) => {
   return (
     <div className={styles['big-size-only']}>
       <Image
+        quality={100}
         src={require(`../../../public/home/${index}.png`)}
         alt="3"
         layout="responsive"
@@ -46,6 +48,7 @@ const Block3 = (index: number) => {
       <div className={styles['wrapper']}>
         <div className={styles['img-holder']}>
           <Image
+            quality={100}
             src={require(`../../../public/home/${index}.png`)}
             alt="Описание"
             layout="responsive"
@@ -64,6 +67,7 @@ const HomePage = () => {
     <div className={styles.container}>
       <div className={styles['block-1']}>
         <Image
+          quality={100}
           src={require('../../../public/home/1.png')}
           alt="1"
           layout="responsive"

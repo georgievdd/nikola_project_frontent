@@ -1,10 +1,9 @@
 'use client'
-import {useCallback, useEffect, useState} from 'react'
+import {useCallback} from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
 
-import {getReservation} from 'api/reservation'
 import {BillEvent} from 'components/Bill/BillEvent/BillEvent'
 import Swiper from 'components/ui/Swiper/Swiper'
 import {Reservation} from 'entity/Reservation'
@@ -17,7 +16,6 @@ import {
   address,
   copyReservationToBuffer,
   getClock,
-  getSlug,
   prepareDate,
 } from './helpers'
 
@@ -25,22 +23,12 @@ const css = require('src/helpers').importStyles(
   require('./ReservationHolder.module.scss'),
 )
 
-const ReservationHolder = () => {
-  const [reservation, setReservstion] = useState<Reservation | null>(null)
-
+const ReservationHolder = ({reservation}: {reservation: Reservation}) => {
   const onClick = () => copyReservationToBuffer(reservation!)
 
   const stopClick = useCallback((e: any) => {
     e.stopPropagation()
   }, [])
-
-  useEffect(() => {
-    getReservation(getSlug()).then(setReservstion)
-  }, [])
-
-  if (!reservation) {
-    return <div></div>
-  }
   return (
     <div className={css`container`}>
       <h1>Заявка отправлена</h1>

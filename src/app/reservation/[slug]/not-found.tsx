@@ -1,9 +1,9 @@
 import DefaultLayout from 'components/Layouts/DefaultLayout'
-import NotFoundPage from 'components/NotFoundPage/NotFoundPage'
+import NotFoundReservationPage from 'components/NotFoundPage/NotFoundReservationPage'
 
 const notFound = () => (
   <DefaultLayout>
-    <NotFoundPage />
+    <NotFoundReservationPage />
   </DefaultLayout>
 )
 

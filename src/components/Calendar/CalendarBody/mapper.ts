@@ -1,54 +1,46 @@
 import {CheckInCalendar, CommonCalendar} from 'Calendar/CalendarBody/dto'
-import {DayType} from 'Calendar/CalendarBody/helpers'
+import {CalendarState, DayType} from 'entity/Calendar'
+
+import {addDayTypeToCalendarState} from './helpers'
 
 /**
  * список на насколько месяцев сразу
  */
-export function mapFromCommonCalendar(
-  data: CommonCalendar[],
-): Record<string, DayType> {
-  const result: Record<string, DayType> = {}
+export function mapFromCommonCalendar(data: CommonCalendar[]): CalendarState {
+  const state: CalendarState = {}
   data.forEach(({calendar}) => {
     Object.keys(calendar).forEach((key) => {
       if (!calendar[key].check_in_is_available) {
-        result[key] = DayType.Disabled
-        return
+        addDayTypeToCalendarState(state, key, DayType.Disabled)
       }
       if (calendar[key].is_holiday) {
-        result[key] = DayType.Holiday
-        return
+        addDayTypeToCalendarState(state, key, DayType.Holiday)
       }
     })
   })
-  return result
+  return state
 }
 
 export function mapFromCheckInDateCalendar(
   checkInDate: Date,
   data: CheckInCalendar[],
-): [Record<string, DayType>, Record<string, number>] {
-  const result: Record<string, DayType> = {}
+): [CalendarState, Record<string, number>] {
+  const state: CalendarState = {}
   const costs: Record<string, number> = {}
   data.forEach(({calendar}) => {
     Object.keys(calendar).forEach((key) => {
       if (calendar[key].price) {
         costs[key] = calendar[key].price!
       }
-      if (checkInDate.getKey() === key) {
-        if (calendar[key].is_holiday) {
-          result[key] = DayType.Holiday
-        }
-        return
-      }
       if (!calendar[key].check_out_is_available) {
-        result[key] = DayType.Disabled
-        return
+        if (checkInDate.getKey() !== key) {
+          addDayTypeToCalendarState(state, key, DayType.Disabled)
+        }
       }
       if (calendar[key].is_holiday) {
-        result[key] = DayType.Holiday
-        return
+        addDayTypeToCalendarState(state, key, DayType.Holiday)
       }
     })
   })
-  return [result, costs]
+  return [state, costs]
 }

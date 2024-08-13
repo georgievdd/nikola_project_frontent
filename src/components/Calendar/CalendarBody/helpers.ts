@@ -2,6 +2,8 @@ import {SyntheticEvent} from 'react'
 
 import {startOfWeek, format, addMonths} from 'date-fns'
 import {ru} from 'date-fns/locale'
+
+import {CalendarState, DayType} from 'entity/Calendar'
 export const monday = startOfWeek(new Date(), {weekStartsOn: 1})
 export const weekArray = Array.from({length: 7})
 
@@ -49,16 +51,6 @@ export function getMonthFromIndexInCalendar(c: number) {
 
 export type DateOrNull = Date | null
 
-export enum DayType {
-  Holiday,
-  Disabled,
-}
-
-export const dayStyle = {
-  [DayType.Disabled]: 'date_disabled',
-  [DayType.Holiday]: 'date_holiday',
-}
-
 const extractMonthIdFromElement = (e: Element): number | undefined => {
   const id = e.id.at(-1)
   return id ? +id : undefined
@@ -72,4 +64,15 @@ export const extractMonthIdFromYear = (
 ): number | undefined => {
   const month = (e.target as Element).parentNode!.querySelector('p')!
   return extractMonthIdFromElement(month)
+}
+
+export function addDayTypeToCalendarState(
+  calendar: CalendarState,
+  key: string,
+  type: DayType,
+) {
+  if (!calendar[key]) {
+    calendar[key] = []
+  }
+  calendar[key].push(type)
 }

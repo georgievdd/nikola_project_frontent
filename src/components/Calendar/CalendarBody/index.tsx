@@ -20,8 +20,6 @@ import {
 import {ru} from 'date-fns/locale'
 
 import {
-  dayStyle,
-  DayType,
   extractIdFromEvent,
   extractMonthIdFromYear,
   getMonthName,
@@ -30,6 +28,9 @@ import {
 } from 'Calendar/CalendarBody/helpers'
 import {CalendarController} from 'Calendar/CalendarBody/hooks/useCalendar'
 import {SelectionController} from 'Calendar/CalendarBody/hooks/useSelection'
+import {CalendarState, dayStyle, DayType} from 'entity/Calendar'
+
+import {calendarSize} from './config'
 
 export default function Calendar3({
   controller,
@@ -40,7 +41,6 @@ export default function Calendar3({
     id,
     selectionController,
     processDateClick,
-    opacity,
     calendarCellsRef,
     scrollController,
     dataController,
@@ -65,7 +65,7 @@ export default function Calendar3({
             calendarMonthNameColumnRef={calendarMonthNameColumnRef}
           />
         )}
-        {Array.from({length: opacity}).map((_, i) => {
+        {Array.from({length: calendarSize}).map((_, i) => {
           const date = addMonths(new Date(), i)
           return (
             <div style={{zIndex: 1}} key={date.getKey()}>
@@ -102,7 +102,7 @@ export default function Calendar3({
               )
             })}
           </div>
-          {Array.from({length: opacity}).map((_, i) => {
+          {Array.from({length: calendarSize}).map((_, i) => {
             const month = addMonths(new Date(), i)
             return (
               <div key={month.getKey()} style={{marginBottom: '10px'}}>
@@ -190,7 +190,7 @@ interface MonthProps {
   month: Date
   selectionController: SelectionController
   processDateClick: (day: Date) => void
-  mapState: Record<string, DayType>
+  mapState: CalendarState
   costs: Record<string, number>
   onLoad: boolean
 }
@@ -204,24 +204,22 @@ const Month = ({
 }: MonthProps) => {
   const {dateBegin, dateEnd, isActive} = selectionController
   const getStyle = (day: Date): string => {
-    let style = ''
-    if (isActive) {
-      if (isSameDay(day, dateBegin!)) {
-        if (isSameDay(day, dateEnd!)) {
-          style += 'date_select-point '
-        } else {
-          style += 'date_select-left '
-        }
-      } else if (isSameDay(day, dateEnd!)) {
-        style += 'date_select-right '
-      } else if (dateBegin! < day && day < dateEnd!) {
-        style += 'date_select '
-      }
-    } else if (dateBegin && isSameDay(day, dateBegin)) {
-      style += 'date_select-start '
+    const style: Array<string> = []
+    const key = day.getKey()
+    if (Array.isArray(mapState[key])) {
+      mapState[key].forEach((type) => {
+        style.push(dayStyle[type])
+      })
     }
-    if (mapState[day.getKey()] == undefined) return style
-    return style + dayStyle[mapState[day.getKey()]]
+    if (isActive) {
+      if (dateBegin! <= day && day <= dateEnd!) {
+        style.push('date_select')
+      }
+    }
+    if (dateBegin && isSameDay(dateBegin, day)) {
+      style.push('date_select-start')
+    }
+    return style.join(' ')
   }
   const renderCells = () => {
     const dateFormat = 'd'
@@ -255,7 +253,7 @@ const Month = ({
               >
                 <p>{format(day, dateFormat)}</p>
                 {costs[day.getKey()] && (
-                  <div className="date__coin">{costs[day.getKey()]}</div>
+                  <div className="date_coin">{costs[day.getKey()]}</div>
                 )}
               </div>
             </div>,

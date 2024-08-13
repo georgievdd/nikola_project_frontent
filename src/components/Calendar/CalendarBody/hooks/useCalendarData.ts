@@ -1,10 +1,12 @@
 import {Dispatch, SetStateAction, useEffect, useState} from 'react'
 
-import {DayType} from 'Calendar/CalendarBody/helpers'
+import {CalendarState, DayType} from 'entity/Calendar'
+
+import {calendarSize} from '../config'
 
 export interface CalendarDataController {
-  mapState: Record<string, DayType>
-  setMapState: Dispatch<SetStateAction<Record<string, DayType>>>
+  mapState: CalendarState
+  setMapState: Dispatch<SetStateAction<CalendarState>>
   costs: Record<string, DayType>
   setCosts: Dispatch<SetStateAction<Record<string, number>>>
   beenLoaded: boolean[]
@@ -13,17 +15,17 @@ export interface CalendarDataController {
   wasCleared: boolean | null
 }
 
-export function useCalendarData(opacity: number): CalendarDataController {
-  const [mapState, setMapState] = useState<Record<string, DayType>>({})
+export function useCalendarData(): CalendarDataController {
+  const [mapState, setMapState] = useState<CalendarState>({})
   const [costs, setCosts] = useState<Record<string, number>>({})
   const [beenLoaded, setBeenLoaded] = useState<Array<boolean>>(
-    Array(opacity).fill(false),
+    Array(calendarSize).fill(false),
   )
   const [wasCleared, setWasCleared] = useState<boolean | null>(null)
   function clear() {
     setMapState({})
     setCosts({})
-    setBeenLoaded((prev) => Array(opacity).fill(false))
+    setBeenLoaded(Array(calendarSize).fill(false))
   }
   useEffect(() => {
     if (Object.keys(mapState).length === 0) {

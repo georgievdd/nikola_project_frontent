@@ -161,7 +161,7 @@ $cell-borde-size: 50px;
     pointer-events: none;
   }
 
-  .date__coin {
+  .date_coin {
     position: absolute;
     font-size: 9px;
     font-weight: 400;
@@ -171,29 +171,12 @@ $cell-borde-size: 50px;
     margin-top: 30px;
   }
 
-  // .date_holiday {
-  //     background-color: bisque;
-  // }
-
-  .date_select-left,
-  .date_select-right,
-  .date_select-point,
   .date_select,
   .date_select-start {
     border-radius: 5px;
     outline: 1px solid $third-acent-color;
   }
 
-  .date_holiday {
-    border-radius: 10px;
-    background-color: $secondary-acent-color;
-  }
-
-  .date_weekend {
-    background-color: $secondary-acent-color;
-  }
-
-  .date_select-left::before,
   .date_select-start::before {
     content: '';
     background-image: url('../../../../public/images/cross.svg');
@@ -207,13 +190,14 @@ $cell-borde-size: 50px;
     background-position: center;
   }
 
-  // .date_select-left {
-  //     border-radius: 10px 0 0 10px;
-  // }
+  .date_holiday {
+    border-radius: 10px;
+    background-color: $secondary-acent-color;
+  }
 
-  // .date_select-right {
-  //     border-radius: 0 10px 10px 0;
-  // }
+  .date_weekend {
+    background-color: $secondary-acent-color;
+  }
 
   .calendar__month {
     position: relative;
@@ -258,7 +242,7 @@ $cell-borde-size: 50px;
     .date {
       width: $cell-borde-size * 0.7;
       height: $cell-borde-size * 0.7;
-      .date__coin {
+      .date_coin {
         margin-top: 24px;
         font-size: 8px;
       }

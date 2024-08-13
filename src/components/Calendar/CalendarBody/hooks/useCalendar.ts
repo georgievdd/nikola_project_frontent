@@ -11,8 +11,8 @@ import {differenceInMonths, isSameDay, startOfMonth} from 'date-fns'
 
 import {showAlert} from 'alert'
 import {getCheckInCalendar, getCommonCalendar} from 'Calendar/CalendarBody/api'
-import {DayType} from 'Calendar/CalendarBody/helpers'
 import {INumberInput} from 'components/ui/Inputs/NumberInput/useNumberInput'
+import {DayType} from 'entity/Calendar'
 
 import {CalendarDataController, useCalendarData} from './useCalendarData'
 import {ScrollController, useScroll} from './useScroll'
@@ -23,7 +23,6 @@ export interface CalendarController {
   selectionController: SelectionController
   processDateClick: (day: Date) => void
   dataController: CalendarDataController
-  opacity: number
   onLoad: boolean
   scrollController: ScrollController
   calendarCellsRef: RefObject<HTMLDivElement>
@@ -41,19 +40,19 @@ export function useCalendar(
    * Сколько месяцев вперед отображаем
    */
   const [show, setShow] = useState(defaultShow)
-  const opacity = 16 // currentMonthIndex
   const calendarCellsRef = useRef<HTMLDivElement>(null)
   const selectionController = useSelection()
   const scrollController = useScroll(calendarCellsRef)
-  const dataController = useCalendarData(opacity)
+  const dataController = useCalendarData()
   const [onLoad, setLoad] = useState(false)
 
   function validDate(date: Date): boolean {
     const key = date.getKey()
     const {mapState} = dataController
     if (!mapState[key]) return true
-    return mapState[key] !== DayType.Disabled
+    return !mapState[key].includes(DayType.Disabled)
   }
+
   const processDateClick = function (date: Date) {
     if (!validDate(date)) {
       return
@@ -84,7 +83,6 @@ export function useCalendar(
   function setCommonCalendar(withClear: boolean = false) {
     setLoad(true)
     getCommonCalendar(
-      2, // сколько месяцев вперед смотрим дополнительно
       dataController,
       scrollController.currentMonthIndex,
       endpoint,
@@ -103,7 +101,6 @@ export function useCalendar(
   ) {
     setLoad(true)
     getCheckInCalendar(
-      2,
       dataController,
       Math.max(scrollController.currentMonthIndex - 1, 0),
       selectionController.dateBegin!,
@@ -114,8 +111,8 @@ export function useCalendar(
       .then((result) => {
         const [map, costs] = result
         if (withClear) {
-          dataController.setMapState((prev) => map)
-          dataController.setCosts((prev) => costs)
+          dataController.setMapState(map)
+          dataController.setCosts(costs)
         } else {
           dataController.setMapState((prev) => ({...map, ...prev}))
           dataController.setCosts((prev) => ({...costs, ...prev}))
@@ -127,6 +124,7 @@ export function useCalendar(
       )
       .finally(() => setLoad(false))
   }
+
   /**
    * При инициализации
    * scrollController.currentMonthIndex = 0 (сегодняшний месяц)
@@ -197,7 +195,6 @@ export function useCalendar(
     scrollController,
     processDateClick,
     dataController,
-    opacity,
     onLoad,
     calendarCellsRef,
     show,

@@ -7,8 +7,7 @@ import PictureWithBlur from 'components/ui/PictureWithBlur/PictureWithBlur'
 import {Picture} from 'entity/House'
 import arrowDown from 'images/arrow-down.svg'
 import arrowUp from 'images/arrow-up.svg'
-
-import {scrollToCenter} from './helpers'
+import {scrollToCenter} from 'src/helpers'
 
 const css = require('src/helpers').importStyles(
   require('./Carousel.module.scss'),

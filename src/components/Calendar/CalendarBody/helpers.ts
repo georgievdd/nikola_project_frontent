@@ -51,20 +51,13 @@ export function getMonthFromIndexInCalendar(c: number) {
 
 export type DateOrNull = Date | null
 
-const extractMonthIdFromElement = (e: Element): number | undefined => {
+const extractGroupIdFromElement = (e: Element): number | undefined => {
   const id = e.id.at(-1)
   return id ? +id : undefined
 }
 
-export const extractIdFromEvent = (e: SyntheticEvent) =>
-  extractMonthIdFromElement(e.target as Element)
-
-export const extractMonthIdFromYear = (
-  e: SyntheticEvent,
-): number | undefined => {
-  const month = (e.target as Element).parentNode!.querySelector('p')!
-  return extractMonthIdFromElement(month)
-}
+export const extractGroupIdFromEvent = (e: SyntheticEvent) =>
+  extractGroupIdFromElement(e.target as Element)
 
 export function addDayTypeToCalendarState(
   calendar: CalendarState,
@@ -76,3 +69,11 @@ export function addDayTypeToCalendarState(
   }
   calendar[key].push(type)
 }
+
+export const getMonthNameElementByIndex = (
+  container: HTMLElement,
+  index: number,
+) =>
+  container.querySelector(
+    `.month-name-title#month-name-${index}`,
+  )! as HTMLElement

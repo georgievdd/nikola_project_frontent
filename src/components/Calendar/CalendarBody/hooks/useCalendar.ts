@@ -7,7 +7,12 @@ import {
   useState,
 } from 'react'
 
-import {differenceInMonths, isSameDay, startOfMonth} from 'date-fns'
+import {
+  differenceInCalendarMonths,
+  differenceInMonths,
+  isSameDay,
+  startOfMonth,
+} from 'date-fns'
 
 import {showAlert} from 'alert'
 import {getCheckInCalendar, getCommonCalendar} from 'Calendar/CalendarBody/api'
@@ -23,9 +28,8 @@ export interface CalendarController {
   selectionController: SelectionController
   processDateClick: (day: Date) => void
   dataController: CalendarDataController
-  onLoad: boolean
   scrollController: ScrollController
-  calendarCellsRef: RefObject<HTMLDivElement>
+  onLoad: boolean
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
   reset: () => void
@@ -40,9 +44,8 @@ export function useCalendar(
    * Сколько месяцев вперед отображаем
    */
   const [show, setShow] = useState(defaultShow)
-  const calendarCellsRef = useRef<HTMLDivElement>(null)
+  const scrollController = useScroll()
   const selectionController = useSelection()
-  const scrollController = useScroll(calendarCellsRef)
   const dataController = useCalendarData()
   const [onLoad, setLoad] = useState(false)
 
@@ -133,6 +136,20 @@ export function useCalendar(
    * нем еще нет рассматриваемого месяца (+ opacity)
    */
   useEffect(() => {
+    if (show) {
+      if (selectionController.dateBegin) {
+        const diff = differenceInCalendarMonths(
+          selectionController.dateBegin,
+          new Date(),
+        )
+        scrollController.scrollToMonth(diff)
+      } else {
+        scrollController.scrollToMonth(0)
+      }
+    }
+  }, [show])
+
+  useEffect(() => {
     if (!show) return
     // isActive оставить в зависимости от требований
     if (selectionController.isStart || selectionController.isActive) {
@@ -141,22 +158,6 @@ export function useCalendar(
       setCommonCalendar()
     }
   }, [scrollController.currentMonthIndex, show])
-
-  useEffect(() => {
-    if (!show) return
-    if (selectionController.isActive) {
-      setTimeout(
-        () =>
-          scrollController.scrollToMonth(
-            differenceInMonths(
-              selectionController.dateBegin!,
-              startOfMonth(new Date()),
-            ),
-          ),
-        75,
-      )
-    }
-  }, [show])
 
   useEffect(() => {
     if (selectionController.isStart) {
@@ -192,11 +193,10 @@ export function useCalendar(
   return {
     id,
     selectionController,
-    scrollController,
     processDateClick,
     dataController,
     onLoad,
-    calendarCellsRef,
+    scrollController,
     show,
     setShow,
     reset,

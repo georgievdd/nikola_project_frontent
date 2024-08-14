@@ -19,13 +19,7 @@ import {
 } from 'date-fns'
 import {ru} from 'date-fns/locale'
 
-import {
-  extractIdFromEvent,
-  extractMonthIdFromYear,
-  getMonthName,
-  monday,
-  weekArray,
-} from 'Calendar/CalendarBody/helpers'
+import {getMonthName, monday, weekArray} from 'Calendar/CalendarBody/helpers'
 import {CalendarController} from 'Calendar/CalendarBody/hooks/useCalendar'
 import {SelectionController} from 'Calendar/CalendarBody/hooks/useSelection'
 import {CalendarState, dayStyle, DayType} from 'entity/Calendar'
@@ -41,44 +35,45 @@ export default function Calendar3({
     id,
     selectionController,
     processDateClick,
-    calendarCellsRef,
     scrollController,
     dataController,
     onLoad,
   } = controller
-  const calendarMonthNameColumnRef = useRef<HTMLDivElement>(null)
   const monthClick = useCallback((e: SyntheticEvent) => {
-    const id = extractIdFromEvent(e)!
-    scrollController.scrollToMonth(id)
-  }, [])
-  const yearClick = useCallback((e: SyntheticEvent) => {
-    const id = extractMonthIdFromYear(e)!
-    scrollController.scrollToMonth(id)
+    e.stopPropagation()
+    e.preventDefault()
+    const monthId = +e.currentTarget.id.split('-').at(-1)!
+    scrollController.scrollToMonth(monthId)
   }, [])
 
   return (
     <div className={'calendar-container'}>
-      <div className="calendar-months" ref={calendarMonthNameColumnRef}>
-        {scrollController.currentMonthIndex !== undefined && (
-          <CalendarHighlighter
-            selectedMonthIndex={scrollController.currentMonthIndex}
-            calendarMonthNameColumnRef={calendarMonthNameColumnRef}
-          />
-        )}
+      <div
+        className="calendar-months"
+        ref={scrollController.monthsContainerRef}
+      >
+        <div
+          className="month-name-highlighter"
+          ref={scrollController.highlighterRef}
+        />
         {Array.from({length: calendarSize}).map((_, i) => {
           const date = addMonths(new Date(), i)
           return (
-            <div style={{zIndex: 1}} key={date.getKey()}>
+            <div id={'month-' + i} key={i} className={'zi-1'}>
               {(date.getMonth() === 0 || i == 0) && (
-                <h3 onClick={yearClick} className={'year-name pointer'}>
+                <h3
+                  onClick={monthClick}
+                  className={'year-name pointer'}
+                  id={'year-' + i}
+                >
                   {date.getFullYear()}
                 </h3>
               )}
               <p
                 onClick={monthClick}
-                id={`${id}month-name${i}`}
                 className="month-name pointer"
                 key={id + i}
+                id={'month-' + i}
               >
                 {getMonthName(date.getMonth())}
               </p>
@@ -89,7 +84,7 @@ export default function Calendar3({
       <div className="calendar-days">
         <div
           className="calendar-cells"
-          ref={calendarCellsRef}
+          ref={scrollController.daysContainerRef}
           onScroll={scrollController.handleScroll}
         >
           <div className="calendar__row days-header">
@@ -106,7 +101,7 @@ export default function Calendar3({
             const month = addMonths(new Date(), i)
             return (
               <div key={month.getKey()} style={{marginBottom: '10px'}}>
-                <h3 id={i + ''} className="month-name-title">
+                <h3 id={'month-name-' + i} className="month-name-title">
                   {getMonthName(month.getMonth())}
                 </h3>
                 <Month
@@ -127,65 +122,6 @@ export default function Calendar3({
   )
 }
 
-const CalendarHighlighter = ({
-  selectedMonthIndex,
-  calendarMonthNameColumnRef,
-}: {
-  selectedMonthIndex: number
-  calendarMonthNameColumnRef: RefObject<HTMLDivElement>
-}) => {
-  const calendarHighlighterRef = useRef<HTMLDivElement>(null)
-  const [highlighterTop, setHighlighterTop] = useState(0)
-  const [highlighterWidth, setHighlighterWidth] = useState(0)
-
-  useEffect(() => {
-    const elements =
-      calendarMonthNameColumnRef.current!.querySelectorAll('.month-name')
-    const month = elements[selectedMonthIndex].getBoundingClientRect()
-    const column = calendarMonthNameColumnRef.current!.getBoundingClientRect()
-    const top =
-      month.top - column.top + calendarMonthNameColumnRef.current!.scrollTop
-    setHighlighterTop(top - 5)
-    setHighlighterWidth(month.width + 20)
-  }, [selectedMonthIndex, calendarMonthNameColumnRef])
-
-  const [prevHighlighterRect, setPrevHighlighterRect] = useState(0)
-  useEffect(() => {
-    const column = calendarMonthNameColumnRef.current!
-    const columnRect = column.getBoundingClientRect()
-    const highlighter = calendarHighlighterRef.current!
-    const highlighterRect = highlighter.getBoundingClientRect()
-    const direction = highlighterRect.bottom - prevHighlighterRect
-
-    if (columnRect.bottom - highlighterRect.bottom < 100) {
-      column.scrollTo({
-        top: column.scrollTop + 120,
-        behavior: 'smooth',
-      })
-      setPrevHighlighterRect((prev) => highlighterRect.bottom - 120)
-      return
-    }
-
-    if (highlighterRect.bottom - columnRect.bottom < 60 && direction <= 0) {
-      column.scrollTo({
-        top: column.scrollTop - 200,
-        behavior: 'smooth',
-      })
-      setPrevHighlighterRect((prev) => highlighterRect.bottom + 200)
-      return
-    }
-    setPrevHighlighterRect(highlighterRect.bottom)
-  }, [highlighterTop, calendarMonthNameColumnRef])
-  return (
-    <div
-      id="calendar-highlighter"
-      className="month-name-highlighter"
-      ref={calendarHighlighterRef}
-      style={{top: `${highlighterTop}px`, width: `${highlighterWidth}px`}}
-    />
-  )
-}
-
 interface MonthProps {
   month: Date
   selectionController: SelectionController
@@ -203,24 +139,29 @@ const Month = ({
   onLoad,
 }: MonthProps) => {
   const {dateBegin, dateEnd, isActive} = selectionController
-  const getStyle = (day: Date): string => {
-    const style: Array<string> = []
-    const key = day.getKey()
-    if (Array.isArray(mapState[key])) {
-      mapState[key].forEach((type) => {
-        style.push(dayStyle[type])
-      })
-    }
-    if (isActive) {
-      if (dateBegin! <= day && day <= dateEnd!) {
-        style.push('date_select')
+
+  const getStyle = useCallback(
+    (day: Date): string => {
+      const style: Array<string> = []
+      const key = day.getKey()
+      if (Array.isArray(mapState[key])) {
+        mapState[key].forEach((type) => {
+          style.push(dayStyle[type])
+        })
       }
-    }
-    if (dateBegin && isSameDay(dateBegin, day)) {
-      style.push('date_select-start')
-    }
-    return style.join(' ')
-  }
+      if (isActive) {
+        if (dateBegin! <= day && day <= dateEnd!) {
+          style.push('date_select')
+        }
+      }
+      if (dateBegin && isSameDay(dateBegin, day)) {
+        style.push('date_select-start')
+      }
+      return style.join(' ')
+    },
+    [mapState, dateBegin],
+  )
+
   const renderCells = () => {
     const dateFormat = 'd'
     const monthStart = startOfMonth(month)

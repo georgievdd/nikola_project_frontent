@@ -8,7 +8,10 @@ import {
 } from 'react'
 
 import Calendar3 from 'Calendar/CalendarBody'
-import {extractIdFromEvent, getDateOrPlug} from 'Calendar/CalendarBody/helpers'
+import {
+  extractGroupIdFromEvent,
+  getDateOrPlug,
+} from 'Calendar/CalendarBody/helpers'
 import type {CalendarController} from 'Calendar/CalendarBody/hooks/useCalendar'
 
 const css = require('src/helpers').importStyles(
@@ -43,7 +46,7 @@ const Calendar = ({
   }
   const groupClick = useCallback((e: SyntheticEvent) => {
     e.stopPropagation()
-    const id = extractIdFromEvent(e)!
+    const id = extractGroupIdFromEvent(e)!
     groupRefs[id].current?.classList.add(css`selected`)
     groupRefs[1 - id].current?.classList.remove(css`selected`)
     setShow(true)

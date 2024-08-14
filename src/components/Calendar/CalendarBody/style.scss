@@ -57,10 +57,14 @@ $cell-borde-size: 50px;
     padding-left: 12px;
     padding-top: 10px;
     width: $sidebar-w;
-    overflow-y: hidden;
+    overflow-y: scroll;
     align-items: flex-start;
     background-color: $primary-color;
     border-radius: 10px 0 0 10px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .month-name-title {
@@ -82,6 +86,7 @@ $cell-borde-size: 50px;
   .year-name {
     margin-left: 10px;
     margin-bottom: 10px;
+    z-index: 20;
   }
 
   .month-name::first-letter,
@@ -97,6 +102,8 @@ $cell-borde-size: 50px;
     height: 30px;
     margin-top: 5px;
     transition: all 0.25s;
+    z-index: 0;
+    width: 200px;
   }
 
   .calendar-days {
@@ -259,4 +266,8 @@ $cell-borde-size: 50px;
       padding: 0;
     }
   }
+}
+
+.zi-1 {
+  z-index: 1;
 }

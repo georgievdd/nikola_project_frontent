@@ -1,7 +1,6 @@
 import {addMonths, startOfMonth} from 'date-fns'
 
 import {axiosInstance} from 'api/instance'
-import {get} from 'api/instance'
 import {CheckInCalendar, CommonCalendar} from 'Calendar/CalendarBody/dto'
 import {CalendarDataController} from 'Calendar/CalendarBody/hooks/useCalendarData'
 import {
@@ -48,7 +47,9 @@ export async function getCommonCalendar(
           year: month.getFullYear(),
           total_persons_amount,
         }
-        return get<CommonCalendar>(endpoint, {params: data})
+        return axiosInstance
+          .get<CommonCalendar>(endpoint, {params: data})
+          .then((r) => r.data)
       }),
     )
     return mapFromCommonCalendar(response)
@@ -77,7 +78,9 @@ export async function getCheckInCalendar(
           chosen_check_in_date: checkInDate.getKey(),
           total_persons_amount,
         }
-        return get<CheckInCalendar>(endpoint, {params: data})
+        return axiosInstance
+          .get<CheckInCalendar>(endpoint, {params: data})
+          .then((r) => r.data)
       }),
     )
     return mapFromCheckInDateCalendar(checkInDate, response)

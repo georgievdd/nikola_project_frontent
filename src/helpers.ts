@@ -1,3 +1,4 @@
+import {showAlert} from 'components/Alert/Alert'
 import {ApiError} from 'entity/Error'
 
 export function getDateFromKey(key: string) {
@@ -74,4 +75,21 @@ export const getVisibleElements = (
     }
   })
   return visibleElements
+}
+
+export function getMessageFromApiError(error: any): string {
+  const details = error?.response?.data?.error?.details
+  if (details) {
+    const messages = Object.keys(details)
+      .map((key) => details[key])
+      .filter(Boolean)
+    if (messages.length > 0) {
+      return messages.join('\n')
+    }
+  }
+  return error?.response?.data?.error?.message || 'Ошибка'
+}
+
+export function handleApiError(error: any) {
+  showAlert(getMessageFromApiError(error))
 }

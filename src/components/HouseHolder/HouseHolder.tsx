@@ -19,8 +19,11 @@ import {
   IReservationPriceRequest,
   MakeReservationRequest,
 } from 'entity/Reservation'
-import {sendMail} from 'mail/index'
-import {getDateFromKey} from 'src/helpers'
+import {
+  getDateFromKey,
+  getMessageFromApiError,
+  handleApiError,
+} from 'src/helpers'
 
 import BookingInvoiceBlock from './Blocks/BookingInvoiceBlock/BookingInvoiceBlock'
 import {useBookingInvoice} from './Blocks/BookingInvoiceBlock/useBookingInvoice'
@@ -79,27 +82,20 @@ const HouseHolder = ({house, houseOptions}: HouseHolderProps) => {
 
   async function makeReservation() {
     const reservatonData = reservationRequestDto()
-    const reservation = await postMakeReservation(house.id, reservatonData)
+    const reservation = await postMakeReservation(
+      house.id,
+      reservatonData,
+    ).catch(handleApiError)
     if (reservation) {
-      sendMail(await getReservation(reservation.slug))
+      await getReservation(reservation.slug).catch(handleApiError)
       router.push(`/reservation/${reservation.slug}`)
     }
   }
-  async function getPriceList(withOutPromo: boolean = false) {
-    const reservationPriceData = reservationPriceRequestDto(withOutPromo)
+  async function getPriceList(withoutPromo: boolean = false) {
+    const reservationPriceData = reservationPriceRequestDto(withoutPromo)
     getReservationPrice(house.id, reservationPriceData)
       .then(priceList.set)
-      .catch((err) => {
-        showAlert(err.response?.data?.non_field_errors[0] || 'Ошибка')
-        if (
-          err.response.data.non_field_errors[0] ===
-          `Промокод "${priceList.promoValue}" не найден`
-        ) {
-          getPriceList(true)
-        } else {
-          priceList.set(null)
-        }
-      })
+      .catch(handleApiError)
   }
 
   /**

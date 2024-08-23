@@ -2,7 +2,7 @@
 import {useEffect, useState} from 'react'
 
 import {GET_HOUSES, GET_HOUSES_CALENDAR} from 'api/endpoints'
-import {get} from 'api/instance'
+import {axiosInstance} from 'api/instance'
 import Calendar from 'Calendar/Calendar'
 import {useCalendar} from 'Calendar/CalendarBody/hooks/useCalendar'
 import HouseCard from 'components/HouseCard/HouseCard'
@@ -34,18 +34,21 @@ const HousesHolder = ({initHouses}: {initHouses: House[]}) => {
   }
 
   useEffect(() => {
-    get<House[]>(GET_HOUSES, {
-      params: {
-        total_persons_amount: guestsController.value,
-        ...getDates(),
-      },
-    }).then((res) => {
-      setHouses(res)
-      const newMaxValue = Math.max(
-        ...res.map((house) => house.max_persons_amount),
-      )
-      guestsController.setMaxValue(newMaxValue)
-    })
+    axiosInstance
+      .get<House[]>(GET_HOUSES, {
+        params: {
+          total_persons_amount: guestsController.value,
+          ...getDates(),
+        },
+      })
+      .then((r) => r.data)
+      .then((res) => {
+        setHouses(res)
+        const newMaxValue = Math.max(
+          ...res.map((house) => house.max_persons_amount),
+        )
+        guestsController.setMaxValue(newMaxValue)
+      })
   }, [
     guestsController.value,
     selectionController.isActive,

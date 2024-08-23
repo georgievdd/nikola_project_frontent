@@ -7,17 +7,12 @@ import {
   useState,
 } from 'react'
 
-import {
-  differenceInCalendarMonths,
-  differenceInMonths,
-  isSameDay,
-  startOfMonth,
-} from 'date-fns'
+import {differenceInCalendarMonths, isSameDay} from 'date-fns'
 
-import {showAlert} from 'alert'
 import {getCheckInCalendar, getCommonCalendar} from 'Calendar/CalendarBody/api'
 import {INumberInput} from 'components/ui/Inputs/NumberInput/useNumberInput'
 import {DayType} from 'entity/Calendar'
+import {getMessageFromApiError, handleApiError} from 'src/helpers'
 
 import {CalendarDataController, useCalendarData} from './useCalendarData'
 import {ScrollController, useScroll} from './useScroll'
@@ -95,7 +90,7 @@ export function useCalendar(
       .then((result) =>
         dataController.setMapState((prev) => ({...prev, ...result})),
       )
-      .catch((e) => showAlert(e.response?.data?.message, 'alert-danger'))
+      .catch(handleApiError)
       .finally(() => setLoad(false))
   }
   function setCheckInCalendar(
@@ -122,9 +117,7 @@ export function useCalendar(
         }
         callback && callback(result)
       })
-      .catch((e) =>
-        showAlert(e.response?.data?.message || 'Ошибка', 'alert-danger'),
-      )
+      .catch(handleApiError)
       .finally(() => setLoad(false))
   }
 

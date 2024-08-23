@@ -1,6 +1,9 @@
 import {Montserrat} from 'next/font/google'
 import './globals.scss'
 import Head from 'next/head'
+import Script from 'next/script'
+
+import yandex_metrika from 'src/yandex_metrika'
 
 const montserrat = Montserrat({
   weight: ['100', '200', '300', '400', '600', '700'],
@@ -18,7 +21,12 @@ export default function RootLayout({
       <Head>
         <link rel="preload" href="style.css" as="style" />
       </Head>
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        <Script id="yandex_metrika" strategy="afterInteractive">
+          {yandex_metrika}
+        </Script>
+        {children}
+      </body>
     </html>
   )
 }

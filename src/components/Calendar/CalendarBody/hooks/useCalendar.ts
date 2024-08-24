@@ -12,7 +12,7 @@ import {differenceInCalendarMonths, isSameDay} from 'date-fns'
 import {getCheckInCalendar, getCommonCalendar} from 'Calendar/CalendarBody/api'
 import {INumberInput} from 'components/ui/Inputs/NumberInput/useNumberInput'
 import {DayType} from 'entity/Calendar'
-import {getMessageFromApiError, handleApiError} from 'src/helpers'
+import {handleApiError} from 'src/helpers'
 
 import {CalendarDataController, useCalendarData} from './useCalendarData'
 import {ScrollController, useScroll} from './useScroll'

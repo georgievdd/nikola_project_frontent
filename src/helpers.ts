@@ -77,7 +77,12 @@ export const getVisibleElements = (
   return visibleElements
 }
 
-export function getMessageFromApiError(error: any): string {
+const errorWordList: Record<string, string> = Object.freeze({
+  chosen_check_in_date: 'дата въезда',
+  'Enter a valid email address.': 'Введите корректный адрес электронной почты.',
+})
+
+function getMessageFromApiError(error: any): string {
   const details = error?.response?.data?.error?.details
   if (details) {
     const messages = Object.keys(details)
@@ -90,6 +95,12 @@ export function getMessageFromApiError(error: any): string {
   return error?.response?.data?.error?.message || 'Ошибка'
 }
 
+const replaceWordList = (str: string) =>
+  Object.keys(errorWordList).reduce(
+    (s, key) => s.replace(key, errorWordList[key]),
+    str,
+  )
+
 export function handleApiError(error: any) {
-  showAlert(getMessageFromApiError(error))
+  showAlert(replaceWordList(getMessageFromApiError(error)))
 }

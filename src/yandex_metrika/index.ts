@@ -1,6 +1,5 @@
 /*eslint-disable max-len*/
-export default `<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
+export default `
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -12,7 +11,4 @@ export default `<!-- Yandex.Metrika counter -->
         trackLinks:true,
         accurateTrackBounce:true,
         webvisor:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/97893037" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->`
+   });`

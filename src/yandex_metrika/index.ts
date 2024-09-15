@@ -6,7 +6,7 @@ export default `
    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-   ym(97893037, "init", {
+   ym(${process.env.NEXT_PUBLIC_YANDEX_METRIKA_COUNTER_ID}, "init", {
         clickmap:true,
         trackLinks:true,
         accurateTrackBounce:true,
